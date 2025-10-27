@@ -25,11 +25,11 @@ export const akaBrowserDesign: SlideConfig = {
           <div
             className={`${isDark ? "bg-zinc-900/50 border-zinc-700" : "bg-white border-zinc-200"} rounded-xl md:rounded-2xl p-4 md:p-5 border shadow-lg`}
           >
-            <h3
+            <h2
               className={`text-base md:text-lg font-bold mb-2 md:mb-2.5 ${isDark ? "text-white" : "text-black"}`}
             >
               1. 관심사 분리
-            </h3>
+            </h2>
             <div
               className={`text-xs sm:text-sm space-y-1 ${isDark ? "text-zinc-300" : "text-black"}`}
             >
@@ -44,11 +44,11 @@ export const akaBrowserDesign: SlideConfig = {
           <div
             className={`${isDark ? "bg-zinc-900/50 border-zinc-700" : "bg-white border-zinc-200"} rounded-xl md:rounded-2xl p-4 md:p-5 border shadow-lg`}
           >
-            <h3
+            <h2
               className={`text-base md:text-lg font-bold mb-2 md:mb-2.5 ${isDark ? "text-white" : "text-black"}`}
             >
               2. 이벤트 기반 통신
-            </h3>
+            </h2>
             <div
               className={`text-xs sm:text-sm space-y-1 ${isDark ? "text-zinc-300" : "text-black"}`}
             >
@@ -62,11 +62,11 @@ export const akaBrowserDesign: SlideConfig = {
           <div
             className={`${isDark ? "bg-zinc-900/50 border-zinc-700" : "bg-white border-zinc-200"} rounded-xl md:rounded-2xl p-4 md:p-5 border shadow-lg`}
           >
-            <h3
+            <h2
               className={`text-base md:text-lg font-bold mb-2 md:mb-2.5 ${isDark ? "text-white" : "text-black"}`}
             >
               3. 메모리 최적화
-            </h3>
+            </h2>
             <div
               className={`text-xs sm:text-sm space-y-1 ${isDark ? "text-zinc-300" : "text-black"}`}
             >

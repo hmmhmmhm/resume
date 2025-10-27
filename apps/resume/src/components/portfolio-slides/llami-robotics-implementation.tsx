@@ -25,11 +25,11 @@ export const llamiRoboticsImplementation: SlideConfig = {
           <div
             className={`${isDark ? "bg-zinc-900/50 border-zinc-700" : "bg-white border-zinc-200"} rounded-xl md:rounded-2xl p-4 md:p-5 border shadow-lg`}
           >
-            <h3
+            <h2
               className={`text-base md:text-lg font-bold mb-2 md:mb-2.5 ${isDark ? "text-white" : "text-black"}`}
             >
               1. UDP 로봇 제어 프로토콜
-            </h3>
+            </h2>
             <div
               className={`text-xs sm:text-sm space-y-1 ${isDark ? "text-zinc-300" : "text-black"}`}
             >
@@ -51,11 +51,11 @@ export const llamiRoboticsImplementation: SlideConfig = {
           <div
             className={`${isDark ? "bg-zinc-900/50 border-zinc-700" : "bg-white border-zinc-200"} rounded-xl md:rounded-2xl p-4 md:p-5 border shadow-lg`}
           >
-            <h3
+            <h2
               className={`text-base md:text-lg font-bold mb-2 md:mb-2.5 ${isDark ? "text-white" : "text-black"}`}
             >
               2. WebRTC 저지연 영상 스트리밍
-            </h3>
+            </h2>
             <div
               className={`text-xs sm:text-sm space-y-1 ${isDark ? "text-zinc-300" : "text-black"}`}
             >
@@ -77,11 +77,11 @@ export const llamiRoboticsImplementation: SlideConfig = {
           <div
             className={`${isDark ? "bg-zinc-900/50 border-zinc-700" : "bg-white border-zinc-200"} rounded-xl md:rounded-2xl p-4 md:p-5 border shadow-lg`}
           >
-            <h3
+            <h2
               className={`text-base md:text-lg font-bold mb-2 md:mb-2.5 ${isDark ? "text-white" : "text-black"}`}
             >
               3. Canvas 기반 A* 경로 계획
-            </h3>
+            </h2>
             <div
               className={`text-xs sm:text-sm space-y-1 ${isDark ? "text-zinc-300" : "text-black"}`}
             >
@@ -103,11 +103,11 @@ export const llamiRoboticsImplementation: SlideConfig = {
           <div
             className={`${isDark ? "bg-zinc-900/50 border-zinc-700" : "bg-white border-zinc-200"} rounded-xl md:rounded-2xl p-4 md:p-5 border shadow-lg`}
           >
-            <h3
+            <h2
               className={`text-base md:text-lg font-bold mb-2 md:mb-2.5 ${isDark ? "text-white" : "text-black"}`}
             >
               4. WebGL 화이트밸런스 & SLAM 시각화
-            </h3>
+            </h2>
             <div
               className={`text-xs sm:text-sm space-y-1 ${isDark ? "text-zinc-300" : "text-black"}`}
             >

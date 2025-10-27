@@ -112,11 +112,11 @@ export const curiosityResults: SlideConfig = {
           <div
             className={`${isDark ? "bg-zinc-900/50 border-zinc-700" : "bg-white border-zinc-200"} rounded-xl md:rounded-2xl p-5 md:p-8 border shadow-lg hover:shadow-xl transition-shadow duration-300`}
           >
-            <h3
+            <h2
               className={`text-lg md:text-xl font-bold mb-4 md:mb-5 ${isDark ? "text-white" : "text-black"}`}
             >
               프로젝트를 통해 배운 점
-            </h3>
+            </h2>
             <div
               className={`grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 text-xs sm:text-sm ${isDark ? "text-zinc-300" : "text-black"}`}
             >
@@ -139,11 +139,11 @@ export const curiosityResults: SlideConfig = {
           <div
             className={`${isDark ? "bg-zinc-900/50 border-zinc-700" : "bg-white border-zinc-200"} rounded-xl md:rounded-2xl p-5 md:p-8 border shadow-lg hover:shadow-xl transition-shadow duration-300`}
           >
-            <h3
+            <h2
               className={`text-lg md:text-xl font-bold mb-4 md:mb-5 ${isDark ? "text-white" : "text-black"}`}
             >
               아쉬운 점 및 중단 사유
-            </h3>
+            </h2>
             <div
               className={`grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 text-xs sm:text-sm ${isDark ? "text-zinc-300" : "text-black"}`}
             >

@@ -25,11 +25,11 @@ export const llamiAppDesign: SlideConfig = {
           <div
             className={`${isDark ? "bg-zinc-900/50 border-zinc-700" : "bg-white border-zinc-200"} rounded-xl md:rounded-2xl p-4 md:p-6 border shadow-lg`}
           >
-            <h3
+            <h2
               className={`text-base md:text-lg font-bold mb-2 md:mb-3 ${isDark ? "text-white" : "text-black"}`}
             >
               요구사항 1: 고정비 제로화
-            </h3>
+            </h2>
             <div className={`text-xs sm:text-sm ${isDark ? "text-zinc-300" : "text-black"}`}>
               → 온디바이스 AI 앱 설계로 서버 비용 완전 제거
             </div>
@@ -39,11 +39,11 @@ export const llamiAppDesign: SlideConfig = {
           <div
             className={`${isDark ? "bg-zinc-900/50 border-zinc-700" : "bg-white border-zinc-200"} rounded-xl md:rounded-2xl p-4 md:p-6 border shadow-lg`}
           >
-            <h3
+            <h2
               className={`text-base md:text-lg font-bold mb-2 md:mb-3 ${isDark ? "text-white" : "text-black"}`}
             >
               요구사항 2: 웹 팀으로 앱 개발
-            </h3>
+            </h2>
             <div className={`text-xs sm:text-sm ${isDark ? "text-zinc-300" : "text-black"}`}>
               → Expo 웹뷰 + 핵심 모듈만 React Native/C++ 하이브리드 설계
             </div>
@@ -53,11 +53,11 @@ export const llamiAppDesign: SlideConfig = {
           <div
             className={`${isDark ? "bg-zinc-900/50 border-zinc-700" : "bg-white border-zinc-200"} rounded-xl md:rounded-2xl p-4 md:p-6 border shadow-lg`}
           >
-            <h3
+            <h2
               className={`text-base md:text-lg font-bold mb-2 md:mb-3 ${isDark ? "text-white" : "text-black"}`}
             >
               요구사항 3: 자체 AI 모델 운용
-            </h3>
+            </h2>
             <div className={`text-xs sm:text-sm ${isDark ? "text-zinc-300" : "text-black"}`}>
               → Gemma3 SLM 파인튜닝 후 GGUF 모델로 배포
             </div>

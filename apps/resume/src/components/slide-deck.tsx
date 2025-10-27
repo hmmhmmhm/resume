@@ -311,6 +311,7 @@ export default function SlideDeck() {
           onClick={prevSlide}
           disabled={currentSlide === 0 || isTransitioning}
           className="rounded-full bg-black dark:bg-white hover:bg-zinc-800 dark:hover:bg-zinc-200 text-white dark:text-black disabled:opacity-30 disabled:cursor-not-allowed transition-colors p-1 sm:p-0.5"
+          aria-label="이전 슬라이드"
         >
           <ChevronLeft className="size-3 sm:size-3" />
         </button>
@@ -318,6 +319,7 @@ export default function SlideDeck() {
           onClick={nextSlide}
           disabled={currentSlide === slides.length - 1 || isTransitioning}
           className="rounded-full bg-black dark:bg-white hover:bg-zinc-800 dark:hover:bg-zinc-200 text-white dark:text-black disabled:opacity-30 disabled:cursor-not-allowed transition-colors p-1 sm:p-0.5"
+          aria-label="다음 슬라이드"
         >
           <ChevronRight className="size-3 sm:size-3" />
         </button>

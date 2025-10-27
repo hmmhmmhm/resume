@@ -25,11 +25,11 @@ export const llamiRoboticsResults: SlideConfig = {
           <div
             className={`${isDark ? "bg-zinc-900/50 border-zinc-700" : "bg-white border-zinc-200"} rounded-xl md:rounded-2xl p-4 md:p-5 border shadow-lg`}
           >
-            <h3
+            <h2
               className={`text-base md:text-lg font-bold mb-2 md:mb-2.5 ${isDark ? "text-white" : "text-black"}`}
             >
               비즈니스 임팩트
-            </h3>
+            </h2>
             <div
               className={`grid grid-cols-2 gap-3 text-xs sm:text-sm ${isDark ? "text-zinc-300" : "text-black"}`}
             >
@@ -88,11 +88,11 @@ export const llamiRoboticsResults: SlideConfig = {
           <div
             className={`${isDark ? "bg-zinc-900/50 border-zinc-700" : "bg-white border-zinc-200"} rounded-xl md:rounded-2xl p-4 md:p-5 border shadow-lg`}
           >
-            <h3
+            <h2
               className={`text-base md:text-lg font-bold mb-2 md:mb-2.5 ${isDark ? "text-white" : "text-black"}`}
             >
               기술적 의사결정
-            </h3>
+            </h2>
             <div
               className={`text-xs sm:text-sm space-y-1.5 ${isDark ? "text-zinc-300" : "text-black"}`}
             >
@@ -107,11 +107,11 @@ export const llamiRoboticsResults: SlideConfig = {
           <div
             className={`${isDark ? "bg-zinc-900/50 border-zinc-700" : "bg-white border-zinc-200"} rounded-xl md:rounded-2xl p-4 md:p-5 border shadow-lg`}
           >
-            <h3
+            <h2
               className={`text-base md:text-lg font-bold mb-2 md:mb-2.5 ${isDark ? "text-white" : "text-black"}`}
             >
               프로젝트를 통해 배운 점
-            </h3>
+            </h2>
             <div
               className={`text-xs sm:text-sm space-y-1.5 ${isDark ? "text-zinc-300" : "text-black"}`}
             >

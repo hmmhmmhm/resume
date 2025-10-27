@@ -12,11 +12,11 @@ export const akaBrowserImplementation: SlideConfig = {
         <div
           className={`${isDark ? "bg-zinc-900/50 border-zinc-700" : "bg-white border-zinc-200"} rounded-xl md:rounded-2xl p-4 md:p-6 border shadow-lg hover:shadow-xl transition-shadow duration-300`}
         >
-          <h3
+          <h2
             className={`text-base md:text-lg font-bold mb-3 md:mb-4 ${isDark ? "text-white" : "text-black"}`}
           >
             핵심 구현 사항
-          </h3>
+          </h2>
           <div
             className={`grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 text-xs sm:text-sm ${isDark ? "text-zinc-300" : "text-black"}`}
           >
@@ -49,11 +49,11 @@ export const akaBrowserImplementation: SlideConfig = {
         <div
           className={`${isDark ? "bg-zinc-900/50 border-zinc-700" : "bg-white border-zinc-200"} rounded-xl md:rounded-2xl p-4 md:p-6 border shadow-lg hover:shadow-xl transition-shadow duration-300`}
         >
-          <h3
+          <h2
             className={`text-base md:text-lg font-bold mb-3 md:mb-4 ${isDark ? "text-white" : "text-black"}`}
           >
             기술적 도전과 해결
-          </h3>
+          </h2>
           <div
             className={`space-y-2.5 md:space-y-3 text-xs sm:text-sm ${isDark ? "text-zinc-300" : "text-black"}`}
           >

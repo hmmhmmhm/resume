@@ -47,20 +47,20 @@ export const llamiAppProblem: SlideConfig = {
           <div
             className={`${isDark ? "bg-zinc-900/50 border-zinc-700" : "bg-white border-zinc-200"} rounded-xl md:rounded-2xl p-4 md:p-6 border shadow-lg`}
           >
-            <h3
+            <h2
               className={`text-base md:text-lg font-bold mb-2 md:mb-3 ${isDark ? "text-white" : "text-black"}`}
             >
               비즈니스 문제
-            </h3>
+            </h2>
             <div
               className={`space-y-2 md:space-y-3 text-xs sm:text-sm ${isDark ? "text-zinc-300" : "text-black"}`}
             >
               <div>
-                • 결제 페이지에서 <span className="font-bold text-red-500">95% 이탈률</span>
+                • 결제 페이지에서 <span className="font-bold text-red-700 dark:text-red-400">95% 이탈률</span>
               </div>
               <div>• 고객 인터뷰: "무료 AI 서비스가 많아 결제 망설임"</div>
               <div>
-                • CAC가 투자자 요구 대비 <span className="font-bold text-red-500">5배 초과</span>
+                • CAC가 투자자 요구 대비 <span className="font-bold text-red-700 dark:text-red-400">5배 초과</span>
               </div>
               <div>• 기존 AI 서비스 고정비 절감 방안은 대규모 서비스에만 특화</div>
             </div>
