@@ -1,0 +1,17 @@
+{
+  "name": "@repo/astro-icon",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./astro": "./src/astro.js",
+    "./react": "./src/react.js"
+  },
+  "dependencies": {
+    "@lucide/astro": "^0.545.0",
+    "lucide-react": "^0.545.0"
+  },
+  "devDependencies": {
+    "astro": "^5.14.4"
+  }
+}

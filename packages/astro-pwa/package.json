@@ -1,0 +1,19 @@
+{
+  "name": "@repo/astro-pwa",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./integration": "./src/astro-integration-generate-sw.ts",
+    "./vite-plugin": "./src/vite-exclude-public-plugin.ts",
+    "./sw-template": "./templates/sw.template.js"
+  },
+  "dependencies": {
+    "@vite-pwa/astro": "^1.1.0",
+    "workbox-window": "^7.3.0"
+  },
+  "devDependencies": {
+    "astro": "^5.14.4",
+    "vite": "^7.1.9"
+  }
+}

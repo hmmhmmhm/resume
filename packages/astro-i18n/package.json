@@ -1,0 +1,21 @@
+{
+  "name": "@repo/astro-i18n",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./config": "./src/config.ts",
+    "./utils": "./src/utils.ts",
+    "./helpers": "./src/helpers.ts",
+    "./astro": "./src/astro.ts"
+  },
+  "dependencies": {
+    "i18next": "^25.6.0"
+  },
+  "peerDependencies": {
+    "astro": "^5.0.0"
+  },
+  "devDependencies": {
+    "astro": "^5.14.4"
+  }
+}

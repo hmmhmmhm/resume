@@ -1,0 +1,23 @@
+{
+  "name": "@repo/astro-preact",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./integration": "./integration.js",
+    "./preact": "./preact.js",
+    "./react": "./react.js",
+    "./react-dom": "./react-dom.js"
+  },
+  "dependencies": {
+    "@astrojs/preact": "^4.1.1",
+    "preact": "^10.27.2",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.1",
+    "astro": "^5.14.4"
+  }
+}

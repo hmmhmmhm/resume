@@ -1,0 +1,167 @@
+---
+import { supportedLanguages } from "@/i18n";
+
+export interface Props {
+  title: string;
+  description: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  ogImage?: string;
+  lang?: string;
+}
+
+const {
+  title,
+  description,
+  ogTitle = title,
+  ogDescription = description,
+  ogImage,
+  lang = "ko",
+} = Astro.props;
+
+// Generate language-specific OG image URL if not provided
+const defaultOgImage = new URL(`/${lang}/og.png`, Astro.url).toString();
+const finalOgImage = ogImage || defaultOgImage;
+
+// Extract path for hreflang, canonical, alternate tags (remove language prefix)
+const pathname = Astro.url.pathname;
+const pathWithoutLang = pathname.replace(/^\/(en|ko)/, "") || "/";
+const siteUrl = "https://hmart.app";
+
+// Canonical URL - official URL of current language version
+const canonicalUrl = `${siteUrl}/${lang}${pathWithoutLang}`;
+---
+
+<meta charset="utf-8" />
+<link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-title" content="hmart.app" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="generator" content={Astro.generator} />
+<meta name="description" content={description} />
+
+<link rel="canonical" href={canonicalUrl} />
+{
+  supportedLanguages.map((locale) => (
+    <link rel="alternate" hreflang={locale} href={`${siteUrl}/${locale}${pathWithoutLang}`} />
+  ))
+}
+<link rel="alternate" hreflang="x-default" href={`${siteUrl}/en${pathWithoutLang}`} />
+
+<meta property="og:locale" content={lang === "ko" ? "ko_KR" : "en_US"} />
+{
+  supportedLanguages
+    .filter((locale) => locale !== lang)
+    .map((locale) => (
+      <meta property="og:locale:alternate" content={locale === "ko" ? "ko_KR" : "en_US"} />
+    ))
+}
+
+<meta property="og:title" content={ogTitle} />
+<meta property="og:description" content={ogDescription} />
+<meta property="og:image" content={finalOgImage} />
+<meta property="og:logo" content={new URL("/favicon/favicon-96x96.png", Astro.url).toString()} />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={ogTitle} />
+<meta name="twitter:description" content={ogDescription} />
+<meta name="twitter:image" content={finalOgImage} />
+<title>{title}</title>
+<script>
+  // Lazy load manifest for PWA
+  const loadManifest = () => {
+    const link = document.createElement("link");
+    link.rel = "manifest";
+    link.href = "/favicon/site.webmanifest";
+    document.head.appendChild(link);
+  };
+
+  const ascii = `
+                  .::;;;:.
+               .:;;;:::::;;;:
+              :;;.         :;;.
+             :;:            .;;
+         ::::;:.             .;;:::.
+     .:;;;:::;;;;:.       :;;:;;:::;;;:
+    :;;.     ;; .;;:    .;;:  ;;     :;;.
+   :;:       :;:  :;:  .;;.  ;;.      .;;.
+  .;:         ;;:  :;: ;;  .;;:        .;;
+  :;:          .;;;:;: ;::;;:           ;;.
+  :;:            .::;;;;;:.             ;;
+  .;;.     .:;;;;;;::  :;;;;;;;;:      :;:
+   .;;.  :;;;    ..;;;;;;;:    .;;;.  :;:
+     :;:;;.   .:;;: :;;:..;;;:    ::;;;.
+       ;;:;;;;;::  .;:.;;   :;;;;;;;::
+      :;:          ;;  :;:          ;;.
+      :;.          ;;  .;:          :;.
+      :;:          :;. :;.          ;;
+       :;:         .;;:;:          ;;.
+        ;;:.        .;;:         :;;:
+         .;;;::::::;;::;;;:::::;;;:
+            .:;;;::      .:;;;::
+`;
+
+  const mono =
+    '"SFMono-Regular", ui-monospace, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace';
+
+  const printAsciiArt = () => {
+    requestIdleCallback(
+      () => {
+        console.log(
+          "%c" + ascii,
+          `color:#ff4da6; font-family:${mono}; white-space:pre; line-height:1.05;`
+        );
+      },
+      { timeout: 2000 }
+    );
+  };
+
+  const init = () => {
+    loadManifest();
+    printAsciiArt();
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
+</script>
+<style is:global>
+  /* Apply text-balance and break-keep to all text elements */
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  li,
+  td,
+  th,
+  blockquote,
+  figcaption,
+  span,
+  a,
+  label,
+  legend,
+  caption {
+    text-wrap: balance;
+    word-break: keep-all;
+  }
+</style>
+
+<script>
+  // Register service worker and handle updates
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("/sw.js").catch((error) => {
+        console.error(error);
+      });
+    });
+  }
+</script>

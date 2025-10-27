@@ -1,0 +1,22 @@
+{
+  "name": "@repo/astro-tailwind",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./tailwind-config": "./tailwind.config.js",
+    "./vite": "./vite.js",
+    "./postcss": "./postcss.js",
+    "./tailwindcss": "./tailwindcss.css"
+  },
+  "dependencies": {
+    "@astrojs/tailwind": "^6.0.2",
+    "@tailwindcss/postcss": "^4.1.14",
+    "@tailwindcss/vite": "^4.1.14",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.14"
+  },
+  "devDependencies": {
+    "tailwindcss-safe-area": "^1.1.0"
+  }
+}

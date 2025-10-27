@@ -1,0 +1,40 @@
+---
+import CommonHead from "@/components/common-head.astro";
+import CommonBody from "@/components/common-body.astro";
+import SplineViewer from "@/components/spline-viewer";
+import "@/styles/global.css";
+
+import { initI18n } from "@/i18n";
+
+const { language, t } = initI18n(Astro);
+
+const pageTitle = "Hamin Lee";
+const pageDescription = "Full Stack Engineer";
+---
+
+<html lang="ko">
+  <head>
+    <CommonHead title={pageTitle} description={pageDescription} lang="ko" />
+    <script is:inline>
+      // Initialize theme before page renders to prevent flash
+      (function () {
+        const theme = localStorage.getItem("theme");
+        // Default to dark theme if no preference is saved
+        if (theme === "dark" || !theme) {
+          document.documentElement.classList.add("dark");
+          if (!theme) {
+            localStorage.setItem("theme", "dark");
+          }
+        } else {
+          document.documentElement.classList.remove("dark");
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <CommonBody lang="ko" />
+    <main class="w-screen h-screen">
+      <SplineViewer client:load scene="/signature.splinecode" />
+    </main>
+  </body>
+</html>

@@ -1,0 +1,37 @@
+{
+  "name": "resume",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "NODE_NO_WARNINGS=1 astro dev",
+    "build": "astro build",
+    "preview": "pnpm build && wrangler pages dev ./dist",
+    "deploy": "pnpm build && wrangler pages deploy ./dist --project-name=resume",
+    "lint": "prettier --write . && eslint . --fix",
+    "lint:check": "prettier --check . && eslint .",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/cloudflare": "^12.6.10",
+    "@repo/astro-i18n": "workspace:*",
+    "@repo/astro-icon": "workspace:*",
+    "@repo/astro-preact": "workspace:*",
+    "@repo/astro-pwa": "workspace:*",
+    "@repo/astro-tailwind": "workspace:*",
+    "@splinetool/react-spline": "^4.1.0",
+    "@supabase/supabase-js": "^2.75.0",
+    "astro": "^5.14.4",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "framer-motion": "^11.18.2",
+    "lucide-preact": "^0.395.0",
+    "preact-markup": "^2.1.1",
+    "tailwind-merge": "^2.6.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20251011.0",
+    "@repo/astro-lint": "workspace:*",
+    "vite": "^7.1.9",
+    "wrangler": "^4.42.2"
+  }
+}
