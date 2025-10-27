@@ -8,27 +8,82 @@ import { Badge } from "@/components/ui/badge";
 import { DATA } from "@/data/resume";
 import { Markdown } from "./markdown";
 import { QRCodeSVG } from "@/components/qrcode-react";
-import { MessageCircle as MessageCircleIcon, Download as DownloadIcon } from "lucide-preact";
+import { MessageCircle as MessageCircleIcon, Download as DownloadIcon, BookOpen as BookOpenIcon } from "lucide-preact";
+import { useState } from "preact/hooks";
 
 // Wrapper components to handle className -> class conversion
 const MessageCircle = ({ className, ...props }: any) => (
   <MessageCircleIcon class={className} {...props} />
 );
 const Download = ({ className, ...props }: any) => <DownloadIcon class={className} {...props} />;
+const BookOpen = ({ className, ...props }: any) => <BookOpenIcon class={className} {...props} />;
+
+// iOS-style spinner component
+const Spinner = ({ className }: { className?: string }) => (
+  <svg
+    class={`animate-spin ${className}`}
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+  >
+    <circle
+      class="opacity-25"
+      cx="12"
+      cy="12"
+      r="10"
+      stroke="currentColor"
+      stroke-width="4"
+    />
+    <path
+      class="opacity-75"
+      fill="currentColor"
+      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+    />
+  </svg>
+);
 
 const BLUR_FADE_DELAY = 0.04;
 
 export default function ResumePage() {
+  const [isDownloading, setIsDownloading] = useState(false);
+
+  const handleDownload = async (e: Event) => {
+    e.preventDefault();
+    setIsDownloading(true);
+    
+    try {
+      const response = await fetch('/resume.pdf');
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = '이하민_이력서.pdf';
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+    } catch (error) {
+      console.error('Download failed:', error);
+    } finally {
+      // Keep spinner visible for a moment for better UX
+      setTimeout(() => setIsDownloading(false), 500);
+    }
+  };
+
   return (
     <main className="flex flex-col min-h-[100dvh] space-y-10 max-w-2xl mx-auto pt-30 pb-12 sm:pt-24 sm:pb-24 px-6">
-      <a
-        href="/resume.pdf"
-        download="이하민_이력서.pdf"
-        className="fixed top-6 right-6 flex items-center gap-2 px-4 py-2 bg-background/95 border border-border rounded-lg hover:bg-muted transition-colors shadow-sm backdrop-blur-sm print:hidden z-50"
+      <button
+        onClick={handleDownload}
+        disabled={isDownloading}
+        className="fixed top-6 right-6 flex items-center gap-2 px-4 py-2 bg-background/80 backdrop-blur-md border border-border rounded-lg hover:bg-background/90 transition-all shadow-lg print:hidden z-50 disabled:opacity-70 disabled:cursor-not-allowed"
       >
-        <Download className="size-4" />
+        {isDownloading ? (
+          <Spinner className="size-4" />
+        ) : (
+          <Download className="size-4" />
+        )}
         <span className="text-sm font-medium">인쇄용 PDF 다운로드</span>
-      </a>
+      </button>
       <section id="hero">
         <div className="mx-auto w-full max-w-2xl space-y-8">
           <div className="gap-2 flex justify-between">
@@ -324,7 +379,7 @@ export default function ResumePage() {
         </div>
       </section>
       <section id="contact">
-        <div className="w-full pt-4 pb-16 sm:pb-8" style={{ marginTop: "-80px" }}>
+        <div className="w-full pt-4 pb-8 sm:pb-4" style={{ marginTop: "-80px" }}>
           <BlurFade delay={BLUR_FADE_DELAY * 16}>
             <div className="flex flex-col items-center justify-center text-center mb-4">
               <h2 className="text-2xl font-bold tracking-tight">연락처</h2>
@@ -355,6 +410,21 @@ export default function ResumePage() {
                     {DATA.contact.kakao}
                   </div>
                 </div>
+              </a>
+            </BlurFade>
+          </div>
+        </div>
+      </section>
+      <section id="portfolio-link" className="print:hidden">
+        <div className="w-full pb-16 sm:pb-8">
+          <div className="max-w-[400px] mx-auto px-4">
+            <BlurFade delay={BLUR_FADE_DELAY * 18}>
+              <a
+                href="/ko/portfolio"
+                className="flex items-center justify-center gap-2 px-6 py-3 bg-foreground text-background rounded-lg hover:opacity-90 transition-all shadow-md font-medium"
+              >
+                <BookOpen className="size-5" />
+                <span>포트폴리오 읽기</span>
               </a>
             </BlurFade>
           </div>
