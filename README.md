@@ -1,4 +1,4 @@
-[![Resume Preview](https://hmart.app/ko/og.png)](https://hmart.app)
+[![Resume Preview](https://hmart.app/en/og.png)](https://hmart.app)
 
 [한국어](README_KR.md) | English
 
