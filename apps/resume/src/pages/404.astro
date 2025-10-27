@@ -1,0 +1,26 @@
+---
+import CommonHead from "@/components/common-head.astro";
+import CommonBody from "@/components/common-body.astro";
+import NotFoundPage from "@/components/404-page";
+import "@/styles/global.css";
+
+const pageTitle = "404 - 페이지를 찾을 수 없습니다";
+const pageDescription = "요청하신 페이지를 찾을 수 없습니다.";
+---
+
+<html lang="ko">
+  <head>
+    <CommonHead title={pageTitle} description={pageDescription} lang="ko" />
+    <script is:inline>
+      // Use light theme for 404 page
+      (function () {
+        document.documentElement.classList.remove("dark");
+        localStorage.setItem("theme", "light");
+      })();
+    </script>
+  </head>
+  <body>
+    <CommonBody lang="ko" />
+    <NotFoundPage client:load />
+  </body>
+</html>
