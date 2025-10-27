@@ -2,7 +2,7 @@ import type { ComponentChildren } from "preact";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import { QRCodeSVG } from "@/components/qrcode";
+import { QRCodeSVG } from "@/components/qrcode-react";
 
 interface Props {
   title: string;

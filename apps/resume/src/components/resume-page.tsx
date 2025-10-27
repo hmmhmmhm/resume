@@ -7,7 +7,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { DATA } from "@/data/resume";
 import { Markdown } from "./markdown";
-import { QRCodeSVG } from "@/components/qrcode";
+import { QRCodeSVG } from "@/components/qrcode-react";
 import { MessageCircle as MessageCircleIcon, Download as DownloadIcon } from "lucide-preact";
 
 // Wrapper components to handle className -> class conversion
