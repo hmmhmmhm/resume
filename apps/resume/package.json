@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "NODE_NO_WARNINGS=1 astro dev",
     "optimize:images": "node scripts/optimize-images.mjs",
-    "prebuild": "pnpm optimize:images",
+    "download:icons": "node scripts/download-icons.mjs",
+    "prebuild": "pnpm optimize:images && pnpm download:icons",
     "build": "astro build",
     "preview": "pnpm build && wrangler pages dev ./dist",
     "deploy": "pnpm build && wrangler pages deploy ./dist --project-name=resume",
