@@ -2,7 +2,26 @@ import Image from "@/components/image";
 import BlurFade from "@/components/magicui/blur-fade";
 import type { SlideConfig } from "./types";
 
-export const llamiRoboticsImplementation: SlideConfig = {
+interface LlamiRoboticsImplementationContent {
+  challenge1Title: string;
+  challenge1Situation: string;
+  challenge1Action: string;
+  challenge1Impact: string;
+  challenge2Title: string;
+  challenge2Situation: string;
+  challenge2Action: string;
+  challenge2Impact: string;
+  challenge3Title: string;
+  challenge3Situation: string;
+  challenge3Action: string;
+  challenge3Impact: string;
+  challenge4Title: string;
+  challenge4Situation: string;
+  challenge4Action: string;
+  challenge4Impact: string;
+}
+
+export const getLlamiRoboticsImplementation = (content?: LlamiRoboticsImplementationContent): SlideConfig => ({
   id: "robot-implementation",
   title: "라미 로보틱스 구현",
   subtitle: "기술적 도전과 해결",
@@ -28,22 +47,14 @@ export const llamiRoboticsImplementation: SlideConfig = {
             <h2
               className={`text-base md:text-lg font-bold mb-2 md:mb-2.5 ${isDark ? "text-white" : "text-black"}`}
             >
-              1. UDP 로봇 제어 프로토콜
+              {content?.challenge1Title || "도전 1: 바이너리 프로토콜 구현"}
             </h2>
             <div
               className={`text-xs sm:text-sm space-y-1 ${isDark ? "text-zinc-300" : "text-black"}`}
             >
-              <div>
-                <span className="font-semibold">상황:</span> 공식 SDK 없이 바이너리 프로토콜 직접
-                구현 필요
-              </div>
-              <div>
-                <span className="font-semibold">행동:</span> Wireshark로 패킷 분석, 200+ 바이트 로봇
-                상태 데이터 파싱
-              </div>
-              <div>
-                <span className="font-semibold">영향:</span> 실시간 양방향 통신 달성 (500ms 주기)
-              </div>
+              <div>{content?.challenge1Situation || "상황: 공식 SDK 없이 바이너리 프로토콜 직접 구현 필요"}</div>
+              <div>{content?.challenge1Action || "행동: Wireshark로 패킷 분석, 200+ 바이트 로봇 상태 데이터 파싱"}</div>
+              <div>{content?.challenge1Impact || "영향: 실시간 양방향 통신 달성 (500ms 주기)"}</div>
             </div>
           </div>
         </BlurFade>
@@ -54,22 +65,14 @@ export const llamiRoboticsImplementation: SlideConfig = {
             <h2
               className={`text-base md:text-lg font-bold mb-2 md:mb-2.5 ${isDark ? "text-white" : "text-black"}`}
             >
-              2. WebRTC 저지연 영상 스트리밍
+              {content?.challenge2Title || "도전 2: 저지연 영상 스트리밍"}
             </h2>
             <div
               className={`text-xs sm:text-sm space-y-1 ${isDark ? "text-zinc-300" : "text-black"}`}
             >
-              <div>
-                <span className="font-semibold">상황:</span> RTSP를 웹에서 재생 불가, HLS는 3~5초
-                지연
-              </div>
-              <div>
-                <span className="font-semibold">행동:</span> FFmpeg로 RTSP → H.264 RTP 트랜스코딩,
-                mediasoup로 WebRTC 전송
-              </div>
-              <div>
-                <span className="font-semibold">영향:</span> 지연 시간 3~5초 → 300~500ms (90% 감소)
-              </div>
+              <div>{content?.challenge2Situation || "상황: RTSP를 웹에서 재생 불가, HLS는 3~5초 지연"}</div>
+              <div>{content?.challenge2Action || "행동: FFmpeg로 RTSP → H.264 RTP 트랜스코딩, mediasoup로 WebRTC 전송"}</div>
+              <div>{content?.challenge2Impact || "영향: 지연 시간 3~5초 → 300~500ms (90% 감소)"}</div>
             </div>
           </div>
         </BlurFade>
@@ -80,22 +83,14 @@ export const llamiRoboticsImplementation: SlideConfig = {
             <h2
               className={`text-base md:text-lg font-bold mb-2 md:mb-2.5 ${isDark ? "text-white" : "text-black"}`}
             >
-              3. Canvas 기반 A* 경로 계획
+              {content?.challenge3Title || "도전 3: 경로 계획 알고리즘"}
             </h2>
             <div
               className={`text-xs sm:text-sm space-y-1 ${isDark ? "text-zinc-300" : "text-black"}`}
             >
-              <div>
-                <span className="font-semibold">상황:</span> 복잡한 환경에서 자율 주행 필요
-              </div>
-              <div>
-                <span className="font-semibold">행동:</span> 다층 비용 맵 생성, 8방향 이웃 탐색 A*
-                알고리즘 구현
-              </div>
-              <div>
-                <span className="font-semibold">영향:</span> 4000×4000 가상 월드에서 경로 계획 평균
-                45ms
-              </div>
+              <div>{content?.challenge3Situation || "상황: 복잡한 환경에서 자율 주행 필요"}</div>
+              <div>{content?.challenge3Action || "행동: 다층 비용 맵 생성, 8방향 이웃 탐색 A* 알고리즘 구현"}</div>
+              <div>{content?.challenge3Impact || "영향: 4000×4000 가상 월드에서 경로 계획 평균 45ms"}</div>
             </div>
           </div>
         </BlurFade>
@@ -106,25 +101,20 @@ export const llamiRoboticsImplementation: SlideConfig = {
             <h2
               className={`text-base md:text-lg font-bold mb-2 md:mb-2.5 ${isDark ? "text-white" : "text-black"}`}
             >
-              4. WebGL 화이트밸런스 & SLAM 시각화
+              {content?.challenge4Title || "도전 4: GPU 가속 영상 처리"}
             </h2>
             <div
               className={`text-xs sm:text-sm space-y-1 ${isDark ? "text-zinc-300" : "text-black"}`}
             >
-              <div>
-                <span className="font-semibold">상황:</span> CPU 기반 영상 처리는 프레임 드롭 발생
-              </div>
-              <div>
-                <span className="font-semibold">행동:</span> WebGL Fragment Shader로 GPU 가속 구현
-              </div>
-              <div>
-                <span className="font-semibold">영향:</span> 1920×1080 해상도 30fps 실시간 처리, CPU
-                사용률 5% 이하
-              </div>
+              <div>{content?.challenge4Situation || "상황: CPU 기반 영상 처리는 프레임 드롭 발생"}</div>
+              <div>{content?.challenge4Action || "행동: WebGL Fragment Shader로 GPU 가속 구현"}</div>
+              <div>{content?.challenge4Impact || "영향: 1920×1080 해상도 30fps 실시간 처리, CPU 사용률 5% 이하"}</div>
             </div>
           </div>
         </BlurFade>
       </div>
     </div>
   ),
-};
+});
+
+export const llamiRoboticsImplementation = getLlamiRoboticsImplementation();

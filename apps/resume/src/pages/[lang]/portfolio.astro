@@ -6,6 +6,7 @@ import Navbar from "@/components/navbar";
 import "@/styles/global.css";
 
 import { initI18n, extractPortfolioTranslations, extractNavbarTranslations } from "@/i18n";
+import { getSlideTranslations } from "@/components/portfolio-slides/get-slide-translations";
 
 const { language, t } = initI18n(Astro);
 
@@ -13,6 +14,7 @@ const pageTitle = t("meta.portfolioTitle");
 const pageDescription = t("meta.portfolioDescription");
 const portfolioTranslations = extractPortfolioTranslations(t);
 const navbarTranslations = extractNavbarTranslations(t);
+const slideTranslations = getSlideTranslations(t);
 ---
 
 <html lang={language}>
@@ -28,7 +30,7 @@ const navbarTranslations = extractNavbarTranslations(t);
   </head>
   <body>
     <CommonBody lang={language} />
-    <SlideDeck client:only="react" translations={portfolioTranslations} />
+    <SlideDeck client:only="react" translations={portfolioTranslations} slideTranslations={slideTranslations} />
     <Navbar client:idle lang={language} translations={navbarTranslations} />
   </body>
 </html>

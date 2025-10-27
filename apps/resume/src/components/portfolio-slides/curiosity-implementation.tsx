@@ -2,7 +2,26 @@ import Image from "@/components/image";
 import BlurFade from "@/components/magicui/blur-fade";
 import type { SlideConfig } from "./types";
 
-export const curiosityImplementation: SlideConfig = {
+interface CuriosityImplementationContent {
+  feature1Title: string;
+  feature1Detail1: string;
+  feature1Detail2: string;
+  feature1Detail3: string;
+  feature2Title: string;
+  feature2Detail1: string;
+  feature2Detail2: string;
+  feature2Detail3: string;
+  feature3Title: string;
+  feature3Detail1: string;
+  feature3Detail2: string;
+  feature3Detail3: string;
+  decisionTitle: string;
+  decision1: string;
+  decision2: string;
+  decision3: string;
+}
+
+export const getCuriosityImplementation = (content?: CuriosityImplementationContent): SlideConfig => ({
   id: "curiosity-implementation",
   title: "큐리오시티 구현",
   subtitle: "기술적 도전과 해결",
@@ -28,14 +47,14 @@ export const curiosityImplementation: SlideConfig = {
             <h2
               className={`text-base md:text-lg font-bold mb-2 md:mb-2.5 ${isDark ? "text-white" : "text-black"}`}
             >
-              1. WebContainer 통합 및 파일시스템 프록시
+              {content?.feature1Title || "1. WebContainer 통합 및 파일시스템 프록시"}
             </h2>
             <div
               className={`text-xs sm:text-sm space-y-1 ${isDark ? "text-zinc-300" : "text-black"}`}
             >
-              <div>• 전역 인스턴스 관리: 여러 컴포넌트에서 동일한 WebContainer 재사용</div>
-              <div>• 다중 경로 시도 로직: /path, path, ./path 등 4가지 형식 자동 시도</div>
-              <div>• 커스텀 명령어 지원: .curiosity 폴더에 스크립트 배치</div>
+              <div>{content?.feature1Detail1 || "• 전역 인스턴스 관리: 여러 컴포넌트에서 동일한 WebContainer 재사용"}</div>
+              <div>{content?.feature1Detail2 || "• 다중 경로 시도 로직: /path, path, ./path 등 4가지 형식 자동 시도"}</div>
+              <div>{content?.feature1Detail3 || "• 커스텀 명령어 지원: .curiosity 폴더에 스크립트 배치"}</div>
             </div>
           </div>
         </BlurFade>
@@ -46,14 +65,14 @@ export const curiosityImplementation: SlideConfig = {
             <h2
               className={`text-base md:text-lg font-bold mb-2 md:mb-2.5 ${isDark ? "text-white" : "text-black"}`}
             >
-              2. 실시간 스트리밍 응답 처리
+              {content?.feature2Title || "2. 실시간 스트리밍 응답 처리"}
             </h2>
             <div
               className={`text-xs sm:text-sm space-y-1 ${isDark ? "text-zinc-300" : "text-black"}`}
             >
-              <div>• AsyncGenerator 기반 스트리밍: OpenAI/Anthropic API 청크 단위 응답</div>
-              <div>• 부분 메시지 누적: accumulatedText로 토큰 누적 및 실시간 UI 업데이트</div>
-              <div>• 비용 및 시간 추적: 최종 응답에서 토큰 사용량 기반 비용 계산</div>
+              <div>{content?.feature2Detail1 || "• AsyncGenerator 기반 스트리밍: OpenAI/Anthropic API 청크 단위 응답"}</div>
+              <div>{content?.feature2Detail2 || "• 부분 메시지 누적: accumulatedText로 토큰 누적 및 실시간 UI 업데이트"}</div>
+              <div>{content?.feature2Detail3 || "• 비용 및 시간 추적: 최종 응답에서 토큰 사용량 기반 비용 계산"}</div>
             </div>
           </div>
         </BlurFade>
@@ -64,16 +83,16 @@ export const curiosityImplementation: SlideConfig = {
             <h2
               className={`text-base md:text-lg font-bold mb-2 md:mb-2.5 ${isDark ? "text-white" : "text-black"}`}
             >
-              3. 재귀적 도구 실행 자동화
+              {content?.feature3Title || "3. 재귀적 도구 실행 자동화"}
             </h2>
             <div
               className={`text-xs sm:text-sm space-y-1 ${isDark ? "text-zinc-300" : "text-black"}`}
             >
               <div>
-                • 무제한 깊이 재귀: processMessageRecursively(depth) 함수로 도구 체인 자동 실행
+                {content?.feature3Detail1 || "• 무제한 깊이 재귀: processMessageRecursively(depth) 함수로 도구 체인 자동 실행"}
               </div>
-              <div>• 반복 패턴 감지: 최근 5회 히스토리 추적, 동일 패턴 3회 반복 시 중단</div>
-              <div>• 개별 도구 타임아웃: 각 도구 실행에 30초 타임아웃 적용</div>
+              <div>{content?.feature3Detail2 || "• 반복 패턴 감지: 최근 5회 히스토리 추적, 동일 패턴 3회 반복 시 중단"}</div>
+              <div>{content?.feature3Detail3 || "• 개별 도구 타임아웃: 각 도구 실행에 30초 타임아웃 적용"}</div>
             </div>
           </div>
         </BlurFade>
@@ -84,18 +103,20 @@ export const curiosityImplementation: SlideConfig = {
             <h2
               className={`text-base md:text-lg font-bold mb-2 md:mb-2.5 ${isDark ? "text-white" : "text-black"}`}
             >
-              기술적 의사결정
+              {content?.decisionTitle || "기술적 의사결정"}
             </h2>
             <div
               className={`text-xs sm:text-sm space-y-1 ${isDark ? "text-zinc-300" : "text-black"}`}
             >
-              <div>• 빠른 MVP vs 완벽한 설계: 재귀 패턴으로 복잡도 감소</div>
-              <div>• 성능 vs 안정성: 타임아웃과 반복 감지로 안정성 우선</div>
-              <div>• 클라우드 vs 온프레미스: 데이터 보안을 위해 온프레미스 우선 설계</div>
+              <div>{content?.decision1 || "• 빠른 MVP vs 완벽한 설계: 재귀 패턴으로 복잡도 감소"}</div>
+              <div>{content?.decision2 || "• 성능 vs 안정성: 타임아웃과 반복 감지로 안정성 우선"}</div>
+              <div>{content?.decision3 || "• 클라우드 vs 온프레미스: 데이터 보안을 위해 온프레미스 우선 설계"}</div>
             </div>
           </div>
         </BlurFade>
       </div>
     </div>
   ),
-};
+});
+
+export const curiosityImplementation = getCuriosityImplementation();

@@ -2,7 +2,21 @@ import Image from "@/components/image";
 import BlurFade from "@/components/magicui/blur-fade";
 import type { SlideConfig } from "./types";
 
-export const akaBrowserProblem: SlideConfig = {
+interface AkaBrowserProblemContent {
+  period: string;
+  periodValue: string;
+  role: string;
+  roleValue: string;
+  techStack: string;
+  techStackValue: string;
+  painPointTitle: string;
+  painPoint1: string;
+  painPoint2: string;
+  painPoint3: string;
+  quote: string;
+}
+
+export const getAkaBrowserProblem = (content?: AkaBrowserProblemContent): SlideConfig => ({
   id: "aka-browser-problem",
   title: "aka-browser: 미니 브라우저 개발",
   subtitle: "프로젝트 개요 및 배경",
@@ -29,16 +43,16 @@ export const akaBrowserProblem: SlideConfig = {
               className={`space-y-2 md:space-y-3 text-xs sm:text-sm ${isDark ? "text-zinc-300" : "text-black"}`}
             >
               <div>
-                <div className="font-semibold mb-1">진행기간</div>
-                <div>2025.10월 2주 진행 (오픈소스)</div>
+                <div className="font-semibold mb-1">{content?.period || "진행기간"}</div>
+                <div>{content?.periodValue || "2025.10월 2주 진행 (오픈소스)"}</div>
               </div>
               <div>
-                <div className="font-semibold mb-1">맡은 역할</div>
-                <div>개인 프로젝트 (설계, 개발, 배포)</div>
+                <div className="font-semibold mb-1">{content?.role || "맡은 역할"}</div>
+                <div>{content?.roleValue || "개인 프로젝트 (설계, 개발, 배포)"}</div>
               </div>
               <div>
-                <div className="font-semibold mb-1">기술 스택</div>
-                <div>Electron (Castlabs), React 18, TypeScript, Vite</div>
+                <div className="font-semibold mb-1">{content?.techStack || "기술 스택"}</div>
+                <div>{content?.techStackValue || "Electron (Castlabs), React 18, TypeScript, Vite"}</div>
               </div>
             </div>
           </div>
@@ -50,14 +64,14 @@ export const akaBrowserProblem: SlideConfig = {
             <h2
               className={`text-base md:text-lg font-bold mb-2 md:mb-3 ${isDark ? "text-white" : "text-black"}`}
             >
-              사용자 페인 포인트
+              {content?.painPointTitle || "사용자 페인 포인트"}
             </h2>
             <div
               className={`space-y-2 md:space-y-3 text-xs sm:text-sm ${isDark ? "text-zinc-300" : "text-black"}`}
             >
-              <div>• 웹 / Expo 개발 시 iOS 시뮬레이터는 노트북에서 항상켜기 너무 무거움</div>
-              <div>• Netflix를 PiP 모드로 볼 경우 자막이 PiP에 표시되지 않음</div>
-              <div>• DRM 콘텐츠 재생이 가능하며 항상 위에 떠있는 미니 브라우저 부재</div>
+              <div>{content?.painPoint1 || "• 웹 / Expo 개발 시 iOS 시뮬레이터는 노트북에서 항상켜기 너무 무거움"}</div>
+              <div>{content?.painPoint2 || "• Netflix를 PiP 모드로 볼 경우 자막이 PiP에 표시되지 않음"}</div>
+              <div>{content?.painPoint3 || "• DRM 콘텐츠 재생이 가능하며 항상 위에 떠있는 미니 브라우저 부재"}</div>
             </div>
           </div>
         </BlurFade>
@@ -66,11 +80,13 @@ export const akaBrowserProblem: SlideConfig = {
             <p
               className={`${isDark ? "text-zinc-300" : "text-zinc-600"} text-sm md:text-base italic font-medium text-balance keep-all`}
             >
-              "작업하면서 항상 위에 떠있는, 가벼운 세컨드 브라우저가 필요하다"
+              {content?.quote || "\"작업하면서 항상 위에 떠있는, 가벼운 세컨드 브라우저가 필요하다\""}
             </p>
           </div>
         </BlurFade>
       </div>
     </div>
   ),
-};
+});
+
+export const akaBrowserProblem = getAkaBrowserProblem();

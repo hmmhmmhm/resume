@@ -2,7 +2,32 @@ import Image from "@/components/image";
 import BlurFade from "@/components/magicui/blur-fade";
 import type { SlideConfig } from "./types";
 
-export const llamiRoboticsResults: SlideConfig = {
+interface LlamiRoboticsResultsContent {
+  businessImpactTitle: string;
+  metric1Value: string;
+  metric1Title: string;
+  metric1Desc: string;
+  metric2Value: string;
+  metric2Title: string;
+  metric2Desc: string;
+  metric3Value: string;
+  metric3Title: string;
+  metric3Desc: string;
+  metric4Value: string;
+  metric4Title: string;
+  metric4Desc: string;
+  technicalDecisionTitle: string;
+  technical1: string;
+  technical2: string;
+  technical3: string;
+  technical4: string;
+  learningsTitle: string;
+  learning1: string;
+  learning2: string;
+  learning3: string;
+}
+
+export const getLlamiRoboticsResults = (content?: LlamiRoboticsResultsContent): SlideConfig => ({
   id: "robot-results",
   title: "라미 로보틱스 결과",
   subtitle: "비즈니스 임팩트 및 학습",
@@ -28,7 +53,7 @@ export const llamiRoboticsResults: SlideConfig = {
             <h2
               className={`text-base md:text-lg font-bold mb-2 md:mb-2.5 ${isDark ? "text-white" : "text-black"}`}
             >
-              비즈니스 임팩트
+              {content?.businessImpactTitle || "비즈니스 임팩트"}
             </h2>
             <div
               className={`grid grid-cols-2 gap-3 text-xs sm:text-sm ${isDark ? "text-zinc-300" : "text-black"}`}
@@ -40,10 +65,10 @@ export const llamiRoboticsResults: SlideConfig = {
                 }}
               >
                 <div className="text-2xl font-black mb-1" style={{ color: "#EA5612" }}>
-                  90%
+                  {content?.metric1Value || "90%"}
                 </div>
-                <div className="font-semibold">영상 지연 감소</div>
-                <div className="text-[10px] opacity-70">3~5초 → 300~500ms</div>
+                <div className="font-semibold">{content?.metric1Title || "영상 지연 감소"}</div>
+                <div className="text-[10px] opacity-70">{content?.metric1Desc || "3~5초 → 300~500ms"}</div>
               </div>
               <div
                 className="text-center p-3 rounded-lg"
@@ -52,10 +77,10 @@ export const llamiRoboticsResults: SlideConfig = {
                 }}
               >
                 <div className="text-2xl font-black mb-1" style={{ color: "#EA5612" }}>
-                  45ms
+                  {content?.metric2Value || "45ms"}
                 </div>
-                <div className="font-semibold">경로 계획 속도</div>
-                <div className="text-[10px] opacity-70">실시간 대응 가능</div>
+                <div className="font-semibold">{content?.metric2Title || "경로 계획 속도"}</div>
+                <div className="text-[10px] opacity-70">{content?.metric2Desc || "실시간 대응 가능"}</div>
               </div>
               <div
                 className="text-center p-3 rounded-lg"
@@ -64,10 +89,10 @@ export const llamiRoboticsResults: SlideConfig = {
                 }}
               >
                 <div className="text-2xl font-black mb-1" style={{ color: "#EA5612" }}>
-                  30fps
+                  {content?.metric3Value || "30fps"}
                 </div>
-                <div className="font-semibold">영상 처리 성능</div>
-                <div className="text-[10px] opacity-70">CPU 5% 이하</div>
+                <div className="font-semibold">{content?.metric3Title || "영상 처리 성능"}</div>
+                <div className="text-[10px] opacity-70">{content?.metric3Desc || "CPU 5% 이하"}</div>
               </div>
               <div
                 className="text-center p-3 rounded-lg"
@@ -76,10 +101,10 @@ export const llamiRoboticsResults: SlideConfig = {
                 }}
               >
                 <div className="text-2xl font-black mb-1" style={{ color: "#EA5612" }}>
-                  500ms
+                  {content?.metric4Value || "500ms"}
                 </div>
-                <div className="font-semibold">제어 응답성</div>
-                <div className="text-[10px] opacity-70">실시간 양방향 통신</div>
+                <div className="font-semibold">{content?.metric4Title || "제어 응답성"}</div>
+                <div className="text-[10px] opacity-70">{content?.metric4Desc || "실시간 양방향 통신"}</div>
               </div>
             </div>
           </div>
@@ -91,15 +116,15 @@ export const llamiRoboticsResults: SlideConfig = {
             <h2
               className={`text-base md:text-lg font-bold mb-2 md:mb-2.5 ${isDark ? "text-white" : "text-black"}`}
             >
-              기술적 의사결정
+              {content?.technicalDecisionTitle || "기술적 의사결정"}
             </h2>
             <div
               className={`text-xs sm:text-sm space-y-1.5 ${isDark ? "text-zinc-300" : "text-black"}`}
             >
-              <div>• Turborepo 모노레포로 apps 분리 (web, motion-host, proxy)</div>
-              <div>• LegendState Observable 패턴으로 반응형 상태 관리</div>
-              <div>• WebGL GPU 가속으로 CPU 부하 최소화</div>
-              <div>• mediasoup SFU로 다중 클라이언트 확장 가능</div>
+              <div>{content?.technical1 || "• Turborepo 모노레포로 apps 분리 (web, motion-host, proxy)"}</div>
+              <div>{content?.technical2 || "• LegendState Observable 패턴으로 반응형 상태 관리"}</div>
+              <div>{content?.technical3 || "• WebGL GPU 가속으로 CPU 부하 최소화"}</div>
+              <div>{content?.technical4 || "• mediasoup SFU로 다중 클라이언트 확장 가능"}</div>
             </div>
           </div>
         </BlurFade>
@@ -110,18 +135,20 @@ export const llamiRoboticsResults: SlideConfig = {
             <h2
               className={`text-base md:text-lg font-bold mb-2 md:mb-2.5 ${isDark ? "text-white" : "text-black"}`}
             >
-              프로젝트를 통해 배운 점
+              {content?.learningsTitle || "프로젝트를 통해 배운 점"}
             </h2>
             <div
               className={`text-xs sm:text-sm space-y-1.5 ${isDark ? "text-zinc-300" : "text-black"}`}
             >
-              <div>• 저수준 UDP 프로토콜 구현 및 바이너리 데이터 파싱 경험</div>
-              <div>• WebRTC SFU 아키텍처 설계 및 실시간 스트리밍 최적화</div>
-              <div>• 경로 계획 알고리즘의 실제 로봇 제어 적용</div>
+              <div>{content?.learning1 || "• 저수준 UDP 프로토콜 구현 및 바이너리 데이터 파싱 경험"}</div>
+              <div>{content?.learning2 || "• WebRTC SFU 아키텍처 설계 및 실시간 스트리밍 최적화"}</div>
+              <div>{content?.learning3 || "• 경로 계획 알고리즘의 실제 로봇 제어 적용"}</div>
             </div>
           </div>
         </BlurFade>
       </div>
     </div>
   ),
-};
+});
+
+export const llamiRoboticsResults = getLlamiRoboticsResults();

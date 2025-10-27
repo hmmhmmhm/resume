@@ -2,7 +2,16 @@ import Image from "@/components/image";
 import BlurFade from "@/components/magicui/blur-fade";
 import type { SlideConfig } from "./types";
 
-export const llamiAppDesign: SlideConfig = {
+interface LlamiAppDesignContent {
+  requirement1: string;
+  solution1: string;
+  requirement2: string;
+  solution2: string;
+  requirement3: string;
+  solution3: string;
+}
+
+export const getLlamiAppDesign = (content?: LlamiAppDesignContent): SlideConfig => ({
   id: "design",
   title: "라미앱 설계",
   subtitle: "요구사항과 해결 방안",
@@ -28,10 +37,10 @@ export const llamiAppDesign: SlideConfig = {
             <h2
               className={`text-base md:text-lg font-bold mb-2 md:mb-3 ${isDark ? "text-white" : "text-black"}`}
             >
-              요구사항 1: 고정비 제로화
+              {content?.requirement1 || "요구사항 1: 고정비 제로화"}
             </h2>
             <div className={`text-xs sm:text-sm ${isDark ? "text-zinc-300" : "text-black"}`}>
-              → 온디바이스 AI 앱 설계로 서버 비용 완전 제거
+              {content?.solution1 || "→ 온디바이스 AI 앱 설계로 서버 비용 완전 제거"}
             </div>
           </div>
         </BlurFade>
@@ -42,10 +51,10 @@ export const llamiAppDesign: SlideConfig = {
             <h2
               className={`text-base md:text-lg font-bold mb-2 md:mb-3 ${isDark ? "text-white" : "text-black"}`}
             >
-              요구사항 2: 웹 팀으로 앱 개발
+              {content?.requirement2 || "요구사항 2: 웹 팀으로 앱 개발"}
             </h2>
             <div className={`text-xs sm:text-sm ${isDark ? "text-zinc-300" : "text-black"}`}>
-              → Expo 웹뷰 + 핵심 모듈만 React Native/C++ 하이브리드 설계
+              {content?.solution2 || "→ Expo 웹뷰 + 핵심 모듈만 React Native/C++ 하이브리드 설계"}
             </div>
           </div>
         </BlurFade>
@@ -56,14 +65,16 @@ export const llamiAppDesign: SlideConfig = {
             <h2
               className={`text-base md:text-lg font-bold mb-2 md:mb-3 ${isDark ? "text-white" : "text-black"}`}
             >
-              요구사항 3: 자체 AI 모델 운용
+              {content?.requirement3 || "요구사항 3: 자체 AI 모델 운용"}
             </h2>
             <div className={`text-xs sm:text-sm ${isDark ? "text-zinc-300" : "text-black"}`}>
-              → Gemma3 SLM 파인튜닝 후 GGUF 모델로 배포
+              {content?.solution3 || "→ Gemma3 SLM 파인튜닝 후 GGUF 모델로 배포"}
             </div>
           </div>
         </BlurFade>
       </div>
     </div>
   ),
-};
+});
+
+export const llamiAppDesign = getLlamiAppDesign();

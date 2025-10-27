@@ -2,7 +2,25 @@ import Image from "@/components/image";
 import BlurFade from "@/components/magicui/blur-fade";
 import type { SlideConfig } from "./types";
 
-export const llamiRoboticsProblem: SlideConfig = {
+interface LlamiRoboticsProblemContent {
+  period: string;
+  periodValue: string;
+  role: string;
+  roleValue: string;
+  contribution: string;
+  contributionValue: string;
+  challengesTitle: string;
+  challenge1Title: string;
+  challenge1Desc: string;
+  challenge2Title: string;
+  challenge2Desc: string;
+  challenge3Title: string;
+  challenge3Desc: string;
+  challenge4Title: string;
+  challenge4Desc: string;
+}
+
+export const getLlamiRoboticsProblem = (content?: LlamiRoboticsProblemContent): SlideConfig => ({
   id: "robot-problem",
   title: "라미 로보틱스 - 4족보행 로봇",
   subtitle: "DeepRobotics 로봇개 원격 제어 및 자율 주행 플랫폼",
@@ -29,19 +47,17 @@ export const llamiRoboticsProblem: SlideConfig = {
               className={`space-y-2 md:space-y-3 text-xs sm:text-sm ${isDark ? "text-zinc-300" : "text-black"}`}
             >
               <div>
-                <div className="font-semibold mb-1">프로젝트 기간</div>
-                <div>2025.07.16 ~ 2025.09.01 (중단)</div>
+                <div className="font-semibold mb-1">{content?.period || "프로젝트 기간"}</div>
+                <div>{content?.periodValue || "2025.07.16 ~ 2025.09.01 (중단)"}</div>
               </div>
               <div>
-                <div className="font-semibold mb-1">역할</div>
-                <div>CTO 및 리드 개발자</div>
+                <div className="font-semibold mb-1">{content?.role || "역할"}</div>
+                <div>{content?.roleValue || "CTO 및 리드 개발자"}</div>
               </div>
               <div>
-                <div className="font-semibold mb-1">프로젝트 기여도</div>
+                <div className="font-semibold mb-1">{content?.contribution || "프로젝트 기여도"}</div>
                 <div>
-                  이하민 50%: 딥로봇틱스 Lite3 로봇개 원격 제어 및 자율 주행 시스템 개발. WebRTC
-                  기반 실시간 영상 스트리밍과 WebSocket 통신을 통한 로봇 제어, SLAM 기반 맵핑 및
-                  경로 계획 기능 구현.
+                  {content?.contributionValue || "이하민 50%: 딥로봇틱스 Lite3 로봇개 원격 제어 및 자율 주행 시스템 개발. WebRTC 기반 실시간 영상 스트리밍과 WebSocket 통신을 통한 로봇 제어, SLAM 기반 맵핑 및 경로 계획 기능 구현."}
                 </div>
               </div>
             </div>
@@ -54,30 +70,30 @@ export const llamiRoboticsProblem: SlideConfig = {
             <h2
               className={`text-base md:text-lg font-bold mb-2 md:mb-3 ${isDark ? "text-white" : "text-black"}`}
             >
-              핵심 기술 과제
+              {content?.challengesTitle || "핵심 기술 과제"}
             </h2>
             <div
               className={`space-y-2 md:space-y-3 text-xs sm:text-sm ${isDark ? "text-zinc-300" : "text-black"}`}
             >
               <div>
-                <span className="font-bold">로봇 웹 통신 프로토콜 부재</span>
+                <span className="font-bold">{content?.challenge1Title || "로봇 웹 통신 프로토콜 부재"}</span>
                 <br />
-                딥로봇틱스 Lite3는 UDP 바이너리 프로토콜 사용, 공식 웹 SDK 없음
+                {content?.challenge1Desc || "딥로봇틱스 Lite3는 UDP 바이너리 프로토콜 사용, 공식 웹 SDK 없음"}
               </div>
               <div>
-                <span className="font-bold">실시간 영상 전송 지연</span>
+                <span className="font-bold">{content?.challenge2Title || "실시간 영상 전송 지연"}</span>
                 <br />
-                RTSP 스트림을 웹에서 직접 재생 불가, HLS는 3~5초 지연
+                {content?.challenge2Desc || "RTSP 스트림을 웹에서 직접 재생 불가, HLS는 3~5초 지연"}
               </div>
               <div>
-                <span className="font-bold">복잡한 환경에서의 경로 계획</span>
+                <span className="font-bold">{content?.challenge3Title || "복잡한 환경에서의 경로 계획"}</span>
                 <br />
-                장애물 회피, 작업 영역 제약, 선호 경로 등 다층 제약 조건 처리
+                {content?.challenge3Desc || "장애물 회피, 작업 영역 제약, 선호 경로 등 다층 제약 조건 처리"}
               </div>
               <div>
-                <span className="font-bold">영상 품질 및 성능 문제</span>
+                <span className="font-bold">{content?.challenge4Title || "영상 품질 및 성능 문제"}</span>
                 <br />
-                로봇 카메라의 불안정한 화이트밸런스, CPU 기반 영상 처리는 30fps에서 프레임 드롭 발생
+                {content?.challenge4Desc || "로봇 카메라의 불안정한 화이트밸런스, CPU 기반 영상 처리는 30fps에서 프레임 드롭 발생"}
               </div>
             </div>
           </div>
@@ -85,4 +101,6 @@ export const llamiRoboticsProblem: SlideConfig = {
       </div>
     </div>
   ),
-};
+});
+
+export const llamiRoboticsProblem = getLlamiRoboticsProblem();

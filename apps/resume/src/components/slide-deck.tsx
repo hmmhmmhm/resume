@@ -29,41 +29,41 @@ const Spinner = ({ className }: { className?: string }) => (
   </svg>
 );
 import {
-  llamiAppProblem,
-  llamiAppDesign,
-  llamiAppImplementation,
-  llamiAppResults,
-  llamiRoboticsProblem,
-  llamiRoboticsDesign,
-  llamiRoboticsImplementation,
-  llamiRoboticsResults,
-  akaBrowserProblem,
-  akaBrowserDesign,
-  akaBrowserImplementation,
-  akaBrowserResults,
-  curiosityProblem,
-  curiosityDesign,
-  curiosityImplementation,
-  curiosityResults,
+  getLlamiAppProblem,
+  getLlamiAppDesign,
+  getLlamiAppImplementation,
+  getLlamiAppResults,
+  getLlamiRoboticsProblem,
+  getLlamiRoboticsDesign,
+  getLlamiRoboticsImplementation,
+  getLlamiRoboticsResults,
+  getAkaBrowserProblem,
+  getAkaBrowserDesign,
+  getAkaBrowserImplementation,
+  getAkaBrowserResults,
+  getCuriosityProblem,
+  getCuriosityDesign,
+  getCuriosityImplementation,
+  getCuriosityResults,
 } from "./portfolio-slides";
 
-const slides = [
-  llamiAppProblem,
-  llamiAppDesign,
-  llamiAppImplementation,
-  llamiAppResults,
-  llamiRoboticsProblem,
-  llamiRoboticsDesign,
-  llamiRoboticsImplementation,
-  llamiRoboticsResults,
-  akaBrowserProblem,
-  akaBrowserDesign,
-  akaBrowserImplementation,
-  akaBrowserResults,
-  curiosityProblem,
-  curiosityDesign,
-  curiosityImplementation,
-  curiosityResults,
+const getSlides = (slideTranslations?: any) => [
+  getLlamiAppProblem(slideTranslations?.llamiApp?.problem),
+  getLlamiAppDesign(slideTranslations?.llamiApp?.design),
+  getLlamiAppImplementation(slideTranslations?.llamiApp?.implementation),
+  getLlamiAppResults(slideTranslations?.llamiApp?.results),
+  getLlamiRoboticsProblem(slideTranslations?.llamiRobotics?.problem),
+  getLlamiRoboticsDesign(slideTranslations?.llamiRobotics?.design),
+  getLlamiRoboticsImplementation(slideTranslations?.llamiRobotics?.implementation),
+  getLlamiRoboticsResults(slideTranslations?.llamiRobotics?.results),
+  getAkaBrowserProblem(slideTranslations?.akaBrowser?.problem),
+  getAkaBrowserDesign(slideTranslations?.akaBrowser?.design),
+  getAkaBrowserImplementation(slideTranslations?.akaBrowser?.implementation),
+  getAkaBrowserResults(slideTranslations?.akaBrowser?.results),
+  getCuriosityProblem(slideTranslations?.curiosity?.problem),
+  getCuriosityDesign(slideTranslations?.curiosity?.design),
+  getCuriosityImplementation(slideTranslations?.curiosity?.implementation),
+  getCuriosityResults(slideTranslations?.curiosity?.results),
 ];
 
 interface SlideDeckProps {
@@ -72,12 +72,15 @@ interface SlideDeckProps {
     downloadFilename: string;
     pageNumber: string;
   };
+  slideTranslations?: any;
 }
 
-export default function SlideDeck({ translations }: SlideDeckProps = {}) {
+export default function SlideDeck({ translations, slideTranslations }: SlideDeckProps = {}) {
   const [mounted, setMounted] = useState(false);
   const [isDark, setIsDark] = useState(true);
   const [isDownloading, setIsDownloading] = useState(false);
+  
+  const slides = getSlides(slideTranslations);
 
   useEffect(() => {
     setMounted(true);
@@ -146,27 +149,65 @@ export default function SlideDeck({ translations }: SlideDeckProps = {}) {
       </button>
 
       <div className="pt-16">
-        {slides.map((slide, index) => (
-          <div key={slide.id}>
-            {index > 0 && (
-              <div className="flex items-center justify-center py-4 px-4">
-                <div className="flex-1 h-px bg-gradient-to-r from-transparent via-zinc-300 dark:via-zinc-700 to-transparent" />
-                <div className="px-4 text-zinc-500 dark:text-zinc-400 font-mono text-sm">
-                  {index + 1} {translations?.pageNumber || '페이지'}
+        {slides.map((slide, index) => {
+          // Get translated title and subtitle if available
+          let translatedTitle = slide.title;
+          let translatedSubtitle = slide.subtitle;
+          
+          if (slideTranslations) {
+            // Map slide IDs to translation keys
+            const slideKeyMap: Record<string, string> = {
+              'problem': 'llamiApp.problem',
+              'design': 'llamiApp.design',
+              'implementation': 'llamiApp.implementation',
+              'results': 'llamiApp.results',
+              'robot-problem': 'llamiRobotics.problem',
+              'robot-design': 'llamiRobotics.design',
+              'robot-implementation': 'llamiRobotics.implementation',
+              'robot-results': 'llamiRobotics.results',
+              'aka-browser-problem': 'akaBrowser.problem',
+              'aka-browser-design': 'akaBrowser.design',
+              'aka-browser-implementation': 'akaBrowser.implementation',
+              'aka-browser-results': 'akaBrowser.results',
+              'curiosity-problem': 'curiosity.problem',
+              'curiosity-design': 'curiosity.design',
+              'curiosity-implementation': 'curiosity.implementation',
+              'curiosity-results': 'curiosity.results',
+            };
+            
+            const translationKey = slideKeyMap[slide.id];
+            if (translationKey) {
+              const keys = translationKey.split('.');
+              const slideData = slideTranslations[keys[0]]?.[keys[1]];
+              if (slideData) {
+                translatedTitle = slideData.title || slide.title;
+                translatedSubtitle = slideData.subtitle || slide.subtitle;
+              }
+            }
+          }
+          
+          return (
+            <div key={slide.id}>
+              {index > 0 && (
+                <div className="flex items-center justify-center py-4 px-4">
+                  <div className="flex-1 h-px bg-gradient-to-r from-transparent via-zinc-300 dark:via-zinc-700 to-transparent" />
+                  <div className="px-4 text-zinc-500 dark:text-zinc-400 font-mono text-sm">
+                    {index + 1} {translations?.pageNumber || '페이지'}
+                  </div>
+                  <div className="flex-1 h-px bg-gradient-to-r from-transparent via-zinc-300 dark:via-zinc-700 to-transparent" />
                 </div>
-                <div className="flex-1 h-px bg-gradient-to-r from-transparent via-zinc-300 dark:via-zinc-700 to-transparent" />
-              </div>
-            )}
-            <Slide
-              title={slide.title}
-              subtitle={slide.subtitle}
-              icon={slide.icon(isDark)}
-              isDark={isDark}
-            >
-              {slide.content(isDark)}
-            </Slide>
-          </div>
-        ))}
+              )}
+              <Slide
+                title={translatedTitle}
+                subtitle={translatedSubtitle}
+                icon={slide.icon(isDark)}
+                isDark={isDark}
+              >
+                {slide.content(isDark)}
+              </Slide>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

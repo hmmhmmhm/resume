@@ -2,7 +2,22 @@ import Image from "@/components/image";
 import BlurFade from "@/components/magicui/blur-fade";
 import type { SlideConfig } from "./types";
 
-export const llamiAppProblem: SlideConfig = {
+interface LlamiAppProblemContent {
+  period: string;
+  periodValue: string;
+  role: string;
+  roleValue: string;
+  contribution: string;
+  contributionValue: string;
+  businessProblem: string;
+  problem1: string;
+  problem2: string;
+  problem3: string;
+  problem4: string;
+  quote: string;
+}
+
+export const getLlamiAppProblem = (content?: LlamiAppProblemContent): SlideConfig => ({
   id: "problem",
   title: "라미앱 개발 배경",
   subtitle: "비즈니스 문제 정의",
@@ -29,16 +44,16 @@ export const llamiAppProblem: SlideConfig = {
               className={`space-y-2 md:space-y-3 text-xs sm:text-sm ${isDark ? "text-zinc-300" : "text-black"}`}
             >
               <div>
-                <div className="font-semibold mb-1">진행기간</div>
-                <div>2025.05.04 ~ 2025.06.17 출시</div>
+                <div className="font-semibold mb-1">{content?.period || "진행기간"}</div>
+                <div>{content?.periodValue || "2025.05.04 ~ 2025.06.17 출시"}</div>
               </div>
               <div>
-                <div className="font-semibold mb-1">맡은 역할</div>
-                <div>CTO 및 리드 개발자</div>
+                <div className="font-semibold mb-1">{content?.role || "맡은 역할"}</div>
+                <div>{content?.roleValue || "CTO 및 리드 개발자"}</div>
               </div>
               <div>
-                <div className="font-semibold mb-1">프로젝트 기여도</div>
-                <div>30% (네이티브 앱 아키텍팅 및 PoC 구현)</div>
+                <div className="font-semibold mb-1">{content?.contribution || "프로젝트 기여도"}</div>
+                <div>{content?.contributionValue || "30% (네이티브 앱 아키텍팅 및 PoC 구현)"}</div>
               </div>
             </div>
           </div>
@@ -50,19 +65,15 @@ export const llamiAppProblem: SlideConfig = {
             <h2
               className={`text-base md:text-lg font-bold mb-2 md:mb-3 ${isDark ? "text-white" : "text-black"}`}
             >
-              비즈니스 문제
+              {content?.businessProblem || "비즈니스 문제"}
             </h2>
             <div
               className={`space-y-2 md:space-y-3 text-xs sm:text-sm ${isDark ? "text-zinc-300" : "text-black"}`}
             >
-              <div>
-                • 결제 페이지에서 <span className="font-bold text-red-700 dark:text-red-400">95% 이탈률</span>
-              </div>
-              <div>• 고객 인터뷰: "무료 AI 서비스가 많아 결제 망설임"</div>
-              <div>
-                • CAC가 투자자 요구 대비 <span className="font-bold text-red-700 dark:text-red-400">5배 초과</span>
-              </div>
-              <div>• 기존 AI 서비스 고정비 절감 방안은 대규모 서비스에만 특화</div>
+              <div dangerouslySetInnerHTML={{ __html: content?.problem1 || '• 결제 페이지에서 <span class="font-bold text-red-700 dark:text-red-400">95% 이탈률</span>' }} />
+              <div>{content?.problem2 || '• 고객 인터뷰: "무료 AI 서비스가 많아 결제 망설임"'}</div>
+              <div dangerouslySetInnerHTML={{ __html: content?.problem3 || '• CAC가 투자자 요구 대비 <span class="font-bold text-red-700 dark:text-red-400">5배 초과</span>' }} />
+              <div>{content?.problem4 || "• 기존 AI 서비스 고정비 절감 방안은 대규모 서비스에만 특화"}</div>
             </div>
           </div>
         </BlurFade>
@@ -71,11 +82,13 @@ export const llamiAppProblem: SlideConfig = {
             <p
               className={`${isDark ? "text-zinc-300" : "text-zinc-600"} text-sm md:text-base italic font-medium text-balance keep-all`}
             >
-              "AI 서비스 고정비를 획기적으로 줄일 새로운 방안이 요구됨"
+              {content?.quote || '"AI 서비스 고정비를 획기적으로 줄일 새로운 방안이 요구됨"'}
             </p>
           </div>
         </BlurFade>
       </div>
     </div>
   ),
-};
+});
+
+export const llamiAppProblem = getLlamiAppProblem();
