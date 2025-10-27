@@ -95,27 +95,30 @@ export function getSlideTranslations(t: TFunction) {
     },
     curiosity: {
       problem: extractFields(t, "slides.curiosity.problem", [
-        "title", "subtitle", "period", "periodValue", "role", "roleValue",
-        "problemTitle", "problem1", "problem2", "problem3"
+        "title", "subtitle", "businessProblemTitle", "businessProblemSubtitle",
+        "problem1", "problem2", "problem3", "existingToolsTitle",
+        "existingTool1", "existingTool2", "existingTool3", "existingTool4", "quote"
       ]),
       design: extractFields(t, "slides.curiosity.design", [
-        "title", "subtitle", "requirement1", "solution1",
-        "requirement2", "solution2", "requirement3", "solution3"
+        "title", "subtitle",
+        "requirement1Title", "requirement1Detail1", "requirement1Detail2", "requirement1Detail3",
+        "requirement2Title", "requirement2Detail1", "requirement2Detail2", "requirement2Detail3",
+        "requirement3Title", "requirement3Detail1", "requirement3Detail2", "requirement3Detail3",
+        "requirement4Title", "requirement4Detail1", "requirement4Detail2", "requirement4Detail3"
       ]),
       implementation: extractFields(t, "slides.curiosity.implementation", [
-        "title", "subtitle", "coreTitle",
-        "feature1Title", "feature1Detail1", "feature1Detail2",
-        "feature2Title", "feature2Detail1", "feature2Detail2",
-        "feature3Title", "feature3Detail1", "feature3Detail2",
-        "feature4Title", "feature4Detail1", "feature4Detail2",
-        "challengesTitle", "challenge1", "challenge2", "challenge3"
+        "title", "subtitle",
+        "feature1Title", "feature1Detail1", "feature1Detail2", "feature1Detail3",
+        "feature2Title", "feature2Detail1", "feature2Detail2", "feature2Detail3",
+        "feature3Title", "feature3Detail1", "feature3Detail2", "feature3Detail3",
+        "decisionTitle", "decision1", "decision2", "decision3"
       ]),
       results: extractFields(t, "slides.curiosity.results", [
         "title", "subtitle", "metric1Value", "metric1Title", "metric1Desc",
         "metric2Value", "metric2Title", "metric2Desc", "metric3Value", "metric3Title", "metric3Desc",
         "learningsTitle", "architectureTitle", "architecture1", "architecture2", "architecture3",
         "balanceTitle", "balance1", "balance2", "balance3",
-        "discontinuedTitle", "discontinued1", "discontinued2", "discontinued3",
+        "discontinuedTitle", "discontinuedSubtitle", "discontinued1", "discontinued2", "discontinued3",
         "futureTitle", "future1", "future2", "future3"
       ]),
     },

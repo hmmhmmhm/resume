@@ -66,7 +66,7 @@
         "location": "South Korea",
         "start": "June 2024",
         "end": "October 2025",
-        "description": "As lead engineer for the on-device LLM mobile app 'Llami App', I designed and implemented a WebView↔Native bridge architecture. Built on-device STT/TTS and image processing pipelines using ONNX Runtime, OpenCV, and MMKV, developed an AI-powered dashboard, and configured Supabase-based DB integration. For the web-based robot control 'Llami Robotics', I implemented UDP control protocol for DeepRobotics Lite3 and WebRTC low-latency streaming, and developed SLAM mapping UI and path planning operation UI. Independently developed the in-browser AI coding agent 'Curiosity', implementing a WebContainer+Monaco-based real-time code execution environment."
+        "description": "As lead engineer for the on-device LLM mobile app 'LLAMI App', I designed and implemented a WebView↔Native bridge architecture. Built on-device STT/TTS and image processing pipelines using ONNX Runtime, OpenCV, and MMKV, developed an AI-powered dashboard, and configured Supabase-based DB integration. For the web-based robot control 'LLAMI Robotics', I implemented UDP control protocol for DeepRobotics Lite3 and WebRTC low-latency streaming, and developed SLAM mapping UI and path planning operation UI. Independently developed the in-browser AI coding agent 'Curiosity', implementing a WebContainer+Monaco-based real-time code execution environment."
       },
       "abacus": {
         "company": "Abacus Technology",
@@ -198,7 +198,7 @@
   "slides": {
     "llamiApp": {
       "problem": {
-        "title": "Llami App Development Background",
+        "title": "LLAMI App Development Background",
         "subtitle": "Business Problem Definition",
         "period": "Project Period",
         "periodValue": "May 4, 2025 ~ June 17, 2025 Launch",
@@ -214,7 +214,7 @@
         "quote": "\"A new approach to dramatically reduce AI service fixed costs is required\""
       },
       "design": {
-        "title": "Llami App Design",
+        "title": "LLAMI App Design",
         "subtitle": "Requirements and Solutions",
         "requirement1": "Requirement 1: Zero Fixed Costs",
         "solution1": "→ Complete server cost elimination through on-device AI app design",
@@ -224,7 +224,7 @@
         "solution3": "→ Fine-tune Gemma3 SLM and deploy as GGUF model"
       },
       "implementation": {
-        "title": "Llami App Implementation",
+        "title": "LLAMI App Implementation",
         "subtitle": "Technical Challenges and Solutions",
         "coreTitle": "Core Implementation",
         "item1Title": "1. State Bridge System",
@@ -246,7 +246,7 @@
         "decision4": "• Type safety through Observable-based state management"
       },
       "results": {
-        "title": "Llami App Results",
+        "title": "LLAMI App Results",
         "subtitle": "Business Impact",
         "metric1Value": "$0",
         "metric1Title": "AI Fixed Cost Achieved",
@@ -270,7 +270,7 @@
     },
     "llamiRobotics": {
       "problem": {
-        "title": "Llami Robotics - Quadruped Robot",
+        "title": "LLAMI Robotics - Quadruped Robot",
         "subtitle": "DeepRobotics Robot Dog Remote Control and Autonomous Navigation Platform",
         "period": "Project Period",
         "periodValue": "July 16, 2025 ~ September 1, 2025 (Discontinued)",
@@ -289,7 +289,7 @@
         "challenge4Desc": "Unstable white balance from robot camera, CPU-based video processing causes frame drops at 30fps"
       },
       "design": {
-        "title": "Llami Robotics Design",
+        "title": "LLAMI Robotics Design",
         "subtitle": "Key Design Decisions",
         "decision1": "UDP-based Binary Protocol",
         "detail1": "Real-time transmission of robot control commands and status data",
@@ -301,7 +301,7 @@
         "detail4": "Optimal path search based on multi-layer cost map"
       },
       "implementation": {
-        "title": "Llami Robotics Implementation",
+        "title": "LLAMI Robotics Implementation",
         "subtitle": "Technical Challenges and Solutions",
         "challenge1Title": "Challenge 1: Binary Protocol Implementation",
         "challenge1Situation": "Situation: Need to implement binary protocol directly without official SDK",
@@ -321,7 +321,7 @@
         "challenge4Impact": "Impact: Real-time 30fps processing at 1920×1080 resolution, CPU usage below 5%"
       },
       "results": {
-        "title": "Llami Robotics Results",
+        "title": "LLAMI Robotics Results",
         "subtitle": "Business Impact and Learnings",
         "businessImpactTitle": "Business Impact",
         "metric1Value": "90%",
@@ -448,45 +448,57 @@
       "problem": {
         "title": "Curiosity Development Background",
         "subtitle": "On-Premise AI Coding Platform for Rapid MVP Validation by Non-Developers",
-        "period": "Project Period",
-        "periodValue": "Aug 2024 ~ Sep 12, 2025 (Discontinued)",
-        "role": "Role",
-        "roleValue": "Personal Project (100%)",
-        "problemTitle": "MVP Validation Barriers for Non-Developers",
+        "businessProblemTitle": "Business Problem Definition",
+        "businessProblemSubtitle": "MVP Validation Barriers for Non-Developers",
         "problem1": "• Outsourced development cost: Minimum $50K+, 2-3 months required",
         "problem2": "• No-code tool limitations: No customization possible",
-        "problem3": "• Developer hiring: Labor cost burden in early-stage startups"
+        "problem3": "• Developer hiring: Labor cost burden in early-stage startups",
+        "existingToolsTitle": "Limitations of Existing Tools",
+        "existingTool1": "• Cursor/Windsurf: Local environment setup required, high barrier for non-developers",
+        "existingTool2": "• Bolt.new: Cloud-dependent, data security concerns",
+        "existingTool3": "• v0.dev: UI generation only, no backend logic",
+        "existingTool4": "• Replit Agent: Cloud-dependent, no on-premise option",
+        "quote": "\"We needed an AI coding platform that runs instantly in the browser without installation, allowing non-developers to validate ideas immediately.\""
       },
       "design": {
         "title": "Curiosity Design",
         "subtitle": "Requirements and Solutions",
-        "requirement1": "Requirement 1: Instant Browser Execution",
-        "solution1": "→ Run Node.js environment in browser with WebContainer",
-        "requirement2": "Requirement 2: AI Agent Auto-Coding",
-        "solution2": "→ Recursive structure for AI to self-plan-execute-verify repeatedly",
-        "requirement3": "Requirement 3: On-Premise Execution",
-        "solution3": "→ Minimize external API dependencies, support closed network environments"
+        "requirement1Title": "1. Instant Environment for Non-Developers",
+        "requirement1Detail1": "→ Build in-browser Node.js environment with WebContainer API",
+        "requirement1Detail2": "• Provide instant dev environment with browser only, no local installation",
+        "requirement1Detail3": "• Manage WebContainer instance with global singleton pattern",
+        "requirement2Title": "2. On-Premise Deployment for Data Security",
+        "requirement2Detail1": "→ Design self-hostable API server",
+        "requirement2Detail2": "• Easy on-premise deployment with Hono-based lightweight API server",
+        "requirement2Detail3": "• Environment variable-based AI provider configuration",
+        "requirement3Title": "3. Fast Feedback with Real-Time AI Response",
+        "requirement3Detail1": "→ Design SSE-based streaming response system",
+        "requirement3Detail2": "• Real-time token-level streaming with AsyncGenerator pattern",
+        "requirement3Detail3": "• Instant feedback by separating partial and complete responses",
+        "requirement4Title": "4. Auto-Execute AI-Proposed Tasks",
+        "requirement4Detail1": "→ Design recursive tool execution engine",
+        "requirement4Detail2": "• Infinite loop structure: API call → Tool execution → API call",
+        "requirement4Detail3": "• Prevent infinite loops with repetition pattern detection algorithm"
       },
       "implementation": {
         "title": "Curiosity Implementation",
         "subtitle": "Technical Challenges and Solutions",
-        "coreTitle": "Core Implementation",
-        "feature1Title": "1. WebContainer Integration",
-        "feature1Detail1": "• Maximize resource efficiency with singleton pattern",
-        "feature1Detail2": "• File system + Terminal + Process management",
-        "feature2Title": "2. AI Agent Recursive Execution",
-        "feature2Detail1": "• Plan → Execute tools → Verify results → Replan",
-        "feature2Detail2": "• Prevent infinite recursion: Pattern detection + max depth limit",
-        "feature3Title": "3. Real-time Code Execution",
-        "feature3Detail1": "• Monaco Editor + WebContainer integration",
-        "feature3Detail2": "• File change detection → Auto re-execution",
-        "feature4Title": "4. Tool System",
-        "feature4Detail1": "• File read/write, command execution, web search, etc.",
-        "feature4Detail2": "• Client-server tool separation design",
-        "challengesTitle": "Technical Challenges and Solutions",
-        "challenge1": "• WebContainer initialization time optimization (singleton pattern)",
-        "challenge2": "• AI infinite recursion prevention (pattern detection algorithm)",
-        "challenge3": "• Browser memory constraints (progressive loading)"
+        "feature1Title": "1. WebContainer Integration and Filesystem Proxy",
+        "feature1Detail1": "• Global instance management: Reuse same WebContainer across components",
+        "feature1Detail2": "• Multi-path retry logic: Auto-try 4 formats like /path, path, ./path",
+        "feature1Detail3": "• Custom command support: Place scripts in .curiosity folder",
+        "feature2Title": "2. Real-time Streaming Response Processing",
+        "feature2Detail1": "• AsyncGenerator-based streaming: OpenAI/Anthropic API chunk-level responses",
+        "feature2Detail2": "• Partial message accumulation: Token accumulation with accumulatedText and real-time UI updates",
+        "feature2Detail3": "• Cost and time tracking: Calculate cost based on token usage in final response",
+        "feature3Title": "3. Recursive Tool Execution Automation",
+        "feature3Detail1": "• Unlimited depth recursion: Auto-execute tool chain with processMessageRecursively(depth) function",
+        "feature3Detail2": "• Repetition pattern detection: Track recent 5 history, stop after 3 identical pattern repeats",
+        "feature3Detail3": "• Individual tool timeout: Apply 30-second timeout to each tool execution",
+        "decisionTitle": "Technical Decisions",
+        "decision1": "• Fast MVP vs Perfect Design: Reduce complexity with recursive pattern",
+        "decision2": "• Performance vs Stability: Prioritize stability with timeout and repetition detection",
+        "decision3": "• Cloud vs On-Premise: Prioritize on-premise design for data security"
       },
       "results": {
         "title": "Curiosity Results",
@@ -509,10 +521,11 @@
         "balance1": "• Solved infinite recursion risk with pattern detection",
         "balance2": "• Designed so individual tool failures don't halt entire flow",
         "balance3": "• Provided intuitive feedback understandable by non-developers",
-        "discontinuedTitle": "Project Discontinued (Sep 12, 2025)",
+        "discontinuedTitle": "Regrets and Discontinuation Reasons",
+        "discontinuedSubtitle": "Project Discontinued (Sep 12, 2025)",
         "discontinued1": "• On-premise LLM integration incomplete",
         "discontinued2": "• External API dependency removal goal unmet",
-        "discontinued3": "• Resource focus shifted to Llami App project",
+        "discontinued3": "• Resource focus shifted to LLAMI App project",
         "futureTitle": "Future Improvements (Pre-discontinuation Plan)",
         "future1": "• On-premise LLM server integration",
         "future2": "• Complete standalone execution in closed networks",
