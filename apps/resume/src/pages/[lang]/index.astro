@@ -1,15 +1,17 @@
 ---
 import CommonHead from "@/components/common-head.astro";
 import CommonBody from "@/components/common-body.astro";
-import SplineViewer from "@/components/spline-viewer";
+import ResumePage from "@/components/resume-page";
+import Navbar from "@/components/navbar";
 import "@/styles/global.css";
 
 import { initI18n } from "@/i18n";
 
 const { language, t } = initI18n(Astro);
 
-const pageTitle = "Hamin Lee";
-const pageDescription = "Full Stack Engineer";
+const pageTitle = "Hamin Lee - Resume";
+const pageDescription =
+  "웹·온디바이스 LLM·실시간 스트리밍·로보틱스를 '출시 가능한 제품'으로 잇는 풀스택 엔지니어입니다.";
 ---
 
 <html lang="ko">
@@ -33,8 +35,7 @@ const pageDescription = "Full Stack Engineer";
   </head>
   <body>
     <CommonBody lang="ko" />
-    <main class="w-screen h-screen">
-      <SplineViewer client:only scene="/signature.splinecode" />
-    </main>
+    <ResumePage client:load />
+    <Navbar client:load />
   </body>
 </html>

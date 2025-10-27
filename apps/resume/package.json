@@ -22,7 +22,6 @@
     "@repo/astro-pwa": "workspace:*",
     "@repo/astro-tailwind": "workspace:*",
     "@repo/sitemap-generator": "workspace:*",
-    "@splinetool/react-spline": "^4.1.0",
     "@supabase/supabase-js": "^2.75.0",
     "astro": "^5.14.4",
     "class-variance-authority": "^0.7.1",
