@@ -41,6 +41,9 @@ importers:
       '@repo/astro-tailwind':
         specifier: workspace:*
         version: link:../../packages/astro-tailwind
+      '@repo/sitemap-generator':
+        specifier: workspace:*
+        version: link:../../packages/sitemap-generator
       '@splinetool/react-spline':
         specifier: ^4.1.0
         version: 4.1.0(@splinetool/runtime@1.10.87)(next@14.2.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
