@@ -84,4 +84,4 @@ pnpm deploy
 
 ## 라이선스
 
-개인 프로젝트입니다.
+MIT License - 자세한 내용은 [LICENSE](LICENSE) 파일을 참조하세요.
