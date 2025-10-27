@@ -19,7 +19,7 @@ export function Slide({ title, subtitle, icon, children, isDark = true }: SlideP
           <BlurFade delay={BLUR_FADE_DELAY}>
             <div className="flex items-center space-x-3 sm:space-x-4 md:space-x-5 mb-4 sm:mb-5 md:mb-6">
               {icon && <div className="text-3xl sm:text-4xl md:text-5xl flex-shrink-0">{icon}</div>}
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl tracking-tight font-bold bg-gradient-to-r from-zinc-900 to-zinc-600 dark:from-white dark:to-zinc-400 bg-clip-text text-transparent leading-tight">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl tracking-tight font-bold bg-gradient-to-r from-zinc-900 to-zinc-600 dark:from-white dark:to-zinc-400 bg-clip-text text-transparent leading-tight text-balance break-keep">
                 {title}
               </h1>
             </div>
