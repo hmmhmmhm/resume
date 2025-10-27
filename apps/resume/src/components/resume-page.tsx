@@ -20,7 +20,7 @@ const BLUR_FADE_DELAY = 0.04;
 
 export default function ResumePage() {
   return (
-    <main className="flex flex-col min-h-[100dvh] space-y-10 max-w-2xl mx-auto py-12 sm:pt-[50px] sm:pb-24 px-6">
+    <main className="flex flex-col min-h-[100dvh] space-y-10 max-w-2xl mx-auto pt-30 pb-12 sm:pt-24 sm:pb-24 px-6">
       <a
         href="/resume.pdf"
         download="이하민_이력서.pdf"
@@ -136,14 +136,14 @@ export default function ResumePage() {
                   className="flex items-center gap-2 px-3 py-1.5"
                 >
                   {typeof skill.icon === "string" ? (
-                    <img 
-                      src={skill.icon} 
-                      alt={skill.name} 
-                      width={16} 
-                      height={16} 
-                      loading="lazy" 
-                      decoding="async" 
-                      className="size-4" 
+                    <img
+                      src={skill.icon}
+                      alt={skill.name}
+                      width={16}
+                      height={16}
+                      loading="lazy"
+                      decoding="async"
+                      className="size-4"
                     />
                   ) : (
                     <skill.icon className="size-4" />
