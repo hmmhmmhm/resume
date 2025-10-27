@@ -53,7 +53,7 @@ export const DATA_KO = {
   navbar: [
     { href: "/", icon: ResumeIcon, label: "이력서" },
     { href: "/portfolio", icon: PortfolioIcon, label: "포트폴리오" },
-    { href: "https://github.com/hmmhmmhm", icon: Icons.github, label: "깃허브" },
+    { href: "https://github.com/hmmhmmhm/resume", icon: Icons.github, label: "깃허브" },
     { href: "https://x.com/hmartapp", icon: Icons.x, label: "트위터" },
     { href: "https://open.kakao.com/me/hamin", icon: Icons.kakao, label: "카카오톡" },
   ],
