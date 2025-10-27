@@ -12,7 +12,7 @@ import { generateServiceWorker } from "@repo/astro-pwa/integration";
 export default defineConfig({
   i18n: {
     defaultLocale: "ko",
-    locales: ["ko"],
+    locales: ["ko", "en"],
     routing: {
       prefixDefaultLocale: true, // Also accessible via /en/
       redirectToDefaultLocale: false,

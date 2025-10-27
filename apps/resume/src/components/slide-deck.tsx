@@ -66,7 +66,15 @@ const slides = [
   curiosityResults,
 ];
 
-export default function SlideDeck() {
+interface SlideDeckProps {
+  translations?: {
+    downloadPDF: string;
+    downloadFilename: string;
+    pageNumber: string;
+  };
+}
+
+export default function SlideDeck({ translations }: SlideDeckProps = {}) {
   const [mounted, setMounted] = useState(false);
   const [isDark, setIsDark] = useState(true);
   const [isDownloading, setIsDownloading] = useState(false);
@@ -102,7 +110,7 @@ export default function SlideDeck() {
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = '이하민_포트폴리오.pdf';
+      a.download = translations?.downloadFilename || '이하민_포트폴리오.pdf';
       document.body.appendChild(a);
       a.click();
       window.URL.revokeObjectURL(url);
@@ -134,7 +142,7 @@ export default function SlideDeck() {
         ) : (
           <Download className="size-4" />
         )}
-        <span className="text-sm font-medium">인쇄용 PDF 다운로드</span>
+        <span className="text-sm font-medium">{translations?.downloadPDF || '인쇄용 PDF 다운로드'}</span>
       </button>
 
       <div className="pt-16">
@@ -144,7 +152,7 @@ export default function SlideDeck() {
               <div className="flex items-center justify-center py-4 px-4">
                 <div className="flex-1 h-px bg-gradient-to-r from-transparent via-zinc-300 dark:via-zinc-700 to-transparent" />
                 <div className="px-4 text-zinc-500 dark:text-zinc-400 font-mono text-sm">
-                  {index + 1} 페이지
+                  {index + 1} {translations?.pageNumber || '페이지'}
                 </div>
                 <div className="flex-1 h-px bg-gradient-to-r from-transparent via-zinc-300 dark:via-zinc-700 to-transparent" />
               </div>

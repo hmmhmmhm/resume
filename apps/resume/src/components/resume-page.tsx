@@ -6,6 +6,7 @@ import { ResumeCard } from "@/components/resume-card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { DATA } from "@/data/resume";
+import type { getResumeData } from "@/data/get-resume-data";
 import { Markdown } from "./markdown";
 import { QRCodeSVG } from "@/components/qrcode-react";
 import { MessageCircle as MessageCircleIcon, Download as DownloadIcon, BookOpen as BookOpenIcon } from "lucide-preact";
@@ -44,7 +45,46 @@ const Spinner = ({ className }: { className?: string }) => (
 
 const BLUR_FADE_DELAY = 0.04;
 
-export default function ResumePage() {
+interface ResumePageProps {
+  lang?: string;
+  data?: ReturnType<typeof getResumeData>;
+  translations?: {
+    downloadPDF: string;
+    downloadFilename: string;
+    hero: {
+      title: string;
+    };
+    sections: {
+      about: string;
+      work: string;
+      education: string;
+      skills: string;
+      projects: string;
+      projectsSubtitle: string;
+      projectsDescription: string;
+      publications: string;
+      publicationsSubtitle: string;
+      publicationsDescription: string;
+      hackathons: string;
+      hackathonsSubtitle: string;
+      hackathonsDescription: string;
+      contact: string;
+    };
+    publication: {
+      author: string;
+      publisher: string;
+      publishDate: string;
+      ebookLink: string;
+    };
+    contact: {
+      kakao: string;
+    };
+    portfolioLink: string;
+  };
+}
+
+export default function ResumePage({ lang = "ko", data, translations }: ResumePageProps = {}) {
+  const resumeData = data || DATA;
   const [isDownloading, setIsDownloading] = useState(false);
 
   const handleDownload = async (e: Event) => {
@@ -57,7 +97,7 @@ export default function ResumePage() {
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = '이하민_이력서.pdf';
+      a.download = translations?.downloadFilename || '이하민_이력서.pdf';
       document.body.appendChild(a);
       a.click();
       window.URL.revokeObjectURL(url);
@@ -82,7 +122,7 @@ export default function ResumePage() {
         ) : (
           <Download className="size-4" />
         )}
-        <span className="text-sm font-medium">인쇄용 PDF 다운로드</span>
+        <span className="text-sm font-medium">{translations?.downloadPDF || '인쇄용 PDF 다운로드'}</span>
       </button>
       <section id="hero">
         <div className="mx-auto w-full max-w-2xl space-y-8">
@@ -92,22 +132,25 @@ export default function ResumePage() {
                 delay={BLUR_FADE_DELAY}
                 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none text-balance [word-break:keep-all] mb-5"
                 yOffset={8}
-                text="풀스택 엔지니어 이하민입니다."
+                text={translations?.hero.title || "풀스택 엔지니어 이하민입니다."}
               />
               <BlurFadeText
                 className="max-w-[600px] md:text-xl"
                 delay={BLUR_FADE_DELAY}
-                text={DATA.description}
+                text={resumeData.description}
               />
               <BlurFade delay={BLUR_FADE_DELAY * 2}>
                 <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm text-black dark:text-white mt-4">
                   <div className="flex items-center gap-1">
                     <span>
-                      {DATA.birthDate} ({DATA.age})
+                      {resumeData.birthDate} ({resumeData.age})
                     </span>
                   </div>
                   <div className="flex items-center gap-1">
-                    <span>{DATA.gender}</span>
+                    <span>{resumeData.gender}</span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <span>{resumeData.location}</span>
                   </div>
                 </div>
               </BlurFade>
@@ -115,11 +158,11 @@ export default function ResumePage() {
             <BlurFade delay={BLUR_FADE_DELAY}>
               <Avatar className="size-36 border">
                 <AvatarImage
-                  alt={DATA.name}
-                  src={DATA.avatarUrl}
+                  alt={resumeData.name}
+                  src={resumeData.avatarUrl}
                   className="object-cover object-top"
                 />
-                <AvatarFallback>{DATA.initials}</AvatarFallback>
+                <AvatarFallback>{resumeData.initials}</AvatarFallback>
               </Avatar>
             </BlurFade>
           </div>
@@ -127,20 +170,20 @@ export default function ResumePage() {
       </section>
       <section id="about">
         <BlurFade delay={BLUR_FADE_DELAY * 3}>
-          <h2 className="text-xl font-bold">소개</h2>
+          <h2 className="text-xl font-bold">{translations?.sections.about || '소개'}</h2>
         </BlurFade>
         <BlurFade delay={BLUR_FADE_DELAY * 4}>
           <Markdown className="prose max-w-full text-pretty font-sans text-sm text-black dark:text-white dark:prose-invert">
-            {DATA.summary}
+            {resumeData.summary}
           </Markdown>
         </BlurFade>
       </section>
       <section id="work">
         <div className="flex min-h-0 flex-col gap-y-3">
           <BlurFade delay={BLUR_FADE_DELAY * 5}>
-            <h2 className="text-xl font-bold">경력</h2>
+            <h2 className="text-xl font-bold">{translations?.sections.work || '경력'}</h2>
           </BlurFade>
-          {DATA.work.map((work, id) => (
+          {resumeData.work.map((work, id) => (
             <BlurFade key={work.company} delay={BLUR_FADE_DELAY * 6 + id * 0.05}>
               <ResumeCard
                 key={work.company}
@@ -160,9 +203,9 @@ export default function ResumePage() {
       <section id="education">
         <div className="flex min-h-0 flex-col gap-y-3">
           <BlurFade delay={BLUR_FADE_DELAY * 7}>
-            <h2 className="text-xl font-bold">학력</h2>
+            <h2 className="text-xl font-bold">{translations?.sections.education || '학력'}</h2>
           </BlurFade>
-          {DATA.education.map((education, id) => (
+          {resumeData.education.map((education, id) => (
             <BlurFade key={education.school} delay={BLUR_FADE_DELAY * 8 + id * 0.05}>
               <ResumeCard
                 key={education.school}
@@ -180,7 +223,7 @@ export default function ResumePage() {
       <section id="skills">
         <div className="flex min-h-0 flex-col gap-y-3">
           <BlurFade delay={BLUR_FADE_DELAY * 9}>
-            <h2 className="text-xl font-bold">기술 스택</h2>
+            <h2 className="text-xl font-bold">{translations?.sections.skills || '기술 스택'}</h2>
           </BlurFade>
           <div className="flex flex-wrap gap-2">
             {DATA.skills.map((skill, id) => (
@@ -216,20 +259,19 @@ export default function ResumePage() {
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
                 <div className="inline-block rounded-lg bg-foreground text-background px-3 py-1 text-sm">
-                  프로젝트
+                  {translations?.sections.projects || '프로젝트'}
                 </div>
                 <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
-                  사이드 프로젝트 이력
+                  {translations?.sections.projectsSubtitle || '사이드 프로젝트 이력'}
                 </h2>
                 <p className="text-black dark:text-white md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed text-balance [word-break:keep-all]">
-                  다양한 사이드 프로젝트를 진행하며 새로운 기술을 탐구하고 아이디어를
-                  실현해왔습니다.
+                  {translations?.sections.projectsDescription || '다양한 사이드 프로젝트를 진행하며 새로운 기술을 탐구하고 아이디어를 실현해왔습니다.'}
                 </p>
               </div>
             </div>
           </BlurFade>
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 max-w-[800px] mx-auto pt-[20px]">
-            {DATA.projects.map((project, id) => (
+            {resumeData.projects.map((project, id) => (
               <BlurFade key={project.title} delay={BLUR_FADE_DELAY * 12 + id * 0.05}>
                 <ProjectCard
                   href={project.href}
@@ -253,17 +295,17 @@ export default function ResumePage() {
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
                 <div className="inline-block rounded-lg bg-foreground text-background px-3 py-1 text-sm">
-                  출판
+                  {translations?.sections.publications || '출판'}
                 </div>
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">출판 이력</h2>
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">{translations?.sections.publicationsSubtitle || '출판 이력'}</h2>
                 <p className="text-black dark:text-white md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed text-balance [word-break:keep-all]">
-                  기술과 개발에 대한 인사이트를 담은 저서입니다.
+                  {translations?.sections.publicationsDescription || '기술과 개발에 대한 인사이트를 담은 저서입니다.'}
                 </p>
               </div>
             </div>
           </BlurFade>
           <div className="grid grid-cols-1 gap-6 max-w-[800px] mx-auto">
-            {DATA.publications.map((publication, id) => (
+            {resumeData.publications.map((publication, id) => (
               <BlurFade key={publication.title} delay={BLUR_FADE_DELAY * 12.5 + id * 0.05}>
                 <div className="block p-6 border rounded-lg">
                   <div className="flex flex-col md:flex-row gap-6 mb-4">
@@ -283,9 +325,9 @@ export default function ResumePage() {
                     <div className="flex-1">
                       <h3 className="text-2xl font-bold mb-2">{publication.title}</h3>
                       <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm text-black dark:text-white mb-4">
-                        <span>저자: {publication.author}</span>
-                        <span>출판사: {publication.publisher}</span>
-                        <span>출간일: {publication.publishDate}</span>
+                        <span>{translations?.publication.author || '저자'}: {publication.author}</span>
+                        <span>{translations?.publication.publisher || '출판사'}: {publication.publisher}</span>
+                        <span>{translations?.publication.publishDate || '출간일'}: {publication.publishDate}</span>
                       </div>
                       <p className="text-sm text-black dark:text-white leading-relaxed text-balance [word-break:keep-all]">
                         {publication.description}
@@ -328,7 +370,7 @@ export default function ResumePage() {
                       </div>
                       <div className="flex-1 min-w-0">
                         <div className="text-xs font-medium text-black dark:text-white mb-1">
-                          E-Book 링크
+                          {translations?.publication.ebookLink || 'E-Book 링크'}
                         </div>
                         <div className="text-xs text-black dark:text-white font-bold break-all text-balance">
                           {publication.url}
@@ -348,17 +390,17 @@ export default function ResumePage() {
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
                 <div className="inline-block rounded-lg bg-foreground text-background px-3 py-1 text-sm">
-                  수상 및 자격증
+                  {translations?.sections.hackathons || '수상 및 자격증'}
                 </div>
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">수상 이력</h2>
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">{translations?.sections.hackathonsSubtitle || '수상 이력'}</h2>
                 <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  다양한 공모전과 대회에서 수상한 경력과 보유 자격증입니다.
+                  {translations?.sections.hackathonsDescription || '다양한 공모전과 대회에서 수상한 경력과 보유 자격증입니다.'}
                 </p>
               </div>
             </div>
           </BlurFade>
           <ul className="mb-4 ml-4 divide-y divide-dashed border-l">
-            {DATA.hackathons.map((project, id) => (
+            {resumeData.hackathons.map((project, id) => (
               <BlurFade
                 key={project.title + project.dates}
                 delay={BLUR_FADE_DELAY * 14 + id * 0.05}
@@ -382,20 +424,20 @@ export default function ResumePage() {
         <div className="w-full pt-4 pb-8 sm:pb-4" style={{ marginTop: "-80px" }}>
           <BlurFade delay={BLUR_FADE_DELAY * 16}>
             <div className="flex flex-col items-center justify-center text-center mb-4">
-              <h2 className="text-2xl font-bold tracking-tight">연락처</h2>
+              <h2 className="text-2xl font-bold tracking-tight">{translations?.sections.contact || '연락처'}</h2>
             </div>
           </BlurFade>
           <div className="max-w-[400px] mx-auto px-4">
             <BlurFade delay={BLUR_FADE_DELAY * 17}>
               <a
-                href={DATA.contact.kakao}
+                href={resumeData.contact.kakao}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 p-2 rounded-lg border hover:bg-muted transition-colors print:border-gray-300"
               >
                 <div className="flex-shrink-0">
                   <QRCodeSVG
-                    value={DATA.contact.kakao}
+                    value={resumeData.contact.kakao}
                     size={48}
                     level="M"
                     className="print:block"
@@ -404,10 +446,10 @@ export default function ResumePage() {
                 <div className="flex-1 min-w-0 text-left">
                   <div className="text-xs font-medium text-muted-foreground mb-0.5 flex items-center gap-1">
                     <MessageCircle className="size-3" />
-                    카카오톡
+                    {translations?.contact.kakao || '카카오톡'}
                   </div>
                   <div className="text-xs text-black dark:text-white font-bold">
-                    {DATA.contact.kakao}
+                    {resumeData.contact.kakao}
                   </div>
                 </div>
               </a>
@@ -420,11 +462,11 @@ export default function ResumePage() {
           <div className="max-w-[400px] mx-auto px-4">
             <BlurFade delay={BLUR_FADE_DELAY * 18}>
               <a
-                href="/ko/portfolio"
+                href={`/${lang}/portfolio`}
                 className="flex items-center justify-center gap-2 px-6 py-3 bg-foreground text-background rounded-lg hover:opacity-90 transition-all shadow-md font-medium"
               >
                 <BookOpen className="size-5" />
-                <span>포트폴리오 읽기</span>
+                <span>{translations?.portfolioLink || '포트폴리오 읽기'}</span>
               </a>
             </BlurFade>
           </div>

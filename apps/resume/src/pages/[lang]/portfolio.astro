@@ -5,17 +5,19 @@ import SlideDeck from "@/components/slide-deck";
 import Navbar from "@/components/navbar";
 import "@/styles/global.css";
 
-import { initI18n } from "@/i18n";
+import { initI18n, extractPortfolioTranslations, extractNavbarTranslations } from "@/i18n";
 
 const { language, t } = initI18n(Astro);
 
-const pageTitle = "Portfolio - Hamin Lee";
-const pageDescription = "Software 3.0 - The Era of LLM-Programmable Systems";
+const pageTitle = t("meta.portfolioTitle");
+const pageDescription = t("meta.portfolioDescription");
+const portfolioTranslations = extractPortfolioTranslations(t);
+const navbarTranslations = extractNavbarTranslations(t);
 ---
 
-<html lang="ko">
+<html lang={language}>
   <head>
-    <CommonHead title={pageTitle} description={pageDescription} lang="ko" />
+    <CommonHead title={pageTitle} description={pageDescription} lang={language} />
     <script is:inline>
       // Force white theme for portfolio page
       (function () {
@@ -25,8 +27,8 @@ const pageDescription = "Software 3.0 - The Era of LLM-Programmable Systems";
     </script>
   </head>
   <body>
-    <CommonBody lang="ko" />
-    <SlideDeck client:only="react" />
-    <Navbar client:idle />
+    <CommonBody lang={language} />
+    <SlideDeck client:only="react" translations={portfolioTranslations} />
+    <Navbar client:idle lang={language} translations={navbarTranslations} />
   </body>
 </html>

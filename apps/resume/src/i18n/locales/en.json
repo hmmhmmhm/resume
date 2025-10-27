@@ -1,0 +1,198 @@
+{
+  "meta": {
+    "title": "Hamin Lee - Resume",
+    "description": "Full-stack engineer connecting web, on-device LLM, real-time streaming, and robotics into shippable products.",
+    "portfolioTitle": "Portfolio - Hamin Lee",
+    "portfolioDescription": "Software 3.0 - The Era of LLM-Programmable Systems"
+  },
+  "navbar": {
+    "resume": "Resume",
+    "portfolio": "Portfolio",
+    "github": "GitHub",
+    "twitter": "Twitter",
+    "kakao": "KakaoTalk",
+    "theme": "Theme"
+  },
+  "resume": {
+    "downloadPDF": "Download PDF for Print",
+    "downloadFilename": "Hamin_Lee_Resume.pdf",
+    "hero": {
+      "title": "Full-Stack Engineer Hamin Lee",
+      "location": "Ansan, Gyeonggi-do, South Korea",
+      "birthDate": "March 4, 1995",
+      "age": "30 years old",
+      "gender": "Male (He, Him)",
+      "description": "Full-stack engineer connecting web, on-device LLM, real-time streaming, and robotics into shippable products.",
+      "summary": "Full-stack engineer connecting web, on-device LLM, real-time streaming, and robotics into shippable products. I specialize in bridging mobile on-device AI with real-time media/robotics through streaming and low-latency control, achieving both user experience and performance with privacy-centric architecture and PWA/edge deployment. I have experience launching and operating multiple projects with end-to-end ownership from product initialization to deployment/operation automation."
+    },
+    "sections": {
+      "about": "About",
+      "work": "Work Experience",
+      "education": "Education",
+      "skills": "Skills",
+      "projects": "Projects",
+      "projectsSubtitle": "Side Projects",
+      "projectsDescription": "I've explored new technologies and realized ideas through various side projects.",
+      "publications": "Publications",
+      "publicationsSubtitle": "Published Works",
+      "publicationsDescription": "Books containing insights on technology and development.",
+      "hackathons": "Awards & Certifications",
+      "hackathonsSubtitle": "Awards",
+      "hackathonsDescription": "Awards from various competitions and certifications I hold.",
+      "contact": "Contact"
+    },
+    "publication": {
+      "author": "Author",
+      "publisher": "Publisher",
+      "publishDate": "Published",
+      "ebookLink": "E-Book Link"
+    },
+    "contact": {
+      "kakao": "KakaoTalk"
+    },
+    "portfolioLink": "Read Portfolio"
+  },
+  "data": {
+    "location": "Ansan, Gyeonggi-do, South Korea",
+    "birthDate": "March 4, 1995",
+    "age": "30 years old",
+    "gender": "Male (He, Him)",
+    "description": "Full-stack engineer connecting web, on-device LLM, real-time streaming, and robotics into shippable products.",
+    "summary": "Full-stack engineer connecting web, on-device LLM, real-time streaming, and robotics into shippable products. I specialize in bridging mobile on-device AI with real-time media/robotics through streaming and low-latency control, achieving both user experience and performance with privacy-centric architecture and PWA/edge deployment. I have experience launching and operating multiple projects with end-to-end ownership from product initialization to deployment/operation automation.",
+    "work": {
+      "poul": {
+        "company": "POUL Inc.",
+        "title": "CTO",
+        "location": "South Korea",
+        "start": "June 2024",
+        "end": "October 2025",
+        "description": "As lead engineer for the on-device LLM mobile app 'Llami App', I designed and implemented a WebView↔Native bridge architecture. Built on-device STT/TTS and image processing pipelines using ONNX Runtime, OpenCV, and MMKV, developed an AI-powered dashboard, and configured Supabase-based DB integration. For the web-based robot control 'Llami Robotics', I implemented UDP control protocol for DeepRobotics Lite3 and WebRTC low-latency streaming, and developed SLAM mapping UI and path planning operation UI. Independently developed the in-browser AI coding agent 'Curiosity', implementing a WebContainer+Monaco-based real-time code execution environment."
+      },
+      "abacus": {
+        "company": "Abacus Technology",
+        "title": "Full-Stack Developer",
+        "location": "South Korea",
+        "start": "November 2022",
+        "end": "June 2024",
+        "description": "Developed a remote education platform using educational hardware. Built real-time chat and video conferencing solutions using WebRTC with Next.js and MobX. Constructed backend with Supabase (PostgreSQL) and Nest.js, deploying infrastructure on Railway. Participated in ESP-32-based hardware firmware development implementing web-based remote updates, and implemented installation-free communication between smart educational hardware and web browsers using Web Bluetooth technology."
+      },
+      "metamorp": {
+        "company": "Metamorp",
+        "title": "Full-Stack Developer",
+        "location": "South Korea",
+        "start": "June 2021",
+        "end": "November 2022",
+        "description": "Participated in developing a web-based 3D slicer program and platform. Developed components using React, SCSS (BEM), and MobX, implementing interaction-based Vector Animation. Developed backend using Nest.js, Prisma ORM, and TypeScript, deploying with AWS Beanstalk, Aurora DB, and Railway. Ported Electron-implemented programs to work on Intel Mac, Silicon Mac, and Linux, and built a real-time update deployment system for Electron apps by configuring a Redis-based Pub/Sub server."
+      },
+      "toss": {
+        "company": "Viva Republica (Toss)",
+        "title": "Web Automation Developer",
+        "location": "South Korea",
+        "start": "April 2021",
+        "end": "May 2021",
+        "description": "Joined the web automation team to develop scraping modules used in the identity verification process for Nonghyup Bank, Shinhan Bank, and Industrial Bank of Korea for the Toss app."
+      },
+      "aha": {
+        "company": "The Corporation (Aha)",
+        "title": "Frontend Developer",
+        "location": "South Korea",
+        "start": "July 2020",
+        "end": "March 2021",
+        "description": "Participated in migrating Aha's knowledge-sharing platform service from Nuxt.js version 2 to version 3. Created and applied an open-source state management module called vue-state-store to the project. Participated in Next.js-based UI development for Aha Connects, an online consultation service, and was responsible for connecting the Sendbird-based chat system on the frontend."
+      },
+      "rightcode": {
+        "company": "Right Code",
+        "title": "Full-Stack Developer",
+        "location": "South Korea",
+        "start": "November 2019",
+        "end": "July 2020",
+        "description": "Took full charge of hybrid app development and release process for Android and iOS. Developed an app that remotely operates sports EMS devices using BLE communication. Participated in configuring communication between hotel fire detectors and servers and building an administrator dashboard page. Developed a communication program between web browsers and POS receipt printers in a store order management system. Worked on crawling real-time stock information from the web and displaying it in real-time within the app using the TradingView library."
+      }
+    },
+    "education": {
+      "hanbat": {
+        "school": "Hanbat National University",
+        "degree": "Computer Engineering (Withdrawn)"
+      }
+    },
+    "projects": {
+      "akaBrowser": {
+        "description": "Created an open-source browser based on the Chromium engine. It's a secondary browser concept that stays always on top without replacing the main browser, and completed beta release with Electron. Implemented encrypted content streaming playback for Netflix/Disney+/Prime Video based on Widevine DRM."
+      },
+      "groundCodes": {
+        "description": "An open-source project with a coordinate-based address system that can specify any location in the world with just a region name and two words. Self-developed the Grok Spiral algorithm (O(√N) efficiency), consisting of a monorepo architecture with Google Maps API-based interactive web app, RESTful API server, and visualization demo app. Completed multilingual support and Cloudflare Pages deployment."
+      },
+      "postRun": {
+        "title": "New Year's Greeting Mailbox",
+        "description": "A project developed at a Hanghae99 event where you can create 3D New Year's greeting cards and add desired images to share. You can have New Year's greeting messages automatically written by LLM or automatically generate images with A.I. to use as card backgrounds. Won the Best Project Award."
+      },
+      "fridayGPT": {
+        "description": "A project that assigns R&R to GPT to proceed with programming step by step. The AI recursively searches web pages and asks itself questions, going through each step until completing the code."
+      }
+    },
+    "hackathons": {
+      "hanghae": {
+        "title": "Hanghae Plus: 2nd Coding Track Meet Best Project Award",
+        "dates": "January 2024",
+        "location": "Hanghae99",
+        "description": "Won the Best Project Award with the 3D New Year's greeting card web app 'New Year's Greeting Mailbox' project.",
+        "win": "Best Project Award"
+      },
+      "socialVenture": {
+        "title": "Social Venture Idea Produce20 Excellence Award",
+        "dates": "September 2019",
+        "location": "Ministry of SMEs and Startups",
+        "description": "Won the Excellence Award (KIST President's Award) in the Social Venture Idea Competition.",
+        "win": "Excellence Award (KIST President's Award)"
+      },
+      "police": {
+        "title": "4th National Police Agency Science Policing Idea Contest Excellence Award",
+        "dates": "November 2018",
+        "location": "KIST",
+        "description": "Won the Excellence Award (KIST President's Award) in the National Police Agency Science Policing Idea Contest.",
+        "win": "Excellence Award (KIST President's Award)"
+      },
+      "defense": {
+        "title": "Ministry of National Defense Creative Defense Idea Contest Excellence Award",
+        "dates": "December 2016",
+        "location": "Ministry of National Defense",
+        "description": "Won the Excellence Award (Minister of National Defense Award) in the Ministry of National Defense Creative Defense Idea Contest.",
+        "win": "Excellence Award (Minister of National Defense Award)"
+      },
+      "certification": {
+        "title": "Electronic Equipment Technician Certificate",
+        "dates": "2013",
+        "location": "Human Resources Development Service of Korea",
+        "description": "Obtained the Electronic Equipment Technician Certificate."
+      }
+    },
+    "publications": {
+      "cleanVibeCoding": {
+        "title": "Clean Vibe Coding",
+        "author": "Hamin Lee",
+        "publisher": "U-Paper",
+        "publishDate": "July 3, 2025",
+        "description": "In an era where generative AI 'mass-produces code', a programmer's value is determined by the ability to maintain less code in a clearer structure and to define, verify, and communicate problems. This book is a practical guide that extends Dijkstra's structured programming and Robert C. Martin's Clean Code to today's AI collaboration environment."
+      },
+      "mugunghwa": {
+        "title": "Base-72 Representation System in Korean Using Syllable Block System",
+        "author": "Hamin Lee",
+        "publisher": "Korea Institute of Communication Sciences",
+        "publishDate": "2019",
+        "description": "Mimicking Base 32, which implements a 32-base system by mixing English and numbers, I created a 72-base encoding system in pure Korean, and proposed an algorithm that compresses GPS coordinates with a 3-meter error into five short Korean characters. Based on this paper, I developed a JavaScript-based open-source implementation called 'Mugunghwa Code' and released it on GitHub."
+      }
+    }
+  },
+  "portfolio": {
+    "downloadPDF": "Download PDF for Print",
+    "downloadFilename": "Hamin_Lee_Portfolio.pdf",
+    "pageNumber": "Page"
+  },
+  "notFound": {
+    "title": "Page Not Found",
+    "description": "The page you requested does not exist or may have been moved.",
+    "goHome": "Go Home",
+    "goBack": "Go Back",
+    "contactAdmin": "If the problem persists, please contact the administrator."
+  }
+}

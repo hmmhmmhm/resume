@@ -3,7 +3,17 @@
 import { useState } from "react"
 import Waves from "@/components/waves"
 
-export default function NotFoundPage() {
+interface NotFoundPageProps {
+  translations?: {
+    title: string;
+    description: string;
+    goHome: string;
+    goBack: string;
+    contactAdmin: string;
+  };
+}
+
+export default function NotFoundPage({ translations }: NotFoundPageProps = {}) {
   const [config] = useState({
     lineColor: "rgba(0, 0, 0, 0.15)",
     backgroundColor: "#ffffff",
@@ -32,12 +42,12 @@ export default function NotFoundPage() {
 
           {/* Main Message */}
           <h2 className="text-3xl md:text-5xl font-bold text-black/90">
-            페이지를 찾을 수 없습니다
+            {translations?.title || '페이지를 찾을 수 없습니다'}
           </h2>
 
           {/* Description */}
           <p className="text-lg md:text-xl text-gray-600/80 max-w-md mx-auto">
-            요청하신 페이지가 존재하지 않거나 이동되었을 수 있습니다.
+            {translations?.description || '요청하신 페이지가 존재하지 않거나 이동되었을 수 있습니다.'}
           </p>
 
           {/* Action Buttons */}
@@ -46,7 +56,7 @@ export default function NotFoundPage() {
               href="/"
               className="group relative px-8 py-4 bg-black text-white rounded-lg font-semibold shadow-lg hover:shadow-black/50 transition-all duration-300 hover:scale-105"
             >
-              <span className="relative z-10">홈으로 돌아가기</span>
+              <span className="relative z-10">{translations?.goHome || '홈으로 돌아가기'}</span>
               <div className="absolute inset-0 bg-gray-900 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </a>
 
@@ -54,13 +64,13 @@ export default function NotFoundPage() {
               onClick={() => window.history.back()}
               className="px-8 py-4 bg-black/10 backdrop-blur-sm border border-black/20 rounded-lg font-semibold text-black hover:bg-black/20 transition-all duration-300 hover:scale-105"
             >
-              이전 페이지로
+              {translations?.goBack || '이전 페이지로'}
             </button>
           </div>
 
           {/* Additional Info */}
           <div className="pt-12 text-sm text-gray-500/60">
-            <p>문제가 계속되면 관리자에게 문의해주세요.</p>
+            <p>{translations?.contactAdmin || '문제가 계속되면 관리자에게 문의해주세요.'}</p>
           </div>
         </div>
       </div>

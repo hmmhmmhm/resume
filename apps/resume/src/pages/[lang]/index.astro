@@ -5,18 +5,21 @@ import ResumePage from "@/components/resume-page";
 import Navbar from "@/components/navbar";
 import "@/styles/global.css";
 
-import { initI18n } from "@/i18n";
+import { initI18n, extractResumeTranslations, extractNavbarTranslations } from "@/i18n";
+import { getResumeData } from "@/data/get-resume-data";
 
 const { language, t } = initI18n(Astro);
 
-const pageTitle = "Hamin Lee - Resume";
-const pageDescription =
-  "웹·온디바이스 LLM·실시간 스트리밍·로보틱스를 '출시 가능한 제품'으로 잇는 풀스택 엔지니어입니다.";
+const pageTitle = t("meta.title");
+const pageDescription = t("meta.description");
+const resumeTranslations = extractResumeTranslations(t);
+const navbarTranslations = extractNavbarTranslations(t);
+const resumeData = getResumeData(t);
 ---
 
-<html lang="ko">
+<html lang={language}>
   <head>
-    <CommonHead title={pageTitle} description={pageDescription} lang="ko" />
+    <CommonHead title={pageTitle} description={pageDescription} lang={language} />
     <script is:inline>
       // Force white theme for resume page
       (function () {
@@ -26,8 +29,8 @@ const pageDescription =
     </script>
   </head>
   <body>
-    <CommonBody lang="ko" />
-    <ResumePage client:idle />
-    <Navbar client:idle />
+    <CommonBody lang={language} />
+    <ResumePage client:idle lang={language} data={resumeData} translations={resumeTranslations} />
+    <Navbar client:idle lang={language} translations={navbarTranslations} />
   </body>
 </html>
