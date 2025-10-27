@@ -17,18 +17,10 @@ const pageDescription = "Software 3.0 - The Era of LLM-Programmable Systems";
   <head>
     <CommonHead title={pageTitle} description={pageDescription} lang="ko" />
     <script is:inline>
-      // Initialize theme before page renders to prevent flash
+      // Force white theme for portfolio page
       (function () {
-        const theme = localStorage.getItem("theme");
-        // Default to dark theme if no preference is saved
-        if (theme === "dark" || !theme) {
-          document.documentElement.classList.add("dark");
-          if (!theme) {
-            localStorage.setItem("theme", "dark");
-          }
-        } else {
-          document.documentElement.classList.remove("dark");
-        }
+        document.documentElement.classList.remove("dark");
+        localStorage.setItem("theme", "light");
       })();
     </script>
   </head>

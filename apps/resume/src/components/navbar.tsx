@@ -32,7 +32,8 @@ export default function Navbar() {
               </Tooltip>
             </DockIcon>
           ))}
-          <Separator orientation="vertical" className="h-full py-2" />
+          {/* Temporarily commented out theme toggle button */}
+          {/* <Separator orientation="vertical" className="h-full py-2" />
           <DockIcon>
             <Tooltip>
               <TooltipTrigger asChild>
@@ -42,7 +43,7 @@ export default function Navbar() {
                 <p>테마</p>
               </TooltipContent>
             </Tooltip>
-          </DockIcon>
+          </DockIcon> */}
         </TooltipProvider>
       </Dock>
     </div>
