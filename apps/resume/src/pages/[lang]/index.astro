@@ -3,6 +3,7 @@ import CommonHead from "@/components/common-head.astro";
 import CommonBody from "@/components/common-body.astro";
 import ResumePage from "@/components/resume-page";
 import Navbar from "@/components/navbar";
+import KakaoBrowserEscape from "@/components/kakao-browser-escape";
 import "@/styles/global.css";
 
 import { initI18n, extractResumeTranslations, extractNavbarTranslations } from "@/i18n";
@@ -30,6 +31,7 @@ const resumeData = getResumeData(t);
   </head>
   <body>
     <CommonBody lang={language} />
+    <KakaoBrowserEscape client:only="preact" />
     <ResumePage client:idle lang={language} data={resumeData} translations={resumeTranslations} />
     <Navbar client:idle lang={language} translations={navbarTranslations} />
   </body>
