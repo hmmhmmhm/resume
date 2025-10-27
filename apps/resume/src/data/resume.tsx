@@ -51,8 +51,8 @@ export const DATA = {
     { name: "Expo", icon: "/icons/expo.svg" },
   ],
   navbar: [
-    { href: "/ko/resume", icon: HomeIcon, label: "이력서" },
-    { href: "/ko/portfolio", icon: BriefcaseIcon, label: "포트폴리오" },
+    { href: "/", icon: HomeIcon, label: "이력서" },
+    { href: "/portfolio", icon: BriefcaseIcon, label: "포트폴리오" },
     { href: "https://github.com/hmmhmmhm", icon: Icons.github, label: "깃허브" },
     { href: "https://x.com/hmartapp", icon: Icons.x, label: "트위터" },
     { href: "https://open.kakao.com/me/hamin", icon: Icons.kakao, label: "카카오톡" },

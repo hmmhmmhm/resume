@@ -1,6 +1,7 @@
 import type { ComponentChildren } from "preact";
 import { useEffect, useRef, useState } from "preact/hooks";
 import { motion, useInView } from "framer-motion";
+import { createElement } from "preact";
 
 interface BlurFadeProps {
   children: ComponentChildren;
@@ -15,6 +16,7 @@ interface BlurFadeProps {
   inView?: boolean;
   inViewMargin?: string;
   blur?: string;
+  as?: string;
 }
 
 const BlurFade = ({
@@ -27,6 +29,7 @@ const BlurFade = ({
   inView = true,
   inViewMargin = "-50px",
   blur = "6px",
+  as = "div",
 }: BlurFadeProps) => {
   const ref = useRef(null);
   const [isPrintMode, setIsPrintMode] = useState(false);
@@ -67,17 +70,18 @@ const BlurFade = ({
     visible: { y: -yOffset, opacity: 1, filter: `blur(0px)` },
   };
   const combinedVariants = variant || defaultVariants;
+  const MotionComponent = motion[as as keyof typeof motion] as any;
 
   if (isPrintMode) {
-    return (
-      <div ref={ref} className={className}>
-        {children}
-      </div>
+    return createElement(
+      as,
+      { ref, className },
+      children
     );
   }
 
   return (
-    <motion.div
+    <MotionComponent
       ref={ref}
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
@@ -91,7 +95,7 @@ const BlurFade = ({
       className={className}
     >
       {children}
-    </motion.div>
+    </MotionComponent>
   );
 };
 

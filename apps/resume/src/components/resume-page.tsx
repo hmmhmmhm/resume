@@ -307,6 +307,8 @@ export default function ResumePage() {
               <BlurFade
                 key={project.title + project.dates}
                 delay={BLUR_FADE_DELAY * 14 + id * 0.05}
+                as="li"
+                className="relative ml-10 py-4"
               >
                 <HackathonCard
                   title={project.title}
