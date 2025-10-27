@@ -324,7 +324,7 @@ export default function ResumePage() {
         </div>
       </section>
       <section id="contact">
-        <div className="w-full pt-4" style={{ marginTop: "-80px" }}>
+        <div className="w-full pt-4 pb-16 sm:pb-8" style={{ marginTop: "-80px" }}>
           <BlurFade delay={BLUR_FADE_DELAY * 16}>
             <div className="flex flex-col items-center justify-center text-center mb-4">
               <h2 className="text-2xl font-bold tracking-tight">연락처</h2>

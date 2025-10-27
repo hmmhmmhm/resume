@@ -282,10 +282,10 @@ export default function SlideDeck() {
       <a
         href="/portfolio.pdf"
         download="이하민_포트폴리오.pdf"
-        className="fixed top-3 sm:top-4 left-3 sm:left-4 z-50 flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-4 py-1.5 sm:py-2 bg-background border border-border rounded-lg hover:bg-muted transition-colors shadow-sm"
+        className="fixed top-4 sm:top-6 left-4 sm:left-6 z-50 flex items-center gap-2 px-4 py-2 bg-background/95 border border-border rounded-lg hover:bg-muted transition-colors shadow-sm backdrop-blur-sm"
       >
-        <Download className="size-3 sm:size-4" />
-        <span className="text-[10px] sm:text-sm font-medium">인쇄용 PDF 다운로드</span>
+        <Download className="size-4" />
+        <span className="text-sm font-medium">인쇄용 PDF 다운로드</span>
       </a>
       <div className="fixed top-3 sm:top-4 right-3 sm:right-4 z-50 flex items-center space-x-2 sm:space-x-2.5">
         {isPageInputMode ? (
