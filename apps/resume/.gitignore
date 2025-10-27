@@ -4,6 +4,8 @@ dist/
 .astro/
 # generated service worker
 public/sw.js
+# image optimization backup
+public/image-backup/
 
 # dependencies
 node_modules/

@@ -136,7 +136,15 @@ export default function ResumePage() {
                   className="flex items-center gap-2 px-3 py-1.5"
                 >
                   {typeof skill.icon === "string" ? (
-                    <img src={skill.icon} alt={skill.name} className="size-4" />
+                    <img 
+                      src={skill.icon} 
+                      alt={skill.name} 
+                      width={16} 
+                      height={16} 
+                      loading="lazy" 
+                      decoding="async" 
+                      className="size-4" 
+                    />
                   ) : (
                     <skill.icon className="size-4" />
                   )}
@@ -209,8 +217,10 @@ export default function ResumePage() {
                         <img
                           src={publication.image}
                           alt={publication.title}
-                          width={150}
-                          height={200}
+                          width={300}
+                          height={420}
+                          loading="lazy"
+                          decoding="async"
                           className="rounded-lg object-cover"
                         />
                       </div>

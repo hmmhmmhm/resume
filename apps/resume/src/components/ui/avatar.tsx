@@ -15,7 +15,16 @@ interface AvatarImageProps {
 }
 
 const AvatarImage = ({ className, src, alt, ...props }: AvatarImageProps) => (
-  <img src={src} alt={alt} className={cn("aspect-square h-full w-full", className)} {...props} />
+  <img 
+    src={src} 
+    alt={alt} 
+    width={284} 
+    height={322} 
+    loading="lazy" 
+    decoding="async" 
+    className={cn("aspect-square h-full w-full", className)} 
+    {...props} 
+  />
 );
 
 const AvatarFallback = ({

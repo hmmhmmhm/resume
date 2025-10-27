@@ -54,8 +54,10 @@ export function ProjectCard({
           <img
             src={image}
             alt={title}
-            width={500}
-            height={300}
+            width={724}
+            height={496}
+            loading="lazy"
+            decoding="async"
             className="h-40 w-full overflow-hidden object-cover object-top"
           />
         )}
