@@ -1,4 +1,4 @@
-import type { ComponentChildren } from "preact";
+import type { ComponentChildren, JSX } from "preact";
 import { useState } from "preact/hooks";
 import { cn } from "@/lib/utils";
 
@@ -7,7 +7,7 @@ interface TooltipProviderProps {
   delayDuration?: number;
 }
 
-const TooltipProvider = ({ children }: TooltipProviderProps) => {
+const TooltipProvider = ({ children }: TooltipProviderProps): JSX.Element => {
   return <>{children}</>;
 };
 
@@ -15,7 +15,7 @@ interface TooltipProps {
   children: ComponentChildren;
 }
 
-const Tooltip = ({ children }: TooltipProps) => {
+const Tooltip = ({ children }: TooltipProps): JSX.Element => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -35,7 +35,7 @@ interface TooltipTriggerProps {
   className?: string;
 }
 
-const TooltipTrigger = ({ children, asChild, className }: TooltipTriggerProps) => {
+const TooltipTrigger = ({ children, asChild, className }: TooltipTriggerProps): JSX.Element => {
   return <div className={className}>{children}</div>;
 };
 
@@ -44,7 +44,7 @@ interface TooltipContentProps {
   className?: string;
 }
 
-const TooltipContent = ({ className, children }: TooltipContentProps) => {
+const TooltipContent = ({ className, children }: TooltipContentProps): JSX.Element => {
   return (
     <div
       className={cn(
