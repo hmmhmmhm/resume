@@ -78,6 +78,7 @@ interface ResumePageProps {
     };
     contact: {
       kakao: string;
+      twitter?: string;
     };
     portfolioLink: string;
   };
@@ -429,30 +430,59 @@ export default function ResumePage({ lang = "ko", data, translations }: ResumePa
           </BlurFade>
           <div className="max-w-[400px] mx-auto px-4">
             <BlurFade delay={BLUR_FADE_DELAY * 17}>
-              <a
-                href={resumeData.contact.kakao}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 p-2 rounded-lg border hover:bg-muted transition-colors print:border-gray-300"
-              >
-                <div className="flex-shrink-0">
-                  <QRCodeSVG
-                    value={resumeData.contact.kakao}
-                    size={48}
-                    level="M"
-                    className="print:block"
-                  />
-                </div>
-                <div className="flex-1 min-w-0 text-left">
-                  <div className="text-xs font-medium text-muted-foreground mb-0.5 flex items-center gap-1">
-                    <MessageCircle className="size-3" />
-                    {translations?.contact.kakao || '카카오톡'}
+              {lang === 'ko' ? (
+                <a
+                  href={resumeData.contact.kakao}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 p-2 rounded-lg border hover:bg-muted transition-colors print:border-gray-300"
+                >
+                  <div className="flex-shrink-0">
+                    <QRCodeSVG
+                      value={resumeData.contact.kakao}
+                      size={48}
+                      level="M"
+                      className="print:block"
+                    />
                   </div>
-                  <div className="text-xs text-black dark:text-white font-bold">
-                    {resumeData.contact.kakao}
+                  <div className="flex-1 min-w-0 text-left">
+                    <div className="text-xs font-medium text-muted-foreground mb-0.5 flex items-center gap-1">
+                      <MessageCircle className="size-3" />
+                      {translations?.contact.kakao || '카카오톡'}
+                    </div>
+                    <div className="text-xs text-black dark:text-white font-bold">
+                      {resumeData.contact.kakao}
+                    </div>
                   </div>
-                </div>
-              </a>
+                </a>
+              ) : (
+                <a
+                  href={resumeData.contact.twitter}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 p-2 rounded-lg border hover:bg-muted transition-colors print:border-gray-300"
+                >
+                  <div className="flex-shrink-0">
+                    <QRCodeSVG
+                      value={resumeData.contact.twitter}
+                      size={48}
+                      level="M"
+                      className="print:block"
+                    />
+                  </div>
+                  <div className="flex-1 min-w-0 text-left">
+                    <div className="text-xs font-medium text-muted-foreground mb-0.5 flex items-center gap-1">
+                      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="size-3" fill="currentColor">
+                        <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z" />
+                      </svg>
+                      {translations?.contact.twitter || 'Twitter'}
+                    </div>
+                    <div className="text-xs text-black dark:text-white font-bold">
+                      {resumeData.contact.twitter}
+                    </div>
+                  </div>
+                </a>
+              )}
             </BlurFade>
           </div>
         </div>

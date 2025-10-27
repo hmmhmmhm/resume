@@ -60,6 +60,7 @@ export const DATA = {
   contact: {
     email: "pm2@kakao.com",
     kakao: "https://open.kakao.com/me/hamin",
+    twitter: "https://x.com/hmartapp",
   },
 
   work: [
