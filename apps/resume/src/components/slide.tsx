@@ -13,7 +13,7 @@ const BLUR_FADE_DELAY = 0.04;
 
 export function Slide({ title, subtitle, icon, children, isDark = true }: SlideProps) {
   return (
-    <section className="min-h-screen flex flex-col justify-center px-4 sm:px-6 md:px-20 py-12 sm:py-16 md:py-20">
+    <section className="min-h-screen flex flex-col justify-center px-4 sm:px-6 md:px-20 py-20 sm:py-16 md:py-20">
       <div className="max-w-7xl mx-auto w-full">
         <div className="mb-8 sm:mb-12 md:mb-16">
           <BlurFade delay={BLUR_FADE_DELAY}>

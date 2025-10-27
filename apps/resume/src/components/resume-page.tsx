@@ -211,9 +211,9 @@ export default function ResumePage() {
             {DATA.publications.map((publication, id) => (
               <BlurFade key={publication.title} delay={BLUR_FADE_DELAY * 12.5 + id * 0.05}>
                 <div className="block p-6 border rounded-lg">
-                  <div className="flex gap-6 mb-4">
+                  <div className="flex flex-col md:flex-row gap-6 mb-4">
                     {publication.image && (
-                      <div className="flex-shrink-0">
+                      <div className="flex-shrink-0 mx-auto md:mx-0">
                         <img
                           src={publication.image}
                           alt={publication.title}
@@ -221,7 +221,7 @@ export default function ResumePage() {
                           height={420}
                           loading="lazy"
                           decoding="async"
-                          className="rounded-lg object-cover"
+                          className="rounded-lg object-cover max-w-[200px] md:max-w-none"
                         />
                       </div>
                     )}
