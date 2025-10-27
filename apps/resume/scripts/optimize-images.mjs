@@ -11,13 +11,13 @@ const __dirname = dirname(__filename);
 // Image size configurations based on the performance report
 // Using 2x resolution for retina displays
 const IMAGE_CONFIGS = {
-  'aka-browser.webp': { width: 1448, height: 940 }, // Display: 724x470
-  'mugunghwa.webp': { width: 600, height: 840 }, // Display: 300x420
-  'hamin.webp': { width: 568, height: 644 }, // Display: 284x322
-  'ground-codes.webp': { width: 1448, height: 992 }, // Display: 724x496
-  'friday.webp': { width: 1448, height: 992 }, // Display: 724x496
-  'post-run.webp': { width: 1448, height: 992 }, // Display: 724x496
-  'police.webp': { width: 184, height: 184 }, // Display: 92x92
+  'aka-browser.webp': { width: 1448, height: 940, quality: 80 }, // Display: 724x470
+  'mugunghwa.webp': { width: 600, height: 840, quality: 80 }, // Display: 300x420
+  'hamin.webp': { width: 568, height: 644, quality: 80 }, // Display: 284x322
+  'ground-codes.webp': { width: 1448, height: 992, quality: 80 }, // Display: 724x496
+  'friday.webp': { width: 1448, height: 992, quality: 80 }, // Display: 724x496
+  'post-run.webp': { width: 1448, height: 992, quality: 80 }, // Display: 724x496
+  'police.webp': { width: 184, height: 184, quality: 85 }, // Display: 92x92
 };
 
 const publicDir = join(__dirname, '..', 'public', 'image');
@@ -62,10 +62,14 @@ async function optimizeImage(filename, config) {
     // Create optimized version
     await sharp(inputPath)
       .resize(config.width, config.height, {
-        fit: 'cover',
-        position: 'top',
+        fit: 'inside',
+        withoutEnlargement: true,
       })
-      .webp({ quality: 85, effort: 6 })
+      .webp({ 
+        quality: config.quality || 85, 
+        effort: 6,
+        smartSubsample: true,
+      })
       .toFile(tempPath);
 
     // Get file sizes
