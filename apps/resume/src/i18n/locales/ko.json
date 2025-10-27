@@ -11,7 +11,10 @@
     "github": "깃허브",
     "twitter": "트위터",
     "kakao": "카카오톡",
-    "theme": "테마"
+    "theme": "테마",
+    "language": "언어",
+    "ko": "한국어",
+    "en": "English"
   },
   "resume": {
     "downloadPDF": "인쇄용 PDF 다운로드",

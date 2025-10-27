@@ -100,5 +100,8 @@ export function extractNavbarTranslations(t: TFunction) {
     twitter: t("navbar.twitter"),
     kakao: t("navbar.kakao"),
     theme: t("navbar.theme"),
+    language: t("navbar.language"),
+    ko: t("navbar.ko"),
+    en: t("navbar.en"),
   };
 }

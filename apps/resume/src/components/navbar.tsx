@@ -1,5 +1,6 @@
 import { Dock, DockIcon } from "@/components/magicui/dock";
 import { ModeToggle } from "@/components/mode-toggle";
+import { LanguageSwitcher } from "@/components/language-switcher";
 import { buttonVariants } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Tooltip, TooltipContent, TooltipTrigger, TooltipProvider } from "@/components/ui/tooltip";
@@ -15,6 +16,9 @@ interface NavbarProps {
     twitter: string;
     kakao: string;
     theme: string;
+    language: string;
+    ko: string;
+    en: string;
   };
 }
 
@@ -71,15 +75,26 @@ export default function Navbar({ lang = "ko", translations }: NavbarProps = {}) 
             // For other items, use DockIcon for the magnification effect and hide on small screens
             return <DockIcon key={localizedHref} className="hidden sm:flex">{content}</DockIcon>;
           })}
+          {/* Language switcher - always visible, placed after main nav items */}
+          <div className="flex items-center">
+            <LanguageSwitcher 
+              currentLang={lang} 
+              translations={{
+                ko: translations?.ko || "한국어",
+                en: translations?.en || "English"
+              }}
+              tooltipText={translations?.language || "언어"}
+            />
+          </div>
+          <Separator orientation="vertical" className="h-full py-2" />
           {/* Temporarily commented out theme toggle button */}
-          {/* <Separator orientation="vertical" className="h-full py-2" />
-          <DockIcon>
+          {/* <DockIcon>
             <Tooltip>
               <TooltipTrigger asChild>
                 <ModeToggle />
               </TooltipTrigger>
               <TooltipContent>
-                <p>테마</p>
+                <p>{translations?.theme || "테마"}</p>
               </TooltipContent>
             </Tooltip>
           </DockIcon> */}

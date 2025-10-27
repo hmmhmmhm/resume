@@ -11,7 +11,10 @@
     "github": "GitHub",
     "twitter": "Twitter",
     "kakao": "KakaoTalk",
-    "theme": "Theme"
+    "theme": "Theme",
+    "language": "Language",
+    "ko": "한국어",
+    "en": "English"
   },
   "resume": {
     "downloadPDF": "Download PDF for Print",
