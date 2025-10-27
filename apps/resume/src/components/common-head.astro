@@ -19,8 +19,8 @@ const {
   lang = "ko",
 } = Astro.props;
 
-// Generate language-specific OG image URL if not provided
-const defaultOgImage = new URL(`/${lang}/og.png`, Astro.url).toString();
+// Always use English OG image as default
+const defaultOgImage = new URL(`/en/og.png`, Astro.url).toString();
 const finalOgImage = ogImage || defaultOgImage;
 
 // Extract path for hreflang, canonical, alternate tags (remove language prefix)
