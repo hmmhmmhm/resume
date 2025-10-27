@@ -52,6 +52,16 @@ export default defineConfig({
     optimizeDeps: {
       exclude: ["sharp"],
     },
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            // Separate lucide icons into their own chunk for better caching
+            'lucide': ['lucide-preact'],
+          },
+        },
+      },
+    },
     define: {
       "import.meta.env.PUBLIC_SUPABASE_URL": JSON.stringify(process.env.PUBLIC_SUPABASE_URL),
       "import.meta.env.PUBLIC_SUPABASE_ANON_KEY": JSON.stringify(

@@ -18,6 +18,7 @@ export default function Navbar() {
                 <TooltipTrigger asChild>
                   <a
                     href={item.href}
+                    aria-label={item.label}
                     className={cn(buttonVariants({ variant: "ghost", size: "icon" }), "size-12")}
                     target={item.href.startsWith("http") ? "_blank" : undefined}
                     rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}

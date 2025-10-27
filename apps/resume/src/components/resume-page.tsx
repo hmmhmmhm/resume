@@ -302,25 +302,23 @@ export default function ResumePage() {
               </div>
             </div>
           </BlurFade>
-          <BlurFade delay={BLUR_FADE_DELAY * 14}>
-            <ul className="mb-4 ml-4 divide-y divide-dashed border-l">
-              {DATA.hackathons.map((project, id) => (
-                <BlurFade
-                  key={project.title + project.dates}
-                  delay={BLUR_FADE_DELAY * 15 + id * 0.05}
-                >
-                  <HackathonCard
-                    title={project.title}
-                    description={project.description}
-                    location={project.location}
-                    dates={project.dates}
-                    image={project.image}
-                    links={project.links}
-                  />
-                </BlurFade>
-              ))}
-            </ul>
-          </BlurFade>
+          <ul className="mb-4 ml-4 divide-y divide-dashed border-l">
+            {DATA.hackathons.map((project, id) => (
+              <BlurFade
+                key={project.title + project.dates}
+                delay={BLUR_FADE_DELAY * 14 + id * 0.05}
+              >
+                <HackathonCard
+                  title={project.title}
+                  description={project.description}
+                  location={project.location}
+                  dates={project.dates}
+                  image={project.image}
+                  links={project.links}
+                />
+              </BlurFade>
+            ))}
+          </ul>
         </div>
       </section>
       <section id="contact">

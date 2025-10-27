@@ -1,4 +1,4 @@
-import { GlobeIcon, MailIcon } from "lucide-preact";
+import { Globe as GlobeIcon, Mail as MailIcon } from "lucide-preact";
 import type { JSX, ComponentChildren } from "preact";
 
 export type IconProps = JSX.SVGAttributes<SVGSVGElement>;

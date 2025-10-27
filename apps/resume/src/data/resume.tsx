@@ -1,5 +1,5 @@
 import { Icons } from "@/components/icons";
-import { HomeIcon, BriefcaseIcon } from "lucide-preact";
+import { Home as HomeIcon, Briefcase as BriefcaseIcon } from "lucide-preact";
 
 export const DATA = {
   name: "Hamin Lee",
