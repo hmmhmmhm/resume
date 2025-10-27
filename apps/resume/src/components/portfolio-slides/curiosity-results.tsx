@@ -10,7 +10,7 @@ export const curiosityResults: SlideConfig = {
   content: (isDark: boolean) => (
     <div className="flex flex-col lg:flex-row gap-6 md:gap-8 items-start lg:items-center">
       {/* Left side - Image */}
-      <div className="lg:w-2/5 flex-shrink-0 flex items-center justify-center">
+      <div className="w-full max-w-md mx-auto lg:mx-0 lg:w-2/5 flex-shrink-0 flex items-center justify-center">
         <BlurFade delay={0.05}>
           <div className="relative w-full rounded-xl md:rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-300">
             <Image
@@ -27,7 +27,7 @@ export const curiosityResults: SlideConfig = {
       </div>
 
       {/* Right side - Content */}
-      <div className="flex-1 space-y-4 md:space-y-5">
+      <div className="flex-1 w-full space-y-4 md:space-y-5">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
           <BlurFade delay={0.1}>
             <div
