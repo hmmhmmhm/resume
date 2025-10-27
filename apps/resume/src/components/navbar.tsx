@@ -86,7 +86,6 @@ export default function Navbar({ lang = "ko", translations }: NavbarProps = {}) 
               tooltipText={translations?.language || "언어"}
             />
           </div>
-          <Separator orientation="vertical" className="h-full py-2" />
           {/* Temporarily commented out theme toggle button */}
           {/* <DockIcon>
             <Tooltip>

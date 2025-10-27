@@ -89,7 +89,7 @@ export function LanguageSwitcher({ currentLang, translations, tooltipText }: Lan
         variant="ghost" 
         size="icon" 
         onClick={toggleDropdown} 
-        className="size-12 gap-1"
+        className="size-12 gap-1 focus-visible:ring-0 focus-visible:ring-offset-0 outline-none border-0"
         aria-label="Switch language"
         aria-expanded={isOpen}
       >
