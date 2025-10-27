@@ -6,6 +6,8 @@ interface ImageProps {
   height?: number;
   className?: string;
   draggable?: boolean;
+  sizes?: string;
+  priority?: boolean;
 }
 
 export default function Image({ src, alt, fill, width, height, className, draggable }: ImageProps) {

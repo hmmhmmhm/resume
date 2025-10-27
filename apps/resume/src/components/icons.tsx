@@ -1,7 +1,7 @@
 import { GlobeIcon, MailIcon } from "lucide-preact";
 import type { JSX, ComponentChildren } from "preact";
 
-export type IconProps = JSX.HTMLAttributes<SVGElement>;
+export type IconProps = JSX.SVGAttributes<SVGSVGElement>;
 
 // Wrapper to convert className to class for lucide-preact icons
 export function Icon({
@@ -17,8 +17,8 @@ export function Icon({
 }
 
 export const Icons = {
-  globe: (props: IconProps) => <GlobeIcon class={props.className} {...props} />,
-  email: (props: IconProps) => <MailIcon class={props.className} {...props} />,
+  globe: (props: IconProps) => <GlobeIcon class={props.className} />,
+  email: (props: IconProps) => <MailIcon class={props.className} />,
   linkedin: (props: IconProps) => (
     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" {...props}>
       <title>LinkedIn</title>

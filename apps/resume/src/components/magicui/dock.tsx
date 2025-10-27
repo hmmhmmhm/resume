@@ -1,4 +1,4 @@
-import type { ComponentChildren } from "preact";
+import type { ReactNode } from "react";
 import { createContext } from "preact";
 import { useRef, useEffect, useState, useContext } from "preact/hooks";
 import { cn } from "@/lib/utils";
@@ -6,7 +6,7 @@ import { motion, useMotionValue, useSpring, useTransform, MotionValue } from "fr
 
 interface DockProps {
   className?: string;
-  children: ComponentChildren;
+  children: ReactNode;
   magnification?: number;
   distance?: number;
 }
@@ -50,7 +50,7 @@ export function Dock({
 
 interface DockIconProps {
   className?: string;
-  children: ComponentChildren;
+  children: ReactNode;
 }
 
 export function DockIcon({ className, children }: DockIconProps) {
