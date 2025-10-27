@@ -57,7 +57,7 @@ export const akaBrowserImplementation: SlideConfig = {
           <div
             className={`space-y-2.5 md:space-y-3 text-xs sm:text-sm ${isDark ? "text-zinc-300" : "text-black"}`}
           >
-            <div className="grid grid-cols-1 md:grid-cols-[1fr,2fr,2fr] gap-2 md:gap-3 items-center">
+            <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr_2fr] gap-2 md:gap-3 items-center">
               <div className="font-semibold text-center md:text-left" style={{ color: "#ef4444" }}>
                 🔴 Widevine 서명 실패
               </div>
@@ -77,7 +77,7 @@ export const akaBrowserImplementation: SlideConfig = {
               </div>
             </div>
             <div className="h-px bg-zinc-700/30"></div>
-            <div className="grid grid-cols-1 md:grid-cols-[1fr,2fr,2fr] gap-2 md:gap-3 items-center">
+            <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr_2fr] gap-2 md:gap-3 items-center">
               <div className="font-semibold text-center md:text-left" style={{ color: "#ef4444" }}>
                 🔴 화면 깜빡임
               </div>
@@ -97,7 +97,7 @@ export const akaBrowserImplementation: SlideConfig = {
               </div>
             </div>
             <div className="h-px bg-zinc-700/30"></div>
-            <div className="grid grid-cols-1 md:grid-cols-[1fr,2fr,2fr] gap-2 md:gap-3 items-center">
+            <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr_2fr] gap-2 md:gap-3 items-center">
               <div className="font-semibold text-center md:text-left" style={{ color: "#ef4444" }}>
                 🔴 보안 vs 기능
               </div>

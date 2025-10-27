@@ -29,6 +29,10 @@ export default defineConfig({
   build: {
     inlineStylesheets: "always",
   },
+  prefetch: {
+    prefetchAll: true,
+    defaultStrategy: "viewport",
+  },
   vite: {
     plugins: [
       /** @type {PluginOption} */ (tailwindcss()),
@@ -53,11 +57,32 @@ export default defineConfig({
       exclude: ["sharp"],
     },
     build: {
+      modulePreload: {
+        polyfill: true,
+      },
       rollupOptions: {
         output: {
-          manualChunks: {
+          manualChunks: (id) => {
             // Separate lucide icons into their own chunk for better caching
-            'lucide': ['lucide-preact'],
+            if (id.includes('lucide-preact')) {
+              return 'lucide';
+            }
+            // Separate framer-motion for better caching
+            if (id.includes('framer-motion')) {
+              return 'framer-motion';
+            }
+            // Group UI components together
+            if (id.includes('/components/ui/')) {
+              return 'ui-components';
+            }
+            // Group magicui components together
+            if (id.includes('/components/magicui/')) {
+              return 'magicui';
+            }
+            // Keep preact core separate
+            if (id.includes('preact') && !id.includes('lucide-preact')) {
+              return 'preact';
+            }
           },
         },
       },
