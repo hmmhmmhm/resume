@@ -42,12 +42,12 @@ export default function NotFoundPage({ translations }: NotFoundPageProps = {}) {
 
           {/* Main Message */}
           <h2 className="text-3xl md:text-5xl font-bold text-black/90">
-            {translations?.title || '페이지를 찾을 수 없습니다'}
+            {translations?.title || '페이지를 찾을 수 없음'}
           </h2>
 
           {/* Description */}
           <p className="text-lg md:text-xl text-gray-600/80 max-w-md mx-auto">
-            {translations?.description || '요청하신 페이지가 존재하지 않거나 이동되었을 수 있습니다.'}
+            {translations?.description || '요청하신 페이지가 존재하지 않거나 이동됨.'}
           </p>
 
           {/* Action Buttons */}
@@ -70,7 +70,7 @@ export default function NotFoundPage({ translations }: NotFoundPageProps = {}) {
 
           {/* Additional Info */}
           <div className="pt-12 text-sm text-gray-500/60">
-            <p>{translations?.contactAdmin || '문제가 계속되면 관리자에게 문의해주세요.'}</p>
+            <p>{translations?.contactAdmin || '문제가 계속되면 관리자에게 문의 바람.'}</p>
           </div>
         </div>
       </div>
