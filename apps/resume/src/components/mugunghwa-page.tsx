@@ -33,7 +33,7 @@ export default function MugunghwaResume() {
   return (
     <div className="relative min-h-screen overflow-hidden flex flex-col-reverse lg:flex-row">
       <div
-        className="w-full lg:w-1/2 p-6 sm:p-8 lg:p-12 font-mono relative z-10 overflow-y-auto bg-black text-white"
+        className="w-full lg:w-1/2 p-6 sm:p-8 lg:p-12 font-mono relative z-10 overflow-y-auto overflow-x-hidden bg-black text-white"
       >
 
         {/* Header */}
@@ -137,7 +137,7 @@ export default function MugunghwaResume() {
             ))}
           </div>
           <div className="flex items-center justify-between p-3 sm:p-4 rounded text-xs sm:text-sm relative z-20 bg-white/5">
-            <code className="break-all">
+            <code className="break-all overflow-hidden text-ellipsis flex-1 min-w-0">
               {selectedPM === "npm" && "npm install mugunghwa"}
               {selectedPM === "pnpm" && "pnpm add mugunghwa"}
               {selectedPM === "yarn" && "yarn add mugunghwa"}
@@ -179,7 +179,7 @@ export default function MugunghwaResume() {
         {/* Usage Example */}
         <div className="mb-6 lg:mb-10 relative z-20">
           <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">사용 예시</h2>
-          <div className="p-3 sm:p-4 rounded text-xs sm:text-sm space-y-3 relative z-20 overflow-x-auto bg-white/5 flex items-center justify-between">
+          <div className="p-3 sm:p-4 rounded text-xs sm:text-sm space-y-3 relative z-20 overflow-x-auto bg-white/5 flex items-start justify-between flex-col sm:flex-row sm:items-center">
             <div className="flex-1 space-y-3">
               <div>
                 <code className="block whitespace-nowrap mb-1">
@@ -239,7 +239,7 @@ const decoded = decode(encoded);
                 setCopiedExample(true);
                 setTimeout(() => setCopiedExample(false), 2000);
               }}
-              className="flex items-center gap-2 px-3 py-1.5 rounded text-xs transition-colors hover:bg-white/10 flex-shrink-0"
+              className="flex items-center gap-2 px-3 py-1.5 rounded text-xs transition-colors hover:bg-white/10 flex-shrink-0 mt-3 sm:mt-0"
               title="복사"
             >
               {copiedExample ? (
@@ -285,8 +285,8 @@ const decoded = decode(encoded);
             <div>
               <h3 className="text-sm sm:text-base font-semibold mb-2">84개 한글글자</h3>
               <div className="space-y-2 opacity-90">
-                <div className="overflow-x-auto">
-                  <table className="w-full border-collapse text-center text-[aqua] font-black">
+                <div className="overflow-x-auto -mx-3 sm:-mx-4 px-3 sm:px-4">
+                  <table className="min-w-full border-collapse text-center text-[aqua] font-black">
                     <tbody>
                       <tr>
                         <td className="p-1 sm:p-2">나</td>

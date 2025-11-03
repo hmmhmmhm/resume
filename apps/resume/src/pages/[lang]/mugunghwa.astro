@@ -14,9 +14,9 @@ const ogImage = new URL(`/ko/mugunghwa/og.png`, Astro.url).toString();
   <head>
     <CommonHead title={pageTitle} description={pageDescription} lang={lang} ogImage={ogImage} />
   </head>
-  <body class="bg-black">
+  <body class="bg-black overflow-x-hidden">
     <CommonBody lang={lang} />
-    <div class="max-w-[1500px] mx-auto">
+    <div class="max-w-[1500px] mx-auto w-full">
       <MugunghwaPage client:only="react" />
     </div>
   </body>
