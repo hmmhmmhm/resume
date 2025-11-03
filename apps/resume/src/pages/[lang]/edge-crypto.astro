@@ -1,0 +1,23 @@
+---
+import CommonHead from "@/components/common-head.astro";
+import CommonBody from "@/components/common-body.astro";
+import EdgeCryptoPage from "@/components/edge-crypto-page.tsx";
+import "@/styles/global.css";
+
+const pageTitle = "Edge Crypto - Universal SubtleCrypto toolkit";
+const pageDescription = "Encrypt, sign, hash, and manage RSA keys across Node.js, browsers, Cloudflare Workers, Deno, and Bun.";
+const lang = Astro.params.lang || "en";
+const ogImage = new URL(`/en/edge-crypto/og.png`, Astro.url).toString();
+---
+
+<html lang={lang}>
+  <head>
+    <CommonHead title={pageTitle} description={pageDescription} lang={lang} ogImage={ogImage} />
+  </head>
+  <body class="bg-black overflow-x-hidden">
+    <CommonBody lang={lang} />
+    <div class="max-w-[1500px] mx-auto w-full">
+      <EdgeCryptoPage client:only="react" />
+    </div>
+  </body>
+</html>

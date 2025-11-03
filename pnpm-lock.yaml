@@ -65,6 +65,9 @@ importers:
       curse-script:
         specifier: ^1.0.5
         version: 1.0.5
+      edge-crypto:
+        specifier: ^0.1.1
+        version: 0.1.1
       framer-motion:
         specifier: ^11.18.2
         version: 11.18.2(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
@@ -2745,6 +2748,10 @@ packages:
   dunder-proto@1.0.1:
     resolution: {integrity: sha512-KIN/nDJBQRcXw0MLVhZE9iQHmG68qAVIBg9CqmUYjmQIhgij9U5MFvrqkUL5FbtyyzZuOeOt0zdeRe4UY7ct+A==}
     engines: {node: '>= 0.4'}
+
+  edge-crypto@0.1.1:
+    resolution: {integrity: sha512-Utj0GoHDkrm/edBqVVnIIMgkP25GKOm8sVxuWeXLXYANeeovG0QUgSwTLAKrmq4DvX1seMXN97eAhokJj0BSAg==}
+    engines: {node: '>=20.0.0'}
 
   ejs@3.1.10:
     resolution: {integrity: sha512-UeJmFfOrAQS8OJWPZ4qtgHyWExa088/MtK5UEyoJGFH67cDEXkZSviOiKRCZ4Xij0zxI3JECgYs3oKx+AizQBA==}
@@ -7628,6 +7635,8 @@ snapshots:
       call-bind-apply-helpers: 1.0.2
       es-errors: 1.3.0
       gopd: 1.2.0
+
+  edge-crypto@0.1.1: {}
 
   ejs@3.1.10:
     dependencies:

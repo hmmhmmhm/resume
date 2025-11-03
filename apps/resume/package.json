@@ -29,6 +29,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "curse-script": "^1.0.5",
+    "edge-crypto": "^1.2.0",
     "framer-motion": "^11.18.2",
     "lucide-preact": "^0.395.0",
     "motion": "^12.23.24",
