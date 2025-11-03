@@ -1,0 +1,23 @@
+---
+import CommonHead from "@/components/common-head.astro";
+import CommonBody from "@/components/common-body.astro";
+import CurseCodePage from "@/components/curse-code-page.tsx";
+import "@/styles/global.css";
+
+const pageTitle = "Curse Script - JavaScript Obfuscator";
+const pageDescription = "A JavaScript obfuscator that converts code into cursed spell-like syntax using ancient characters";
+const lang = Astro.params.lang || "en";
+const ogImage = new URL(`/en/curse-code/og.png`, Astro.url).toString();
+---
+
+<html lang={lang}>
+  <head>
+    <CommonHead title={pageTitle} description={pageDescription} lang={lang} ogImage={ogImage} />
+  </head>
+  <body class="bg-black overflow-x-hidden">
+    <CommonBody lang={lang} />
+    <div class="max-w-[1500px] mx-auto w-full">
+      <CurseCodePage client:only="react" />
+    </div>
+  </body>
+</html>
