@@ -5,6 +5,7 @@ import MugunghwaCounter from "./mugunghwa-counter";
 import ColorBends from "./color-bends";
 import { ScrollVelocity } from "./scroll-velocity";
 import { encode } from "mugunghwa";
+import { QRCodeSVG } from "./qrcode-react";
 
 export default function MugunghwaResume() {
   const [selectedPM, setSelectedPM] = useState<string>("npm");
@@ -285,7 +286,7 @@ const decoded = decode(encoded);
               <h3 className="text-sm sm:text-base font-semibold mb-2">84개 한글글자</h3>
               <div className="space-y-2 opacity-90">
                 <div className="overflow-x-auto">
-                  <table className="w-full border-collapse text-center text-[aqua]">
+                  <table className="w-full border-collapse text-center text-[aqua] font-black">
                     <tbody>
                       <tr>
                         <td className="p-1 sm:p-2">나</td>
@@ -410,6 +411,98 @@ const decoded = decode(encoded);
                 <p>과정을 통해서 발생가능한 비속어나 발음하기 어려운 단어 노출을 방지합니다.</p>
               </div>
             </div>
+          </div>
+        </div>
+
+        {/* Publication Section */}
+        <div className="mb-6 lg:mb-10 relative z-20">
+          <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">관련 논문</h2>
+          <div className="block p-6 border border-current/10 rounded-lg @container">
+            <div className="flex flex-col @md:flex-row gap-6 mb-4">
+              <div className="flex-shrink-0 mx-auto @md:mx-0">
+                <img
+                  src="/image/mugunghwa.webp"
+                  alt="음절 블록 체계를 이용한 한글에서의 72진법 표현 체계"
+                  width={300}
+                  height={420}
+                  loading="lazy"
+                  decoding="async"
+                  className="rounded-lg object-cover max-w-[200px] @md:max-w-none"
+                />
+              </div>
+              <div className="flex-1">
+                <h3 className="text-xl sm:text-2xl font-bold mb-2">음절 블록 체계를 이용한 한글에서의 72진법 표현 체계</h3>
+                <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs sm:text-sm mb-4 opacity-80">
+                  <span>저자: 이하민</span>
+                  <span>출판사: 한국통신학회</span>
+                  <span>출간일: 2019년</span>
+                </div>
+                <p className="text-xs sm:text-sm leading-relaxed opacity-90">
+                  영어와 숫자를 혼합한 32진법 Base 32를 모방해 순수 한글로 72진법 인코드 체계 개발. 3미터 오차의 GPS 좌표를 한글 다섯자리로 압축하는 알고리즘 제안. 이 논문을 토대로 JavaScript 기반 오픈소스 구현체 '무궁화 코드' 개발 및 GitHub 공개.
+                </p>
+              </div>
+            </div>
+            <div className="flex flex-col gap-3">
+              <a
+                href="https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE09277763"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 p-2 rounded-md hover:bg-white/5 transition-colors border border-current/10"
+              >
+                <div className="flex-shrink-0">
+                  <QRCodeSVG value="https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE09277763" size={48} level="M" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="text-xs font-medium mb-1">
+                    Paper
+                  </div>
+                  <div className="text-xs font-bold break-all">
+                    https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE09277763
+                  </div>
+                </div>
+              </a>
+              <a
+                href="https://github.com/hmmhmmhm/node-packages/tree/main/packages/mugunghwa"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 p-2 rounded-md hover:bg-white/5 transition-colors border border-current/10"
+              >
+                <div className="flex-shrink-0">
+                  <QRCodeSVG value="https://github.com/hmmhmmhm/node-packages/tree/main/packages/mugunghwa" size={48} level="M" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="text-xs font-medium mb-1">
+                    GitHub
+                  </div>
+                  <div className="text-xs font-bold break-all">
+                    https://github.com/hmmhmmhm/node-packages/tree/main/packages/mugunghwa
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* Download Section */}
+        <div className="mb-6 lg:mb-10 relative z-20">
+          <div className="p-6 border border-current/10 rounded-lg bg-white/5">
+            <h3 className="text-base sm:text-lg font-semibold mb-3">무궁화 코드 전체 조합 다운로드</h3>
+            <p className="text-xs sm:text-sm opacity-90 mb-4 leading-relaxed">
+              비속어가 필터링된 5,184개의 무궁화 코드 조합을 다운로드할 수 있습니다.
+              이름 작명, 코드 생성 등 다양한 용도로 활용하실 수 있습니다.
+            </p>
+            <a
+              href="/ko/mugunghwa/84_filtered.txt"
+              download="mugunghwa_84_filtered.txt"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 rounded-md transition-colors text-sm font-medium"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+              </svg>
+              84_filtered.txt 다운로드
+            </a>
           </div>
         </div>
 

@@ -310,7 +310,7 @@ export const DATA_KO = {
         },
         {
           type: "GitHub",
-          href: "https://github.com/hmmhmmhm/mugunghwa",
+          href: "https://github.com/hmmhmmhm/node-packages/tree/main/packages/mugunghwa",
           icon: <Icons.github className="size-3" />,
         },
       ],
