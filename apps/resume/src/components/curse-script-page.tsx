@@ -240,7 +240,7 @@ const cursedPersian = curse('alert(1)', { characterSet: 'oldPersian' });`;
               <h3 className="text-sm sm:text-base font-semibold mb-2">Obfuscation Process</h3>
               <div className="space-y-2 opacity-90">
                 <p>Unlike conventional obfuscators that simply rename identifiers or gzip strings, Curse Script code-golfs every fragment so the payload contains no legible traces of the original program.</p>
-                <p>The prelude starts with minimal assignments like <code>A = ''</code> and then abuses coercion (e.g., <code>B = !A + A</code>, <code>D = A + {}</code>) to mine words such as <code>"true"</code>, <code>"false"</code>, and <code>"[object Object]"</code> without ever typing them directly.</p>
+                <p>The prelude starts with minimal assignments like <code>A = ''</code> and then abuses coercion (e.g., <code>B = !A + A</code>, <code>D = A + { }</code>) to mine words such as <code>"true"</code>, <code>"false"</code>, and <code>"[object Object]"</code> without ever typing them directly.</p>
                 <p>Those harvested substrings are recombined to synthesize critical tokens: <code>E = B[A++]</code> plucks the letter "t", <code>I = D[G+H]</code> reveals "constructor", and stacking them inside <code>J(...)</code> produces a reference to the <code>Function</code> constructor entirely through side effects.</p>
                 <p>Each source character is re-expressed via these golfed variables—common glyphs come from a lookup table, while the rest are rebuilt on demand through Unicode escape expressions that even handle surrogate pairs for astral symbols.</p>
                 <p>All pieces are concatenated into <code>J(... )();</code>, invoking the synthesized <code>Function</code>; the final pass optionally remaps variables <code>A</code>–<code>X</code> to Runic, Old Persian, emoji, or custom glyphs, cementing the spell-like appearance while keeping the script executable.</p>
@@ -305,7 +305,7 @@ const cursedPersian = curse('alert(1)', { characterSet: 'oldPersian' });`;
               "#8B0000", "#DC143C", "#FF0000", "#B22222", "#8B0000", "#DC143C"
               // "#ff5c7a",
             ]}
-            characters="𐎠𐎡𐎢𐎣𐎤𐎥𐎦,='𐎧𐎨𐎩𐎪𐎫𐎬𐎭𐎮𐎯𐎰𐎱𐎲𐎳𐎴𐎵𐎶𐎷"
+            characters="+𐎠𐎡𐎢𐎣𐎤𐎥𐎦,='𐎧𐎨𐎩𐎪𐎫𐎬𐎭𐎮𐎯𐎰𐎱𐎲𐎳𐎴𐎵𐎶𐎷+"
           />
         </div>
         {/* Mobile: absolute positioned within right panel */}
