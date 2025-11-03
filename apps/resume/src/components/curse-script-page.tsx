@@ -1,10 +1,10 @@
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import CircularText from "./circular-text";
-import CurseCodeCounter from "./curse-code-counter";
+import CurseScriptCounter from "./curse-script-counter";
 import { ScrollVelocity } from "./scroll-velocity";
 import LetterGlitch from "./letter-glitch";
 
-export default function CurseCodePage() {
+export default function CurseScriptPage() {
   const [selectedPM, setSelectedPM] = useState<string>("npm");
   const [copiedInstall, setCopiedInstall] = useState<boolean>(false);
   const [copiedExample, setCopiedExample] = useState<boolean>(false);
@@ -30,7 +30,7 @@ export default function CurseCodePage() {
         </div>
 
         {/* Interactive Counter */}
-        <CurseCodeCounter isDarkMode={true} />
+        <CurseScriptCounter isDarkMode={true} />
 
         {/* Features Section */}
         <div className="mb-6 lg:mb-10 relative z-20">

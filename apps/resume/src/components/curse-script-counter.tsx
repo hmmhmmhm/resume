@@ -4,7 +4,7 @@ import GradientText from "./gradient-text";
 
 type CharacterSet = "runic" | "oldPersian" | "emoji" | "none";
 
-export default function CurseCodeCounter({ isDarkMode }: { isDarkMode: boolean }) {
+export default function CurseScriptCounter({ isDarkMode }: { isDarkMode: boolean }) {
   const [inputCode, setInputCode] = useState<string>("");
   const [cursedOutput, setCursedOutput] = useState<string>("");
   const [copied, setCopied] = useState<boolean>(false);
