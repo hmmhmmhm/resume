@@ -574,12 +574,25 @@ const decoded = decode(encoded);
             noise={0.08}
           />
         </div>
-        <div className="absolute bottom-6 right-6 sm:bottom-8 sm:right-8 lg:bottom-12 lg:right-12 w-40 h-40 sm:w-48 sm:h-48 lg:w-56 lg:h-56 z-20 mix-blend-difference">
+        {/* Mobile: absolute positioned within right panel */}
+        <div className="absolute bottom-6 right-6 sm:bottom-8 sm:right-8 w-40 h-40 sm:w-48 sm:h-48 z-20 mix-blend-difference lg:hidden">
           <CircularText
             text="MUGUNGHWA * 무궁화 * MUGUNGHWA * 무궁화 * "
             onHover="speedUp"
             spinDuration={20}
-            className="text-xs sm:text-sm lg:text-base font-mono font-black text-white"
+            className="text-xs sm:text-sm font-mono font-black text-white"
+          />
+        </div>
+      </div>
+      
+      {/* Desktop: fixed floating at bottom right */}
+      <div className="hidden lg:block fixed bottom-12 right-12 w-56 h-56 z-50 mix-blend-difference pointer-events-none">
+        <div className="pointer-events-auto">
+          <CircularText
+            text="MUGUNGHWA * 무궁화 * MUGUNGHWA * 무궁화 * "
+            onHover="speedUp"
+            spinDuration={20}
+            className="text-base font-mono font-black text-white"
           />
         </div>
       </div>
