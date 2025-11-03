@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig } from "astro/config";
 import { preactIntegration } from "@repo/astro-preact/integration";
+import react from "@astrojs/react";
 import tailwindcss from "@repo/astro-tailwind/vite";
 import cloudflare from "@astrojs/cloudflare";
 import { excludePublicFiles } from "@repo/astro-pwa/vite-plugin";
@@ -18,7 +19,15 @@ export default defineConfig({
       redirectToDefaultLocale: false,
     },
   },
-  integrations: [generateServiceWorker(), preactIntegration()],
+  integrations: [
+    generateServiceWorker(),
+    preactIntegration({
+      exclude: ['**/mugunghwa-page.tsx', '**/node_modules/@paper-design/**'],
+    }),
+    react({
+      include: ['**/mugunghwa-page.tsx', '**/node_modules/@paper-design/**'],
+    }),
+  ],
   output: "server",
   adapter: cloudflare({
     imageService: "compile",
@@ -37,6 +46,24 @@ export default defineConfig({
     plugins: [
       /** @type {PluginOption} */ (tailwindcss()),
       /** @type {PluginOption} */ (excludePublicFiles(["sw.template.js"])),
+      /** @type {PluginOption} */ ({
+        name: "conditional-react-alias",
+        enforce: "pre",
+        resolveId(source, importer) {
+          // Don't alias React imports for mugunghwa-resume component
+          if (importer && (importer.includes("mugunghwa-resume.tsx") || importer.includes("mugunghwa-resume.jsx"))) {
+            if (source === "react" || source === "react-dom" || source === "react/jsx-runtime") {
+              return null; // Let Vite resolve the actual React
+            }
+          }
+          // Don't alias React imports from @paper-design/shaders-react
+          if (importer && importer.includes("@paper-design/shaders-react")) {
+            if (source === "react" || source === "react-dom" || source === "react/jsx-runtime") {
+              return null; // Let Vite resolve the actual React
+            }
+          }
+        },
+      }),
     ],
     resolve: {
       alias: {
@@ -51,7 +78,7 @@ export default defineConfig({
     assetsInclude: ["**/*.wasm"],
     ssr: {
       external: ["buffer", "path", "fs", "sharp"].map((i) => (i === "sharp" ? i : `node:${i}`)),
-      noExternal: ["workers-og", "@supabase/supabase-js", "framer-motion"],
+      noExternal: ["workers-og", "@supabase/supabase-js", "framer-motion", "@paper-design/shaders-react"],
     },
     optimizeDeps: {
       exclude: ["sharp"],

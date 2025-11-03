@@ -1,0 +1,20 @@
+---
+import CommonHead from "@/components/common-head.astro";
+import CommonBody from "@/components/common-body.astro";
+import MugunghwaPage from "@/components/mugunghwa-page.tsx";
+import "@/styles/global.css";
+
+const pageTitle = "무궁화 - 한글 기반 72진법 인코딩 라이브러리";
+const pageDescription = "10진수 숫자를 한글로 인코딩/디코딩하는 TypeScript 라이브러리";
+const lang = Astro.params.lang || "ko";
+---
+
+<html lang={lang}>
+  <head>
+    <CommonHead title={pageTitle} description={pageDescription} lang={lang} />
+  </head>
+  <body>
+    <CommonBody lang={lang} />
+    <MugunghwaPage client:only="react" />
+  </body>
+</html>
