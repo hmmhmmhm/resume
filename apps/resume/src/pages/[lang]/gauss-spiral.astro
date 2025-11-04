@@ -1,13 +1,13 @@
 ---
 import CommonHead from "@/components/common-head.astro";
 import CommonBody from "@/components/common-body.astro";
-import BiggestPage from "@/components/biggest-page.tsx";
+import GaussSpiralPage from "@/components/gauss-spiral-page.tsx";
 import "@/styles/global.css";
 
-const pageTitle = "Biggest - 무한 정밀도 계산 라이브러리";
-const pageDescription = "2kb의 가벼운 크기로 무한 정밀도의 큰 정수와 큰 소수를 안전하게 계산할 수 있는 라이브러리";
+const pageTitle = "Gauss Spiral - 나선 좌표 시스템 라이브러리";
+const pageDescription = "나선형으로 회전하며 픽셀을 채우는 효율적인 좌표 시스템의 좌표를 계산합니다.";
 const lang = Astro.params.lang || "ko";
-const ogImage = new URL(`/ko/biggest/og.png`, Astro.url).toString();
+const ogImage = new URL(`/ko/gauss-spiral/og.png`, Astro.url).toString();
 ---
 
 <html lang={lang}>
@@ -17,7 +17,7 @@ const ogImage = new URL(`/ko/biggest/og.png`, Astro.url).toString();
   <body class="bg-black overflow-x-hidden">
     <CommonBody lang={lang} />
     <div class="max-w-[1500px] mx-auto w-full">
-      <BiggestPage client:only="react" />
+      <GaussSpiralPage client:only="react" />
     </div>
   </body>
 </html>

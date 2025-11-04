@@ -182,7 +182,7 @@ export default function BiggestPage() {
       </div>
 
       <div className="flex flex-col lg:flex-row">
-        <div className="w-full lg:w-1/2 p-6 sm:p-8 lg:p-12 font-mono relative z-10 overflow-x-hidden relative">
+        <div className="w-full lg:w-1/2 p-6 sm:p-8 lg:p-12 font-mono z-10 overflow-x-hidden relative">
           <section className="mb-6 lg:mb-10 space-y-4">
             <p className="text-xs uppercase tracking-[0.35em] text-white/50">프로젝트</p>
             <h1 className="text-3xl sm:text-4xl font-bold">Biggest</h1>
