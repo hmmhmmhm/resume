@@ -1,0 +1,23 @@
+---
+import CommonHead from "@/components/common-head.astro";
+import CommonBody from "@/components/common-body.astro";
+import PseudoShufflePage from "@/components/pseudo-shuffle-page.tsx";
+import "@/styles/global.css";
+
+const pageTitle = "Pseudo Shuffle - FPE 동형암호화 기반 유사난수 셔플 라이브러리";
+const pageDescription = "실제로 섞지 않고도 섞인 것처럼 보이는 인덱스를 계산하는 TypeScript 라이브러리";
+const lang = Astro.params.lang || "ko";
+const ogImage = new URL(`/ko/pseudo-shuffle/og.png`, Astro.url).toString();
+---
+
+<html lang={lang}>
+  <head>
+    <CommonHead title={pageTitle} description={pageDescription} lang={lang} ogImage={ogImage} />
+  </head>
+  <body class="bg-black overflow-x-hidden">
+    <CommonBody lang={lang} />
+    <div class="max-w-[1500px] mx-auto w-full">
+      <PseudoShufflePage client:only="react" />
+    </div>
+  </body>
+</html>

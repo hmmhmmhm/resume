@@ -31,10 +31,12 @@
     "curse-script": "^1.0.5",
     "edge-crypto": "^0.1.1",
     "framer-motion": "^11.18.2",
+    "gsap": "^3.13.0",
     "lucide-preact": "^0.395.0",
     "motion": "^12.23.24",
     "mugunghwa": "^1.0.1",
     "preact-markup": "^2.1.1",
+    "pseudo-shuffle": "^1.1.2",
     "qrcode": "^1.5.4",
     "tailwind-merge": "^2.6.0",
     "three": "^0.181.0"
