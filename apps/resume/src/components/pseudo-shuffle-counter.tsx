@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { encode, decode } from "pseudo-shuffle";
 
 interface PseudoShuffleCounterProps {
@@ -14,6 +14,31 @@ export default function PseudoShuffleCounter({ isDarkMode = true }: PseudoShuffl
   const [privateKey, setPrivateKey] = useState<string>("");
   const [encodedValue, setEncodedValue] = useState<number>(0);
   const [decodedValue, setDecodedValue] = useState<number>(0);
+  
+  // Debounced values for heavy computation
+  const [debouncedMin, setDebouncedMin] = useState<number>(min);
+  const [debouncedMax, setDebouncedMax] = useState<number>(max);
+  const [debouncedIndex, setDebouncedIndex] = useState<number>(index);
+  const debounceTimerRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Debounce min, max, and index changes
+  useEffect(() => {
+    if (debounceTimerRef.current) {
+      clearTimeout(debounceTimerRef.current);
+    }
+    
+    debounceTimerRef.current = setTimeout(() => {
+      setDebouncedMin(min);
+      setDebouncedMax(max);
+      setDebouncedIndex(index);
+    }, 150); // 150ms debounce delay
+    
+    return () => {
+      if (debounceTimerRef.current) {
+        clearTimeout(debounceTimerRef.current);
+      }
+    };
+  }, [min, max, index]);
 
   // Ensure index is within valid range when min or max changes
   useEffect(() => {
@@ -22,7 +47,7 @@ export default function PseudoShuffleCounter({ isDarkMode = true }: PseudoShuffl
     } else if (index > max) {
       setIndex(max);
     }
-  }, [min, max]);
+  }, [min, max, index]);
 
   // Sync index when switching tabs
   useEffect(() => {
@@ -41,9 +66,9 @@ export default function PseudoShuffleCounter({ isDarkMode = true }: PseudoShuffl
         if (activeTab === "encode") {
           // Encode mode: encode the index
           const encodeResult = encode({
-            min,
-            max,
-            index,
+            min: debouncedMin,
+            max: debouncedMax,
+            index: debouncedIndex,
             ...(privateKey && { privateKey })
           });
           const encoded = await Promise.resolve(encodeResult);
@@ -51,9 +76,9 @@ export default function PseudoShuffleCounter({ isDarkMode = true }: PseudoShuffl
         } else {
           // Decode mode: decode the index
           const decodeResult = decode({
-            min,
-            max,
-            index,
+            min: debouncedMin,
+            max: debouncedMax,
+            index: debouncedIndex,
             ...(privateKey && { privateKey })
           });
           const decoded = await Promise.resolve(decodeResult);
@@ -65,7 +90,7 @@ export default function PseudoShuffleCounter({ isDarkMode = true }: PseudoShuffl
     };
 
     processValue();
-  }, [min, max, index, privateKey, activeTab]);
+  }, [debouncedMin, debouncedMax, debouncedIndex, privateKey, activeTab]);
 
   const bgClass = isDarkMode ? "bg-white/5" : "bg-black/5";
   const borderClass = isDarkMode ? "border-white/10" : "border-black/10";
