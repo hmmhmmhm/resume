@@ -27,6 +27,14 @@ interface SidePageProps {
 
 const sideProjects: SideProject[] = [
   {
+    title: "Mugunghwa",
+    href: "/mugunghwa",
+    description: "한글 기반 72진법 인코딩 라이브러리로 욕설 필터링 기능을 포함하고 있습니다.",
+    image: "https://hmart.app/ko/mugunghwa/og.png",
+    tags: ["TypeScript", "Korean", "Encoding"],
+    dates: "",
+  },
+  {
     title: "Biggest",
     href: "/biggest",
     description: "2kb의 가벼운 크기로 무한 정밀도의 큰 정수와 큰 소수를 안전하게 계산할 수 있는 라이브러리입니다.",
@@ -56,14 +64,6 @@ const sideProjects: SideProject[] = [
     description: "중심에서 바깥으로 원을 점으로 채우는 나선형 열거를 위한 (x, y) ↔ n 매핑을 효율적으로 계산합니다.",
     image: "https://hmart.app/ko/gauss-spiral/og.png",
     tags: ["TypeScript", "Algorithm", "Math"],
-    dates: "",
-  },
-  {
-    title: "Mugunghwa",
-    href: "/mugunghwa",
-    description: "한글 기반 72진법 인코딩 라이브러리로 욕설 필터링 기능을 포함하고 있습니다.",
-    image: "https://hmart.app/ko/mugunghwa/og.png",
-    tags: ["TypeScript", "Korean", "Encoding"],
     dates: "",
   },
   {
