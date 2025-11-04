@@ -25,10 +25,28 @@ export default function PseudoShufflePage() {
   }, []);
 
   return (
-    <div className="relative min-h-screen flex flex-col-reverse lg:flex-row lg:overflow-hidden">
-      <div
-        className="w-full lg:w-1/2 p-6 sm:p-8 lg:p-12 font-mono relative z-10 lg:overflow-y-auto overflow-x-hidden bg-black text-white"
-      >
+    <div className="relative min-h-screen">
+      {/* Mobile: Ballpit section */}
+      <div className="lg:hidden w-full h-[250px] sm:h-[300px] relative overflow-hidden">
+        <div className="absolute inset-0 w-full h-full bg-black">
+          <Ballpit
+            count={40}
+            gravity={0}
+            friction={0.98}
+            wallBounce={0.85}
+            followCursor={false}
+            colors={["#ff3333", "#ff6666", "#ff9999", "#ffcccc", "#ffffff"]}
+            ambientColor="#1a1a2e"
+            pointColor="#ffcccc"
+            lightIntensity={50}
+          />
+        </div>
+      </div>
+
+      <div className="flex flex-col lg:flex-row">
+        <div
+          className="w-full lg:w-1/2 p-6 sm:p-8 lg:p-12 font-mono relative z-10 overflow-x-hidden bg-black text-white"
+        >
 
         {/* Header */}
         <div className="mb-8 lg:mb-12 relative z-20">
@@ -136,7 +154,7 @@ export default function PseudoShufflePage() {
         </div>
 
         {/* Random Texts */}
-        <div className="mb-6 lg:mb-10 relative z-20 overflow-hidden">
+        <div className="mb-6 lg:mb-10 relative z-20 overflow-hidden pointer-events-none">
           <style>{`
             @keyframes gradient-shift {
               0% { background-position: 0% 50%; }
@@ -380,8 +398,9 @@ const decoded = decode({ min: 0, max: 100, index: encoded });
         </div>
       </div>
 
-      <div className="w-full lg:w-1/2 relative h-[250px] sm:h-[300px] lg:h-auto lg:min-h-screen overflow-hidden pointer-events-none">
-        <div className="absolute inset-0 w-full h-full bg-black">
+      {/* Desktop: Ballpit as overlay */}
+      <div className="hidden lg:block w-full lg:w-1/2 relative lg:h-auto lg:min-h-screen overflow-hidden z-0">
+        <div className="absolute inset-0 w-full h-full bg-black pointer-events-none">
           <Ballpit
             count={40}
             gravity={0}
@@ -392,15 +411,6 @@ const decoded = decode({ min: 0, max: 100, index: encoded });
             ambientColor="#1a1a2e"
             pointColor="#ffcccc"
             lightIntensity={50}
-          />
-        </div>
-        {/* Mobile: absolute positioned within right panel */}
-        <div className="absolute bottom-6 right-6 sm:bottom-8 sm:right-8 w-40 h-40 sm:w-48 sm:h-48 z-20 mix-blend-difference lg:hidden">
-          <CircularText
-            text="PSEUDO-SHUFFLE * PSEUDO-SHUFFLE * "
-            onHover="speedUp"
-            spinDuration={20}
-            className="text-xs sm:text-sm font-mono font-black text-white"
           />
         </div>
       </div>
@@ -415,6 +425,7 @@ const decoded = decode({ min: 0, max: 100, index: encoded });
             className="text-base font-mono font-black text-white"
           />
         </div>
+      </div>
       </div>
     </div>
   );
