@@ -380,8 +380,8 @@ const decoded = decode({ min: 0, max: 100, index: encoded });
         </div>
       </div>
 
-      <div className="w-full lg:w-1/2 relative h-[250px] sm:h-[300px] lg:h-auto lg:min-h-screen overflow-hidden">
-        <div className="absolute inset-0 w-full h-full bg-black pointer-events-none">
+      <div className="w-full lg:w-1/2 relative h-[250px] sm:h-[300px] lg:h-auto lg:min-h-screen overflow-hidden pointer-events-none">
+        <div className="absolute inset-0 w-full h-full bg-black">
           <Ballpit
             count={40}
             gravity={0}

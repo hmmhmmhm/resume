@@ -13,6 +13,12 @@ const ogImage = new URL(`/ko/pseudo-shuffle/og.png`, Astro.url).toString();
 <html lang={lang}>
   <head>
     <CommonHead title={pageTitle} description={pageDescription} lang={lang} ogImage={ogImage} />
+    <style>
+      body {
+        touch-action: pan-y;
+        -webkit-overflow-scrolling: touch;
+      }
+    </style>
   </head>
   <body class="bg-black">
     <CommonBody lang={lang} />
