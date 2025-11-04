@@ -33,7 +33,7 @@ export default function MugunghwaResume() {
   return (
     <div className="relative min-h-screen overflow-hidden flex flex-col-reverse lg:flex-row">
       <div
-        className="w-full lg:w-1/2 p-6 sm:p-8 lg:p-12 font-mono relative z-10 overflow-y-auto overflow-x-hidden bg-black text-white"
+        className="w-full lg:w-1/2 p-6 sm:p-8 lg:p-12 pb-24 font-mono relative z-10 overflow-y-auto overflow-x-hidden bg-black text-white"
       >
 
         {/* Header */}

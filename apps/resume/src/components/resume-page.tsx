@@ -81,6 +81,7 @@ interface ResumePageProps {
       twitter?: string;
     };
     portfolioLink: string;
+    sideProjectsLink?: string;
   };
 }
 
@@ -488,7 +489,7 @@ export default function ResumePage({ lang = "ko", data, translations }: ResumePa
         </div>
       </section>
       <section id="portfolio-link" className="print:hidden">
-        <div className="w-full pb-16 sm:pb-8">
+        <div className="w-full pb-4 sm:pb-4">
           <div className="max-w-[400px] mx-auto px-4">
             <BlurFade delay={BLUR_FADE_DELAY * 18}>
               <a
@@ -497,6 +498,35 @@ export default function ResumePage({ lang = "ko", data, translations }: ResumePa
               >
                 <BookOpen className="size-5" />
                 <span>{translations?.portfolioLink || '포트폴리오 읽기'}</span>
+              </a>
+            </BlurFade>
+          </div>
+        </div>
+      </section>
+      <section id="side-projects-link" className="print:hidden">
+        <div className="w-full pb-16 sm:pb-8">
+          <div className="max-w-[400px] mx-auto px-4">
+            <BlurFade delay={BLUR_FADE_DELAY * 19}>
+              <a
+                href={`/${lang}/side`}
+                className="flex items-center justify-center gap-2 px-6 py-3 border border-foreground text-foreground rounded-lg hover:bg-foreground hover:text-background transition-all shadow-md font-medium"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="size-5"
+                >
+                  <path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+                  <rect width="20" height="14" x="2" y="6" rx="2" />
+                </svg>
+                <span>{translations?.sideProjectsLink || '사이드 프로젝트 보기'}</span>
               </a>
             </BlurFade>
           </div>

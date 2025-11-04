@@ -1,0 +1,49 @@
+---
+import CommonHead from "@/components/common-head.astro";
+import CommonBody from "@/components/common-body.astro";
+import SidePage from "@/components/side-page";
+import Navbar from "@/components/navbar";
+import KakaoBrowserEscape from "@/components/kakao-browser-escape";
+import "@/styles/global.css";
+
+import { initI18n, extractNavbarTranslations } from "@/i18n";
+
+const { language, t } = initI18n(Astro);
+
+const pageTitle = language === "ko" 
+  ? "사이드 프로젝트 - 이하민" 
+  : "Side Projects - Hamin Lee";
+const pageDescription = language === "ko"
+  ? "개발하면서 필요했던 기능들을 범용적인 오픈소스 라이브러리로 만들어 공개했습니다."
+  : "I've created and published general-purpose open-source libraries for functionality I needed during development.";
+const navbarTranslations = extractNavbarTranslations(t);
+
+const sideTranslations = {
+  hero: {
+    title: language === "ko" ? "사이드 프로젝트" : "Side Projects",
+    subtitle: language === "ko" ? "오픈소스 라이브러리 컬렉션" : "Open Source Library Collection",
+    description: language === "ko" 
+      ? "개발하면서 필요했던 기능들을 범용적인 오픈소스 라이브러리로 만들어 공개했습니다. 각 프로젝트는 실제 문제를 해결하기 위해 설계되었으며, TypeScript로 작성되어 타입 안정성을 보장합니다."
+      : "I've created and published general-purpose open-source libraries for functionality I needed during development. Each project is designed to solve real problems and is written in TypeScript to ensure type safety.",
+  },
+};
+---
+
+<html lang={language}>
+  <head>
+    <CommonHead title={pageTitle} description={pageDescription} lang={language} />
+    <script is:inline>
+      // Force light theme for side page
+      (function () {
+        document.documentElement.classList.remove("dark");
+        localStorage.setItem("theme", "light");
+      })();
+    </script>
+  </head>
+  <body>
+    <CommonBody lang={language} />
+    <KakaoBrowserEscape client:only="preact" />
+    <SidePage client:idle lang={language} translations={sideTranslations} />
+    <Navbar client:idle lang={language} translations={navbarTranslations} />
+  </body>
+</html>

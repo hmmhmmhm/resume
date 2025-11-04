@@ -2,7 +2,13 @@
 import CommonHead from "@/components/common-head.astro";
 import CommonBody from "@/components/common-body.astro";
 import MugunghwaPage from "@/components/mugunghwa-page.tsx";
+import Navbar from "@/components/navbar";
+import KakaoBrowserEscape from "@/components/kakao-browser-escape";
+import { initI18n, extractNavbarTranslations } from "@/i18n";
 import "@/styles/global.css";
+
+const { language, t } = initI18n(Astro);
+const navbarTranslations = extractNavbarTranslations(t);
 
 const pageTitle = "무궁화 - 한글 기반 72진법 인코딩 라이브러리";
 const pageDescription = "10진수 숫자를 한글로 인코딩/디코딩하는 TypeScript 라이브러리";
@@ -10,14 +16,23 @@ const lang = Astro.params.lang || "ko";
 const ogImage = new URL(`/ko/mugunghwa/og.png`, Astro.url).toString();
 ---
 
-<html lang={lang}>
+<html lang={language}>
   <head>
-    <CommonHead title={pageTitle} description={pageDescription} lang={lang} ogImage={ogImage} />
+    <CommonHead title={pageTitle} description={pageDescription} lang={language} ogImage={ogImage} />
+    <script is:inline>
+      // Force dark theme
+      (function () {
+        document.documentElement.classList.add("dark");
+        localStorage.setItem("theme", "dark");
+      })();
+    </script>
   </head>
   <body class="bg-black overflow-x-hidden">
-    <CommonBody lang={lang} />
+    <CommonBody lang={language} />
+    <KakaoBrowserEscape client:only="preact" />
     <div class="max-w-[1500px] mx-auto w-full">
       <MugunghwaPage client:only="react" />
     </div>
+    <Navbar client:idle lang={language} translations={navbarTranslations} />
   </body>
 </html>

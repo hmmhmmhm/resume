@@ -8,9 +8,7 @@
   "navbar": {
     "resume": "이력서",
     "portfolio": "포트폴리오",
-    "github": "깃허브",
-    "twitter": "트위터",
-    "kakao": "카카오톡",
+    "side": "사이드",
     "theme": "테마",
     "language": "언어",
     "ko": "한국어",
@@ -53,7 +51,8 @@
     "contact": {
       "kakao": "카카오톡"
     },
-    "portfolioLink": "포트폴리오 읽기"
+    "portfolioLink": "포트폴리오 읽기",
+    "sideProjectsLink": "사이드 프로젝트 보기"
   },
   "data": {
     "location": "경기도 안산, 대한민국",

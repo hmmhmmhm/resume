@@ -8,9 +8,7 @@
   "navbar": {
     "resume": "Resume",
     "portfolio": "Portfolio",
-    "github": "GitHub",
-    "twitter": "Twitter",
-    "kakao": "KakaoTalk",
+    "side": "Side Projects",
     "theme": "Theme",
     "language": "Language",
     "ko": "한국어",
@@ -53,7 +51,8 @@
     "contact": {
       "kakao": "KakaoTalk"
     },
-    "portfolioLink": "Read Portfolio"
+    "portfolioLink": "Read Portfolio",
+    "sideProjectsLink": "View Side Projects"
   },
   "data": {
     "location": "Ansan, Gyeonggi-do, South Korea",

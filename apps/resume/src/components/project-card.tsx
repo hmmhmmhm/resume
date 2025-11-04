@@ -19,6 +19,8 @@ interface Props {
     href: string;
   }[];
   className?: string;
+  fullImage?: boolean;
+  isExternal?: boolean;
 }
 
 export function ProjectCard({
@@ -32,6 +34,8 @@ export function ProjectCard({
   video,
   links,
   className,
+  fullImage = false,
+  isExternal = false,
 }: Props) {
   return (
     <Card
@@ -41,8 +45,8 @@ export function ProjectCard({
     >
       <a 
         href={href || "#"} 
-        target="_blank"
-        rel="noopener noreferrer"
+        target={isExternal ? "_blank" : undefined}
+        rel={isExternal ? "noopener noreferrer" : undefined}
         className={cn("block cursor-pointer", className)}
       >
         {video && (
@@ -52,7 +56,11 @@ export function ProjectCard({
             loop
             muted
             playsInline
-            className="pointer-events-none mx-auto h-40 w-full object-cover object-top"
+            className={fullImage 
+              ? "pointer-events-none mx-auto w-full object-contain bg-black" 
+              : "pointer-events-none mx-auto h-40 w-full object-cover object-top"
+            }
+            style={fullImage ? { height: 'auto', minHeight: '300px', maxHeight: '500px' } : undefined}
           />
         )}
         {image && (
@@ -63,7 +71,11 @@ export function ProjectCard({
             height={496}
             loading="lazy"
             decoding="async"
-            className="h-40 w-full overflow-hidden object-cover object-top"
+            className={fullImage 
+              ? "w-full overflow-hidden object-contain bg-black" 
+              : "h-40 w-full overflow-hidden object-cover object-top"
+            }
+            style={fullImage ? { height: 'auto', minHeight: '300px', maxHeight: '500px' } : undefined}
           />
         )}
       </a>

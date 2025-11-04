@@ -12,9 +12,7 @@ interface NavbarProps {
   translations?: {
     resume: string;
     portfolio: string;
-    github: string;
-    twitter: string;
-    kakao: string;
+    side: string;
     theme: string;
     language: string;
     ko: string;
@@ -23,12 +21,12 @@ interface NavbarProps {
 }
 
 export default function Navbar({ lang = "ko", translations }: NavbarProps = {}) {
-  const isMainNavItem = (href: string) => href === `/${lang}` || href === `/${lang}/portfolio`;
+  const isMainNavItem = (href: string) => href === `/${lang}` || href === `/${lang}/portfolio` || href === `/${lang}/side`;
   
   return (
     <div className="print:hidden pointer-events-none fixed inset-x-0 bottom-0 z-30 mx-auto mb-4 flex origin-bottom h-full max-h-14">
       <div className="fixed bottom-0 inset-x-0 h-16 w-full bg-background/80 to-transparent backdrop-blur-lg [-webkit-mask-image:linear-gradient(to_top,black,transparent)] dark:bg-background/80"></div>
-      <Dock className="z-50 pointer-events-auto relative mx-auto flex min-h-full h-full items-center px-1 gap-1 sm:gap-0 bg-background/95 [box-shadow:0_0_0_1px_rgba(0,0,0,.03),0_2px_4px_rgba(0,0,0,.05),0_12px_24px_rgba(0,0,0,.05)] transform-gpu dark:bg-background/95 dark:[border:1px_solid_rgba(255,255,255,.1)] dark:[box-shadow:0_-20px_80px_-20px_#ffffff1f_inset] ">
+      <Dock className="z-50 pointer-events-auto relative mx-auto flex min-h-full h-full items-center px-1 gap-0.5 sm:gap-0 bg-background/95 [box-shadow:0_0_0_1px_rgba(0,0,0,.03),0_2px_4px_rgba(0,0,0,.05),0_12px_24px_rgba(0,0,0,.05)] transform-gpu dark:bg-background/95 dark:[border:1px_solid_rgba(255,255,255,.1)] dark:[box-shadow:0_-20px_80px_-20px_#ffffff1f_inset] ">
         <TooltipProvider>
           {DATA.navbar.map((item) => {
             // Update href to use current language
@@ -49,7 +47,7 @@ export default function Navbar({ lang = "ko", translations }: NavbarProps = {}) 
                       buttonVariants({ variant: "ghost", size: isMainNavItem(localizedHref) ? "default" : "icon" }),
                       "flex items-center justify-center",
                       isMainNavItem(localizedHref) 
-                        ? "h-12 px-4 gap-2" 
+                        ? "h-12 px-2.5 gap-2" 
                         : "size-12 sm:size-12"
                     )}
                     target={localizedHref.startsWith("http") ? "_blank" : undefined}

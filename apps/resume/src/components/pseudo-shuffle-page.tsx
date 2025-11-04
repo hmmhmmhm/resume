@@ -45,7 +45,7 @@ export default function PseudoShufflePage() {
 
       <div className="flex flex-col lg:flex-row">
         <div
-          className="w-full lg:w-1/2 p-6 sm:p-8 lg:p-12 font-mono relative z-10 overflow-x-hidden bg-black text-white"
+          className="w-full lg:w-1/2 p-6 sm:p-8 lg:p-12 pb-24 font-mono relative z-10 overflow-x-hidden bg-black text-white"
         >
 
         {/* Header */}

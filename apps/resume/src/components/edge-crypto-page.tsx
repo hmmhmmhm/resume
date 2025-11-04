@@ -234,7 +234,7 @@ export default function EdgeCryptoPage() {
 
   return (
     <div className="relative min-h-screen overflow-hidden flex flex-col-reverse lg:flex-row">
-      <div className="w-full lg:w-1/2 p-6 sm:p-8 lg:p-12 font-mono relative z-10 overflow-y-auto overflow-x-hidden bg-black text-white">
+      <div className="w-full lg:w-1/2 p-6 sm:p-8 lg:p-12 pb-24 font-mono relative z-10 overflow-y-auto overflow-x-hidden bg-black text-white">
         <div className="mb-10 lg:mb-14 relative z-20 space-y-4">
           <p className="text-xs uppercase tracking-[0.35em] text-emerald-300/80">SubtleCrypto Toolkit</p>
           <h1 className="text-3xl sm:text-4xl font-bold">Edge Crypto</h1>

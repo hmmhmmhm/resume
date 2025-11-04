@@ -1,5 +1,5 @@
 import { Icons } from "@/components/icons";
-import { FileText as ResumeIcon, Briefcase as PortfolioIcon } from "lucide-preact";
+import { FileText as ResumeIcon, Briefcase as PortfolioIcon, Package as SideIcon } from "lucide-preact";
 
 export const DATA = {
   name: "Hamin Lee",
@@ -53,9 +53,7 @@ export const DATA = {
   navbar: [
     { href: "/ko", icon: ResumeIcon, label: "이력서", key: "resume" },
     { href: "/ko/portfolio", icon: PortfolioIcon, label: "포트폴리오", key: "portfolio" },
-    { href: "https://github.com/hmmhmmhm/resume", icon: Icons.github, label: "깃허브", key: "github" },
-    { href: "https://x.com/hmartapp", icon: Icons.x, label: "트위터", key: "twitter" },
-    { href: "https://open.kakao.com/me/hamin", icon: Icons.kakao, label: "카카오톡", key: "kakao" },
+    { href: "/ko/side", icon: SideIcon, label: "사이드", key: "side" },
   ],
   contact: {
     email: "pm2@kakao.com",
