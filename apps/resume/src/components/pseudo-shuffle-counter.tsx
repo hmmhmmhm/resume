@@ -14,31 +14,6 @@ export default function PseudoShuffleCounter({ isDarkMode = true }: PseudoShuffl
   const [privateKey, setPrivateKey] = useState<string>("");
   const [encodedValue, setEncodedValue] = useState<number>(0);
   const [decodedValue, setDecodedValue] = useState<number>(0);
-  
-  // Debounced values for heavy computation
-  const [debouncedMin, setDebouncedMin] = useState<number>(min);
-  const [debouncedMax, setDebouncedMax] = useState<number>(max);
-  const [debouncedIndex, setDebouncedIndex] = useState<number>(index);
-  const debounceTimerRef = useRef<NodeJS.Timeout | null>(null);
-
-  // Debounce min, max, and index changes
-  useEffect(() => {
-    if (debounceTimerRef.current) {
-      clearTimeout(debounceTimerRef.current);
-    }
-    
-    debounceTimerRef.current = setTimeout(() => {
-      setDebouncedMin(min);
-      setDebouncedMax(max);
-      setDebouncedIndex(index);
-    }, 150); // 150ms debounce delay
-    
-    return () => {
-      if (debounceTimerRef.current) {
-        clearTimeout(debounceTimerRef.current);
-      }
-    };
-  }, [min, max, index]);
 
   // Ensure index is within valid range when min or max changes
   useEffect(() => {
@@ -47,7 +22,7 @@ export default function PseudoShuffleCounter({ isDarkMode = true }: PseudoShuffl
     } else if (index > max) {
       setIndex(max);
     }
-  }, [min, max, index]);
+  }, [min, max]);
 
   // Sync index when switching tabs
   useEffect(() => {
@@ -60,25 +35,24 @@ export default function PseudoShuffleCounter({ isDarkMode = true }: PseudoShuffl
     }
   }, [activeTab]);
 
+  // Real-time processing
   useEffect(() => {
     const processValue = async () => {
       try {
         if (activeTab === "encode") {
-          // Encode mode: encode the index
           const encodeResult = encode({
-            min: debouncedMin,
-            max: debouncedMax,
-            index: debouncedIndex,
+            min,
+            max,
+            index,
             ...(privateKey && { privateKey })
           });
           const encoded = await Promise.resolve(encodeResult);
           setEncodedValue(encoded);
         } else {
-          // Decode mode: decode the index
           const decodeResult = decode({
-            min: debouncedMin,
-            max: debouncedMax,
-            index: debouncedIndex,
+            min,
+            max,
+            index,
             ...(privateKey && { privateKey })
           });
           const decoded = await Promise.resolve(decodeResult);
@@ -90,7 +64,19 @@ export default function PseudoShuffleCounter({ isDarkMode = true }: PseudoShuffl
     };
 
     processValue();
-  }, [debouncedMin, debouncedMax, debouncedIndex, privateKey, activeTab]);
+  }, [min, max, index, privateKey, activeTab]);
+
+  // Convert slider position (0-10) to actual value (10^0 to 10^10)
+  const sliderToValue = (sliderPos: number): number => {
+    if (sliderPos === 0) return 1;
+    return Math.pow(10, sliderPos);
+  };
+
+  // Convert actual value to slider position (0-10)
+  const valueToSlider = (value: number): number => {
+    if (value <= 1) return 0;
+    return Math.log10(value);
+  };
 
   const bgClass = isDarkMode ? "bg-white/5" : "bg-black/5";
   const borderClass = isDarkMode ? "border-white/10" : "border-black/10";
@@ -204,9 +190,16 @@ export default function PseudoShuffleCounter({ isDarkMode = true }: PseudoShuffl
           <input
             type="range"
             min="0"
-            max={max - 4}
-            value={min}
-            onChange={(e) => setMin(Number((e.target as HTMLInputElement).value))}
+            max="10"
+            step="1"
+            value={valueToSlider(min === 0 ? 1 : min)}
+            onChange={(e) => {
+              const sliderPos = Number((e.target as HTMLInputElement).value);
+              const newValue = sliderPos === 0 ? 0 : sliderToValue(sliderPos);
+              if (newValue <= max - 4) {
+                setMin(newValue);
+              }
+            }}
             className="slider-input"
           />
         </div>
@@ -231,10 +224,17 @@ export default function PseudoShuffleCounter({ isDarkMode = true }: PseudoShuffl
           </div>
           <input
             type="range"
-            min={min + 4}
-            max="10000000000"
-            value={max}
-            onChange={(e) => setMax(Number((e.target as HTMLInputElement).value))}
+            min="0"
+            max="10"
+            step="1"
+            value={valueToSlider(max)}
+            onChange={(e) => {
+              const sliderPos = Number((e.target as HTMLInputElement).value);
+              const newValue = sliderToValue(sliderPos);
+              if (newValue >= min + 4 && newValue <= 10000000000) {
+                setMax(newValue);
+              }
+            }}
             className="slider-input"
           />
         </div>
