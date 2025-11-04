@@ -2,6 +2,7 @@
 import CommonHead from "@/components/common-head.astro";
 import CommonBody from "@/components/common-body.astro";
 import PseudoShufflePage from "@/components/pseudo-shuffle-page.tsx";
+import KakaoBrowserEscape from "@/components/kakao-browser-escape";
 import "@/styles/global.css";
 
 const pageTitle = "Pseudo Shuffle - FPE 동형암호화 기반 유사난수 셔플 라이브러리";
@@ -16,6 +17,7 @@ const ogImage = new URL(`/ko/pseudo-shuffle/og.png`, Astro.url).toString();
   </head>
   <body class="bg-black overflow-x-hidden">
     <CommonBody lang={lang} />
+    <KakaoBrowserEscape client:only="preact" />
     <div class="max-w-[1500px] mx-auto w-full">
       <PseudoShufflePage client:only="react" />
     </div>
