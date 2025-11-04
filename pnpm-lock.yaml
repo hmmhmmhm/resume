@@ -56,6 +56,9 @@ importers:
       astro:
         specifier: ^5.14.4
         version: 5.14.4(@types/node@20.19.23)(jiti@2.6.0)(lightningcss@1.30.1)(rollup@4.52.3)(terser@5.44.0)(tsx@4.20.6)(typescript@5.9.2)(yaml@2.8.1)
+      biggest:
+        specifier: ^1.0.0
+        version: 1.0.3
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -83,6 +86,9 @@ importers:
       mugunghwa:
         specifier: ^1.0.1
         version: 1.0.1
+      ogl:
+        specifier: ^1.0.11
+        version: 1.0.11
       preact-markup:
         specifier: ^2.1.1
         version: 2.1.1(preact@10.27.2)
@@ -2452,6 +2458,9 @@ packages:
     resolution: {integrity: sha512-616V5YX4bepJFzNyOfce5Fa8fDJMfoxzOIzDCZwaGL8MKVpFrXqfNUoIpRn9YMI5pXf/VKgzjB4htFMsFKKdiQ==}
     hasBin: true
 
+  biggest@1.0.3:
+    resolution: {integrity: sha512-UWQJ8yQ0ghPZWOt4YCUwZo8keRqRHHAhOKBhaVZAgordssF7FdhenJnK74ag6asRrZ5G4w1R3RoyMqN8K1bH+A==}
+
   bigint-buffer@1.1.5:
     resolution: {integrity: sha512-trfYco6AoZ+rKhKnxA0hgX0HAbVP/s808/EuDSe2JDzUnCp/xAsli35Orvk67UrTEcwuxZqYZDmfA2RXJgxVvA==}
     engines: {node: '>= 10.0.0'}
@@ -3867,6 +3876,9 @@ packages:
 
   ofetch@1.4.1:
     resolution: {integrity: sha512-QZj2DfGplQAr2oj9KzceK9Hwz6Whxazmn85yYeVuS3u9XTMOGMRx0kO95MQ+vLsj/S/NwBDMMLU5hpxvI6Tklw==}
+
+  ogl@1.0.11:
+    resolution: {integrity: sha512-kUpC154AFfxi16pmZUK4jk3J+8zxwTWGPo03EoYA8QPbzikHoaC82n6pNTbd+oEaJonaE8aPWBlX7ad9zrqLsA==}
 
   ohash@2.0.11:
     resolution: {integrity: sha512-RdR9FQrFwNBNXAr4GixM8YaRZRJ5PUWbKYbE5eOsrwAjJW0q2REGcf79oYPsLyskQCZG1PLN+S/K1V00joZAoQ==}
@@ -7377,6 +7389,8 @@ snapshots:
 
   baseline-browser-mapping@2.8.23: {}
 
+  biggest@1.0.3: {}
+
   bigint-buffer@1.1.5:
     dependencies:
       bindings: 1.5.0
@@ -9094,6 +9108,8 @@ snapshots:
       destr: 2.0.5
       node-fetch-native: 1.6.7
       ufo: 1.6.1
+
+  ogl@1.0.11: {}
 
   ohash@2.0.11: {}
 

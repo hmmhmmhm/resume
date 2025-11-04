@@ -1,0 +1,23 @@
+---
+import CommonHead from "@/components/common-head.astro";
+import CommonBody from "@/components/common-body.astro";
+import BiggestPage from "@/components/biggest-page.tsx";
+import "@/styles/global.css";
+
+const pageTitle = "Biggest - 무한 정밀도 계산 라이브러리";
+const pageDescription = "2kb의 가벼운 크기로 무한 정밀도의 큰 정수와 큰 소수를 안전하게 계산할 수 있는 라이브러리";
+const lang = Astro.params.lang || "ko";
+const ogImage = new URL(`/${lang}/biggest/og.png`, Astro.url).toString();
+---
+
+<html lang={lang}>
+  <head>
+    <CommonHead title={pageTitle} description={pageDescription} lang={lang} ogImage={ogImage} />
+  </head>
+  <body class="bg-black overflow-x-hidden">
+    <CommonBody lang={lang} />
+    <div class="max-w-[1500px] mx-auto w-full">
+      <BiggestPage client:only="react" />
+    </div>
+  </body>
+</html>
