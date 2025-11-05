@@ -10,10 +10,13 @@ import "@/styles/global.css";
 const { language, t } = initI18n(Astro);
 const navbarTranslations = extractNavbarTranslations(t);
 
-const pageTitle = "Curse Script - JavaScript Obfuscator";
-const pageDescription = "A JavaScript obfuscator that converts code into cursed spell-like syntax using ancient characters";
+const pageTitle = t.sideProjects?.curseScript?.pageTitle || (language === "ko"
+  ? "Curse Script - JavaScript Obfuscator"
+  : "Curse Script - JavaScript Obfuscator");
+const pageDescription = t.sideProjects?.curseScript?.pageDescription || "A JavaScript obfuscator that converts code into cursed spell-like syntax using ancient characters";
 const lang = Astro.params.lang || "en";
-const ogImage = new URL(`/en/curse-script/og.png`, Astro.url).toString();
+const ogImage = new URL(`/${lang}/curse-script/og.png`, Astro.url).toString();
+const curseScriptTranslations = t.sideProjects?.curseScript || {};
 ---
 
 <html lang={language}>
@@ -31,7 +34,7 @@ const ogImage = new URL(`/en/curse-script/og.png`, Astro.url).toString();
     <CommonBody lang={language} />
     <KakaoBrowserEscape client:only="preact" />
     <div class="max-w-[1500px] mx-auto w-full">
-      <CurseScriptPage client:only="react" />
+      <CurseScriptPage client:only="react" lang={lang} translations={curseScriptTranslations} />
     </div>
     <Navbar client:idle lang={language} translations={navbarTranslations} />
   </body>

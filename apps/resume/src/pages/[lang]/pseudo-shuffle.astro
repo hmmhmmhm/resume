@@ -10,10 +10,14 @@ import "@/styles/global.css";
 const { language, t } = initI18n(Astro);
 const navbarTranslations = extractNavbarTranslations(t);
 
-const pageTitle = "Pseudo Shuffle - FPE 동형암호화 기반 유사난수 셔플 라이브러리";
-const pageDescription = "실제로 섞지 않고도 섞인 것처럼 보이는 인덱스를 계산하는 TypeScript 라이브러리";
+const pageTitle = t.sideProjects?.pseudoShuffle?.pageTitle || (language === "ko"
+  ? "Pseudo Shuffle - FPE 동형암호화 기반 유사난수 셔플 라이브러리"
+  : "Pseudo Shuffle - FPE-Based Pseudo-Random Shuffle Library");
+const pageDescription = t.sideProjects?.pseudoShuffle?.pageDescription || (language === "ko"
+  ? "실제로 섞지 않고도 섞인 것처럼 보이는 인덱스를 계산하는 TypeScript 라이브러리"
+  : "A TypeScript library that calculates shuffled-looking indices without actually shuffling");
 const lang = Astro.params.lang || "ko";
-const ogImage = new URL(`/ko/pseudo-shuffle/og.png`, Astro.url).toString();
+const ogImage = new URL(`/${lang}/pseudo-shuffle/og.png`, Astro.url).toString();
 ---
 
 <html lang={language}>
@@ -31,7 +35,7 @@ const ogImage = new URL(`/ko/pseudo-shuffle/og.png`, Astro.url).toString();
     <CommonBody lang={language} />
     <KakaoBrowserEscape client:only="preact" />
     <div class="max-w-[1500px] mx-auto w-full">
-      <PseudoShufflePage client:only="react" />
+      <PseudoShufflePage client:only="react" lang={lang} />
     </div>
     <Navbar client:idle lang={language} translations={navbarTranslations} />
   </body>

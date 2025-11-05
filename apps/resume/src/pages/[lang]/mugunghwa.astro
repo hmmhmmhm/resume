@@ -10,10 +10,15 @@ import "@/styles/global.css";
 const { language, t } = initI18n(Astro);
 const navbarTranslations = extractNavbarTranslations(t);
 
-const pageTitle = "무궁화 - 한글 기반 72진법 인코딩 라이브러리";
-const pageDescription = "10진수 숫자를 한글로 인코딩/디코딩하는 TypeScript 라이브러리";
+const pageTitle = t.sideProjects?.mugunghwa?.pageTitle || (language === "ko" 
+  ? "무궁화 - 한글 기반 72진법 인코딩 라이브러리"
+  : "Mugunghwa - Korean Base-72 Encoding Library");
+const pageDescription = t.sideProjects?.mugunghwa?.pageDescription || (language === "ko"
+  ? "10진수 숫자를 한글로 인코딩/디코딩하는 TypeScript 라이브러리"
+  : "A TypeScript library for encoding/decoding decimal numbers to Korean characters");
 const lang = Astro.params.lang || "ko";
-const ogImage = new URL(`/ko/mugunghwa/og.png`, Astro.url).toString();
+const ogImage = new URL(`/${lang}/mugunghwa/og.png`, Astro.url).toString();
+const mugunghwaTranslations = t.sideProjects?.mugunghwa || {};
 ---
 
 <html lang={language}>
@@ -31,7 +36,7 @@ const ogImage = new URL(`/ko/mugunghwa/og.png`, Astro.url).toString();
     <CommonBody lang={language} />
     <KakaoBrowserEscape client:only="preact" />
     <div class="max-w-[1500px] mx-auto w-full">
-      <MugunghwaPage client:only="react" />
+      <MugunghwaPage client:only="react" lang={lang} translations={mugunghwaTranslations} />
     </div>
     <Navbar client:idle lang={language} translations={navbarTranslations} />
   </body>

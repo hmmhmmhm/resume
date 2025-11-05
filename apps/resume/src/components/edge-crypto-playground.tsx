@@ -24,28 +24,84 @@ const hashAlgorithms: HashAlgorithm[] = ["SHA-256", "SHA-384", "SHA-512"];
 
 type PlaygroundTabId = "symmetric" | "hashing" | "rsa";
 
-const playgroundTabs: { id: PlaygroundTabId; icon: any; label: string; description: string }[] = [
+const getPlaygroundLabels = (isKorean: boolean) => ({
+  symmetric: {
+    encryptTitle: isKorean ? "암호문으로 암호화" : "Encrypt to ciphertext",
+    encryptDesc: isKorean ? "비밀번호 기반 키를 사용한 AES-GCM." : "AES-GCM with password-derived keys.",
+    encrypting: isKorean ? "암호화 중…" : "Encrypting…",
+    message: isKorean ? "메시지" : "Message",
+    password: isKorean ? "비밀번호" : "Password",
+    encrypt: isKorean ? "암호화" : "Encrypt",
+    ciphertextBase64: isKorean ? "암호문 (Base64)" : "Ciphertext (Base64)",
+    decryptTitle: isKorean ? "암호문 복호화" : "Decrypt ciphertext",
+    decryptDesc: isKorean ? "AES-GCM 페이로드를 붙여넣고 평문을 복구합니다." : "Paste an AES-GCM payload and recover the plaintext.",
+    decrypting: isKorean ? "복호화 중…" : "Decrypting…",
+    ciphertext: isKorean ? "암호문" : "Ciphertext",
+    ciphertextPlaceholder: isKorean ? "encryptToString에서 생성된 암호문을 붙여넣으세요" : "Paste ciphertext generated from encryptToString",
+    decrypt: isKorean ? "복호화" : "Decrypt",
+    plaintext: isKorean ? "평문" : "Plaintext"
+  },
+  hashing: {
+    title: isKorean ? "해싱" : "Hashing",
+    desc: (algo: string) => isKorean ? `SHA-${algo.slice(4)}로 다이제스트 생성` : `Generate digests with SHA-${algo.slice(4)}`,
+    hashValue: isKorean ? "해시 값" : "Hash value",
+    hashing: isKorean ? "해싱 중…" : "Hashing…",
+    digest: isKorean ? "다이제스트" : "Digest",
+    length: isKorean ? "길이" : "Length",
+    chars: isKorean ? "문자" : "chars"
+  },
+  rsa: {
+    encryptionTitle: isKorean ? "RSA-OAEP 암호화" : "RSA-OAEP Encryption",
+    encryptionDesc: isKorean ? "브라우저에서 키를 생성한 다음 메시지를 암호화하고 복호화합니다." : "Generate keys in-browser, then encrypt and decrypt messages.",
+    running: isKorean ? "실행 중…" : "Running…",
+    generating: isKorean ? "생성 중…" : "Generating…",
+    generate: isKorean ? "생성" : "Generate",
+    regenerate: isKorean ? "재생성" : "Regenerate",
+    messageToEncrypt: isKorean ? "암호화할 메시지" : "Message to encrypt",
+    encrypt: isKorean ? "암호화" : "Encrypt",
+    ciphertextBase64: isKorean ? "암호문 (Base64)" : "Ciphertext (Base64)",
+    ciphertextToDecrypt: isKorean ? "복호화할 암호문" : "Ciphertext to decrypt",
+    ciphertextPlaceholder: isKorean ? "RSA-OAEP로 생성된 암호문을 붙여넣으세요" : "Paste ciphertext generated with RSA-OAEP",
+    decrypt: isKorean ? "복호화" : "Decrypt",
+    plaintext: isKorean ? "평문" : "Plaintext",
+    signingTitle: isKorean ? "RSA-PSS 서명" : "RSA-PSS Signing",
+    signingDesc: isKorean ? "RSA-PSS로 메시지에 서명하고 쌍을 이루는 공개 키를 사용하여 검증합니다." : "Sign messages with RSA-PSS and verify using the paired public key.",
+    messageToSign: isKorean ? "서명할 메시지" : "Message to sign",
+    sign: isKorean ? "서명" : "Sign",
+    signatureBase64: isKorean ? "서명 (Base64)" : "Signature (Base64)",
+    messageToVerify: isKorean ? "검증할 메시지" : "Message to verify",
+    signatureToVerify: isKorean ? "검증할 서명" : "Signature to verify",
+    verify: isKorean ? "검증" : "Verify"
+  }
+});
+
+const getPlaygroundTabs = (isKorean: boolean): { id: PlaygroundTabId; icon: any; label: string; description: string }[] => [
   {
     id: "symmetric",
     icon: Lock,
-    label: "Symmetric",
-    description: "AES-GCM encryption & decryption"
+    label: isKorean ? "대칭 암호화" : "Symmetric",
+    description: isKorean ? "AES-GCM 암호화 및 복호화" : "AES-GCM encryption & decryption"
   },
   {
     id: "hashing",
     icon: Hash,
-    label: "Hashing",
-    description: "Generate SHA digests"
+    label: isKorean ? "해싱" : "Hashing",
+    description: isKorean ? "SHA 다이제스트 생성" : "Generate SHA digests"
   },
   {
     id: "rsa",
     icon: Key,
-    label: "RSA Toolkit",
-    description: "Keygen, encrypt, sign, verify"
+    label: isKorean ? "RSA 툴킷" : "RSA Toolkit",
+    description: isKorean ? "키 생성, 암호화, 서명, 검증" : "Keygen, encrypt, sign, verify"
   }
 ];
 
-export default function EdgeCryptoPlayground() {
+interface EdgeCryptoPlaygroundProps {
+  lang?: string;
+}
+
+export default function EdgeCryptoPlayground({ lang = "en" }: EdgeCryptoPlaygroundProps) {
+  const isKorean = lang === "ko";
   const [cryptoModule, setCryptoModule] = useState<EdgeCryptoModule | null>(null);
   const [loadError, setLoadError] = useState<string | null>(null);
   const [supported, setSupported] = useState<boolean | null>(null);
@@ -172,30 +228,34 @@ export default function EdgeCryptoPlayground() {
 
   const installHint = useMemo(() => {
     if (loadError) {
-      return "Run `pnpm add edge-crypto` inside apps/resume to enable the playground.";
+      return isKorean 
+        ? "플레이그라운드를 활성화하려면 apps/resume 내에서 `pnpm add edge-crypto`를 실행하세요."
+        : "Run `pnpm add edge-crypto` inside apps/resume to enable the playground.";
     }
     if (checkingSupport) {
-      return "Checking SubtleCrypto availability...";
+      return isKorean ? "SubtleCrypto 가용성 확인 중..." : "Checking SubtleCrypto availability...";
     }
     if (supported === false) {
-      return "SubtleCrypto is not available in this environment.";
+      return isKorean 
+        ? "이 환경에서는 SubtleCrypto를 사용할 수 없습니다."
+        : "SubtleCrypto is not available in this environment.";
     }
     return null;
-  }, [checkingSupport, loadError, supported]);
+  }, [checkingSupport, loadError, supported, isKorean]);
 
   const isReady = cryptoModule && supported !== false;
 
   async function handleSymmetricEncrypt() {
     if (!cryptoModule) {
-      setEncryptStatus({ type: "error", message: "edge-crypto is still loading." });
+      setEncryptStatus({ type: "error", message: isKorean ? "edge-crypto 로딩 중입니다." : "edge-crypto is still loading." });
       return;
     }
     if (!encryptMessage.trim()) {
-      setEncryptStatus({ type: "error", message: "Provide a message to encrypt." });
+      setEncryptStatus({ type: "error", message: isKorean ? "암호화할 메시지를 입력하세요." : "Provide a message to encrypt." });
       return;
     }
     if (!encryptPassword.trim()) {
-      setEncryptStatus({ type: "error", message: "Provide a password." });
+      setEncryptStatus({ type: "error", message: isKorean ? "비밀번호를 입력하세요." : "Provide a password." });
       return;
     }
 
@@ -206,12 +266,12 @@ export default function EdgeCryptoPlayground() {
       setCiphertextOutput(result);
       setDecryptCiphertext(result);
       setDecryptOutput("(awaiting decryption)");
-      setEncryptStatus({ type: "success", message: "Encrypted with AES-GCM." });
+      setEncryptStatus({ type: "success", message: isKorean ? "AES-GCM으로 암호화되었습니다." : "Encrypted with AES-GCM." });
     } catch (error) {
       console.error(error);
       setEncryptStatus({
         type: "error",
-        message: "Encryption failed. Ensure SubtleCrypto is supported."
+        message: isKorean ? "암호화에 실패했습니다. SubtleCrypto가 지원되는지 확인하세요." : "Encryption failed. Ensure SubtleCrypto is supported."
       });
     } finally {
       setEncryptBusy(false);
@@ -220,15 +280,15 @@ export default function EdgeCryptoPlayground() {
 
   async function handleSymmetricDecrypt() {
     if (!cryptoModule) {
-      setDecryptStatus({ type: "error", message: "edge-crypto is still loading." });
+      setDecryptStatus({ type: "error", message: isKorean ? "edge-crypto 로딩 중입니다." : "edge-crypto is still loading." });
       return;
     }
     if (!decryptCiphertext.trim()) {
-      setDecryptStatus({ type: "error", message: "Paste a ciphertext generated with AES-GCM." });
+      setDecryptStatus({ type: "error", message: isKorean ? "AES-GCM으로 생성된 암호문을 붙여넣으세요." : "Paste a ciphertext generated with AES-GCM." });
       return;
     }
     if (!decryptPassword.trim()) {
-      setDecryptStatus({ type: "error", message: "Provide the password used for encryption." });
+      setDecryptStatus({ type: "error", message: isKorean ? "암호화에 사용된 비밀번호를 입력하세요." : "Provide the password used for encryption." });
       return;
     }
 
@@ -237,12 +297,12 @@ export default function EdgeCryptoPlayground() {
     try {
       const result = await cryptoModule.decryptFromString(decryptCiphertext, decryptPassword);
       setDecryptOutput(result);
-      setDecryptStatus({ type: "success", message: "Ciphertext decrypted successfully." });
+      setDecryptStatus({ type: "success", message: isKorean ? "암호문이 성공적으로 복호화되었습니다." : "Ciphertext decrypted successfully." });
     } catch (error) {
       console.error(error);
       setDecryptStatus({
         type: "error",
-        message: "Decryption failed. Double-check the password or ciphertext."
+        message: isKorean ? "복호화에 실패했습니다. 비밀번호나 암호문을 다시 확인하세요." : "Decryption failed. Double-check the password or ciphertext."
       });
     } finally {
       setDecryptBusy(false);
@@ -251,11 +311,11 @@ export default function EdgeCryptoPlayground() {
 
   async function handleHash() {
     if (!cryptoModule) {
-      setHashStatus({ type: "error", message: "edge-crypto is still loading." });
+      setHashStatus({ type: "error", message: isKorean ? "edge-crypto 로딩 중입니다." : "edge-crypto is still loading." });
       return;
     }
     if (!hashInput.trim()) {
-      setHashStatus({ type: "error", message: "Provide input to hash." });
+      setHashStatus({ type: "error", message: isKorean ? "해시할 입력을 제공하세요." : "Provide input to hash." });
       return;
     }
 
@@ -264,10 +324,10 @@ export default function EdgeCryptoPlayground() {
     try {
       const result = await cryptoModule.hash(hashInput, hashAlgorithm);
       setHashOutput(result);
-      setHashStatus({ type: "success", message: `Generated ${hashAlgorithm} digest.` });
+      setHashStatus({ type: "success", message: isKorean ? `${hashAlgorithm} 다이제스트를 생성했습니다.` : `Generated ${hashAlgorithm} digest.` });
     } catch (error) {
       console.error(error);
-      setHashStatus({ type: "error", message: "Hashing failed." });
+      setHashStatus({ type: "error", message: isKorean ? "해싱에 실패했습니다." : "Hashing failed." });
     } finally {
       setHashBusy(false);
     }
@@ -275,7 +335,7 @@ export default function EdgeCryptoPlayground() {
 
   async function handleGenerateRSAEncryptionKeys() {
     if (!cryptoModule) {
-      setRsaEncryptionStatus({ type: "error", message: "edge-crypto is still loading." });
+      setRsaEncryptionStatus({ type: "error", message: isKorean ? "edge-crypto 로딩 중입니다." : "edge-crypto is still loading." });
       return;
     }
     setRsaEncryptionGenerating(true);
@@ -286,10 +346,10 @@ export default function EdgeCryptoPlayground() {
       setRsaEncryptCiphertext("");
       setRsaDecryptCiphertext("");
       setRsaDecryptOutput("");
-      setRsaEncryptionStatus({ type: "success", message: "RSA-OAEP key pair ready." });
+      setRsaEncryptionStatus({ type: "success", message: isKorean ? "RSA-OAEP 키 쌍이 준비되었습니다." : "RSA-OAEP key pair ready." });
     } catch (error) {
       console.error(error);
-      setRsaEncryptionStatus({ type: "error", message: "RSA-OAEP key generation failed." });
+      setRsaEncryptionStatus({ type: "error", message: isKorean ? "RSA-OAEP 키 생성에 실패했습니다." : "RSA-OAEP key generation failed." });
     } finally {
       setRsaEncryptionGenerating(false);
     }
@@ -297,15 +357,15 @@ export default function EdgeCryptoPlayground() {
 
   async function handleRSAEncryptMessage() {
     if (!cryptoModule) {
-      setRsaEncryptionStatus({ type: "error", message: "edge-crypto is still loading." });
+      setRsaEncryptionStatus({ type: "error", message: isKorean ? "edge-crypto 로딩 중입니다." : "edge-crypto is still loading." });
       return;
     }
     if (!rsaEncryptionKeyPair) {
-      setRsaEncryptionStatus({ type: "error", message: "Generate an RSA key pair first." });
+      setRsaEncryptionStatus({ type: "error", message: isKorean ? "먼저 RSA 키 쌍을 생성하세요." : "Generate an RSA key pair first." });
       return;
     }
     if (!rsaEncryptMessage.trim()) {
-      setRsaEncryptionStatus({ type: "error", message: "Provide a message to encrypt." });
+      setRsaEncryptionStatus({ type: "error", message: isKorean ? "암호화할 메시지를 입력하세요." : "Provide a message to encrypt." });
       return;
     }
 
@@ -316,10 +376,10 @@ export default function EdgeCryptoPlayground() {
       setRsaEncryptCiphertext(result);
       setRsaDecryptCiphertext(result);
       setRsaDecryptOutput("(awaiting decryption)");
-      setRsaEncryptionStatus({ type: "success", message: "Encrypted with RSA-OAEP." });
+      setRsaEncryptionStatus({ type: "success", message: isKorean ? "RSA-OAEP로 암호화되었습니다." : "Encrypted with RSA-OAEP." });
     } catch (error) {
       console.error(error);
-      setRsaEncryptionStatus({ type: "error", message: "RSA encryption failed." });
+      setRsaEncryptionStatus({ type: "error", message: isKorean ? "RSA 암호화에 실패했습니다." : "RSA encryption failed." });
     } finally {
       setRsaEncryptionBusy(false);
     }
@@ -327,15 +387,15 @@ export default function EdgeCryptoPlayground() {
 
   async function handleRSADecryptMessage() {
     if (!cryptoModule) {
-      setRsaEncryptionStatus({ type: "error", message: "edge-crypto is still loading." });
+      setRsaEncryptionStatus({ type: "error", message: isKorean ? "edge-crypto 로딩 중입니다." : "edge-crypto is still loading." });
       return;
     }
     if (!rsaEncryptionKeyPair) {
-      setRsaEncryptionStatus({ type: "error", message: "Generate an RSA key pair first." });
+      setRsaEncryptionStatus({ type: "error", message: isKorean ? "먼저 RSA 키 쌍을 생성하세요." : "Generate an RSA key pair first." });
       return;
     }
     if (!rsaDecryptCiphertext.trim()) {
-      setRsaEncryptionStatus({ type: "error", message: "Paste a ciphertext to decrypt." });
+      setRsaEncryptionStatus({ type: "error", message: isKorean ? "복호화할 암호문을 붙여넣으세요." : "Paste a ciphertext to decrypt." });
       return;
     }
 
@@ -344,10 +404,10 @@ export default function EdgeCryptoPlayground() {
     try {
       const result = await cryptoModule.decryptRSA(rsaDecryptCiphertext, rsaEncryptionKeyPair.privateKey);
       setRsaDecryptOutput(result);
-      setRsaEncryptionStatus({ type: "success", message: "Ciphertext decrypted with private key." });
+      setRsaEncryptionStatus({ type: "success", message: isKorean ? "개인 키로 암호문이 복호화되었습니다." : "Ciphertext decrypted with private key." });
     } catch (error) {
       console.error(error);
-      setRsaEncryptionStatus({ type: "error", message: "RSA decryption failed." });
+      setRsaEncryptionStatus({ type: "error", message: isKorean ? "RSA 복호화에 실패했습니다." : "RSA decryption failed." });
     } finally {
       setRsaEncryptionBusy(false);
     }
@@ -355,7 +415,7 @@ export default function EdgeCryptoPlayground() {
 
   async function handleGenerateRSASigningKeys() {
     if (!cryptoModule) {
-      setRsaSigningStatus({ type: "error", message: "edge-crypto is still loading." });
+      setRsaSigningStatus({ type: "error", message: isKorean ? "edge-crypto 로딩 중입니다." : "edge-crypto is still loading." });
       return;
     }
     setRsaSigningGenerating(true);
@@ -365,10 +425,10 @@ export default function EdgeCryptoPlayground() {
       setRsaSigningKeyPair(keys);
       setRsaSignature("");
       setRsaVerifySignature("");
-      setRsaSigningStatus({ type: "success", message: "RSA signing key pair ready." });
+      setRsaSigningStatus({ type: "success", message: isKorean ? "RSA 서명 키 쌍이 준비되었습니다." : "RSA signing key pair ready." });
     } catch (error) {
       console.error(error);
-      setRsaSigningStatus({ type: "error", message: "RSA signing key generation failed." });
+      setRsaSigningStatus({ type: "error", message: isKorean ? "RSA 서명 키 생성에 실패했습니다." : "RSA signing key generation failed." });
     } finally {
       setRsaSigningGenerating(false);
     }
@@ -376,15 +436,15 @@ export default function EdgeCryptoPlayground() {
 
   async function handleRSASignMessage() {
     if (!cryptoModule) {
-      setRsaSigningStatus({ type: "error", message: "edge-crypto is still loading." });
+      setRsaSigningStatus({ type: "error", message: isKorean ? "edge-crypto 로딩 중입니다." : "edge-crypto is still loading." });
       return;
     }
     if (!rsaSigningKeyPair) {
-      setRsaSigningStatus({ type: "error", message: "Generate a signing key pair first." });
+      setRsaSigningStatus({ type: "error", message: isKorean ? "먼저 서명 키 쌍을 생성하세요." : "Generate a signing key pair first." });
       return;
     }
     if (!rsaSignMessage.trim()) {
-      setRsaSigningStatus({ type: "error", message: "Provide a message to sign." });
+      setRsaSigningStatus({ type: "error", message: isKorean ? "서명할 메시지를 입력하세요." : "Provide a message to sign." });
       return;
     }
 
@@ -395,10 +455,10 @@ export default function EdgeCryptoPlayground() {
       setRsaSignature(result);
       setRsaVerifyMessage(rsaSignMessage);
       setRsaVerifySignature(result);
-      setRsaSigningStatus({ type: "success", message: "Message signed with RSA-PSS." });
+      setRsaSigningStatus({ type: "success", message: isKorean ? "RSA-PSS로 메시지가 서명되었습니다." : "Message signed with RSA-PSS." });
     } catch (error) {
       console.error(error);
-      setRsaSigningStatus({ type: "error", message: "RSA signing failed." });
+      setRsaSigningStatus({ type: "error", message: isKorean ? "RSA 서명에 실패했습니다." : "RSA signing failed." });
     } finally {
       setRsaSigningBusy(false);
     }
@@ -406,15 +466,15 @@ export default function EdgeCryptoPlayground() {
 
   async function handleRSAVerifySignature() {
     if (!cryptoModule) {
-      setRsaSigningStatus({ type: "error", message: "edge-crypto is still loading." });
+      setRsaSigningStatus({ type: "error", message: isKorean ? "edge-crypto 로딩 중입니다." : "edge-crypto is still loading." });
       return;
     }
     if (!rsaSigningKeyPair) {
-      setRsaSigningStatus({ type: "error", message: "Generate a signing key pair first." });
+      setRsaSigningStatus({ type: "error", message: isKorean ? "먼저 서명 키 쌍을 생성하세요." : "Generate a signing key pair first." });
       return;
     }
     if (!rsaVerifySignature.trim()) {
-      setRsaSigningStatus({ type: "error", message: "Provide a signature to verify." });
+      setRsaSigningStatus({ type: "error", message: isKorean ? "검증할 서명을 입력하세요." : "Provide a signature to verify." });
       return;
     }
 
@@ -428,27 +488,31 @@ export default function EdgeCryptoPlayground() {
       );
       setRsaSigningStatus({
         type: valid ? "success" : "error",
-        message: valid ? "Signature verified with public key." : "Signature verification failed."
+        message: valid 
+          ? (isKorean ? "공개 키로 서명이 검증되었습니다." : "Signature verified with public key.") 
+          : (isKorean ? "서명 검증에 실패했습니다." : "Signature verification failed.")
       });
     } catch (error) {
       console.error(error);
-      setRsaSigningStatus({ type: "error", message: "RSA verification failed." });
+      setRsaSigningStatus({ type: "error", message: isKorean ? "RSA 검증에 실패했습니다." : "RSA verification failed." });
     } finally {
       setRsaSigningBusy(false);
     }
   }
+
+  const labels = getPlaygroundLabels(isKorean);
 
   const renderSymmetricTab = () => (
     <div className="space-y-4">
       <div className="space-y-3 rounded-xl border border-white/10 bg-black/40 p-5">
         <header className="flex items-start justify-between gap-3">
           <div>
-            <h4 className="font-semibold">Encrypt to ciphertext</h4>
-            <p className="text-xs text-white/60">AES-GCM with password-derived keys.</p>
+            <h4 className="font-semibold">{labels.symmetric.encryptTitle}</h4>
+            <p className="text-xs text-white/60">{labels.symmetric.encryptDesc}</p>
           </div>
-          {encryptBusy && <span className="text-xs text-white/50 animate-pulse">Encrypting…</span>}
+          {encryptBusy && <span className="text-xs text-white/50 animate-pulse">{labels.symmetric.encrypting}</span>}
         </header>
-        <label className="text-xs uppercase tracking-wide text-white/40">Message</label>
+        <label className="text-xs uppercase tracking-wide text-white/40">{labels.symmetric.message}</label>
         <textarea
           value={encryptMessage}
           onChange={(event: JSX.TargetedEvent<HTMLTextAreaElement, Event>) =>
@@ -456,7 +520,7 @@ export default function EdgeCryptoPlayground() {
           }
           className="min-h-[90px] w-full rounded-lg border border-white/10 bg-black/60 p-3 text-sm focus:border-emerald-400 focus:outline-none"
         />
-        <label className="text-xs uppercase tracking-wide text-white/40">Password</label>
+        <label className="text-xs uppercase tracking-wide text-white/40">{labels.symmetric.password}</label>
         <input
           type="text"
           value={encryptPassword}
@@ -471,7 +535,7 @@ export default function EdgeCryptoPlayground() {
             disabled={!isReady || encryptBusy}
             className="rounded-lg bg-emerald-500/20 px-4 py-2 text-sm font-medium text-emerald-200 transition hover:bg-emerald-500/30 disabled:cursor-not-allowed disabled:opacity-40"
           >
-            Encrypt
+            {labels.symmetric.encrypt}
           </button>
         </div>
         {encryptStatus.message && (
@@ -489,7 +553,7 @@ export default function EdgeCryptoPlayground() {
         )}
         {ciphertextOutput && (
           <div className="space-y-2">
-            <label className="text-xs uppercase tracking-wide text-white/40">Ciphertext (Base64)</label>
+            <label className="text-xs uppercase tracking-wide text-white/40">{labels.symmetric.ciphertextBase64}</label>
             <textarea
               readOnly
               value={ciphertextOutput}
@@ -502,21 +566,21 @@ export default function EdgeCryptoPlayground() {
       <div className="space-y-3 rounded-xl border border-white/10 bg-black/40 p-5">
         <header className="flex items-start justify-between gap-3">
           <div>
-            <h4 className="font-semibold">Decrypt ciphertext</h4>
-            <p className="text-xs text-white/60">Paste an AES-GCM payload and recover the plaintext.</p>
+            <h4 className="font-semibold">{labels.symmetric.decryptTitle}</h4>
+            <p className="text-xs text-white/60">{labels.symmetric.decryptDesc}</p>
           </div>
-          {decryptBusy && <span className="text-xs text-white/50 animate-pulse">Decrypting…</span>}
+          {decryptBusy && <span className="text-xs text-white/50 animate-pulse">{labels.symmetric.decrypting}</span>}
         </header>
-        <label className="text-xs uppercase tracking-wide text-white/40">Ciphertext</label>
+        <label className="text-xs uppercase tracking-wide text-white/40">{labels.symmetric.ciphertext}</label>
         <textarea
           value={decryptCiphertext}
-          placeholder="Paste ciphertext generated from encryptToString"
+          placeholder={labels.symmetric.ciphertextPlaceholder}
           onChange={(event: JSX.TargetedEvent<HTMLTextAreaElement, Event>) =>
             setDecryptCiphertext(event.currentTarget.value)
           }
           className="min-h-[90px] w-full rounded-lg border border-white/10 bg-black/60 p-3 text-xs font-mono focus:border-emerald-400 focus:outline-none"
         />
-        <label className="text-xs uppercase tracking-wide text-white/40">Password</label>
+        <label className="text-xs uppercase tracking-wide text-white/40">{labels.symmetric.password}</label>
         <input
           type="text"
           value={decryptPassword}
@@ -531,7 +595,7 @@ export default function EdgeCryptoPlayground() {
             disabled={!isReady || decryptBusy}
             className="rounded-lg bg-white/10 px-4 py-2 text-sm font-medium text-white transition hover:bg-white/20 disabled:cursor-not-allowed disabled:opacity-40"
           >
-            Decrypt
+            {labels.symmetric.decrypt}
           </button>
         </div>
         {decryptStatus.message && (
@@ -549,7 +613,7 @@ export default function EdgeCryptoPlayground() {
         )}
         {decryptOutput && (
           <div className="rounded-lg border border-emerald-500/40 bg-emerald-500/10 p-3 text-xs">
-            <div className="mb-1 text-emerald-200/70">Plaintext</div>
+            <div className="mb-1 text-emerald-200/70">{labels.symmetric.plaintext}</div>
             <div className="font-mono text-emerald-100 whitespace-pre-wrap break-words">{decryptOutput}</div>
           </div>
         )}
@@ -561,8 +625,8 @@ export default function EdgeCryptoPlayground() {
     <div className="space-y-3 rounded-xl border border-white/10 bg-black/40 p-5">
       <header className="flex items-center justify-between gap-3">
         <div>
-          <h4 className="font-semibold">Hashing</h4>
-          <p className="text-xs text-white/60">Generate digests with SHA-{hashAlgorithm.slice(4)}</p>
+          <h4 className="font-semibold">{labels.hashing.title}</h4>
+          <p className="text-xs text-white/60">{labels.hashing.desc(hashAlgorithm)}</p>
         </div>
         <select
           value={hashAlgorithm}
@@ -591,7 +655,7 @@ export default function EdgeCryptoPlayground() {
         disabled={!isReady || hashBusy}
         className="rounded-lg bg-emerald-500/20 px-4 py-2 text-sm font-medium text-emerald-200 transition hover:bg-emerald-500/30 disabled:cursor-not-allowed disabled:opacity-40"
       >
-        {hashBusy ? "Hashing…" : "Hash value"}
+        {hashBusy ? labels.hashing.hashing : labels.hashing.hashValue}
       </button>
       {hashStatus.message && (
         <p
@@ -608,10 +672,10 @@ export default function EdgeCryptoPlayground() {
       )}
       {hashOutput && (
         <div className="rounded-lg border border-white/10 bg-black/60 p-3 text-xs">
-          <div className="mb-1 text-white/50">Digest ({hashAlgorithm})</div>
+          <div className="mb-1 text-white/50">{labels.hashing.digest} ({hashAlgorithm})</div>
           <div className="break-all font-mono">{hashOutput}</div>
           <div className="mt-2 text-[0.7rem] uppercase tracking-wide text-white/40">
-            Length: {hashOutput.length} chars (base64)
+            {labels.hashing.length}: {hashOutput.length} {labels.hashing.chars} (base64)
           </div>
         </div>
       )}
@@ -623,21 +687,21 @@ export default function EdgeCryptoPlayground() {
       <div className="space-y-3 rounded-xl border border-white/10 bg-black/40 p-5">
         <header className="flex items-start justify-between gap-3">
           <div>
-            <h4 className="font-semibold">RSA-OAEP Encryption</h4>
-            <p className="text-xs text-white/60">Generate keys in-browser, then encrypt and decrypt messages.</p>
+            <h4 className="font-semibold">{labels.rsa.encryptionTitle}</h4>
+            <p className="text-xs text-white/60">{labels.rsa.encryptionDesc}</p>
           </div>
           <div className="flex items-center gap-2 text-xs text-white/50">
-            {rsaEncryptionBusy && <span className="animate-pulse">Running…</span>}
+            {rsaEncryptionBusy && <span className="animate-pulse">{labels.rsa.running}</span>}
             <button
               onClick={handleGenerateRSAEncryptionKeys}
               disabled={!isReady || rsaEncryptionGenerating}
               className="rounded-lg bg-emerald-500/20 px-3 py-1.5 font-semibold text-emerald-200 transition hover:bg-emerald-500/30 disabled:cursor-not-allowed disabled:opacity-40"
             >
-              {rsaEncryptionGenerating ? "Generating…" : rsaEncryptionKeyPair ? "Regenerate" : "Generate"}
+              {rsaEncryptionGenerating ? labels.rsa.generating : rsaEncryptionKeyPair ? labels.rsa.regenerate : labels.rsa.generate}
             </button>
           </div>
         </header>
-        <label className="text-xs uppercase tracking-wide text-white/40">Message to encrypt</label>
+        <label className="text-xs uppercase tracking-wide text-white/40">{labels.rsa.messageToEncrypt}</label>
         <textarea
           value={rsaEncryptMessage}
           onChange={(event: JSX.TargetedEvent<HTMLTextAreaElement, Event>) =>
@@ -651,7 +715,7 @@ export default function EdgeCryptoPlayground() {
             disabled={!isReady || rsaEncryptionBusy || !rsaEncryptionKeyPair}
             className="rounded-lg bg-emerald-500/20 px-4 py-2 text-sm font-medium text-emerald-200 transition hover:bg-emerald-500/30 disabled:cursor-not-allowed disabled:opacity-40"
           >
-            Encrypt
+            {labels.rsa.encrypt}
           </button>
         </div>
         {rsaEncryptionStatus.message && (
@@ -669,7 +733,7 @@ export default function EdgeCryptoPlayground() {
         )}
         {rsaEncryptCiphertext && (
           <div className="space-y-2">
-            <label className="text-xs uppercase tracking-wide text-white/40">Ciphertext (Base64)</label>
+            <label className="text-xs uppercase tracking-wide text-white/40">{labels.rsa.ciphertextBase64}</label>
             <textarea
               readOnly
               value={rsaEncryptCiphertext}
@@ -677,10 +741,10 @@ export default function EdgeCryptoPlayground() {
             />
           </div>
         )}
-        <label className="text-xs uppercase tracking-wide text-white/40">Ciphertext to decrypt</label>
+        <label className="text-xs uppercase tracking-wide text-white/40">{labels.rsa.ciphertextToDecrypt}</label>
         <textarea
           value={rsaDecryptCiphertext}
-          placeholder="Paste ciphertext generated with RSA-OAEP"
+          placeholder={labels.rsa.ciphertextPlaceholder}
           onChange={(event: JSX.TargetedEvent<HTMLTextAreaElement, Event>) =>
             setRsaDecryptCiphertext(event.currentTarget.value)
           }
@@ -692,12 +756,12 @@ export default function EdgeCryptoPlayground() {
             disabled={!isReady || rsaEncryptionBusy || !rsaEncryptionKeyPair}
             className="rounded-lg bg-white/10 px-4 py-2 text-sm font-medium text-white transition hover:bg-white/20 disabled:cursor-not-allowed disabled:opacity-40"
           >
-            Decrypt
+            {labels.rsa.decrypt}
           </button>
         </div>
         {rsaDecryptOutput && (
           <div className="rounded-lg border border-emerald-500/40 bg-emerald-500/10 p-3 text-xs">
-            <div className="mb-1 text-emerald-200/70">Plaintext</div>
+            <div className="mb-1 text-emerald-200/70">{labels.rsa.plaintext}</div>
             <div className="font-mono text-emerald-100 whitespace-pre-wrap break-words">{rsaDecryptOutput}</div>
           </div>
         )}
@@ -706,21 +770,21 @@ export default function EdgeCryptoPlayground() {
       <div className="space-y-3 rounded-xl border border-white/10 bg-black/40 p-5">
         <header className="flex items-start justify-between gap-3">
           <div>
-            <h4 className="font-semibold">RSA-PSS Signing</h4>
-            <p className="text-xs text-white/60">Sign messages with RSA-PSS and verify using the paired public key.</p>
+            <h4 className="font-semibold">{labels.rsa.signingTitle}</h4>
+            <p className="text-xs text-white/60">{labels.rsa.signingDesc}</p>
           </div>
           <div className="flex items-center gap-2 text-xs text-white/50">
-            {rsaSigningBusy && <span className="animate-pulse">Running…</span>}
+            {rsaSigningBusy && <span className="animate-pulse">{labels.rsa.running}</span>}
             <button
               onClick={handleGenerateRSASigningKeys}
               disabled={!isReady || rsaSigningGenerating}
               className="rounded-lg bg-emerald-500/20 px-3 py-1.5 font-semibold text-emerald-200 transition hover:bg-emerald-500/30 disabled:cursor-not-allowed disabled:opacity-40"
             >
-              {rsaSigningGenerating ? "Generating…" : rsaSigningKeyPair ? "Regenerate" : "Generate"}
+              {rsaSigningGenerating ? labels.rsa.generating : rsaSigningKeyPair ? labels.rsa.regenerate : labels.rsa.generate}
             </button>
           </div>
         </header>
-        <label className="text-xs uppercase tracking-wide text-white/40">Message to sign</label>
+        <label className="text-xs uppercase tracking-wide text-white/40">{labels.rsa.messageToSign}</label>
         <textarea
           value={rsaSignMessage}
           onChange={(event: JSX.TargetedEvent<HTMLTextAreaElement, Event>) =>
@@ -734,7 +798,7 @@ export default function EdgeCryptoPlayground() {
             disabled={!isReady || rsaSigningBusy || !rsaSigningKeyPair}
             className="rounded-lg bg-emerald-500/20 px-4 py-2 text-sm font-medium text-emerald-200 transition hover:bg-emerald-500/30 disabled:cursor-not-allowed disabled:opacity-40"
           >
-            Sign
+            {labels.rsa.sign}
           </button>
         </div>
         {rsaSigningStatus.message && (
@@ -752,7 +816,7 @@ export default function EdgeCryptoPlayground() {
         )}
         {rsaSignature && (
           <div className="space-y-2">
-            <label className="text-xs uppercase tracking-wide text-white/40">Signature (Base64)</label>
+            <label className="text-xs uppercase tracking-wide text-white/40">{labels.rsa.signatureBase64}</label>
             <textarea
               readOnly
               value={rsaSignature}
@@ -760,7 +824,7 @@ export default function EdgeCryptoPlayground() {
             />
           </div>
         )}
-        <label className="text-xs uppercase tracking-wide text-white/40">Message to verify</label>
+        <label className="text-xs uppercase tracking-wide text-white/40">{labels.rsa.messageToVerify}</label>
         <textarea
           value={rsaVerifyMessage}
           onChange={(event: JSX.TargetedEvent<HTMLTextAreaElement, Event>) =>
@@ -768,7 +832,7 @@ export default function EdgeCryptoPlayground() {
           }
           className="min-h-[60px] w-full rounded-lg border border-white/10 bg-black/60 p-3 text-sm focus:border-emerald-400 focus:outline-none"
         />
-        <label className="text-xs uppercase tracking-wide text-white/40">Signature to verify</label>
+        <label className="text-xs uppercase tracking-wide text-white/40">{labels.rsa.signatureToVerify}</label>
         <textarea
           value={rsaVerifySignature}
           onChange={(event: JSX.TargetedEvent<HTMLTextAreaElement, Event>) =>
@@ -782,19 +846,21 @@ export default function EdgeCryptoPlayground() {
             disabled={!isReady || rsaSigningBusy || !rsaSigningKeyPair}
             className="rounded-lg bg-white/10 px-4 py-2 text-sm font-medium text-white transition hover:bg-white/20 disabled:cursor-not-allowed disabled:opacity-40"
           >
-            Verify
+            {labels.rsa.verify}
           </button>
         </div>
       </div>
     </div>
   );
 
+  const playgroundTabs = getPlaygroundTabs(isKorean);
+
   return (
     <div className="rounded-2xl border border-white/10 bg-white/5 p-6 sm:p-8 text-white shadow-xl shadow-emerald-500/10 backdrop-blur">
       <div className="mb-6 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <p className="text-xs uppercase tracking-[0.25em] text-emerald-300/90">Live Playground</p>
-          <h3 className="text-xl font-semibold">Try edge-crypto in your browser</h3>
+          <p className="text-xs uppercase tracking-[0.25em] text-emerald-300/90">{isKorean ? "라이브 플레이그라운드" : "Live Playground"}</p>
+          <h3 className="text-xl font-semibold">{isKorean ? "브라우저에서 edge-crypto 사용해보기" : "Try edge-crypto in your browser"}</h3>
         </div>
         {installHint && (
           <div className="text-xs text-emerald-200/70 sm:text-right">{installHint}</div>

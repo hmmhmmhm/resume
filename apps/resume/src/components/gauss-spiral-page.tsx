@@ -4,7 +4,14 @@ import SpiralViewer from "./spiral-viewer";
 import CircularText from "./circular-text";
 import FaultyTerminal from "./faulty-terminal";
 
-export default function GaussSpiralPage() {
+interface GaussSpiralPageProps {
+  lang?: string;
+  translations?: any;
+}
+
+export default function GaussSpiralPage({ lang = "ko", translations }: GaussSpiralPageProps) {
+  const isKorean = lang === "ko";
+  const t = translations || {};
   const [selectedPM, setSelectedPM] = useState<string>("npm");
   const [copiedInstall, setCopiedInstall] = useState<boolean>(false);
   const [copiedExample, setCopiedExample] = useState<boolean>(false);
@@ -17,70 +24,86 @@ export default function GaussSpiralPage() {
         {/* Header */}
         <div className="mb-8 lg:mb-12 relative z-20">
           <h1 className="text-3xl sm:text-4xl font-bold mb-3 sm:mb-4 flex items-center gap-3">
+            <svg className="w-8 h-8 sm:w-10 sm:h-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M12 12c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2z"/>
+              <path d="M12 12c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/>
+              <path d="M12 12c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2z"/>
+              <path d="M12 12c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2z"/>
+              <circle cx="12" cy="12" r="10" opacity="0.3"/>
+            </svg>
             Gauss Spiral
           </h1>
+          <p className="text-base sm:text-lg opacity-80">{isKorean ? "중심에서 바깥으로 원을 점으로 채우는 나선형 열거를 위한 (x, y) ↔ n 매핑" : "(x, y) ↔ n mapping for spiral enumeration filling a circle from center outward"}</p>
         </div>
 
         {/* Introduction */}
         <div className="mb-6 lg:mb-10 relative z-20">
           <p className="text-sm sm:text-base leading-relaxed opacity-90">
-            나선형으로 회전하며 픽셀을 채우는 효율적인 좌표 시스템의 좌표를 계산합니다. 매우 큰 좌표 경우에도 (x, y) ↔ n을 빠르게 계산합니다
-            O(√m) 및, O(log m) 의 효율을 가지며, GIS, 드론, 렌더링 최적화 등 다양한 분야에 활용될 수 있습니다.
+            {isKorean ? (
+              <span>
+                나선형으로 회전하며 픽셀을 채우는 효율적인 좌표 시스템의 좌표를 계산합니다. 매우 큰 좌표 경우에도 (x, y) ↔ n을 빠르게 계산합니다
+                O(√m) 및, O(log m) 의 효율을 가지며, GIS, 드론, 렌더링 최적화 등 다양한 분야에 활용될 수 있습니다.
+              </span>
+            ) : (
+              <span>
+                Calculates the coordinates of an efficient coordinate system that fills pixels by rotating in a spiral. Even for very large coordinates, (x, y) ↔ n can be calculated quickly with O(√m) and O(log m) efficiency, making it suitable for various fields such as GIS, drones, and rendering optimization.
+              </span>
+            )}
           </p>
         </div>
 
         {/* Interactive Spiral Viewer */}
         <div className="mb-6 lg:mb-10 relative z-20">
-          <SpiralViewer getCoordinates={getCoordinates} getNFromCoordinates={getNFromCoordinates} />
+          <SpiralViewer getCoordinates={getCoordinates} getNFromCoordinates={getNFromCoordinates} translations={t} />
         </div>
 
         {/* Analogy Section */}
         <div className="mb-6 lg:mb-10 relative z-20">
-          <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">설명</h2>
+          <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">{t.explanation || "설명"}</h2>
           <div className="space-y-2 text-xs sm:text-sm opacity-90">
-            <p>중심 픽셀 (0, 0)에서 시작하여 바깥쪽으로 확장하면서 점을 그려 원이 빈틈없이 채워지는 것을 상상해보세요. 이 라이브러리는 다음 사항을 계산할 수 있습니다:</p>
+            <p>{t.explanationText1 || "중심 픽셀 (0, 0)에서 시작하여 바깥쪽으로 확장하면서 점을 그려 원이 빈틈없이 채워지는 것을 상상해보세요. 이 라이브러리는 다음 사항을 계산할 수 있습니다:"}</p>
             <ul className="list-none space-y-1 ml-4">
-              <li>• 점의 좌표 (x, y)가 주어지면, 정확히 몇 번째 턴 n에 배치되었는지</li>
-              <li>• 단계 n이 주어지면, 다음에 그릴 정확한 좌표 (x, y)</li>
+              <li>{t.explanationItem1 || "• 점의 좌표 (x, y)가 주어지면, 정확히 몇 번째 턴 n에 배치되었는지"}</li>
+              <li>{t.explanationItem2 || "• 단계 n이 주어지면, 다음에 그릴 정확한 좌표 (x, y)"}</li>
             </ul>
-            <p className="pt-2">픽셀 플로팅, 파티클 시스템, 절차적 아트 또는 중심에서 바깥으로 확장하는 결정론적 나선 채우기가 필요한 모든 시각화에 유용합니다.</p>
+            <p className="pt-2">{t.explanationText2 || "픽셀 플로팅, 파티클 시스템, 절차적 아트 또는 중심에서 바깥으로 확장하는 결정론적 나선 채우기가 필요한 모든 시각화에 유용합니다."}</p>
           </div>
         </div>
 
         {/* Features Section */}
         <div className="mb-6 lg:mb-10 relative z-20">
-          <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">특징</h2>
+          <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">{t.featuresTitle || (isKorean ? "특징" : "Features")}</h2>
           <div className="space-y-2 text-xs sm:text-sm relative z-20">
             <div className="flex items-start">
               <span className="mr-3 opacity-60">→</span>
-              <span><strong>결정론적 매핑</strong>: 모든 격자점에 대해 안정적이고 재현 가능한 순서</span>
+              <span><strong>{t.featureDeterministic || "결정론적 매핑"}</strong>: {t.featureDeterministicDesc || "모든 격자점에 대해 안정적이고 재현 가능한 순서"}</span>
             </div>
             <div className="flex items-start">
               <span className="mr-3 opacity-60">→</span>
-              <span><strong>양방향 변환</strong>: (x, y) → n 및 n → (x, y) 모두 변환 가능</span>
+              <span><strong>{t.featureBidirectional || "양방향 변환"}</strong>: {t.featureBidirectionalDesc || "(x, y) → n 및 n → (x, y) 모두 변환 가능"}</span>
             </div>
             <div className="flex items-start">
               <span className="mr-3 opacity-60">→</span>
-              <span><strong>기하학 우선</strong>: 간단한 산술과 atan2 정렬, 복잡한 정수론 불필요</span>
+              <span><strong>{t.featureGeometry || "기하학 우선"}</strong>: {t.featureGeometryDesc || "간단한 산술과 atan2 정렬, 복잡한 정수론 불필요"}</span>
             </div>
             <div className="flex items-start">
               <span className="mr-3 opacity-60">→</span>
-              <span><strong>점진적 렌더링 친화적</strong>: 점진적 렌더링이나 스트리밍 업데이트에 적합</span>
+              <span><strong>{t.featureProgressive || "점진적 렌더링 친화적"}</strong>: {t.featureProgressiveDesc || "점진적 렌더링이나 스트리밍 업데이트에 적합"}</span>
             </div>
             <div className="flex items-start">
               <span className="mr-3 opacity-60">→</span>
-              <span><strong>링 샘플링</strong>: 효과 및 배칭을 위해 반경 링별로 점을 쉽게 반복</span>
+              <span><strong>{t.featureRingSampling || "링 샘플링"}</strong>: {t.featureRingSamplingDesc || "효과 및 배칭을 위해 반경 링별로 점을 쉽게 반복"}</span>
             </div>
             <div className="flex items-start">
               <span className="mr-3 opacity-60">→</span>
-              <span><strong>의존성 제로</strong>: 순수 TypeScript/JavaScript, 작은 번들 크기</span>
+              <span><strong>{t.featureZeroDeps || "의존성 제로"}</strong>: {t.featureZeroDepsDesc || "순수 TypeScript/JavaScript, 작은 번들 크기"}</span>
             </div>
           </div>
         </div>
 
         {/* Installation */}
         <div className="mb-6 lg:mb-10 relative z-20">
-          <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">설치</h2>
+          <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">{t.installation || (isKorean ? "설치" : "Installation")}</h2>
           <div className="flex gap-2 mb-3 relative z-20 flex-wrap">
             {["npm", "pnpm", "yarn"].map((pm) => (
               <button
@@ -113,14 +136,14 @@ export default function GaussSpiralPage() {
                 setTimeout(() => setCopiedInstall(false), 2000);
               }}
               className="flex items-center gap-2 px-3 py-1.5 rounded text-xs transition-colors hover:bg-white/10"
-              title="복사"
+              title={t.copyTitle || "복사"}
             >
               {copiedInstall ? (
                 <>
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <polyline points="20 6 9 17 4 12" />
                   </svg>
-                  <span>복사됨!</span>
+                  <span>{t.copied || "복사됨!"}</span>
                 </>
               ) : (
                 <>
@@ -128,7 +151,7 @@ export default function GaussSpiralPage() {
                     <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
                     <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
                   </svg>
-                  <span>복사</span>
+                  <span>{t.copy || "복사"}</span>
                 </>
               )}
             </button>
@@ -137,7 +160,7 @@ export default function GaussSpiralPage() {
 
         {/* Usage Example */}
         <div className="mb-6 lg:mb-10 relative z-20">
-          <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">사용 예시</h2>
+          <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">{t.usageExample || "사용 예시"}</h2>
           <div className="p-3 sm:p-4 rounded text-xs sm:text-sm space-y-3 relative z-20 overflow-x-auto bg-white/5 flex items-start justify-between flex-col sm:flex-row sm:items-center">
             <div className="flex-1 space-y-3">
               <div>
@@ -155,7 +178,7 @@ export default function GaussSpiralPage() {
                 </code>
               </div>
               <div className="pt-2">
-                <div className="opacity-60 mb-1">// (x, y)에서 n 구하기</div>
+                <div className="opacity-60 mb-1">{t.usageComment1 || "// (x, y)에서 n 구하기"}</div>
                 <code className="block whitespace-nowrap">
                   <span style={{ color: '#C586C0' }}>const</span>
                   {' '}
@@ -170,7 +193,7 @@ export default function GaussSpiralPage() {
                 </code>
               </div>
               <div className="pt-2">
-                <div className="opacity-60 mb-1">// n에서 (x, y) 구하기</div>
+                <div className="opacity-60 mb-1">{t.usageComment2 || "// n에서 (x, y) 구하기"}</div>
                 <code className="block whitespace-nowrap">
                   <span style={{ color: '#C586C0' }}>const</span>
                   {' '}
@@ -187,24 +210,24 @@ export default function GaussSpiralPage() {
               onClick={() => {
                 const codeExample = `import { getNFromCoordinates, getCoordinates } from 'gauss-spiral';
 
-// (x, y)에서 n 구하기
+${t.usageComment1 || "// (x, y)에서 n 구하기"}
 const n = getNFromCoordinates(2, 3);
 
-// n에서 (x, y) 구하기
+${t.usageComment2 || "// n에서 (x, y) 구하기"}
 const coords = getCoordinates(10);`;
                 navigator.clipboard.writeText(codeExample);
                 setCopiedExample(true);
                 setTimeout(() => setCopiedExample(false), 2000);
               }}
               className="flex items-center gap-2 px-3 py-1.5 rounded text-xs transition-colors hover:bg-white/10 flex-shrink-0 mt-3 sm:mt-0"
-              title="복사"
+              title={t.copyTitle || "복사"}
             >
               {copiedExample ? (
                 <>
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <polyline points="20 6 9 17 4 12" />
                   </svg>
-                  <span>복사됨!</span>
+                  <span>{t.copied || "복사됨!"}</span>
                 </>
               ) : (
                 <>
@@ -212,7 +235,7 @@ const coords = getCoordinates(10);`;
                     <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
                     <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
                   </svg>
-                  <span>복사</span>
+                  <span>{t.copy || "복사"}</span>
                 </>
               )}
             </button>
@@ -221,29 +244,29 @@ const coords = getCoordinates(10);`;
 
         {/* Practical Examples */}
         <div className="mb-6 lg:mb-10 relative z-20">
-          <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">실용적인 예시</h2>
+          <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">{t.practicalExamples || "실용적인 예시"}</h2>
           <div className="space-y-6 text-xs sm:text-sm relative z-20">
             <div>
-              <h3 className="text-sm sm:text-base font-semibold mb-2">시각 효과 / 렌더링</h3>
+              <h3 className="text-sm sm:text-base font-semibold mb-2">{t.exampleVisual || "시각 효과 / 렌더링"}</h3>
               <div className="space-y-2 opacity-90">
-                <p>점진적 방사형 표시, 나선형 파티클 방출, 후광 확장 효과</p>
-                <p>n = 1..N을 반복하고 getCoordinates(n)을 플롯하여 x² + y²가 반경을 초과하면 중지</p>
+                <p>{t.exampleVisualDesc1 || "점진적 방사형 표시, 나선형 파티클 방출, 후광 확장 효과"}</p>
+                <p>{t.exampleVisualDesc2 || "n = 1..N을 반복하고 getCoordinates(n)을 플롯하여 x² + y²가 반경을 초과하면 중지"}</p>
               </div>
             </div>
 
             <div>
-              <h3 className="text-sm sm:text-base font-semibold mb-2">GIS / 지도 타일링</h3>
+              <h3 className="text-sm sm:text-base font-semibold mb-2">{t.exampleGIS || "GIS / 지도 타일링"}</h3>
               <div className="space-y-2 opacity-90">
-                <p>중심 타일 (cx, cy) 주변의 타일을 나선 순서로 우선 가져와 체감 반응성을 극대화</p>
-                <p>getCoordinates(n)을 (cx, cy)의 오프셋으로 사용</p>
+                <p>{t.exampleGISDesc1 || "중심 타일 (cx, cy) 주변의 타일을 나선 순서로 우선 가져와 체감 반응성을 극대화"}</p>
+                <p>{t.exampleGISDesc2 || "getCoordinates(n)을 (cx, cy)의 오프셋으로 사용"}</p>
               </div>
             </div>
 
             <div>
-              <h3 className="text-sm sm:text-base font-semibold mb-2">게임 / 청크 가시성 및 로딩</h3>
+              <h3 className="text-sm sm:text-base font-semibold mb-2">{t.exampleGame || "게임 / 청크 가시성 및 로딩"}</h3>
               <div className="space-y-2 opacity-90">
-                <p>플레이어 주변의 청크를 원형 우선 방식으로 로드하여 다이아몬드 또는 사각형 모양의 아티팩트 방지</p>
-                <p>getCoordinates(n)으로 로딩 순서를 계산하거나 getNFromCoordinates(dx, dy)를 통해 알려진 청크에 우선순위 할당</p>
+                <p>{t.exampleGameDesc1 || "플레이어 주변의 청크를 원형 우선 방식으로 로드하여 다이아몬드 또는 사각형 모양의 아티팩트 방지"}</p>
+                <p>{t.exampleGameDesc2 || "getCoordinates(n)으로 로딩 순서를 계산하거나 getNFromCoordinates(dx, dy)를 통해 알려진 청크에 우선순위 할당"}</p>
               </div>
             </div>
           </div>
@@ -251,34 +274,34 @@ const coords = getCoordinates(10);`;
 
         {/* How it works */}
         <div className="mb-6 lg:mb-10 relative z-20">
-          <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">작동 원리</h2>
+          <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">{t.howItWorks || "작동 원리"}</h2>
           <div className="space-y-6 text-xs sm:text-sm relative z-20">
             <div>
-              <h3 className="text-sm sm:text-base font-semibold mb-2">문제 정의</h3>
+              <h3 className="text-sm sm:text-base font-semibold mb-2">{t.problemDefinition || "문제 정의"}</h3>
               <div className="space-y-2 opacity-90">
-                <p>원점에서 바깥쪽으로 점점 커지는 나선으로 정수 점을 플로팅할 때:</p>
+                <p>{t.problemDefinitionDesc || "원점에서 바깥쪽으로 점점 커지는 나선으로 정수 점을 플로팅할 때:"}</p>
                 <ul className="list-none space-y-1 ml-4">
-                  <li>• 주어진 (x, y)에 대한 n (방문 인덱스) 결정</li>
-                  <li>• 주어진 n에 대한 (x, y) (단계 n에서 방문한 좌표) 결정</li>
+                  <li>{t.problemItem1 || "• 주어진 (x, y)에 대한 n (방문 인덱스) 결정"}</li>
+                  <li>{t.problemItem2 || "• 주어진 n에 대한 (x, y) (단계 n에서 방문한 좌표) 결정"}</li>
                 </ul>
               </div>
             </div>
 
             <div>
-              <h3 className="text-sm sm:text-base font-semibold mb-2">접근 방식</h3>
+              <h3 className="text-sm sm:text-base font-semibold mb-2">{t.approach || "접근 방식"}</h3>
               <div className="space-y-2 opacity-90">
-                <p>제곱 반경 m = x² + y²로 점을 그룹화합니다 (동심원 "링"). 각 링 내에서 점들은 시계 방향으로 극각 atan2(y, x)로 정렬됩니다.</p>
-                <p>전역 인덱스 n은 더 작은 m을 가진 모든 점의 누적 개수와 현재 링 내 위치의 합입니다.</p>
+                <p>{t.approachDesc1 || "제곱 반경 m = x² + y²로 점을 그룹화합니다 (동심원 \"링\"). 각 링 내에서 점들은 시계 방향으로 극각 atan2(y, x)로 정렬됩니다."}</p>
+                <p>{t.approachDesc2 || "전역 인덱스 n은 더 작은 m을 가진 모든 점의 누적 개수와 현재 링 내 위치의 합입니다."}</p>
               </div>
             </div>
 
             <div>
-              <h3 className="text-sm sm:text-base font-semibold mb-2">알고리즘 개요</h3>
+              <h3 className="text-sm sm:text-base font-semibold mb-2">{t.algorithmOverview || "알고리즘 개요"}</h3>
               <div className="space-y-2 opacity-90">
-                <p><strong>링</strong>: 각 정수 m ≥ 0에 대해 링은 x² + y² = m의 모든 정수 해를 포함</p>
-                <p><strong>링 내 순서</strong>: atan2(y, x) 내림차순(시계방향)으로 해를 정렬</p>
-                <p><strong>전역 인덱스</strong>: S(m)을 x² + y² ≤ m인 정수 점의 개수라 하면, x² + y² = m인 (x, y)에 대해 n = S(m-1) + k (k는 링에서의 1기반 위치)</p>
-                <p><strong>역변환 (n → (x, y))</strong>: S(m) ≥ n인 최소 m을 이진 탐색하고, k = n - S(m-1)로 설정하여 위와 같이 정렬된 링의 k번째 점 반환</p>
+                <p><strong>{t.algorithmRing || "링"}</strong>: {t.algorithmRingDesc || "각 정수 m ≥ 0에 대해 링은 x² + y² = m의 모든 정수 해를 포함"}</p>
+                <p><strong>{t.algorithmOrder || "링 내 순서"}</strong>: {t.algorithmOrderDesc || "atan2(y, x) 내림차순(시계방향)으로 해를 정렬"}</p>
+                <p><strong>{t.algorithmGlobalIndex || "전역 인덱스"}</strong>: {t.algorithmGlobalIndexDesc || "S(m)을 x² + y² ≤ m인 정수 점의 개수라 하면, x² + y² = m인 (x, y)에 대해 n = S(m-1) + k (k는 링에서의 1기반 위치)"}</p>
+                <p><strong>{t.algorithmInverse || "역변환 (n → (x, y))"}</strong>: {t.algorithmInverseDesc || "S(m) ≥ n인 최소 m을 이진 탐색하고, k = n - S(m-1)로 설정하여 위와 같이 정렬된 링의 k번째 점 반환"}</p>
               </div>
             </div>
           </div>
@@ -286,25 +309,25 @@ const coords = getCoordinates(10);`;
 
         {/* API Documentation */}
         <div className="mb-6 lg:mb-10 relative z-20">
-          <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">API</h2>
+          <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">{t.api || "API"}</h2>
           <div className="space-y-4 text-xs sm:text-sm relative z-20">
             <div className="p-4 bg-white/5 rounded">
               <code className="text-sm font-semibold text-[#DCDCAA]">getNFromCoordinates(x: number, y: number): number</code>
-              <p className="mt-2 opacity-90">나선 열거에서 (x, y)의 1기반 방문 인덱스 n을 반환합니다.</p>
+              <p className="mt-2 opacity-90">{t.apiGetNDesc || "나선 열거에서 (x, y)의 1기반 방문 인덱스 n을 반환합니다."}</p>
             </div>
             <div className="p-4 bg-white/5 rounded">
               <code className="text-sm font-semibold text-[#DCDCAA]">getCoordinates(n: number): {'{ x: number; y: number }'}</code>
-              <p className="mt-2 opacity-90">단계 n에서 방문한 격자 좌표를 반환합니다. (n은 0보다 커야 함)</p>
+              <p className="mt-2 opacity-90">{t.apiGetCoordsDesc || "단계 n에서 방문한 격자 좌표를 반환합니다. (n은 0보다 커야 함)"}</p>
             </div>
           </div>
         </div>
 
         {/* Performance Notes */}
         <div className="mb-6 lg:mb-10 relative z-20">
-          <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">성능 참고사항</h2>
+          <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">{t.performanceNotes || "성능 참고사항"}</h2>
           <div className="space-y-2 text-xs sm:text-sm opacity-90">
-            <p>• S(m) 카운팅은 대칭을 사용하여 x당 격자점을 집계하는 O(√m)으로 구현됩니다</p>
-            <p>• n → (x, y)는 초기 추측 주변의 m에 대한 이진 탐색을 사용한 다음 해당 m에 대한 링 점만 정렬합니다</p>
+            <p>{t.performanceNote1 || "• S(m) 카운팅은 대칭을 사용하여 x당 격자점을 집계하는 O(√m)으로 구현됩니다"}</p>
+            <p>{t.performanceNote2 || "• n → (x, y)는 초기 추측 주변의 m에 대한 이진 탐색을 사용한 다음 해당 m에 대한 링 점만 정렬합니다"}</p>
           </div>
         </div>
 

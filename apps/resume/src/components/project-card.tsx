@@ -109,8 +109,8 @@ export function ProjectCard({
               <a
                 href={link?.href}
                 key={idx}
-                target="_blank"
-                rel="noopener noreferrer"
+                target={isExternal ? "_blank" : undefined}
+                rel={isExternal ? "noopener noreferrer" : undefined}
                 className="flex items-center gap-3 p-2 rounded-md hover:bg-muted transition-colors border print:border-gray-300"
               >
                 <div className="flex-shrink-0">

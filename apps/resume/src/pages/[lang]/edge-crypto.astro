@@ -10,10 +10,12 @@ import "@/styles/global.css";
 const { language, t } = initI18n(Astro);
 const navbarTranslations = extractNavbarTranslations(t);
 
-const pageTitle = "Edge Crypto - Universal SubtleCrypto toolkit";
-const pageDescription = "Encrypt, sign, hash, and manage RSA keys across Node.js, browsers, Cloudflare Workers, Deno, and Bun.";
+const pageTitle = t.sideProjects?.edgeCrypto?.pageTitle || (language === "ko"
+  ? "Edge Crypto - Universal SubtleCrypto toolkit"
+  : "Edge Crypto - Universal SubtleCrypto Toolkit");
+const pageDescription = t.sideProjects?.edgeCrypto?.pageDescription || "Encrypt, sign, hash, and manage RSA keys across Node.js, browsers, Cloudflare Workers, Deno, and Bun.";
 const lang = Astro.params.lang || "en";
-const ogImage = new URL(`/en/edge-crypto/og.png`, Astro.url).toString();
+const ogImage = new URL(`/${lang}/edge-crypto/og.png`, Astro.url).toString();
 ---
 
 <html lang={language}>
@@ -31,7 +33,7 @@ const ogImage = new URL(`/en/edge-crypto/og.png`, Astro.url).toString();
     <CommonBody lang={language} />
     <KakaoBrowserEscape client:only="preact" />
     <div class="max-w-[1500px] mx-auto w-full">
-      <EdgeCryptoPage client:only="react" />
+      <EdgeCryptoPage client:only="react" lang={lang} />
     </div>
     <Navbar client:idle lang={language} translations={navbarTranslations} />
   </body>

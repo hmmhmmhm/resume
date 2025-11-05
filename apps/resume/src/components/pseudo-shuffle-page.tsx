@@ -5,7 +5,12 @@ import { ScrollVelocity } from "./scroll-velocity";
 import Ballpit from "./ballpit";
 import PseudoShuffleCounter from "./pseudo-shuffle-counter";
 
-export default function PseudoShufflePage() {
+interface PseudoShufflePageProps {
+  lang?: string;
+}
+
+export default function PseudoShufflePage({ lang = "ko" }: PseudoShufflePageProps) {
+  const isKorean = lang === "ko";
   const [selectedPM, setSelectedPM] = useState<string>("npm");
   const [copiedInstall, setCopiedInstall] = useState<boolean>(false);
   const [copiedExample, setCopiedExample] = useState<boolean>(false);
@@ -54,24 +59,24 @@ export default function PseudoShufflePage() {
             <Shuffle className="w-8 h-8 sm:w-10 sm:h-10" />
             Pseudo Shuffle
           </h1>
-          <p className="text-base sm:text-lg opacity-80">FPE 동형암호화 기반 유사난수 셔플 라이브러리</p>
+          <p className="text-base sm:text-lg opacity-80">{isKorean ? "FPE 동형암호화 기반 유사난수 셔플 라이브러리" : "FPE-based Pseudo-Random Shuffle Library"}</p>
         </div>
 
         {/* Introduction */}
         <div className="mb-6 lg:mb-10 relative z-20">
           <p className="text-sm sm:text-base leading-relaxed opacity-90">
-            Pseudo Shuffle은 FPE(Format-Preserving Encryption) 동형암호화 알고리즘을 활용하여
-            매우 큰 범위의 인덱스를 실제로 섞지 않고도 섞인 것처럼 보이게 만드는 TypeScript 라이브러리입니다.
-            DB나 메모리를 사용하지 않고도 유사난수 개념으로 겹치지 않는 셔플된 인덱스를 즉시 계산할 수 있습니다.
+            {isKorean 
+              ? "Pseudo Shuffle은 FPE(Format-Preserving Encryption) 동형암호화 알고리즘을 활용하여 매우 큰 범위의 인덱스를 실제로 섞지 않고도 섞인 것처럼 보이게 만드는 TypeScript 라이브러리입니다. DB나 메모리를 사용하지 않고도 유사난수 개념으로 겹치지 않는 셔플된 인덱스를 즉시 계산할 수 있습니다."
+              : "Pseudo Shuffle is a TypeScript library that uses FPE (Format-Preserving Encryption) to make indices appear shuffled without actually shuffling them. It instantly calculates non-overlapping shuffled indices using pseudo-random concepts without DB or memory."}
           </p>
         </div>
 
         {/* Interactive Counter */}
-        <PseudoShuffleCounter isDarkMode={true} />
+        <PseudoShuffleCounter isDarkMode={true} lang={lang} />
 
         {/* Installation */}
         <div className="mb-6 lg:mb-10 relative z-20">
-          <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">설치</h2>
+          <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">{isKorean ? "설치" : "Installation"}</h2>
           <div className="flex gap-2 mb-3 relative z-20 flex-wrap">
             {["npm", "pnpm", "yarn"].map((pm) => (
               <button
@@ -104,14 +109,14 @@ export default function PseudoShufflePage() {
                 setTimeout(() => setCopiedInstall(false), 2000);
               }}
               className="flex items-center gap-2 px-3 py-1.5 rounded text-xs transition-colors hover:bg-white/10"
-              title="복사"
+              title={isKorean ? "복사" : "Copy"}
             >
               {copiedInstall ? (
                 <>
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <polyline points="20 6 9 17 4 12" />
                   </svg>
-                  <span>복사됨!</span>
+                  <span>{isKorean ? "복사됨!" : "Copied!"}</span>
                 </>
               ) : (
                 <>
@@ -119,7 +124,7 @@ export default function PseudoShufflePage() {
                     <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
                     <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
                   </svg>
-                  <span>복사</span>
+                  <span>{isKorean ? "복사" : "Copy"}</span>
                 </>
               )}
             </button>
@@ -128,27 +133,27 @@ export default function PseudoShufflePage() {
 
         {/* Features Section */}
         <div className="mb-6 lg:mb-10 relative z-20">
-          <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">특징</h2>
+          <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">{isKorean ? "특징" : "Features"}</h2>
           <div className="space-y-2 text-xs sm:text-sm relative z-20">
             <div className="flex items-start">
               <span className="mr-3 opacity-60">→</span>
-              <span><strong>FPE 암호화</strong>: Format-Preserving Encryption으로 안전한 셔플</span>
+              <span><strong>{isKorean ? "FPE 암호화" : "FPE Encryption"}</strong>: {isKorean ? "Format-Preserving Encryption으로 안전한 셔플" : "Secure shuffle with Format-Preserving Encryption"}</span>
             </div>
             <div className="flex items-start">
               <span className="mr-3 opacity-60">→</span>
-              <span><strong>메모리 효율</strong>: DB나 배열 없이 즉시 계산</span>
+              <span><strong>{isKorean ? "메모리 효율" : "Memory Efficient"}</strong>: {isKorean ? "DB나 배열 없이 즉시 계산" : "Instant calculation without DB or arrays"}</span>
             </div>
             <div className="flex items-start">
               <span className="mr-3 opacity-60">→</span>
-              <span><strong>충돌 방지</strong>: 같은 범위 내에서 절대 겹치지 않음</span>
+              <span><strong>{isKorean ? "충돌 방지" : "Collision-Free"}</strong>: {isKorean ? "같은 범위 내에서 절대 겹치지 않음" : "Never overlaps within the same range"}</span>
             </div>
             <div className="flex items-start">
               <span className="mr-3 opacity-60">→</span>
-              <span><strong>양방향 변환</strong>: 인코딩/디코딩 모두 지원</span>
+              <span><strong>{isKorean ? "양방향 변환" : "Bidirectional"}</strong>: {isKorean ? "인코딩/디코딩 모두 지원" : "Supports both encoding and decoding"}</span>
             </div>
             <div className="flex items-start">
               <span className="mr-3 opacity-60">→</span>
-              <span><strong>TypeScript 지원</strong>: 완전한 타입 정의 제공</span>
+              <span><strong>{isKorean ? "TypeScript 지원" : "TypeScript Support"}</strong>: {isKorean ? "완전한 타입 정의 제공" : "Complete type definitions provided"}</span>
             </div>
           </div>
         </div>
@@ -194,42 +199,42 @@ export default function PseudoShufflePage() {
 
         {/* Use Cases Section */}
         <div className="mb-6 lg:mb-10 relative z-20">
-          <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">활용 사례</h2>
+          <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">{isKorean ? "활용 사례" : "Use Cases"}</h2>
           <div className="space-y-3 text-xs sm:text-sm relative z-20">
             <div className="p-3 sm:p-4 rounded bg-white/5 border border-white/10">
               <h3 className="font-semibold mb-2 text-[#ff5c7a] flex items-center gap-2">
                 <Link2 className="w-4 h-4" />
-                단축 URL 생성
+                {isKorean ? "단축 URL 생성" : "Short URL Generation"}
               </h3>
-              <p className="opacity-90">DB 없이 순차적인 ID를 무작위로 보이는 짧은 URL로 변환. 예측 불가능하면서도 충돌 없는 단축 링크 생성</p>
+              <p className="opacity-90">{isKorean ? "DB 없이 순차적인 ID를 무작위로 보이는 짧은 URL로 변환. 예측 불가능하면서도 충돌 없는 단축 링크 생성" : "Convert sequential IDs to random-looking short URLs without DB. Generate unpredictable yet collision-free short links"}</p>
             </div>
             <div className="p-3 sm:p-4 rounded bg-white/5 border border-white/10">
               <h3 className="font-semibold mb-2 text-[#8a5cff] flex items-center gap-2">
                 <Lock className="w-4 h-4" />
-                유저 번호 암호화
+                {isKorean ? "유저 번호 암호화" : "User ID Encryption"}
               </h3>
-              <p className="opacity-90">순차적인 유저 ID를 암호화하여 노출. 길이가 변하지 않아 기존 시스템과 호환성 유지</p>
+              <p className="opacity-90">{isKorean ? "순차적인 유저 ID를 암호화하여 노출. 길이가 변하지 않아 기존 시스템과 호환성 유지" : "Encrypt sequential user IDs for exposure. Maintains compatibility with existing systems as length doesn't change"}</p>
             </div>
             <div className="p-3 sm:p-4 rounded bg-white/5 border border-white/10">
               <h3 className="font-semibold mb-2 text-[#00ffd1] flex items-center gap-2">
                 <Shield className="w-4 h-4" />
-                개인정보 보호
+                {isKorean ? "개인정보 보호" : "Privacy Protection"}
               </h3>
-              <p className="opacity-90">주민번호, 전화번호 등 고정 길이 데이터를 형식 유지하며 암호화. FPE 특성으로 원본 형식 그대로 보호</p>
+              <p className="opacity-90">{isKorean ? "주민번호, 전화번호 등 고정 길이 데이터를 형식 유지하며 암호화. FPE 특성으로 원본 형식 그대로 보호" : "Encrypt fixed-length data like SSN and phone numbers while preserving format. Protects original format with FPE characteristics"}</p>
             </div>
             <div className="p-3 sm:p-4 rounded bg-white/5 border border-white/10">
               <h3 className="font-semibold mb-2 text-[#ffd700] flex items-center gap-2">
                 <Ticket className="w-4 h-4" />
-                쿠폰/티켓 번호
+                {isKorean ? "쿠폰/티켓 번호" : "Coupon/Ticket Numbers"}
               </h3>
-              <p className="opacity-90">순차 발급되는 쿠폰 번호를 무작위처럼 보이게 변환. 발급 순서 추측 방지 및 보안 강화</p>
+              <p className="opacity-90">{isKorean ? "순차 발급되는 쿠폰 번호를 무작위처럼 보이게 변환. 발급 순서 추측 방지 및 보안 강화" : "Convert sequentially issued coupon numbers to appear random. Prevents guessing issuance order and enhances security"}</p>
             </div>
           </div>
         </div>
 
         {/* Usage Example */}
         <div className="mb-6 lg:mb-10 relative z-20">
-          <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">사용 예시</h2>
+          <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">{isKorean ? "사용 예시" : "Usage Example"}</h2>
           <div className="p-3 sm:p-4 rounded text-xs sm:text-sm space-y-3 relative z-20 overflow-x-auto bg-white/5">
             <div className="flex-1 space-y-3">
               <div>
@@ -247,7 +252,7 @@ export default function PseudoShufflePage() {
                 </code>
               </div>
               <div className="pt-2">
-                <div className="opacity-60 mb-1">// 인덱스 인코딩</div>
+                <div className="opacity-60 mb-1">{isKorean ? "// 인덱스 인코딩" : "// Encode index"}</div>
                 <code className="block whitespace-nowrap">
                   <span style={{ color: '#ff3366' }}>const</span>
                   {' '}
@@ -271,7 +276,7 @@ export default function PseudoShufflePage() {
                 <code className="block opacity-60 whitespace-nowrap">// 29</code>
               </div>
               <div className="pt-2">
-                <div className="opacity-60 mb-1">// 인덱스 디코딩</div>
+                <div className="opacity-60 mb-1">{isKorean ? "// 인덱스 디코딩" : "// Decode index"}</div>
                 <code className="block whitespace-nowrap">
                   <span style={{ color: '#ff3366' }}>const</span>
                   {' '}
@@ -311,14 +316,14 @@ const decoded = decode({ min: 0, max: 100, index: encoded });
                 setTimeout(() => setCopiedExample(false), 2000);
               }}
               className="flex items-center gap-2 px-3 py-1.5 rounded text-xs transition-colors hover:bg-white/10 flex-shrink-0 mt-3 sm:mt-0"
-              title="복사"
+              title={isKorean ? "복사" : "Copy"}
             >
               {copiedExample ? (
                 <>
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <polyline points="20 6 9 17 4 12" />
                   </svg>
-                  <span>복사됨!</span>
+                  <span>{isKorean ? "복사됨!" : "Copied!"}</span>
                 </>
               ) : (
                 <>
@@ -326,7 +331,7 @@ const decoded = decode({ min: 0, max: 100, index: encoded });
                     <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
                     <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
                   </svg>
-                  <span>복사</span>
+                  <span>{isKorean ? "복사" : "Copy"}</span>
                 </>
               )}
             </button>
@@ -335,32 +340,62 @@ const decoded = decode({ min: 0, max: 100, index: encoded });
 
         {/* How it works */}
         <div className="mb-6 lg:mb-10 relative z-20">
-          <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">작동 원리</h2>
+          <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">{isKorean ? "작동 원리" : "How It Works"}</h2>
           <div className="space-y-6 text-xs sm:text-sm relative z-20">
             <div>
-              <h3 className="text-sm sm:text-base font-semibold mb-2">Pseudo Shuffle란?</h3>
+              <h3 className="text-sm sm:text-base font-semibold mb-2">{isKorean ? "Pseudo Shuffle란?" : "What is Pseudo Shuffle?"}</h3>
               <div className="space-y-2 opacity-90">
-                <p>실제로 데이터를 섞지 않고, 유사난수(Pseudo Random) 개념을 활용하여</p>
-                <p>주어진 범위 내에서 인덱스가 섞인 것처럼 보이게 만드는 기술입니다.</p>
-                <p>같은 인덱스는 항상 같은 값으로 변환되며, 충돌이 발생하지 않습니다.</p>
+                {isKorean ? (
+                  <>
+                    <p>실제로 데이터를 섞지 않고, 유사난수(Pseudo Random) 개념을 활용하여</p>
+                    <p>주어진 범위 내에서 인덱스가 섞인 것처럼 보이게 만드는 기술입니다.</p>
+                    <p>같은 인덱스는 항상 같은 값으로 변환되며, 충돌이 발생하지 않습니다.</p>
+                  </>
+                ) : (
+                  <>
+                    <p>A technique that makes indices appear shuffled within a given range</p>
+                    <p>using pseudo-random concepts without actually shuffling the data.</p>
+                    <p>The same index always converts to the same value with no collisions.</p>
+                  </>
+                )}
               </div>
             </div>
 
             <div>
-              <h3 className="text-sm sm:text-base font-semibold mb-2">FPE 암호화</h3>
+              <h3 className="text-sm sm:text-base font-semibold mb-2">{isKorean ? "FPE 암호화" : "FPE Encryption"}</h3>
               <div className="space-y-2 opacity-90">
-                <p>Format-Preserving Encryption을 사용하여 입력 형식을 유지하면서</p>
-                <p>암호화된 값을 생성합니다. 이를 통해 예측 불가능하면서도</p>
-                <p>결정론적인 셔플 결과를 얻을 수 있습니다.</p>
+                {isKorean ? (
+                  <>
+                    <p>Format-Preserving Encryption을 사용하여 입력 형식을 유지하면서</p>
+                    <p>암호화된 값을 생성합니다. 이를 통해 예측 불가능하면서도</p>
+                    <p>결정론적인 셔플 결과를 얻을 수 있습니다.</p>
+                  </>
+                ) : (
+                  <>
+                    <p>Uses Format-Preserving Encryption to generate encrypted values</p>
+                    <p>while maintaining the input format. This provides unpredictable yet</p>
+                    <p>deterministic shuffle results.</p>
+                  </>
+                )}
               </div>
             </div>
 
             <div>
-              <h3 className="text-sm sm:text-base font-semibold mb-2">주의사항</h3>
+              <h3 className="text-sm sm:text-base font-semibold mb-2">{isKorean ? "주의사항" : "Precautions"}</h3>
               <div className="space-y-2 opacity-90">
-                <p>⚠️ 진짜 난수가 아닌 유사난수입니다. 암호학적 보안이 필요한 경우 privateKey를 설정하세요.</p>
-                <p>⚠️ min과 max 값의 차이가 최소 4 이상이어야 셔플이 적용됩니다.</p>
-                <p>✅ 이 라이브러리는 node-fe1-fpe 라이브러리를 기반으로 만들어졌습니다.</p>
+                {isKorean ? (
+                  <>
+                    <p>⚠️ 진짜 난수가 아닌 유사난수입니다. 암호학적 보안이 필요한 경우 privateKey를 설정하세요.</p>
+                    <p>⚠️ min과 max 값의 차이가 최소 4 이상이어야 셔플이 적용됩니다.</p>
+                    <p>✅ 이 라이브러리는 node-fe1-fpe 라이브러리를 기반으로 만들어졌습니다.</p>
+                  </>
+                ) : (
+                  <>
+                    <p>⚠️ This is pseudo-random, not true random. Set a privateKey for cryptographic security.</p>
+                    <p>⚠️ The difference between min and max must be at least 4 for shuffling to work.</p>
+                    <p>✅ This library is based on the node-fe1-fpe library.</p>
+                  </>
+                )}
               </div>
             </div>
           </div>

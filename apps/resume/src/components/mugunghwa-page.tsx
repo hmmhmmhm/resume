@@ -7,10 +7,22 @@ import { ScrollVelocity } from "./scroll-velocity";
 import { encode } from "mugunghwa";
 import { QRCodeSVG } from "./qrcode-react";
 
-export default function MugunghwaResume() {
+interface MugunghwaResumeProps {
+  lang?: string;
+  translations?: any;
+}
+
+export default function MugunghwaResume({ lang = "ko", translations = {} }: MugunghwaResumeProps) {
   const [selectedPM, setSelectedPM] = useState<string>("npm");
   const [copiedInstall, setCopiedInstall] = useState<boolean>(false);
   const [copiedExample, setCopiedExample] = useState<boolean>(false);
+  
+  const isKorean = lang === "ko";
+  
+  // Helper function to get translation with fallback
+  const t = (key: string, fallbackKo: string, fallbackEn: string) => {
+    return translations[key] || (isKorean ? fallbackKo : fallbackEn);
+  };
 
   // Generate random mugunghwa encoded texts
   const randomTexts = useMemo(() => {
@@ -38,44 +50,43 @@ export default function MugunghwaResume() {
 
         {/* Header */}
         <div className="mb-8 lg:mb-12 relative z-20">
-          <h1 className="text-3xl sm:text-4xl font-bold mb-3 sm:mb-4">🌺 무궁화</h1>
-          <p className="text-base sm:text-lg opacity-80">한글 기반 72진법 인코딩 라이브러리</p>
+          <h1 className="text-3xl sm:text-4xl font-bold mb-3 sm:mb-4">{t('title', '🌺 무궁화', '🌺 Mugunghwa')}</h1>
+          <p className="text-base sm:text-lg opacity-80">{t('subtitle', '한글 기반 72진법 인코딩 라이브러리', 'Korean Base-72 Encoding Library')}</p>
         </div>
 
         {/* Introduction */}
         <div className="mb-6 lg:mb-10 relative z-20">
           <p className="text-sm sm:text-base leading-relaxed opacity-90">
-            무궁화는 10진수 숫자를 한글로 인코딩/디코딩하는 TypeScript 라이브러리입니다.
-            한글의 특성을 활용하여 숫자를 간결하고 읽기 쉬운 한글 문자열로 변환합니다.
+            {t('introduction', '무궁화는 10진수 숫자를 한글로 인코딩/디코딩하는 TypeScript 라이브러리입니다. 한글의 특성을 활용하여 숫자를 간결하고 읽기 쉬운 한글 문자열로 변환합니다.', 'Mugunghwa is a TypeScript library that encodes/decodes decimal numbers to Korean characters. It leverages Korean language characteristics to convert numbers into concise and readable Korean strings.')}
           </p>
         </div>
 
         {/* Interactive Counter */}
-        <MugunghwaCounter isDarkMode={true} />
+        <MugunghwaCounter isDarkMode={true} translations={translations} lang={lang} />
 
         {/* Features Section */}
         <div className="mb-6 lg:mb-10 relative z-20">
-          <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">특징</h2>
+          <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">{t('features', '특징', 'Features')}</h2>
           <div className="space-y-2 text-xs sm:text-sm relative z-20">
             <div className="flex items-start">
               <span className="mr-3 opacity-60">→</span>
-              <span><strong>72진법 기반</strong>: 한글 조합을 활용한 효율적인 숫자 인코딩</span>
+              <span dangerouslySetInnerHTML={{ __html: t('feature1', '<strong>72진법 기반</strong>: 한글 조합을 활용한 효율적인 숫자 인코딩', '<strong>Base-72 System</strong>: Efficient number encoding using Korean combinations') }} />
             </div>
             <div className="flex items-start">
               <span className="mr-3 opacity-60">→</span>
-              <span><strong>비속어 필터링</strong>: 부적절한 단어 조합을 자동으로 배제</span>
+              <span dangerouslySetInnerHTML={{ __html: t('feature2', '<strong>비속어 필터링</strong>: 부적절한 단어 조합을 자동으로 배제', '<strong>Profanity Filtering</strong>: Automatically excludes inappropriate word combinations') }} />
             </div>
             <div className="flex items-start">
               <span className="mr-3 opacity-60">→</span>
-              <span><strong>양방향 변환</strong>: 숫자 ↔ 한글 문자열 상호 변환 지원</span>
+              <span dangerouslySetInnerHTML={{ __html: t('feature3', '<strong>양방향 변환</strong>: 숫자 ↔ 한글 문자열 상호 변환 지원', '<strong>Bidirectional Conversion</strong>: Supports number ↔ Korean string conversion') }} />
             </div>
             <div className="flex items-start">
               <span className="mr-3 opacity-60">→</span>
-              <span><strong>오타 보정</strong>: 유사한 글자의 오타를 자동으로 수정</span>
+              <span dangerouslySetInnerHTML={{ __html: t('feature4', '<strong>오타 보정</strong>: 유사한 글자의 오타를 자동으로 수정', '<strong>Typo Correction</strong>: Automatically corrects typos in similar characters') }} />
             </div>
             <div className="flex items-start">
               <span className="mr-3 opacity-60">→</span>
-              <span><strong>TypeScript 지원</strong>: 완전한 타입 정의 제공</span>
+              <span dangerouslySetInnerHTML={{ __html: t('feature5', '<strong>TypeScript 지원</strong>: 완전한 타입 정의 제공', '<strong>TypeScript Support</strong>: Complete type definitions provided') }} />
             </div>
           </div>
         </div>
@@ -121,7 +132,7 @@ export default function MugunghwaResume() {
 
         {/* Installation */}
         <div className="mb-6 lg:mb-10 relative z-20">
-          <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">설치</h2>
+          <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">{t('installation', '설치', 'Installation')}</h2>
           <div className="flex gap-2 mb-3 relative z-20 flex-wrap">
             {["npm", "pnpm", "yarn"].map((pm) => (
               <button
@@ -154,14 +165,14 @@ export default function MugunghwaResume() {
                 setTimeout(() => setCopiedInstall(false), 2000);
               }}
               className="flex items-center gap-2 px-3 py-1.5 rounded text-xs transition-colors hover:bg-white/10"
-              title="복사"
+              title={t('copyTitle', '복사', 'Copy')}
             >
               {copiedInstall ? (
                 <>
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <polyline points="20 6 9 17 4 12" />
                   </svg>
-                  <span>복사됨!</span>
+                  <span>{t('copied', '복사됨!', 'Copied!')}</span>
                 </>
               ) : (
                 <>
@@ -169,7 +180,7 @@ export default function MugunghwaResume() {
                     <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
                     <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
                   </svg>
-                  <span>복사</span>
+                  <span>{t('copy', '복사', 'Copy')}</span>
                 </>
               )}
             </button>
@@ -178,7 +189,7 @@ export default function MugunghwaResume() {
 
         {/* Usage Example */}
         <div className="mb-6 lg:mb-10 relative z-20">
-          <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">사용 예시</h2>
+          <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">{t('usageExample', '사용 예시', 'Usage Example')}</h2>
           <div className="p-3 sm:p-4 rounded text-xs sm:text-sm space-y-3 relative z-20 overflow-x-auto bg-white/5 flex items-start justify-between flex-col sm:flex-row sm:items-center">
             <div className="flex-1 space-y-3">
               <div>
@@ -196,7 +207,7 @@ export default function MugunghwaResume() {
                 </code>
               </div>
               <div className="pt-2">
-                <div className="opacity-60 mb-1">// 숫자를 한글로 인코딩</div>
+                <div className="opacity-60 mb-1">{t('usageComment1', '// 숫자를 한글로 인코딩', '// Encode number to Korean')}</div>
                 <code className="block whitespace-nowrap">
                   <span style={{ color: '#C586C0' }}>const</span>
                   {' '}
@@ -210,7 +221,7 @@ export default function MugunghwaResume() {
                 <code className="block opacity-60 whitespace-nowrap">// "내실-내초-온율"</code>
               </div>
               <div className="pt-2">
-                <div className="opacity-60 mb-1">// 한글을 숫자로 디코딩</div>
+                <div className="opacity-60 mb-1">{t('usageComment2', '// 한글을 숫자로 디코딩', '// Decode Korean to number')}</div>
                 <code className="block whitespace-nowrap">
                   <span style={{ color: '#C586C0' }}>const</span>
                   {' '}
@@ -226,7 +237,7 @@ export default function MugunghwaResume() {
             </div>
             <button
               onClick={() => {
-                const codeExample = `import { encode, decode } from "mugunghwa";
+                const codeExample = isKorean ? `import { encode, decode } from "mugunghwa";
 
 // 숫자를 한글로 인코딩
 const encoded = encode(3790050939);
@@ -234,20 +245,28 @@ const encoded = encode(3790050939);
 
 // 한글을 숫자로 디코딩
 const decoded = decode(encoded);
+// 3790050939` : `import { encode, decode } from "mugunghwa";
+
+// Encode number to Korean
+const encoded = encode(3790050939);
+// "내실-내초-온율"
+
+// Decode Korean to number
+const decoded = decode(encoded);
 // 3790050939`;
                 navigator.clipboard.writeText(codeExample);
                 setCopiedExample(true);
                 setTimeout(() => setCopiedExample(false), 2000);
               }}
               className="flex items-center gap-2 px-3 py-1.5 rounded text-xs transition-colors hover:bg-white/10 flex-shrink-0 mt-3 sm:mt-0"
-              title="복사"
+              title={t('copyTitle', '복사', 'Copy')}
             >
               {copiedExample ? (
                 <>
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <polyline points="20 6 9 17 4 12" />
                   </svg>
-                  <span>복사됨!</span>
+                  <span>{t('copied', '복사됨!', 'Copied!')}</span>
                 </>
               ) : (
                 <>
@@ -255,7 +274,7 @@ const decoded = decode(encoded);
                     <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
                     <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
                   </svg>
-                  <span>복사</span>
+                  <span>{t('copy', '복사', 'Copy')}</span>
                 </>
               )}
             </button>
@@ -264,26 +283,26 @@ const decoded = decode(encoded);
 
         {/* How it works */}
         <div className="mb-6 lg:mb-10 relative z-20">
-          <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">작동 원리</h2>
+          <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">{t('howItWorks', '작동 원리', 'How It Works')}</h2>
           <div className="space-y-6 text-xs sm:text-sm relative z-20">
             <div>
-              <h3 className="text-sm sm:text-base font-semibold mb-2">무궁화 코드란?</h3>
+              <h3 className="text-sm sm:text-base font-semibold mb-2">{t('whatIsMugunghwa', '무궁화 코드란?', 'What is Mugunghwa Code?')}</h3>
               <div className="space-y-2 opacity-90">
-                <p>무궁화코드는 한글로 숫자를 표현하는 코드체계입니다.</p>
-                <p>숫자만의 적은 길이로 더 수를 표현할 수 있게 해줍니다.</p>
+                <p>{t('whatIsMugunghwaDesc1', '무궁화코드는 한글로 숫자를 표현하는 코드체계입니다.', 'Mugunghwa Code is a coding system that represents numbers in Korean.')}</p>
+                <p>{t('whatIsMugunghwaDesc2', '숫자만의 적은 길이로 더 수를 표현할 수 있게 해줍니다.', 'It allows you to represent more numbers with shorter lengths than digits alone.')}</p>
               </div>
             </div>
 
             <div>
-              <h3 className="text-sm sm:text-base font-semibold mb-2">무궁화 코드 원리</h3>
+              <h3 className="text-sm sm:text-base font-semibold mb-2">{t('principle', '무궁화 코드 원리', 'Mugunghwa Code Principle')}</h3>
               <div className="space-y-2 opacity-90">
-                <p>무궁화코드는 <strong>10개 숫자</strong>로 <strong>10진법</strong>을 이루는 것 처럼</p>
-                <p><strong>84개의 한글글자</strong>로 <strong>72진법</strong>을 구성하고 있습니다.</p>
+                <p>{t('principleDesc1', '무궁화코드는 10개 숫자로 10진법을 이루는 것 처럼', 'Just as 10 digits form base-10,')}</p>
+                <p>{t('principleDesc2', '84개의 한글글자로 72진법을 구성하고 있습니다.', '84 Korean characters form base-72 in Mugunghwa Code.')}</p>
               </div>
             </div>
 
             <div>
-              <h3 className="text-sm sm:text-base font-semibold mb-2">84개 한글글자</h3>
+              <h3 className="text-sm sm:text-base font-semibold mb-2">{t('koreanCharacters', '84개 한글글자', '84 Korean Characters')}</h3>
               <div className="space-y-2 opacity-90">
                 <div className="overflow-x-auto -mx-3 sm:-mx-4 px-3 sm:px-4">
                   <table className="min-w-full border-collapse text-center text-[aqua] font-black">
@@ -393,22 +412,22 @@ const decoded = decode(encoded);
             </div>
 
             <div>
-              <h3 className="text-sm sm:text-base font-semibold mb-2">무궁화 코드의 인코딩 방식</h3>
+              <h3 className="text-sm sm:text-base font-semibold mb-2">{t('encodingMethod', '무궁화 코드의 인코딩 방식', 'Mugunghwa Code Encoding Method')}</h3>
               <div className="space-y-2 opacity-90">
-                <p>10진법을 72진법으로 변환할 때, 2글자씩 묶어서 5184진법으로 끊은 후,</p>
-                <p>마지막에 글자가 하나 남으면 해당 글자만 72진법으로 하향 표기합니다.</p>
+                <p>{t('encodingMethodDesc1', '10진법을 72진법으로 변환할 때, 2글자씩 묶어서 5184진법으로 끊은 후,', 'When converting base-10 to base-72, group 2 characters into base-5184,')}</p>
+                <p>{t('encodingMethodDesc2', '마지막에 글자가 하나 남으면 해당 글자만 72진법으로 하향 표기합니다.', 'and if one character remains at the end, represent it in base-72.')}</p>
               </div>
               <div className="pt-2 space-y-1">
-                <p><strong>84진법 2글자 조합</strong>: 84² = 7,056개</p>
-                <p><strong>72진법 2글자 조합</strong>: 72² = 5,184개</p>
+                <p>{t('encodingMethodDetail1', '84진법 2글자 조합: 84² = 7,056개', 'Base-84 2-char combinations: 84² = 7,056')}</p>
+                <p>{t('encodingMethodDetail2', '72진법 2글자 조합: 72² = 5,184개', 'Base-72 2-char combinations: 72² = 5,184')}</p>
               </div>
             </div>
 
             <div>
-              <h3 className="text-sm sm:text-base font-semibold mb-2">비속어 필터링 전략</h3>
+              <h3 className="text-sm sm:text-base font-semibold mb-2">{t('profanityFiltering', '비속어 필터링 전략', 'Profanity Filtering Strategy')}</h3>
               <div className="space-y-2 opacity-90">
-                <p>무궁화코드는 84진법 중 검사 조합에서 1872개의 조합을 배제하는</p>
-                <p>과정을 통해서 발생가능한 비속어나 발음하기 어려운 단어 노출을 방지합니다.</p>
+                <p>{t('profanityFilteringDesc1', '무궁화코드는 84진법 중 검사 조합에서 1872개의 조합을 배제하는', 'Mugunghwa Code excludes 1,872 combinations from base-84')}</p>
+                <p>{t('profanityFilteringDesc2', '과정을 통해서 발생가능한 비속어나 발음하기 어려운 단어 노출을 방지합니다.', 'to prevent exposure to profanity or hard-to-pronounce words.')}</p>
               </div>
             </div>
           </div>
@@ -416,13 +435,13 @@ const decoded = decode(encoded);
 
         {/* Publication Section */}
         <div className="mb-6 lg:mb-10 relative z-20">
-          <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">관련 논문</h2>
+          <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">{t('relatedPaper', '관련 논문', 'Related Paper')}</h2>
           <div className="block p-6 border border-current/10 rounded-lg @container">
             <div className="flex flex-col @md:flex-row gap-6 mb-4">
               <div className="flex-shrink-0 mx-auto @md:mx-0">
                 <img
                   src="/image/mugunghwa.webp"
-                  alt="음절 블록 체계를 이용한 한글에서의 72진법 표현 체계"
+                  alt={t('paperTitle', '음절 블록 체계를 이용한 한글에서의 72진법 표현 체계', 'Base-72 Representation System in Korean Using Syllable Block Structure')}
                   width={300}
                   height={420}
                   loading="lazy"
@@ -431,14 +450,14 @@ const decoded = decode(encoded);
                 />
               </div>
               <div className="flex-1">
-                <h3 className="text-xl sm:text-2xl font-bold mb-2">음절 블록 체계를 이용한 한글에서의 72진법 표현 체계</h3>
+                <h3 className="text-xl sm:text-2xl font-bold mb-2">{t('paperTitle', '음절 블록 체계를 이용한 한글에서의 72진법 표현 체계', 'Base-72 Representation System in Korean Using Syllable Block Structure')}</h3>
                 <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs sm:text-sm mb-4 opacity-80">
-                  <span>저자: 이하민</span>
-                  <span>출판사: 한국통신학회</span>
-                  <span>출간일: 2019년</span>
+                  <span>{t('author', '저자: 이하민', 'Author: Hamin Lee')}</span>
+                  <span>{t('publisher', '출판사: 한국통신학회', 'Publisher: Korean Institute of Communications')}</span>
+                  <span>{t('publishDate', '출간일: 2019년', 'Published: 2019')}</span>
                 </div>
                 <p className="text-xs sm:text-sm leading-relaxed opacity-90">
-                  영어와 숫자를 혼합한 32진법 Base 32를 모방해 순수 한글로 72진법 인코드 체계 개발. 3미터 오차의 GPS 좌표를 한글 다섯자리로 압축하는 알고리즘 제안. 이 논문을 토대로 JavaScript 기반 오픈소스 구현체 '무궁화 코드' 개발 및 GitHub 공개.
+                  {t('paperDescription', '영어와 숫자를 혼합한 32진법 Base 32를 모방해 순수 한글로 72진법 인코드 체계 개발. 3미터 오차의 GPS 좌표를 한글 다섯자리로 압축하는 알고리즘 제안. 이 논문을 토대로 JavaScript 기반 오픈소스 구현체 \'무궁화 코드\' 개발 및 GitHub 공개.', 'Developed a base-72 encoding system using pure Korean, inspired by base-32 that mixes letters and numbers. Proposed an algorithm to compress GPS coordinates with 3-meter accuracy into five Korean characters. Based on this paper, developed and published the JavaScript-based open-source implementation \'Mugunghwa Code\' on GitHub.')}
                 </p>
               </div>
             </div>
@@ -454,7 +473,7 @@ const decoded = decode(encoded);
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="text-xs font-medium mb-1">
-                    Paper
+                    {t('paper', 'Paper', 'Paper')}
                   </div>
                   <div className="text-xs font-bold break-all">
                     https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE09277763
@@ -472,7 +491,7 @@ const decoded = decode(encoded);
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="text-xs font-medium mb-1">
-                    GitHub
+                    {t('github', 'GitHub', 'GitHub')}
                   </div>
                   <div className="text-xs font-bold break-all">
                     https://github.com/hmmhmmhm/node-packages/tree/main/packages/mugunghwa
@@ -486,10 +505,9 @@ const decoded = decode(encoded);
         {/* Download Section */}
         <div className="mb-6 lg:mb-10 relative z-20">
           <div className="p-6 border border-current/10 rounded-lg bg-white/5">
-            <h3 className="text-base sm:text-lg font-semibold mb-3">무궁화 코드 전체 조합 다운로드</h3>
+            <h3 className="text-base sm:text-lg font-semibold mb-3">{t('downloadSection', '무궁화 코드 전체 조합 다운로드', 'Download All Mugunghwa Code Combinations')}</h3>
             <p className="text-xs sm:text-sm opacity-90 mb-4 leading-relaxed">
-              비속어가 필터링된 5,184개의 무궁화 코드 조합을 다운로드할 수 있습니다.
-              이름 작명, 코드 생성 등 다양한 용도로 활용하실 수 있습니다.
+              {t('downloadDescription', '비속어가 필터링된 5,184개의 무궁화 코드 조합을 다운로드할 수 있습니다. 이름 작명, 코드 생성 등 다양한 용도로 활용하실 수 있습니다.', 'Download 5,184 profanity-filtered Mugunghwa Code combinations. Can be used for various purposes such as naming, code generation, etc.')}
             </p>
             <a
               href="/ko/mugunghwa/84_filtered.txt"
@@ -501,7 +519,7 @@ const decoded = decode(encoded);
                 <polyline points="7 10 12 15 17 10" />
                 <line x1="12" y1="15" x2="12" y2="3" />
               </svg>
-              84_filtered.txt 다운로드
+              {t('downloadButton', '84_filtered.txt 다운로드', 'Download 84_filtered.txt')}
             </a>
           </div>
         </div>
@@ -518,7 +536,7 @@ const decoded = decode(encoded);
               <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
               </svg>
-              GitHub
+              {t('github', 'GitHub', 'GitHub')}
             </a>
             <a
               href="https://deepwiki.com/hmmhmmhm/node-packages"
@@ -530,7 +548,7 @@ const decoded = decode(encoded);
                 <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
                 <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
               </svg>
-              Wiki
+              {t('wiki', 'Wiki', 'Wiki')}
             </a>
             <a
               href="https://www.npmjs.com/package/mugunghwa"
@@ -541,11 +559,11 @@ const decoded = decode(encoded);
               <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M0 7.334v8h6.666v1.332H12v-1.332h12v-8H0zm6.666 6.664H5.334v-4H3.999v4H1.335V8.667h5.331v5.331zm4 0v1.336H8.001V8.667h5.334v5.332h-2.669v-.001zm12.001 0h-1.33v-4h-1.336v4h-1.335v-4h-1.33v4h-2.671V8.667h8.002v5.331zM10.665 10H12v2.667h-1.335V10z" />
               </svg>
-              NPM
+              {t('npm', 'NPM', 'NPM')}
             </a>
           </div>
           <div className="mt-4 text-xs opacity-60 relative z-20">
-            MIT License © hmmhmmhm
+            {t('license', 'MIT License © hmmhmmhm', 'MIT License © hmmhmmhm')}
           </div>
         </div>
       </div>

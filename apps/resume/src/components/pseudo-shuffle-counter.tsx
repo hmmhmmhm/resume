@@ -3,9 +3,11 @@ import { encode, decode } from "pseudo-shuffle";
 
 interface PseudoShuffleCounterProps {
   isDarkMode?: boolean;
+  lang?: string;
 }
 
-export default function PseudoShuffleCounter({ isDarkMode = true }: PseudoShuffleCounterProps) {
+export default function PseudoShuffleCounter({ isDarkMode = true, lang = "ko" }: PseudoShuffleCounterProps) {
+  const isKorean = lang === "ko";
   const [activeTab, setActiveTab] = useState<"encode" | "decode">("encode");
   const [min, setMin] = useState<number>(0);
   const [max, setMax] = useState<number>(10000000000);
@@ -114,7 +116,7 @@ export default function PseudoShuffleCounter({ isDarkMode = true }: PseudoShuffl
           border: none;
         }
       `}</style>
-      <h3 className="text-base sm:text-lg font-semibold mb-4">플레이그라운드</h3>
+      <h3 className="text-base sm:text-lg font-semibold mb-4">{isKorean ? "플레이그라운드" : "Playground"}</h3>
 
       {/* Tabs */}
       <div className="flex gap-2 mb-4">
@@ -126,7 +128,7 @@ export default function PseudoShuffleCounter({ isDarkMode = true }: PseudoShuffl
               : "opacity-50 hover:opacity-70"
           }`}
         >
-          인코딩
+          {isKorean ? "인코딩" : "Encode"}
         </button>
         <button
           onClick={() => setActiveTab("decode")}
@@ -136,7 +138,7 @@ export default function PseudoShuffleCounter({ isDarkMode = true }: PseudoShuffl
               : "opacity-50 hover:opacity-70"
           }`}
         >
-          디코딩
+          {isKorean ? "디코딩" : "Decode"}
         </button>
       </div>
 
@@ -145,7 +147,9 @@ export default function PseudoShuffleCounter({ isDarkMode = true }: PseudoShuffl
         <div>
           <div className="flex justify-between items-center mb-2">
             <label className="text-xs sm:text-sm opacity-80">
-              {activeTab === "encode" ? "원본 인덱스 (Index)" : "인코딩된 값 (Encoded)"}:
+              {activeTab === "encode" 
+                ? (isKorean ? "원본 인덱스 (Index)" : "Original Index")
+                : (isKorean ? "인코딩된 값 (Encoded)" : "Encoded Value")}:
             </label>
             <input
               type="number"
@@ -173,7 +177,7 @@ export default function PseudoShuffleCounter({ isDarkMode = true }: PseudoShuffl
         <div>
           <div className="flex justify-between items-center mb-2">
             <label className="text-xs sm:text-sm opacity-80">
-              최소값 (Min):
+              {isKorean ? "최소값 (Min)" : "Minimum (Min)"}:
             </label>
             <input
               type="number"
@@ -208,7 +212,7 @@ export default function PseudoShuffleCounter({ isDarkMode = true }: PseudoShuffl
         <div>
           <div className="flex justify-between items-center mb-2">
             <label className="text-xs sm:text-sm opacity-80">
-              최대값 (Max):
+              {isKorean ? "최대값 (Max)" : "Maximum (Max)"}:
             </label>
             <input
               type="number"
@@ -242,13 +246,13 @@ export default function PseudoShuffleCounter({ isDarkMode = true }: PseudoShuffl
         {/* Private Key */}
         <div>
           <label className="block text-xs sm:text-sm mb-2 opacity-80">
-            비밀키 (Private Key - 선택사항)
+            {isKorean ? "비밀키 (Private Key - 선택사항)" : "Private Key (Optional)"}
           </label>
           <input
             type="text"
             value={privateKey}
             onChange={(e) => setPrivateKey((e.target as HTMLInputElement).value)}
-            placeholder="비밀키를 입력하세요"
+            placeholder={isKorean ? "비밀키를 입력하세요" : "Enter private key"}
             className={`w-full px-3 py-2 rounded text-xs sm:text-sm ${bgClass} border ${borderClass} focus:outline-none focus:border-white/30`}
           />
         </div>
@@ -259,24 +263,28 @@ export default function PseudoShuffleCounter({ isDarkMode = true }: PseudoShuffl
             {activeTab === "encode" ? (
               <>
                 <div className="flex justify-between items-center">
-                  <span className="opacity-80">인코딩된 값:</span>
+                  <span className="opacity-80">{isKorean ? "인코딩된 값:" : "Encoded Value:"}</span>
                   <span className="font-bold text-lg text-[#ff5c7a]">{encodedValue}</span>
                 </div>
                 <div className="pt-2 mt-2 border-t border-current/10">
                   <p className="text-xs opacity-60">
-                    원본 인덱스 {index}가 {encodedValue}로 인코딩됩니다.
+                    {isKorean 
+                      ? `원본 인덱스 ${index}가 ${encodedValue}로 인코딩됩니다.`
+                      : `Original index ${index} is encoded to ${encodedValue}.`}
                   </p>
                 </div>
               </>
             ) : (
               <>
                 <div className="flex justify-between items-center">
-                  <span className="opacity-80">디코딩된 값:</span>
+                  <span className="opacity-80">{isKorean ? "디코딩된 값:" : "Decoded Value:"}</span>
                   <span className="font-bold text-lg text-[#00ffd1]">{decodedValue}</span>
                 </div>
                 <div className="pt-2 mt-2 border-t border-current/10">
                   <p className="text-xs opacity-60">
-                    인코딩된 값 {index}가 {decodedValue}로 디코딩됩니다.
+                    {isKorean 
+                      ? `인코딩된 값 ${index}가 ${decodedValue}로 디코딩됩니다.`
+                      : `Encoded value ${index} is decoded to ${decodedValue}.`}
                   </p>
                 </div>
               </>

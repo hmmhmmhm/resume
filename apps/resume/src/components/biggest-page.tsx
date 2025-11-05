@@ -3,13 +3,19 @@ import GalaxyEffect from "./galaxy-effect";
 import CircularText from "./circular-text";
 import * as biggest from "biggest";
 
-export default function BiggestPage() {
+interface BiggestPageProps {
+  lang?: string;
+}
+
+export default function BiggestPage({ lang = "ko" }: BiggestPageProps) {
+  const isKorean = lang === "ko";
+  
   // 탭 데이터
   const tabs = [
-    { id: "add", label: "큰수 덧셈", operator: "+", example: "258435724652396573465785972395784578958967346782346137856284628964723865893478348174612396116278462856892367823471346128+34769357265716348967693647236571349813673456782945789647819656395724651736481248368736592637862374678457934657246873562" },
-    { id: "subtract", label: "큰수 뺄셈", operator: "-", example: "357245637923963276728365986578367862896734584973456364286423969385745764716482649167463578191738481264789478164792371673-21345932471247835676739273618634964756375634678267637567346319813741796712479237284978358264867281692367816482837282222" },
-    { id: "multiply", label: "큰수 곱셈", operator: "×", example: "24534857238472634712471561972836134629756284623467364189267123947134621768794782165764574385346723647364726581637963723582648237×187647123427469816783671264836134712936478368127421587268736721671948163836483275647856373847364783642672672722" },
-    { id: "divide", label: "큰수 나눗셈", operator: "÷", example: "856234857361236735678957162894745726734967836783958425746172367367368967529567249573457368342849162946726734617348247161÷24583495678467183573496387628462384637487365846537958245284639467236587956376573333373333" }
+    { id: "add", label: isKorean ? "큰수 덧셈" : "Big Number Addition", operator: "+", example: "258435724652396573465785972395784578958967346782346137856284628964723865893478348174612396116278462856892367823471346128+34769357265716348967693647236571349813673456782945789647819656395724651736481248368736592637862374678457934657246873562" },
+    { id: "subtract", label: isKorean ? "큰수 뺄셈" : "Big Number Subtraction", operator: "-", example: "357245637923963276728365986578367862896734584973456364286423969385745764716482649167463578191738481264789478164792371673-21345932471247835676739273618634964756375634678267637567346319813741796712479237284978358264867281692367816482837282222" },
+    { id: "multiply", label: isKorean ? "큰수 곱셈" : "Big Number Multiplication", operator: "×", example: "24534857238472634712471561972836134629756284623467364189267123947134621768794782165764574385346723647364726581637963723582648237×187647123427469816783671264836134712936478368127421587268736721671948163836483275647856373847364783642672672722" },
+    { id: "divide", label: isKorean ? "큰수 나눗셈" : "Big Number Division", operator: "÷", example: "856234857361236735678957162894745726734967836783958425746172367367368967529567249573457368342849162946726734617348247161÷24583495678467183573496387628462384637487365846537958245284639467236587956376573333373333" }
   ];
 
   const [selectedTab, setSelectedTab] = useState<string>("multiply");
@@ -97,13 +103,13 @@ export default function BiggestPage() {
       } else if (divMatch) {
         res = biggest.divide(divMatch[1].trim(), divMatch[2].trim(), 20);
       } else {
-        res = "잘못된 계산식";
+        res = isKorean ? "잘못된 계산식" : "Invalid expression";
       }
 
       setResult(res);
       setDisplay(res);
     } catch (error) {
-      setResult(`오류: ${error instanceof Error ? error.message : "계산 실패"}`);
+      setResult(`${isKorean ? "오류" : "Error"}: ${error instanceof Error ? error.message : (isKorean ? "계산 실패" : "Calculation failed")}`);
     }
   };
 
@@ -184,15 +190,17 @@ export default function BiggestPage() {
       <div className="flex flex-col lg:flex-row">
         <div className="w-full lg:w-1/2 p-6 sm:p-8 lg:p-12 pb-24 font-mono z-10 overflow-x-hidden relative">
           <section className="mb-6 lg:mb-10 space-y-4">
-            <p className="text-xs uppercase tracking-[0.35em] text-white/50">프로젝트</p>
+            <p className="text-xs uppercase tracking-[0.35em] text-white/50">{isKorean ? "프로젝트" : "PROJECT"}</p>
             <h1 className="text-3xl sm:text-4xl font-bold">Biggest</h1>
             <p className="text-base sm:text-lg text-white/80">
-              2kb의 가벼운 크기로 무한 정밀도의 큰 정수와 큰 소수를 안전하게 계산할 수 있는 라이브러리입니다.
+              {isKorean 
+                ? "2kb의 가벼운 크기로 무한 정밀도의 큰 정수와 큰 소수를 안전하게 계산할 수 있는 라이브러리입니다."
+                : "A lightweight 2kb library for safely calculating infinitely precise large integers and decimals."}
             </p>
           </section>
 
           <section className="mb-6 lg:mb-10 space-y-4">
-            <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">설치</h2>
+            <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">{isKorean ? "설치" : "Installation"}</h2>
             <div className="flex gap-2 mb-3 flex-wrap">
               {["npm", "pnpm", "yarn"].map((pm) => (
                 <button
@@ -225,14 +233,14 @@ export default function BiggestPage() {
                   setTimeout(() => setCopiedInstall(false), 2000);
                 }}
                 className="flex items-center gap-2 px-3 py-1.5 rounded text-xs transition-colors hover:bg-white/10 flex-shrink-0 ml-2"
-                title="복사"
+                title={isKorean ? "복사" : "Copy"}
               >
                 {copiedInstall ? (
                   <>
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <polyline points="20 6 9 17 4 12" />
                     </svg>
-                    <span>복사됨!</span>
+                    <span>{isKorean ? "복사됨!" : "Copied!"}</span>
                   </>
                 ) : (
                   <>
@@ -240,7 +248,7 @@ export default function BiggestPage() {
                       <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
                       <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
                     </svg>
-                    <span>복사</span>
+                    <span>{isKorean ? "복사" : "Copy"}</span>
                   </>
                 )}
               </button>
@@ -393,15 +401,15 @@ export default function BiggestPage() {
           </section>
 
           <section className="mb-6 lg:mb-10 space-y-4">
-            <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">주요 기능</h2>
+            <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">{isKorean ? "주요 기능" : "Key Features"}</h2>
             <div className="space-y-2 text-xs sm:text-sm">
               {[
-                { title: "기본 연산", desc: "덧셈, 뺄셈, 곱셈, 나눗셈" },
-                { title: "비교 연산", desc: "크기 비교, 최소/최대값 찾기" },
-                { title: "반올림", desc: "floor, ceil, round 등" },
-                { title: "거듭제곱", desc: "제곱근, n제곱근 계산" },
-                { title: "모듈러 연산", desc: "mod, gcd, lcm 계산" },
-                { title: "조합론", desc: "팩토리얼, 조합, 순열 계산" }
+                { title: isKorean ? "기본 연산" : "Basic Operations", desc: isKorean ? "덧셈, 뺄셈, 곱셈, 나눗셈" : "Addition, subtraction, multiplication, division" },
+                { title: isKorean ? "비교 연산" : "Comparison", desc: isKorean ? "크기 비교, 최소/최대값 찾기" : "Size comparison, min/max values" },
+                { title: isKorean ? "반올림" : "Rounding", desc: "floor, ceil, round" },
+                { title: isKorean ? "거듭제곱" : "Power", desc: isKorean ? "제곱근, n제곱근 계산" : "Square root, nth root calculation" },
+                { title: isKorean ? "모듈러 연산" : "Modular", desc: "mod, gcd, lcm" },
+                { title: isKorean ? "조합론" : "Combinatorics", desc: isKorean ? "팩토리얼, 조합, 순열 계산" : "Factorial, combination, permutation" }
               ].map((item) => (
                 <div key={item.title} className="flex items-start">
                   <span className="mr-3 opacity-60">→</span>
@@ -412,12 +420,12 @@ export default function BiggestPage() {
           </section>
 
           <section className="mb-6 lg:mb-10 space-y-4">
-            <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">왜 Biggest를 사용해야 하나요?</h2>
+            <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">{isKorean ? "왜 Biggest를 사용해야 하나요?" : "Why Use Biggest?"}</h2>
             <div className="space-y-2 text-xs sm:text-sm">
               {[
-                { title: "무한 정밀도", desc: "JavaScript의 숫자 제한을 넘어 임의의 크기의 정수와 소수를 처리" },
-                { title: "가벼운 크기", desc: "단 2kb의 크기로 의존성 없이 순수 문자열 기반 구현" },
-                { title: "완벽한 정확성", desc: "부동소수점 오류 없이 금융, 과학 계산 등에 안전하게 사용" }
+                { title: isKorean ? "무한 정밀도" : "Infinite Precision", desc: isKorean ? "JavaScript의 숫자 제한을 넘어 임의의 크기의 정수와 소수를 처리" : "Handle arbitrary-size integers and decimals beyond JavaScript limits" },
+                { title: isKorean ? "가벼운 크기" : "Lightweight", desc: isKorean ? "단 2kb의 크기로 의존성 없이 순수 문자열 기반 구현" : "Only 2kb with zero dependencies, pure string-based implementation" },
+                { title: isKorean ? "완벽한 정확성" : "Perfect Accuracy", desc: isKorean ? "부동소수점 오류 없이 금융, 과학 계산 등에 안전하게 사용" : "No floating-point errors, safe for financial and scientific calculations" }
               ].map((item, idx) => (
                 <div key={idx} className="flex items-start">
                   <span className="mr-3 opacity-60">→</span>
@@ -428,13 +436,13 @@ export default function BiggestPage() {
           </section>
 
           <section className="mb-6 lg:mb-10 space-y-4">
-            <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">사용 예시</h2>
+            <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">{isKorean ? "사용 예시" : "Usage Examples"}</h2>
 
             {/* 예시 탭 */}
             <div className="flex gap-2 mb-3 flex-wrap">
               {[
-                { id: "basic", label: "기본 연산" },
-                { id: "advanced", label: "고급 연산" }
+                { id: "basic", label: isKorean ? "기본 연산" : "Basic" },
+                { id: "advanced", label: isKorean ? "고급 연산" : "Advanced" }
               ].map((tab) => (
                 <button
                   key={tab.id}

@@ -10,10 +10,14 @@ import "@/styles/global.css";
 const { language, t } = initI18n(Astro);
 const navbarTranslations = extractNavbarTranslations(t);
 
-const pageTitle = "Biggest - 무한 정밀도 계산 라이브러리";
-const pageDescription = "2kb의 가벼운 크기로 무한 정밀도의 큰 정수와 큰 소수를 안전하게 계산할 수 있는 라이브러리";
+const pageTitle = t.sideProjects?.biggest?.pageTitle || (language === "ko"
+  ? "Biggest - 무한 정밀도 계산 라이브러리"
+  : "Biggest - Arbitrary Precision Math Library");
+const pageDescription = t.sideProjects?.biggest?.pageDescription || (language === "ko"
+  ? "2kb의 가벼운 크기로 무한 정밀도의 큰 정수와 큰 소수를 안전하게 계산할 수 있는 라이브러리"
+  : "A lightweight 2kb library for safely calculating arbitrary-precision large integers and decimals");
 const lang = Astro.params.lang || "ko";
-const ogImage = new URL(`/ko/biggest/og.png`, Astro.url).toString();
+const ogImage = new URL(`/${lang}/biggest/og.png`, Astro.url).toString();
 ---
 
 <html lang={language}>
@@ -31,7 +35,7 @@ const ogImage = new URL(`/ko/biggest/og.png`, Astro.url).toString();
     <CommonBody lang={language} />
     <KakaoBrowserEscape client:only="preact" />
     <div class="max-w-[1500px] mx-auto w-full">
-      <BiggestPage client:only="react" />
+      <BiggestPage client:only="react" lang={lang} />
     </div>
     <Navbar client:idle lang={language} translations={navbarTranslations} />
   </body>

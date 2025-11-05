@@ -10,10 +10,82 @@ import "@/styles/global.css";
 const { language, t } = initI18n(Astro);
 const navbarTranslations = extractNavbarTranslations(t);
 
-const pageTitle = "Gauss Spiral - 나선 좌표 시스템 라이브러리";
-const pageDescription = "나선형으로 회전하며 픽셀을 채우는 효율적인 좌표 시스템의 좌표를 계산합니다.";
+const pageTitle = t("sideProjects.gaussSpiral.pageTitle") || (language === "ko"
+  ? "Gauss Spiral - 나선 좌표 시스템 라이브러리"
+  : "Gauss Spiral - Spiral Coordinate System Library");
+const pageDescription = t("sideProjects.gaussSpiral.pageDescription") || (language === "ko"
+  ? "나선형으로 회전하며 픽셀을 채우는 효율적인 좌표 시스템의 좌표를 계산합니다."
+  : "Calculates coordinates for an efficient coordinate system that fills pixels in a spiral rotation.");
 const lang = Astro.params.lang || "ko";
-const ogImage = new URL(`/ko/gauss-spiral/og.png`, Astro.url).toString();
+const ogImage = new URL(`/${lang}/gauss-spiral/og.png`, Astro.url).toString();
+
+// Extract all gaussSpiral translations for the component
+const gaussSpiralTranslations = {
+  spiralViewerTitle: t("sideProjects.gaussSpiral.spiralViewerTitle"),
+  spiralViewerDesc: t("sideProjects.gaussSpiral.spiralViewerDesc"),
+  gridRange: t("sideProjects.gaussSpiral.gridRange"),
+  coordinateRange: t("sideProjects.gaussSpiral.coordinateRange"),
+  spiralTransformTitle: t("sideProjects.gaussSpiral.spiralTransformTitle"),
+  error: t("sideProjects.gaussSpiral.error"),
+  explanation: t("sideProjects.gaussSpiral.explanation"),
+  explanationText1: t("sideProjects.gaussSpiral.explanationText1"),
+  explanationItem1: t("sideProjects.gaussSpiral.explanationItem1"),
+  explanationItem2: t("sideProjects.gaussSpiral.explanationItem2"),
+  explanationText2: t("sideProjects.gaussSpiral.explanationText2"),
+  featuresTitle: t("sideProjects.gaussSpiral.featuresTitle"),
+  featureDeterministic: t("sideProjects.gaussSpiral.featureDeterministic"),
+  featureDeterministicDesc: t("sideProjects.gaussSpiral.featureDeterministicDesc"),
+  featureBidirectional: t("sideProjects.gaussSpiral.featureBidirectional"),
+  featureBidirectionalDesc: t("sideProjects.gaussSpiral.featureBidirectionalDesc"),
+  featureGeometry: t("sideProjects.gaussSpiral.featureGeometry"),
+  featureGeometryDesc: t("sideProjects.gaussSpiral.featureGeometryDesc"),
+  featureProgressive: t("sideProjects.gaussSpiral.featureProgressive"),
+  featureProgressiveDesc: t("sideProjects.gaussSpiral.featureProgressiveDesc"),
+  featureRingSampling: t("sideProjects.gaussSpiral.featureRingSampling"),
+  featureRingSamplingDesc: t("sideProjects.gaussSpiral.featureRingSamplingDesc"),
+  featureZeroDeps: t("sideProjects.gaussSpiral.featureZeroDeps"),
+  featureZeroDepsDesc: t("sideProjects.gaussSpiral.featureZeroDepsDesc"),
+  installation: t("sideProjects.gaussSpiral.installation"),
+  copy: t("sideProjects.gaussSpiral.copy"),
+  copied: t("sideProjects.gaussSpiral.copied"),
+  copyTitle: t("sideProjects.gaussSpiral.copyTitle"),
+  usageExample: t("sideProjects.gaussSpiral.usageExample"),
+  usageComment1: t("sideProjects.gaussSpiral.usageComment1"),
+  usageComment2: t("sideProjects.gaussSpiral.usageComment2"),
+  practicalExamples: t("sideProjects.gaussSpiral.practicalExamples"),
+  exampleVisual: t("sideProjects.gaussSpiral.exampleVisual"),
+  exampleVisualDesc1: t("sideProjects.gaussSpiral.exampleVisualDesc1"),
+  exampleVisualDesc2: t("sideProjects.gaussSpiral.exampleVisualDesc2"),
+  exampleGIS: t("sideProjects.gaussSpiral.exampleGIS"),
+  exampleGISDesc1: t("sideProjects.gaussSpiral.exampleGISDesc1"),
+  exampleGISDesc2: t("sideProjects.gaussSpiral.exampleGISDesc2"),
+  exampleGame: t("sideProjects.gaussSpiral.exampleGame"),
+  exampleGameDesc1: t("sideProjects.gaussSpiral.exampleGameDesc1"),
+  exampleGameDesc2: t("sideProjects.gaussSpiral.exampleGameDesc2"),
+  howItWorks: t("sideProjects.gaussSpiral.howItWorks"),
+  problemDefinition: t("sideProjects.gaussSpiral.problemDefinition"),
+  problemDefinitionDesc: t("sideProjects.gaussSpiral.problemDefinitionDesc"),
+  problemItem1: t("sideProjects.gaussSpiral.problemItem1"),
+  problemItem2: t("sideProjects.gaussSpiral.problemItem2"),
+  approach: t("sideProjects.gaussSpiral.approach"),
+  approachDesc1: t("sideProjects.gaussSpiral.approachDesc1"),
+  approachDesc2: t("sideProjects.gaussSpiral.approachDesc2"),
+  algorithmOverview: t("sideProjects.gaussSpiral.algorithmOverview"),
+  algorithmRing: t("sideProjects.gaussSpiral.algorithmRing"),
+  algorithmRingDesc: t("sideProjects.gaussSpiral.algorithmRingDesc"),
+  algorithmOrder: t("sideProjects.gaussSpiral.algorithmOrder"),
+  algorithmOrderDesc: t("sideProjects.gaussSpiral.algorithmOrderDesc"),
+  algorithmGlobalIndex: t("sideProjects.gaussSpiral.algorithmGlobalIndex"),
+  algorithmGlobalIndexDesc: t("sideProjects.gaussSpiral.algorithmGlobalIndexDesc"),
+  algorithmInverse: t("sideProjects.gaussSpiral.algorithmInverse"),
+  algorithmInverseDesc: t("sideProjects.gaussSpiral.algorithmInverseDesc"),
+  api: t("sideProjects.gaussSpiral.api"),
+  apiGetNDesc: t("sideProjects.gaussSpiral.apiGetNDesc"),
+  apiGetCoordsDesc: t("sideProjects.gaussSpiral.apiGetCoordsDesc"),
+  performanceNotes: t("sideProjects.gaussSpiral.performanceNotes"),
+  performanceNote1: t("sideProjects.gaussSpiral.performanceNote1"),
+  performanceNote2: t("sideProjects.gaussSpiral.performanceNote2"),
+};
 ---
 
 <html lang={language}>
@@ -31,7 +103,7 @@ const ogImage = new URL(`/ko/gauss-spiral/og.png`, Astro.url).toString();
     <CommonBody lang={language} />
     <KakaoBrowserEscape client:only="preact" />
     <div class="max-w-[1500px] mx-auto w-full">
-      <GaussSpiralPage client:only="react" />
+      <GaussSpiralPage client:only="react" lang={lang} translations={gaussSpiralTranslations} />
     </div>
     <Navbar client:idle lang={language} translations={navbarTranslations} />
   </body>

@@ -4,7 +4,19 @@ import GradientText from "./gradient-text";
 
 type CharacterSet = "runic" | "oldPersian" | "emoji" | "none";
 
-export default function CurseScriptCounter({ isDarkMode }: { isDarkMode: boolean }) {
+interface CurseScriptCounterProps {
+  isDarkMode: boolean;
+  translations?: any;
+  lang?: string;
+}
+
+export default function CurseScriptCounter({ isDarkMode, translations = {}, lang = "en" }: CurseScriptCounterProps) {
+  const isKorean = lang === "ko";
+  
+  // Helper function to get translation with fallback
+  const t = (key: string, fallbackKo: string, fallbackEn: string) => {
+    return translations[key] || (isKorean ? fallbackKo : fallbackEn);
+  };
   const [inputCode, setInputCode] = useState<string>("");
   const [cursedOutput, setCursedOutput] = useState<string>("");
   const [copied, setCopied] = useState<boolean>(false);
@@ -73,12 +85,12 @@ export default function CurseScriptCounter({ isDarkMode }: { isDarkMode: boolean
 
   return (
     <div className="mb-6 lg:mb-10 relative z-20">
-      <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">Try It Out</h2>
+      <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">{t('tryItOut', '체험하기', 'Try It Out')}</h2>
       <div className="space-y-4">
         {/* Character Set Selection */}
         <div className="space-y-2">
           <label className="block text-xs opacity-50 mb-1.5">
-            Character Set
+            {t('characterSet', '문자 세트', 'Character Set')}
           </label>
           <div className="flex gap-2 flex-wrap">
             {(["runic", "oldPersian", "emoji", "none"] as CharacterSet[]).map((charSet) => (
@@ -100,21 +112,21 @@ export default function CurseScriptCounter({ isDarkMode }: { isDarkMode: boolean
         <div className="space-y-3">
           <div className="flex items-center justify-between">
             <label className="text-xs sm:text-sm opacity-70">
-              JavaScript Code
+              {t('javascriptCode', 'JavaScript 코드', 'JavaScript Code')}
             </label>
             <button
               onClick={handleRandomize}
               className={`px-3 py-1.5 rounded text-xs transition-colors ${isDarkMode ? "bg-white/5 hover:bg-white/10" : "bg-black/5 hover:bg-black/10"
                 }`}
-              title="Random Example"
+              title={t('randomExample', '랜덤 예제', 'Random Example')}
             >
-              🎲 Random
+              🎲 {t('randomExample', '랜덤', 'Random')}
             </button>
           </div>
           <textarea
             value={inputCode}
             onChange={(e) => handleConvert((e.target as HTMLTextAreaElement).value)}
-            placeholder='Enter JavaScript code (e.g., console.log("Hello"))'
+            placeholder={t('enterCode', 'JavaScript 코드를 입력하세요 (예: console.log("Hello"))', 'Enter JavaScript code (e.g., console.log("Hello"))')}
             rows={3}
             className={`w-full px-3 py-2 rounded text-xs sm:text-sm font-mono transition-colors resize-none ${isDarkMode
               ? "bg-white/5 text-[#dc143c] placeholder-white/20 focus:bg-white/10"
@@ -128,20 +140,20 @@ export default function CurseScriptCounter({ isDarkMode }: { isDarkMode: boolean
           <div className="space-y-3">
             <div className="flex items-center justify-between">
               <label className="text-xs sm:text-sm opacity-70">
-                Cursed Output
+                {t('cursedOutput', '난독화된 출력', 'Cursed Output')}
               </label>
               <button
                 onClick={handleCopy}
                 className={`flex items-center gap-2 px-3 py-1.5 rounded text-xs transition-colors ${isDarkMode ? "hover:bg-white/10" : "hover:bg-black/10"
                   }`}
-                title="Copy"
+                title={t('copyTitle', '복사', 'Copy')}
               >
                 {copied ? (
                   <>
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <polyline points="20 6 9 17 4 12" />
                     </svg>
-                    <span>Copied!</span>
+                    <span>{t('copied', '복사됨!', 'Copied!')}</span>
                   </>
                 ) : (
                   <>
@@ -149,7 +161,7 @@ export default function CurseScriptCounter({ isDarkMode }: { isDarkMode: boolean
                       <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
                       <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
                     </svg>
-                    <span>Copy</span>
+                    <span>{t('copy', '복사', 'Copy')}</span>
                   </>
                 )}
               </button>

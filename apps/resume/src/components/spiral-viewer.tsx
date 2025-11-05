@@ -11,12 +11,15 @@ const getLayerColor = (layer: number) => {
 export interface SpiralViewerProps {
   getCoordinates?: (n: number) => { x: number; y: number };
   getNFromCoordinates?: (x: number, y: number) => number;
+  translations?: any;
 }
 
 export default function SpiralViewer({
   getCoordinates,
   getNFromCoordinates,
+  translations,
 }: SpiralViewerProps) {
+  const t = translations || {};
   const [currentCoordinate, setCurrentCoordinate] = useState(90);
   const [coordinatesHistory, setCoordinatesHistory] = useState<number[]>(
     Array.from({ length: 90 }, (_, i) => i + 1)
@@ -79,15 +82,14 @@ export default function SpiralViewer({
         <div className="w-full flex flex-col">
           <div className="mb-4 text-white">
             <h2 className="text-lg sm:text-xl font-bold mb-2">
-              나선 좌표 시각화
+              {t.spiralViewerTitle || "나선 좌표 시각화"}
             </h2>
             <p className="text-xs sm:text-sm text-gray-300 mb-4">
-              이 시각화는 (0,0)에서 시작하여 시계 방향으로 바깥쪽으로 확장되는 독특한 나선 좌표 시스템을 보여줍니다.
-              슬라이더를 움직여 1부터 좌표를 생성하고, 원점 주위에 동심원 레이어를 형성하는 모습을 관찰하세요.
+              {t.spiralViewerDesc || "이 시각화는 (0,0)에서 시작하여 시계 방향으로 바깥쪽으로 확장되는 독특한 나선 좌표 시스템을 보여줍니다. 슬라이더를 움직여 1부터 좌표를 생성하고, 원점 주위에 동심원 레이어를 형성하는 모습을 관찰하세요."}
             </p>
             <div className="mb-4">
               <label className="block text-xs sm:text-sm font-medium mb-2">
-                그리드 범위 (-{gridRange} ~ {gridRange})
+                {t.gridRange || "그리드 범위"} (-{gridRange} ~ {gridRange})
               </label>
               <div className="relative">
                 <input
@@ -113,7 +115,7 @@ export default function SpiralViewer({
           </div>
           <div className="relative">
             <label className="block text-xs sm:text-sm font-medium mb-2 text-white">
-              좌표 범위 (1 ~ {maxCoordinate})
+              {t.coordinateRange || "좌표 범위"} (1 ~ {maxCoordinate})
             </label>
             <input
               type="range"
@@ -161,7 +163,7 @@ export default function SpiralViewer({
 
           <div className="relative mt-6 sm:mt-10">
             <h2 className="text-lg sm:text-xl font-bold">
-              나선 좌표 변환
+              {t.spiralTransformTitle || "나선 좌표 변환"}
             </h2>
           </div>
 
@@ -186,7 +188,7 @@ export default function SpiralViewer({
                     const coords = getCoordinates(n);
                     return `(${coords.x}, ${coords.y})`;
                   } catch (error) {
-                    return "오류";
+                    return t.error || "오류";
                   }
                 })()}
               </span>
@@ -223,7 +225,7 @@ export default function SpiralViewer({
                     const n = getNFromCoordinates(x, y);
                     return `${n}`;
                   } catch (error) {
-                    return "오류";
+                    return t.error || "오류";
                   }
                 })()}
               </span>

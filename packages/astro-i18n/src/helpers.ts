@@ -96,6 +96,7 @@ export function extractNavbarTranslations(t: TFunction) {
   return {
     resume: t("navbar.resume"),
     portfolio: t("navbar.portfolio"),
+    side: t("navbar.side"),
     github: t("navbar.github"),
     twitter: t("navbar.twitter"),
     kakao: t("navbar.kakao"),

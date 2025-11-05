@@ -4,7 +4,18 @@ import GradientText from "./gradient-text";
 
 type TabType = "encode" | "decode";
 
-export default function MugunghwaCounter({ isDarkMode }: { isDarkMode: boolean }) {
+interface MugunghwaCounterProps {
+  isDarkMode: boolean;
+  translations?: any;
+  lang?: string;
+}
+
+export default function MugunghwaCounter({ isDarkMode, translations = {}, lang = "ko" }: MugunghwaCounterProps) {
+  const isKorean = lang === "ko";
+  
+  const t = (key: string, fallbackKo: string, fallbackEn: string) => {
+    return translations[key] || (isKorean ? fallbackKo : fallbackEn);
+  };
   const minValue = 10000;
   const maxValue = 9999999999;
 
@@ -100,7 +111,7 @@ export default function MugunghwaCounter({ isDarkMode }: { isDarkMode: boolean }
 
   return (
     <div className="mb-6 lg:mb-10 relative z-20">
-      <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">체험</h2>
+      <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">{t('experience', '체험', 'Experience')}</h2>
       <div className="space-y-4">
         {/* Tab Navigation */}
         <div className="flex gap-2">
@@ -113,7 +124,7 @@ export default function MugunghwaCounter({ isDarkMode }: { isDarkMode: boolean }
               : "opacity-50 hover:opacity-70"
               }`}
           >
-            암호화
+            {t('encode', '암호화', 'Encode')}
           </button>
           <button
             onClick={() => setActiveTab("decode")}
@@ -124,7 +135,7 @@ export default function MugunghwaCounter({ isDarkMode }: { isDarkMode: boolean }
               : "opacity-50 hover:opacity-70"
               }`}
           >
-            복호화
+            {t('decode', '복호화', 'Decode')}
           </button>
         </div>
 
@@ -136,20 +147,20 @@ export default function MugunghwaCounter({ isDarkMode }: { isDarkMode: boolean }
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
                   <label className="text-xs sm:text-sm opacity-70">
-                    무궁화 코드
+                    {t('mugunghwaCode', '무궁화 코드', 'Mugunghwa Code')}
                   </label>
                   <button
                     onClick={handleCopy}
                     className={`flex items-center gap-2 px-3 py-1.5 rounded text-xs transition-colors ${isDarkMode ? "hover:bg-white/10" : "hover:bg-black/10"
                       }`}
-                    title="복사"
+                    title={t('copy', '복사', 'Copy')}
                   >
                     {copied ? (
                       <>
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                           <polyline points="20 6 9 17 4 12" />
                         </svg>
-                        <span>복사됨!</span>
+                        <span>{t('copied', '복사됨!', 'Copied!')}</span>
                       </>
                     ) : (
                       <>
@@ -157,7 +168,7 @@ export default function MugunghwaCounter({ isDarkMode }: { isDarkMode: boolean }
                           <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
                           <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
                         </svg>
-                        <span>복사</span>
+                        <span>{t('copy', '복사', 'Copy')}</span>
                       </>
                     )}
                   </button>
@@ -178,7 +189,7 @@ export default function MugunghwaCounter({ isDarkMode }: { isDarkMode: boolean }
             {/* 숫자 입력 - 작게 표시 */}
             <div className="pt-2 space-y-3">
               <label className="block text-xs opacity-50 mb-1.5">
-                코드로 변환될 숫자
+                {t('numberToConvert', '코드로 변환될 숫자', 'Number to convert to code')}
               </label>
 
               {/* 슬라이더 */}
@@ -244,7 +255,7 @@ export default function MugunghwaCounter({ isDarkMode }: { isDarkMode: boolean }
                   type="number"
                   value={inputNumber}
                   onChange={(e) => handleConvert((e.target as HTMLInputElement).value)}
-                  placeholder="숫자를 입력하세요"
+                  placeholder={t('enterNumber', '숫자를 입력하세요', 'Enter a number')}
                   className={`flex-1 px-3 py-2 rounded text-xs sm:text-sm font-mono transition-colors ${isDarkMode
                     ? "bg-white/5 text-white/70 placeholder-white/20 focus:bg-white/10"
                     : "bg-black/5 text-black/70 placeholder-black/20 focus:bg-black/10"
@@ -254,7 +265,7 @@ export default function MugunghwaCounter({ isDarkMode }: { isDarkMode: boolean }
                   onClick={handleRandomize}
                   className={`px-4 py-2 rounded text-base sm:text-lg transition-colors ${isDarkMode ? "bg-white/5 hover:bg-white/10" : "bg-black/5 hover:bg-black/10"
                     }`}
-                  title="랜덤 숫자 생성"
+                  title={t('randomNumber', '랜덤 숫자 생성', 'Generate random number')}
                 >
                   🎲
                 </button>
@@ -270,13 +281,13 @@ export default function MugunghwaCounter({ isDarkMode }: { isDarkMode: boolean }
             <div className="space-y-3" style={{ visibility: decoded ? 'visible' : 'hidden', height: decoded ? 'auto' : '0' }}>
               <div className="flex items-center justify-between">
                 <label className="text-xs sm:text-sm opacity-70">
-                  디코딩된 숫자
+                  {t('decodedNumber', '디코딩된 숫자', 'Decoded Number')}
                 </label>
                 <button
                   onClick={handleCopy}
                   className={`flex items-center gap-2 px-3 py-1.5 rounded text-xs transition-colors ${isDarkMode ? "hover:bg-white/10" : "hover:bg-black/10"
                     }`}
-                  title="복사"
+                  title={t('copy', '복사', 'Copy')}
                   disabled={!decoded}
                 >
                   {copied ? (
@@ -284,7 +295,7 @@ export default function MugunghwaCounter({ isDarkMode }: { isDarkMode: boolean }
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                         <polyline points="20 6 9 17 4 12" />
                       </svg>
-                      <span>복사됨!</span>
+                      <span>{t('copied', '복사됨!', 'Copied!')}</span>
                     </>
                   ) : (
                     <>
@@ -292,7 +303,7 @@ export default function MugunghwaCounter({ isDarkMode }: { isDarkMode: boolean }
                         <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
                         <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
                       </svg>
-                      <span>복사</span>
+                      <span>{t('copy', '복사', 'Copy')}</span>
                     </>
                   )}
                 </button>
@@ -312,7 +323,7 @@ export default function MugunghwaCounter({ isDarkMode }: { isDarkMode: boolean }
             {/* 무궁화 코드 입력 */}
             <div className="pt-2 space-y-3">
               <label className="block text-xs opacity-50 mb-1.5">
-                숫자로 변환될 무궁화 코드
+                {t('codeToConvert', '숫자로 변환될 무궁화 코드', 'Mugunghwa code to convert to number')}
               </label>
 
               {/* 입력란과 랜덤 버튼 */}
@@ -323,7 +334,7 @@ export default function MugunghwaCounter({ isDarkMode }: { isDarkMode: boolean }
                   type="text"
                   value={inputCode}
                   onChange={(e) => handleDecodeConvert((e.target as HTMLInputElement).value)}
-                  placeholder="무궁화 코드를 입력하세요"
+                  placeholder={t('enterCode', '무궁화 코드를 입력하세요', 'Enter Mugunghwa code')}
                   autoComplete="off"
                   className={`flex-1 px-3 py-2 rounded text-xs sm:text-sm font-mono transition-colors ${isDarkMode
                     ? "bg-white/5 text-white/70 placeholder-white/20 focus:bg-white/10"
@@ -334,7 +345,7 @@ export default function MugunghwaCounter({ isDarkMode }: { isDarkMode: boolean }
                   onClick={handleRandomize}
                   className={`px-4 py-2 rounded text-base sm:text-lg transition-colors ${isDarkMode ? "bg-white/5 hover:bg-white/10" : "bg-black/5 hover:bg-black/10"
                     }`}
-                  title="랜덤 코드 생성"
+                  title={t('randomCode', '랜덤 코드 생성', 'Generate random code')}
                 >
                   🎲
                 </button>
