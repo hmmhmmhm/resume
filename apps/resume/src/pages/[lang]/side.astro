@@ -30,11 +30,12 @@ const sideTranslations = {
   },
   projects: t.sideProjects?.projects || {},
 };
+const ogImage = new URL(`/en/side-og.png`, Astro.url).toString();
 ---
 
 <html lang={language}>
   <head>
-    <CommonHead title={pageTitle} description={pageDescription} lang={language} />
+    <CommonHead title={pageTitle} description={pageDescription} lang={language} ogImage={ogImage} />
     <script is:inline>
       // Force light theme for side page
       (function () {
