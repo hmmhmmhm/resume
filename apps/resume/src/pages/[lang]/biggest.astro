@@ -3,7 +3,6 @@ import CommonHead from "@/components/common-head.astro";
 import CommonBody from "@/components/common-body.astro";
 import BiggestPage from "@/components/biggest-page.tsx";
 import Navbar from "@/components/navbar";
-import KakaoBrowserEscape from "@/components/kakao-browser-escape";
 import { initI18n, extractNavbarTranslations } from "@/i18n";
 import "@/styles/global.css";
 
@@ -33,7 +32,6 @@ const ogImage = new URL(`/${lang}/biggest/og.png`, Astro.url).toString();
   </head>
   <body class="bg-black overflow-x-hidden">
     <CommonBody lang={language} />
-    <KakaoBrowserEscape client:only="preact" />
     <div class="max-w-[1500px] mx-auto w-full">
       <BiggestPage client:only="react" lang={lang} />
     </div>

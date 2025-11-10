@@ -3,7 +3,6 @@ import CommonHead from "@/components/common-head.astro";
 import CommonBody from "@/components/common-body.astro";
 import SidePage from "@/components/side-page";
 import Navbar from "@/components/navbar";
-import KakaoBrowserEscape from "@/components/kakao-browser-escape";
 import "@/styles/global.css";
 
 import { initI18n, extractNavbarTranslations } from "@/i18n";
@@ -46,7 +45,6 @@ const ogImage = new URL(`/en/side-og.png`, Astro.url).toString();
   </head>
   <body>
     <CommonBody lang={language} />
-    <KakaoBrowserEscape client:only="preact" />
     <SidePage client:idle lang={language} translations={sideTranslations} />
     <Navbar client:idle lang={language} translations={navbarTranslations} />
   </body>

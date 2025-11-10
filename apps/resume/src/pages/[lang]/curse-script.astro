@@ -3,7 +3,6 @@ import CommonHead from "@/components/common-head.astro";
 import CommonBody from "@/components/common-body.astro";
 import CurseScriptPage from "@/components/curse-script-page.tsx";
 import Navbar from "@/components/navbar";
-import KakaoBrowserEscape from "@/components/kakao-browser-escape";
 import { initI18n, extractNavbarTranslations } from "@/i18n";
 import "@/styles/global.css";
 
@@ -32,7 +31,6 @@ const curseScriptTranslations = t.sideProjects?.curseScript || {};
   </head>
   <body class="bg-black overflow-x-hidden">
     <CommonBody lang={language} />
-    <KakaoBrowserEscape client:only="preact" />
     <div class="max-w-[1500px] mx-auto w-full">
       <CurseScriptPage client:only="react" lang={lang} translations={curseScriptTranslations} />
     </div>
