@@ -40,6 +40,27 @@ paths:
               schema:
                 type: string
 
+  /rss.xml:
+    get:
+      summary: Get RSS feed
+      description: Returns RSS feed with resume, portfolio, and side project updates
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/rss+xml:
+              schema:
+                type: string
+                example: |
+                  <?xml version="1.0" encoding="UTF-8"?>
+                  <rss version="2.0">
+                    <channel>
+                      <title>Hamin Lee - Full Stack Engineer</title>
+                      <link>https://hmart.app</link>
+                      <description>Professional resume and portfolio updates</description>
+                    </channel>
+                  </rss>
+
   /en:
     get:
       summary: Get English resume page

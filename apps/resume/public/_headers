@@ -50,6 +50,12 @@
   X-Robots-Tag: index, follow
   Content-Type: text/markdown; charset=utf-8
 
+# RSS Feed
+/rss.xml
+  Cache-Control: public, max-age=3600
+  X-Robots-Tag: index, follow
+  Content-Type: application/rss+xml; charset=utf-8
+
 # HTML pages - Allow AI crawlers with full content access
 /*
   X-Robots-Tag: index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1

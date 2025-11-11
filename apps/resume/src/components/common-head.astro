@@ -92,6 +92,9 @@ const canonicalUrl = `${siteUrl}/${lang}${pathWithoutLang}`;
 <link rel="alternate" type="text/plain" href={`${siteUrl}/llms-ko.txt`} title="LLM Context (Korean)" />
 <link rel="alternate" type="application/json" href={`${siteUrl}/.well-known/llm.json`} title="LLM Metadata" />
 
+<!-- RSS Feed -->
+<link rel="alternate" type="application/rss+xml" href={`${siteUrl}/rss.xml`} title="Hamin Lee - Resume & Portfolio RSS Feed" />
+
 <meta property="og:locale" content={lang === "ko" ? "ko_KR" : "en_US"} />
 {
   supportedLanguages

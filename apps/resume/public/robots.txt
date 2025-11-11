@@ -44,6 +44,9 @@ Crawl-delay: 1
 # Sitemap location
 Sitemap: https://hmart.app/sitemap.xml
 
+# RSS Feed
+# https://hmart.app/rss.xml
+
 # LLM Context files for AI crawlers
 # These files contain structured information for AI assistants
 # English: https://hmart.app/llms.txt
