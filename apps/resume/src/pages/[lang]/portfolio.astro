@@ -4,7 +4,6 @@ import CommonBody from "@/components/common-body.astro";
 import StructuredData from "@/components/structured-data.astro";
 import SlideDeck from "@/components/slide-deck";
 import Navbar from "@/components/navbar";
-import KakaoBrowserEscape from "@/components/kakao-browser-escape";
 import "@/styles/global.css";
 
 import { initI18n, extractPortfolioTranslations, extractNavbarTranslations } from "@/i18n";
@@ -49,7 +48,6 @@ const hideNavbar = Astro.url.searchParams.has('nonav');
   </head>
   <body>
     <CommonBody lang={language} />
-    <KakaoBrowserEscape client:only="preact" />
     <SlideDeck client:only="react" translations={portfolioTranslations} slideTranslations={slideTranslations} />
     {!hideNavbar && <Navbar client:idle lang={language} translations={navbarTranslations} />}
   </body>

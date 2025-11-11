@@ -3,7 +3,6 @@ import CommonHead from "@/components/common-head.astro";
 import CommonBody from "@/components/common-body.astro";
 import MugunghwaPage from "@/components/mugunghwa-page.tsx";
 import Navbar from "@/components/navbar";
-import KakaoBrowserEscape from "@/components/kakao-browser-escape";
 import { initI18n, extractNavbarTranslations } from "@/i18n";
 import "@/styles/global.css";
 
@@ -37,7 +36,6 @@ const hideNavbar = Astro.url.searchParams.has('nonav');
   </head>
   <body class="bg-black overflow-x-hidden">
     <CommonBody lang={language} />
-    <KakaoBrowserEscape client:only="preact" />
     <div class="max-w-[1500px] mx-auto w-full">
       <MugunghwaPage client:only="react" lang={lang} translations={mugunghwaTranslations} />
     </div>
