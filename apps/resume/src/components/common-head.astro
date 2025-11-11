@@ -8,6 +8,8 @@ export interface Props {
   ogDescription?: string;
   ogImage?: string;
   lang?: string;
+  keywords?: string;
+  author?: string;
 }
 
 const {
@@ -17,6 +19,8 @@ const {
   ogDescription = description,
   ogImage,
   lang = "ko",
+  keywords,
+  author = "Hamin Lee",
 } = Astro.props;
 
 // Always use English OG image as default
@@ -43,6 +47,19 @@ const canonicalUrl = `${siteUrl}/${lang}${pathWithoutLang}`;
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <meta name="generator" content={Astro.generator} />
 <meta name="description" content={description} />
+<meta name="author" content={author} />
+{keywords && <meta name="keywords" content={keywords} />}
+
+<!-- AI Crawler specific meta tags -->
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+<meta name="googlebot" content="index, follow" />
+<meta name="bingbot" content="index, follow" />
+
+<!-- Professional Profile Meta Tags -->
+<meta property="profile:first_name" content="Hamin" />
+<meta property="profile:last_name" content="Lee" />
+<meta property="profile:username" content="hmmhmmhm" />
+<meta property="article:author" content={author} />
 
 <!-- Preconnect to external domains for faster resource loading -->
 <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />

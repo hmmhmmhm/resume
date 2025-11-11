@@ -17,6 +17,9 @@ const pageDescription = t.sideProjects?.curseScript?.pageDescription || "A JavaS
 const lang = Astro.params.lang || "en";
 const ogImage = new URL(`/${lang}/curse-script/og.png`, Astro.url).toString();
 const curseScriptTranslations = t.sideProjects?.curseScript || {};
+
+// Check if nonav query parameter is present
+const hideNavbar = Astro.url.searchParams.has('nonav');
 ---
 
 <html lang={language}>
@@ -36,6 +39,6 @@ const curseScriptTranslations = t.sideProjects?.curseScript || {};
     <div class="max-w-[1500px] mx-auto w-full">
       <CurseScriptPage client:only="react" lang={lang} translations={curseScriptTranslations} />
     </div>
-    <Navbar client:idle lang={language} translations={navbarTranslations} />
+    {!hideNavbar && <Navbar client:idle lang={language} translations={navbarTranslations} />}
   </body>
 </html>

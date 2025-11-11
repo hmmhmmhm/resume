@@ -1,0 +1,149 @@
+---
+export interface Props {
+  lang: string;
+  data: any;
+  pageType?: 'resume' | 'portfolio' | 'side';
+}
+
+const { lang, data, pageType = 'resume' } = Astro.props;
+
+const siteUrl = "https://hmart.app";
+const currentUrl = new URL(Astro.url.pathname, siteUrl).toString();
+
+// Person Schema - 개인 프로필 정보
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": `${siteUrl}/#person`,
+  name: data.name,
+  alternateName: data.initials,
+  url: data.url,
+  image: `${siteUrl}${data.avatarUrl}`,
+  email: data.contact.email,
+  jobTitle: "Full Stack Engineer",
+  description: data.description,
+  knowsAbout: data.skills.map((skill: any) => skill.name),
+  sameAs: [
+    data.contact.twitter,
+    data.contact.kakao,
+    "https://github.com/hmmhmmhm",
+  ].filter(Boolean),
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: lang === 'ko' ? "안산" : "Ansan",
+    addressRegion: lang === 'ko' ? "경기도" : "Gyeonggi-do",
+    addressCountry: lang === 'ko' ? "대한민국" : "South Korea",
+  },
+  alumniOf: data.education?.map((edu: any) => ({
+    "@type": "EducationalOrganization",
+    name: edu.school,
+    location: edu.location,
+  })) || [],
+  worksFor: data.work?.slice(0, 1).map((job: any) => ({
+    "@type": "Organization",
+    name: job.company,
+    location: job.location,
+  })) || [],
+  hasOccupation: {
+    "@type": "Occupation",
+    name: "Full Stack Engineer",
+    occupationLocation: {
+      "@type": "Country",
+      name: lang === 'ko' ? "대한민국" : "South Korea",
+    },
+    skills: data.skills.map((skill: any) => skill.name).join(", "),
+    description: data.summary,
+  },
+};
+
+// WebSite Schema - 웹사이트 정보
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": `${siteUrl}/#website`,
+  url: siteUrl,
+  name: `${data.name} - ${lang === 'ko' ? '이력서 & 포트폴리오' : 'Resume & Portfolio'}`,
+  description: data.description,
+  inLanguage: lang === 'ko' ? 'ko-KR' : 'en-US',
+  author: {
+    "@id": `${siteUrl}/#person`,
+  },
+  potentialAction: {
+    "@type": "SearchAction",
+    target: {
+      "@type": "EntryPoint",
+      urlTemplate: `${siteUrl}/?q={search_term_string}`,
+    },
+    "query-input": "required name=search_term_string",
+  },
+};
+
+// ProfilePage Schema - 프로필 페이지
+const profilePageSchema = {
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  "@id": currentUrl,
+  url: currentUrl,
+  name: `${data.name} - ${pageType === 'resume' ? (lang === 'ko' ? '이력서' : 'Resume') : pageType === 'portfolio' ? (lang === 'ko' ? '포트폴리오' : 'Portfolio') : (lang === 'ko' ? '사이드 프로젝트' : 'Side Projects')}`,
+  description: data.description,
+  inLanguage: lang === 'ko' ? 'ko-KR' : 'en-US',
+  mainEntity: {
+    "@id": `${siteUrl}/#person`,
+  },
+  breadcrumb: {
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: lang === 'ko' ? "홈" : "Home",
+        item: `${siteUrl}/${lang}`,
+      },
+      pageType !== 'resume' && {
+        "@type": "ListItem",
+        position: 2,
+        name: pageType === 'portfolio' ? (lang === 'ko' ? '포트폴리오' : 'Portfolio') : (lang === 'ko' ? '사이드 프로젝트' : 'Side Projects'),
+        item: currentUrl,
+      },
+    ].filter(Boolean),
+  },
+};
+
+// ItemList Schema for Projects/Work Experience
+const itemListSchema = pageType === 'portfolio' && data.work ? {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: lang === 'ko' ? "경력 사항" : "Work Experience",
+  description: lang === 'ko' ? `${data.name}의 경력 사항` : `${data.name}'s Work Experience`,
+  itemListElement: data.work.map((job: any, index: number) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    item: {
+      "@type": "Event",
+      name: `${job.title} at ${job.company}`,
+      description: job.description,
+      startDate: job.start,
+      endDate: job.end,
+      location: {
+        "@type": "Place",
+        name: job.location,
+      },
+      organizer: {
+        "@type": "Organization",
+        name: job.company,
+        logo: job.logoUrl ? `${siteUrl}${job.logoUrl}` : undefined,
+      },
+    },
+  })),
+} : null;
+
+// Combine all schemas
+const schemas = [
+  personSchema,
+  websiteSchema,
+  profilePageSchema,
+  itemListSchema,
+].filter(Boolean);
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schemas)} />

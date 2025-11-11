@@ -19,6 +19,9 @@ const pageDescription = t.sideProjects?.mugunghwa?.pageDescription || (language 
 const lang = Astro.params.lang || "ko";
 const ogImage = new URL(`/${lang}/mugunghwa/og.png`, Astro.url).toString();
 const mugunghwaTranslations = t.sideProjects?.mugunghwa || {};
+
+// Check if nonav query parameter is present
+const hideNavbar = Astro.url.searchParams.has('nonav');
 ---
 
 <html lang={language}>
@@ -38,6 +41,6 @@ const mugunghwaTranslations = t.sideProjects?.mugunghwa || {};
     <div class="max-w-[1500px] mx-auto w-full">
       <MugunghwaPage client:only="react" lang={lang} translations={mugunghwaTranslations} />
     </div>
-    <Navbar client:idle lang={language} translations={navbarTranslations} />
+    {!hideNavbar && <Navbar client:idle lang={language} translations={navbarTranslations} />}
   </body>
 </html>

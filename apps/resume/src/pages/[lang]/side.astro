@@ -1,12 +1,14 @@
 ---
 import CommonHead from "@/components/common-head.astro";
 import CommonBody from "@/components/common-body.astro";
+import StructuredData from "@/components/structured-data.astro";
 import SidePage from "@/components/side-page";
 import Navbar from "@/components/navbar";
 import KakaoBrowserEscape from "@/components/kakao-browser-escape";
 import "@/styles/global.css";
 
 import { initI18n, extractNavbarTranslations } from "@/i18n";
+import { getResumeData } from "@/data/get-resume-data";
 
 const { language, t } = initI18n(Astro);
 
@@ -17,6 +19,12 @@ const pageDescription = language === "ko"
   ? "개발하면서 필요했던 기능들을 범용적인 오픈소스 라이브러리로 만들어 공개했습니다."
   : "I've created and published general-purpose open-source libraries for functionality I needed during development.";
 const navbarTranslations = extractNavbarTranslations(t);
+const resumeData = getResumeData(t);
+
+// SEO Keywords for AI crawlers
+const keywords = language === 'ko' 
+  ? "사이드 프로젝트, 오픈소스, 라이브러리, NPM, TypeScript, JavaScript, 무궁화, 가우스 나선 , 엣지 크립토, 이하민, Hamin Lee, 개발자 도구"
+  : "Side Projects, Open Source, Library, NPM, TypeScript, JavaScript, Mugunghwa, Gauss Spiral, Edge Crypto, Hamin Lee, Developer Tools";
 
 const sideTranslations = {
   hero: t.sideProjects?.hero || {
@@ -31,11 +39,22 @@ const sideTranslations = {
   projects: t.sideProjects?.projects || {},
 };
 const ogImage = new URL(`/en/side-og.png`, Astro.url).toString();
+
+// Check if nonav query parameter is present
+const hideNavbar = Astro.url.searchParams.has('nonav');
 ---
 
 <html lang={language}>
   <head>
-    <CommonHead title={pageTitle} description={pageDescription} lang={language} ogImage={ogImage} />
+    <CommonHead 
+      title={pageTitle} 
+      description={pageDescription} 
+      lang={language} 
+      ogImage={ogImage}
+      keywords={keywords}
+      author="Hamin Lee"
+    />
+    <StructuredData lang={language} data={resumeData} pageType="side" />
     <script is:inline>
       // Force light theme for side page
       (function () {
@@ -48,6 +67,6 @@ const ogImage = new URL(`/en/side-og.png`, Astro.url).toString();
     <CommonBody lang={language} />
     <KakaoBrowserEscape client:only="preact" />
     <SidePage client:idle lang={language} translations={sideTranslations} />
-    <Navbar client:idle lang={language} translations={navbarTranslations} />
+    {!hideNavbar && <Navbar client:idle lang={language} translations={navbarTranslations} />}
   </body>
 </html>

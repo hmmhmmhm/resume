@@ -1,0 +1,17 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "Hamin Lee Resume & Portfolio",
+  "name_for_model": "hamin_lee_resume",
+  "description_for_human": "Professional resume and portfolio of Hamin Lee, a Full Stack Engineer specializing in Web, On-device LLM, Real-time Streaming, and Robotics.",
+  "description_for_model": "This is the professional resume and portfolio website of Hamin Lee, a Full Stack Engineer from South Korea. He specializes in web development (React, Next.js, Vue, TypeScript), on-device AI/LLM, real-time streaming (WebRTC), and robotics. Current CTO at POUL Inc., previously worked at Abacus Technology and Metamorp. Has multiple open-source projects on NPM. Available for full-stack development, technical leadership, and AI/ML engineering positions.",
+  "auth": {
+    "type": "none"
+  },
+  "api": {
+    "type": "openapi",
+    "url": "https://hmart.app/openapi.yaml"
+  },
+  "logo_url": "https://hmart.app/favicon/favicon-96x96.png",
+  "contact_email": "pm2@kakao.com",
+  "legal_info_url": "https://hmart.app"
+}

@@ -1,0 +1,102 @@
+# Hamin Lee - Full Stack Engineer
+
+## Professional Summary
+Full Stack Engineer specializing in Web, On-device LLM, Real-time Streaming, and Robotics.
+Expertise in bridging mobile on-device AI with real-time media and robotics through streaming and low-latency control.
+Privacy-focused architecture with PWA/Edge deployment for optimal user experience and performance.
+End-to-end ownership from product initialization to deployment and operations automation.
+
+## Core Competencies
+- Full Stack Development: React, Next.js, Vue, Nuxt.js, Svelte Kit, TypeScript, JavaScript
+- Backend: Node.js, Nest.js, Express.js, Prisma ORM, Drizzle ORM
+- Database: PostgreSQL, MySQL, Redis, Supabase
+- Mobile: React Native, Expo, On-device AI (ONNX Runtime)
+- Real-time Communication: WebRTC, WebSocket, UDP protocols
+- Robotics: Robot control systems, SLAM mapping, Path planning
+- AI/ML: On-device LLM, STT/TTS, Image processing (OpenCV)
+- Cloud & DevOps: AWS, Vercel, Cloudflare, Docker, Railway
+- Tools: Git, Electron.js, Web Bluetooth, PWA
+
+## Current Position
+CTO at POUL Inc. (June 2024 - October 2025)
+- Lead engineer for "Lami App" - on-device LLM mobile application
+- Designed and implemented WebView ↔ Native bridge architecture
+- Built on-device STT/TTS and image processing pipeline using ONNX Runtime, OpenCV, MMKV
+- Developed AI-powered dashboard with Supabase database integration
+- Implemented "Lami Robotics" - web-based robot control system for DeepRobotics Lite3
+- Created UDP control protocol and WebRTC low-latency streaming
+- Developed SLAM mapping UI and path planning operation interface
+- Solo developed "Curiosity" - in-browser AI coding agent with WebContainer + Monaco
+
+## Previous Experience
+
+### Full Stack Developer at Abacus Technology (Nov 2022 - June 2024)
+- Developed remote education platform using educational hardware
+- Built real-time chat and video conferencing solution with WebRTC
+- Used Next.js and MobX for frontend development
+- Constructed backend with Supabase (PostgreSQL) and Nest.js, deployed on Railway
+- Participated in ESP-32 based hardware firmware development
+- Implemented web-based remote firmware updates
+- Created browser-hardware communication using Web Bluetooth (no installation required)
+
+### Full Stack Developer at Metamorp (June 2021 - Nov 2022)
+- Participated in web-based 3D slicer program and platform development
+- Component development using React, SCSS (BEM), MobX
+- Implemented interaction-based Vector Animation
+- Backend development with Nest.js, Prisma ORM, TypeScript
+- Deployed using AWS Beanstalk, Aurora DB, Railway
+- Ported Electron application to Intel Mac, Silicon Mac, and Linux
+- Built Redis-based Pub/Sub server for real-time Electron app update deployment system
+
+## Open Source Projects
+- **mugunghwa**: Korean word shuffling algorithm library
+- **gauss-spiral**: Gaussian spiral generation library
+- **edge-crypto**: Edge-compatible cryptographic utilities
+- **biggest**: Array element comparison utility
+- **pseudo-shuffle**: Deterministic shuffling algorithm
+- **curse-script**: Korean curse word filtering library
+
+## Education
+- Ansan University, Computer Information Department (2014 - 2016)
+
+## Contact Information
+- Email: pm2@kakao.com
+- Website: https://hmart.app
+- GitHub: https://github.com/hmmhmmhm
+- Twitter: https://x.com/hmartapp
+- KakaoTalk: https://open.kakao.com/me/hamin
+- Location: Ansan, Gyeonggi-do, South Korea
+
+## Languages
+- Korean (Native)
+- English (Professional Working Proficiency)
+
+## Key Projects & Achievements
+1. **Lami App**: Mobile on-device LLM application with native bridge architecture
+2. **Lami Robotics**: Web-based robot control with real-time streaming
+3. **Curiosity**: Browser-based AI coding agent
+4. **Remote Education Platform**: WebRTC-based real-time education system
+5. **3D Slicer Platform**: Web-based 3D printing preparation software
+
+## Technical Specializations
+- On-device AI and LLM integration
+- Real-time streaming and low-latency communication
+- WebRTC implementation and optimization
+- Robot control systems and automation
+- Cross-platform application development
+- Privacy-focused architecture design
+- PWA and edge computing deployment
+
+## Available for
+- Full Stack Development positions
+- Technical Leadership roles
+- AI/ML Engineering projects
+- Real-time Systems development
+- Robotics Software Engineering
+- Consulting and Technical Advisory
+
+---
+Last Updated: November 2025
+Portfolio: https://hmart.app/en/portfolio
+Resume: https://hmart.app/en
+Side Projects: https://hmart.app/en/side

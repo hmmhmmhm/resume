@@ -1,0 +1,166 @@
+openapi: 3.0.0
+info:
+  title: Hamin Lee Resume & Portfolio API
+  description: Professional resume and portfolio information for Hamin Lee, Full Stack Engineer
+  version: 1.0.0
+  contact:
+    name: Hamin Lee
+    email: pm2@kakao.com
+    url: https://hmart.app
+
+servers:
+  - url: https://hmart.app
+    description: Production server
+
+paths:
+  /llms.txt:
+    get:
+      summary: Get LLM-readable context (English)
+      description: Returns comprehensive professional information in plain text format for LLM crawlers
+      responses:
+        '200':
+          description: Successful response
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: |
+                  # Hamin Lee - Full Stack Engineer
+                  Professional Summary: Full Stack Engineer specializing in Web, On-device LLM, Real-time Streaming, and Robotics...
+
+  /llms-ko.txt:
+    get:
+      summary: Get LLM-readable context (Korean)
+      description: Returns comprehensive professional information in Korean plain text format for LLM crawlers
+      responses:
+        '200':
+          description: Successful response
+          content:
+            text/plain:
+              schema:
+                type: string
+
+  /en:
+    get:
+      summary: Get English resume page
+      description: Returns the full English resume page with structured data
+      responses:
+        '200':
+          description: Successful response
+          content:
+            text/html:
+              schema:
+                type: string
+
+  /ko:
+    get:
+      summary: Get Korean resume page
+      description: Returns the full Korean resume page with structured data
+      responses:
+        '200':
+          description: Successful response
+          content:
+            text/html:
+              schema:
+                type: string
+
+  /en/portfolio:
+    get:
+      summary: Get English portfolio page
+      description: Returns the portfolio showcase with project details
+      responses:
+        '200':
+          description: Successful response
+          content:
+            text/html:
+              schema:
+                type: string
+
+  /ko/portfolio:
+    get:
+      summary: Get Korean portfolio page
+      description: Returns the portfolio showcase with project details in Korean
+      responses:
+        '200':
+          description: Successful response
+          content:
+            text/html:
+              schema:
+                type: string
+
+  /en/side:
+    get:
+      summary: Get English side projects page
+      description: Returns open-source side projects information
+      responses:
+        '200':
+          description: Successful response
+          content:
+            text/html:
+              schema:
+                type: string
+
+  /ko/side:
+    get:
+      summary: Get Korean side projects page
+      description: Returns open-source side projects information in Korean
+      responses:
+        '200':
+          description: Successful response
+          content:
+            text/html:
+              schema:
+                type: string
+
+  /sitemap.xml:
+    get:
+      summary: Get sitemap
+      description: Returns XML sitemap for all pages
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/xml:
+              schema:
+                type: string
+
+components:
+  schemas:
+    Person:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Hamin Lee
+        jobTitle:
+          type: string
+          example: Full Stack Engineer
+        email:
+          type: string
+          example: pm2@kakao.com
+        location:
+          type: string
+          example: Ansan, Gyeonggi-do, South Korea
+        skills:
+          type: array
+          items:
+            type: string
+          example:
+            - JavaScript
+            - TypeScript
+            - React
+            - Next.js
+            - Node.js
+            - WebRTC
+            - AI/ML
+        description:
+          type: string
+          example: Full Stack Engineer specializing in Web, On-device LLM, Real-time Streaming, and Robotics
+
+tags:
+  - name: Resume
+    description: Professional resume information
+  - name: Portfolio
+    description: Project portfolio and work experience
+  - name: Side Projects
+    description: Open-source projects and libraries

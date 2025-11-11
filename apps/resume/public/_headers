@@ -25,3 +25,22 @@
 # Cache PDF for 1 week
 *.pdf
   Cache-Control: public, max-age=604800
+
+# LLM Context files - Allow all AI crawlers
+/llms.txt
+  Cache-Control: public, max-age=3600
+  X-Robots-Tag: index, follow
+
+/llms-ko.txt
+  Cache-Control: public, max-age=3600
+  X-Robots-Tag: index, follow
+
+/README.md
+  Cache-Control: public, max-age=3600
+  X-Robots-Tag: index, follow
+
+# HTML pages - Allow AI crawlers with full content access
+/*
+  X-Robots-Tag: index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin

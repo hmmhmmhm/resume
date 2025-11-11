@@ -16,6 +16,9 @@ const pageTitle = t.sideProjects?.edgeCrypto?.pageTitle || (language === "ko"
 const pageDescription = t.sideProjects?.edgeCrypto?.pageDescription || "Encrypt, sign, hash, and manage RSA keys across Node.js, browsers, Cloudflare Workers, Deno, and Bun.";
 const lang = Astro.params.lang || "en";
 const ogImage = new URL(`/${lang}/edge-crypto/og.png`, Astro.url).toString();
+
+// Check if nonav query parameter is present
+const hideNavbar = Astro.url.searchParams.has('nonav');
 ---
 
 <html lang={language}>
@@ -35,6 +38,6 @@ const ogImage = new URL(`/${lang}/edge-crypto/og.png`, Astro.url).toString();
     <div class="max-w-[1500px] mx-auto w-full">
       <EdgeCryptoPage client:only="react" lang={lang} />
     </div>
-    <Navbar client:idle lang={language} translations={navbarTranslations} />
+    {!hideNavbar && <Navbar client:idle lang={language} translations={navbarTranslations} />}
   </body>
 </html>

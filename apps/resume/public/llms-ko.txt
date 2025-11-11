@@ -1,0 +1,108 @@
+# 이하민 - 풀스택 엔지니어
+
+## 전문 분야 요약
+웹·온디바이스 LLM·실시간 스트리밍·로보틱스를 '출시 가능한 제품'으로 잇는 풀스택 엔지니어.
+모바일 온디바이스 AI와 실시간 미디어/로보틱스를 잇는 브릿지·스트리밍·저지연 제어 전문성 보유.
+프라이버시 중심 아키텍처와 PWA/엣지 배포로 사용자 경험과 성능을 동시에 달성.
+제품 초기화부터 배포/운영 자동화까지 엔드투엔드 오너십으로 다수 프로젝트 출시 및 운영 경험 보유.
+
+## 핵심 역량
+- 풀스택 개발: React, Next.js, Vue, Nuxt.js, Svelte Kit, TypeScript, JavaScript
+- 백엔드: Node.js, Nest.js, Express.js, Prisma ORM, Drizzle ORM
+- 데이터베이스: PostgreSQL, MySQL, Redis, Supabase
+- 모바일: React Native, Expo, 온디바이스 AI (ONNX Runtime)
+- 실시간 통신: WebRTC, WebSocket, UDP 프로토콜
+- 로보틱스: 로봇 제어 시스템, SLAM 매핑, 경로 계획
+- AI/ML: 온디바이스 LLM, STT/TTS, 이미지 처리 (OpenCV)
+- 클라우드 & DevOps: AWS, Vercel, Cloudflare, Docker, Railway
+- 도구: Git, Electron.js, Web Bluetooth, PWA
+
+## 현재 직책
+주식회사 피오유엘 CTO (2024년 6월 - 2025년 10월)
+- 온디바이스 LLM 모바일 앱 '라미앱' 리드 엔지니어
+- 웹뷰↔네이티브 브릿지 아키텍처 설계 및 구현
+- ONNX Runtime, OpenCV, MMKV를 활용한 온디바이스 STT/TTS·이미지 처리 파이프라인 구축
+- AI 기반 대시보드 개발 및 Supabase 기반 DB 연동 구성
+- 웹 기반 로봇제어 '라미 로보틱스' 구현 (딥로봇틱스 Lite3 대상)
+- UDP 제어 프로토콜과 WebRTC 저지연 스트리밍 구현
+- SLAM 맵핑 UI 및 경로계획 운용 UI 개발
+- 브라우저 내 AI 코딩 에이전트 '큐리오시티' 단독 개발 (WebContainer+Monaco 기반)
+
+## 이전 경력
+
+### 아바쿠스 테크놀로지 풀스택 개발자 (2022년 11월 - 2024년 6월)
+- 교육 하드웨어를 이용한 원격 교육 플랫폼 개발
+- WebRTC를 이용한 실시간 채팅 및 영상 회의 솔루션 구축
+- Next.js와 MobX 사용
+- Supabase(PostgreSQL)와 Nest.js로 백엔드 구축 및 Railway로 인프라 배포
+- ESP-32 기반 하드웨어의 펌웨어 개발 참여, 웹 상 원격 업데이트 구현
+- Web Bluetooth 기술을 활용한 스마트 교육 하드웨어와 웹 브라우저 간 무설치 통신 구현
+
+### 메타몰프 풀스택 개발자 (2021년 6월 - 2022년 11월)
+- 웹 기반 3D 슬라이서 프로그램 및 플랫폼 개발 참여
+- React, SCSS(BEM), MobX를 활용한 컴포넌트 개발
+- 인터렉션 기반 Vector Animation 구현
+- Nest.js와 Prisma ORM, TypeScript를 활용한 백엔드 개발
+- AWS Beanstalk, Aurora DB, Railway를 활용한 배포
+- Electron으로 구현된 프로그램을 Intel Mac, Silicon Mac, Linux에서 동작 가능하게 포팅
+- Redis 기반 Pub/Sub 서버 구성, 일렉트론 앱의 실시간 업데이트 배포 시스템 구축
+
+## 오픈소스 프로젝트
+- **무궁화(mugunghwa)**: 한국어 단어 섞기 알고리즘 라이브러리
+- **가우스 나선(gauss-spiral)**: 가우스 나선 생성 라이브러리
+- **엣지 크립토(edge-crypto)**: 엣지 호환 암호화 유틸리티
+- **biggest**: 배열 요소 비교 유틸리티
+- **pseudo-shuffle**: 결정론적 셔플 알고리즘
+- **curse-script**: 한국어 욕설 필터링 라이브러리
+
+## 학력
+- 안산대학교 컴퓨터정보과 (2014 - 2016)
+
+## 연락처
+- 이메일: pm2@kakao.com
+- 웹사이트: https://hmart.app
+- GitHub: https://github.com/hmmhmmhm
+- Twitter: https://x.com/hmartapp
+- 카카오톡: https://open.kakao.com/me/hamin
+- 위치: 대한민국 경기도 안산
+
+## 언어
+- 한국어 (모국어)
+- 영어 (업무 수준)
+
+## 주요 프로젝트 및 성과
+1. **라미앱**: 네이티브 브릿지 아키텍처를 갖춘 모바일 온디바이스 LLM 애플리케이션
+2. **라미 로보틱스**: 실시간 스트리밍을 갖춘 웹 기반 로봇 제어
+3. **큐리오시티**: 브라우저 기반 AI 코딩 에이전트
+4. **원격 교육 플랫폼**: WebRTC 기반 실시간 교육 시스템
+5. **3D 슬라이서 플랫폼**: 웹 기반 3D 프린팅 준비 소프트웨어
+
+## 기술 전문 분야
+- 온디바이스 AI 및 LLM 통합
+- 실시간 스트리밍 및 저지연 통신
+- WebRTC 구현 및 최적화
+- 로봇 제어 시스템 및 자동화
+- 크로스 플랫폼 애플리케이션 개발
+- 프라이버시 중심 아키텍처 설계
+- PWA 및 엣지 컴퓨팅 배포
+
+## 채용 가능 분야
+- 풀스택 개발 포지션
+- 기술 리더십 역할
+- AI/ML 엔지니어링 프로젝트
+- 실시간 시스템 개발
+- 로보틱스 소프트웨어 엔지니어링
+- 컨설팅 및 기술 자문
+
+## 검색 키워드
+풀스택 개발자, 웹 개발자, 프론트엔드 개발자, 백엔드 개발자, React 개발자, Next.js 개발자, 
+TypeScript 개발자, Node.js 개발자, AI 엔지니어, 머신러닝 엔지니어, 로보틱스 엔지니어,
+WebRTC 전문가, 실시간 통신, 온디바이스 AI, LLM, 모바일 개발자, React Native,
+이하민, Hamin Lee, 한국 개발자, 경기도 개발자, 안산 개발자, CTO, 기술 리더,
+라미앱, 라미 로보틱스, 큐리오시티, 오픈소스 개발자, NPM 패키지 개발자
+
+---
+최종 업데이트: 2025년 11월
+포트폴리오: https://hmart.app/ko/portfolio
+이력서: https://hmart.app/ko
+사이드 프로젝트: https://hmart.app/ko/side

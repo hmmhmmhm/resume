@@ -1,6 +1,7 @@
 ---
 import CommonHead from "@/components/common-head.astro";
 import CommonBody from "@/components/common-body.astro";
+import StructuredData from "@/components/structured-data.astro";
 import SlideDeck from "@/components/slide-deck";
 import Navbar from "@/components/navbar";
 import KakaoBrowserEscape from "@/components/kakao-browser-escape";
@@ -8,6 +9,7 @@ import "@/styles/global.css";
 
 import { initI18n, extractPortfolioTranslations, extractNavbarTranslations } from "@/i18n";
 import { getSlideTranslations } from "@/components/portfolio-slides/get-slide-translations";
+import { getResumeData } from "@/data/get-resume-data";
 
 const { language, t } = initI18n(Astro);
 
@@ -16,11 +18,27 @@ const pageDescription = t("meta.portfolioDescription");
 const portfolioTranslations = extractPortfolioTranslations(t);
 const navbarTranslations = extractNavbarTranslations(t);
 const slideTranslations = getSlideTranslations(t);
+const resumeData = getResumeData(t);
+
+// SEO Keywords for AI crawlers
+const keywords = language === 'ko' 
+  ? "포트폴리오, 프로젝트, 개발 경력, 풀스택 개발자, 이하민, Hamin Lee, 라미앱, 라미 로보틱스, 큐리오시티, WebRTC, AI, LLM, 온디바이스 AI, React, Next.js, TypeScript"
+  : "Portfolio, Projects, Development Experience, Full Stack Engineer, Hamin Lee, Lami App, Lami Robotics, Curiosity, WebRTC, AI, LLM, On-device AI, React, Next.js, TypeScript";
+
+// Check if nonav query parameter is present
+const hideNavbar = Astro.url.searchParams.has('nonav');
 ---
 
 <html lang={language}>
   <head>
-    <CommonHead title={pageTitle} description={pageDescription} lang={language} />
+    <CommonHead 
+      title={pageTitle} 
+      description={pageDescription} 
+      lang={language}
+      keywords={keywords}
+      author="Hamin Lee"
+    />
+    <StructuredData lang={language} data={resumeData} pageType="portfolio" />
     <script is:inline>
       // Force white theme for portfolio page
       (function () {
@@ -33,6 +51,6 @@ const slideTranslations = getSlideTranslations(t);
     <CommonBody lang={language} />
     <KakaoBrowserEscape client:only="preact" />
     <SlideDeck client:only="react" translations={portfolioTranslations} slideTranslations={slideTranslations} />
-    <Navbar client:idle lang={language} translations={navbarTranslations} />
+    {!hideNavbar && <Navbar client:idle lang={language} translations={navbarTranslations} />}
   </body>
 </html>
