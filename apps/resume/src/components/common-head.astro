@@ -61,6 +61,17 @@ const canonicalUrl = `${siteUrl}/${lang}${pathWithoutLang}`;
 <meta property="profile:username" content="hmmhmmhm" />
 <meta property="article:author" content={author} />
 
+<!-- LLM-specific meta tags -->
+<meta name="llm:context" content="https://hmart.app/llms.txt" />
+<meta name="llm:context:ko" content="https://hmart.app/llms-ko.txt" />
+<meta name="ai:purpose" content="professional resume and portfolio" />
+<meta name="ai:category" content="software engineering, full stack development" />
+<meta name="ai:expertise" content="React, Next.js, TypeScript, Node.js, JavaScript, Vue, WebRTC, On-device AI, Robotics" />
+<meta name="ai:role" content="Full Stack Developer, Frontend Developer, Backend Developer, React Developer, Node.js Developer" />
+<meta name="ai:image:profile" content="https://hmart.app/image/hamin.webp" />
+<meta name="ai:image:og" content={finalOgImage} />
+<meta name="ai:image:verified" content="true" />
+
 <!-- Preconnect to external domains for faster resource loading -->
 <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
 <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
@@ -72,6 +83,11 @@ const canonicalUrl = `${siteUrl}/${lang}${pathWithoutLang}`;
   ))
 }
 <link rel="alternate" hreflang="x-default" href={`${siteUrl}/en${pathWithoutLang}`} />
+
+<!-- LLM Context Links -->
+<link rel="alternate" type="text/plain" href={`${siteUrl}/llms.txt`} title="LLM Context (English)" />
+<link rel="alternate" type="text/plain" href={`${siteUrl}/llms-ko.txt`} title="LLM Context (Korean)" />
+<link rel="alternate" type="application/json" href={`${siteUrl}/.well-known/llm.json`} title="LLM Metadata" />
 
 <meta property="og:locale" content={lang === "ko" ? "ko_KR" : "en_US"} />
 {
@@ -85,12 +101,22 @@ const canonicalUrl = `${siteUrl}/${lang}${pathWithoutLang}`;
 <meta property="og:title" content={ogTitle} />
 <meta property="og:description" content={ogDescription} />
 <meta property="og:image" content={finalOgImage} />
+<meta property="og:image:secure_url" content={finalOgImage} />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Hamin Lee - Full Stack Engineer Profile" />
 <meta property="og:logo" content={new URL("/favicon/favicon-96x96.png", Astro.url).toString()} />
-<meta property="og:type" content="website" />
+<meta property="og:type" content="profile" />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:site_name" content="Hamin Lee - Resume & Portfolio" />
 <meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@hmartapp" />
+<meta name="twitter:creator" content="@hmartapp" />
 <meta name="twitter:title" content={ogTitle} />
 <meta name="twitter:description" content={ogDescription} />
 <meta name="twitter:image" content={finalOgImage} />
+<meta name="twitter:image:alt" content="Hamin Lee - Full Stack Engineer Profile" />
 <title>{title}</title>
 <script>
   // Lazy load manifest for PWA

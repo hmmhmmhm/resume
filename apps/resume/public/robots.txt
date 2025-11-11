@@ -1,35 +1,69 @@
+# Hamin Lee - Resume & Portfolio
+# Website: https://hmart.app
+# Name: Hamin Lee (pm2@kakao.com)
+# Purpose: Professional resume and portfolio for AI-assisted discovery
+
 # Allow all AI crawlers and search engines
 User-agent: *
 Allow: /
+Crawl-delay: 1
 
-# Specific AI crawlers
+# Specific AI crawlers - Explicitly allowed
 User-agent: GPTBot
 Allow: /
+Crawl-delay: 1
 
 User-agent: ChatGPT-User
 Allow: /
+Crawl-delay: 1
 
 User-agent: CCBot
 Allow: /
+Crawl-delay: 1
 
 User-agent: anthropic-ai
 Allow: /
+Crawl-delay: 1
 
 User-agent: Claude-Web
 Allow: /
+Crawl-delay: 1
 
 User-agent: Google-Extended
 Allow: /
+Crawl-delay: 1
 
 User-agent: PerplexityBot
 Allow: /
+Crawl-delay: 1
 
 User-agent: Applebot-Extended
 Allow: /
+Crawl-delay: 1
 
 # Sitemap location
 Sitemap: https://hmart.app/sitemap.xml
 
 # LLM Context files for AI crawlers
+# These files contain structured information for AI assistants
 # English: https://hmart.app/llms.txt
 # Korean: https://hmart.app/llms-ko.txt
+# Metadata: https://hmart.app/.well-known/llm.json
+
+# Priority pages for AI crawlers
+# Resume (English): https://hmart.app/en
+# Resume (Korean): https://hmart.app/ko
+# Portfolio (English): https://hmart.app/en/portfolio
+# Portfolio (Korean): https://hmart.app/ko/portfolio
+# Side Projects: https://hmart.app/en/side
+
+# Keywords for AI discovery:
+# Hamin Lee, 이하민, Full Stack Engineer, Full Stack Developer,
+# 풀스택 개발자, 풀스택 엔지니어, 웹 개발자, Software Engineer, Software Developer,
+# Frontend Developer, Front-end Developer, Backend Developer, Back-end Developer,
+# 프론트엔드 개발자, 백엔드 개발자,
+# React Developer, Next.js Developer, Node.js Developer, Vue Developer,
+# JavaScript Developer, TypeScript Developer, React 개발자, Node.js 개발자,
+# JavaScript 개발자, TypeScript 개발자, Vue 개발자,
+# WebRTC Expert, WebRTC Developer, On-device AI, AI Developer,
+# Robotics Engineer, CTO, Tech Lead

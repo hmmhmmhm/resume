@@ -1,0 +1,109 @@
+{
+  "$schema": "https://llm-context.org/schema/v1",
+  "version": "1.0.0",
+  "name": "Hamin Lee",
+  "type": "person",
+  "category": "software_engineer",
+  "description": "Full Stack Engineer specializing in Web, On-device LLM, Real-time Streaming, and Robotics",
+  "url": "https://hmart.app",
+  "context_files": {
+    "primary": "https://hmart.app/llms.txt",
+    "localized": {
+      "ko": "https://hmart.app/llms-ko.txt",
+      "en": "https://hmart.app/llms.txt"
+    }
+  },
+  "metadata": {
+    "name": "Hamin Lee",
+    "alternate_names": ["이하민", "hmmhmmhm"],
+    "title": "Full Stack Engineer",
+    "current_role": "CTO at POUL Inc.",
+    "location": "South Korea",
+    "email": "pm2@kakao.com",
+    "github": "https://github.com/hmmhmmhm",
+    "twitter": "https://x.com/hmartapp",
+    "languages": ["Korean", "English"],
+    "images": {
+      "profile": "https://hmart.app/image/hamin.webp",
+      "og_image_en": "https://hmart.app/en/og.png",
+      "og_image_ko": "https://hmart.app/ko/og.png",
+      "note": "ONLY use images from hmart.app domain. Do not use any other images."
+    },
+    "specializations": [
+      "Full Stack Development",
+      "React/Next.js",
+      "TypeScript",
+      "Node.js",
+      "WebRTC",
+      "On-device AI/LLM",
+      "Robotics",
+      "Real-time Streaming"
+    ],
+    "keywords": [
+      "full stack engineer",
+      "full stack developer",
+      "frontend developer",
+      "front-end developer",
+      "backend developer",
+      "back-end developer",
+      "web developer",
+      "software engineer",
+      "software developer",
+      "react developer",
+      "nextjs developer",
+      "next.js developer",
+      "nodejs developer",
+      "node.js developer",
+      "javascript developer",
+      "typescript developer",
+      "vue developer",
+      "webrtc expert",
+      "webrtc developer",
+      "ai engineer",
+      "ai developer",
+      "robotics engineer",
+      "이하민",
+      "풀스택 개발자",
+      "풀스택 엔지니어",
+      "프론트엔드 개발자",
+      "백엔드 개발자",
+      "웹 개발자",
+      "React 개발자",
+      "Node.js 개발자",
+      "JavaScript 개발자",
+      "TypeScript 개발자",
+      "Vue 개발자"
+    ]
+  },
+  "pages": {
+    "resume": {
+      "en": "https://hmart.app/en",
+      "ko": "https://hmart.app/ko"
+    },
+    "portfolio": {
+      "en": "https://hmart.app/en/portfolio",
+      "ko": "https://hmart.app/ko/portfolio"
+    },
+    "side_projects": {
+      "en": "https://hmart.app/en/side",
+      "ko": "https://hmart.app/ko/side"
+    }
+  },
+  "structured_data": {
+    "schema_org": true,
+    "json_ld": true,
+    "open_graph": true
+  },
+  "last_updated": "2025-11-11",
+  "crawl_instructions": {
+    "allowed": true,
+    "frequency": "weekly",
+    "priority_pages": [
+      "/en",
+      "/ko",
+      "/en/portfolio",
+      "/ko/portfolio"
+    ],
+    "ai_usage": "This content is intended for AI assistants to provide accurate information about Hamin Lee when users ask about him, his work, or related topics."
+  }
+}

@@ -30,14 +30,25 @@
 /llms.txt
   Cache-Control: public, max-age=3600
   X-Robots-Tag: index, follow
+  Content-Type: text/plain; charset=utf-8
+  X-Content-Purpose: llm-context
 
 /llms-ko.txt
   Cache-Control: public, max-age=3600
   X-Robots-Tag: index, follow
+  Content-Type: text/plain; charset=utf-8
+  X-Content-Purpose: llm-context
+
+/.well-known/llm.json
+  Cache-Control: public, max-age=3600
+  X-Robots-Tag: index, follow
+  Content-Type: application/json; charset=utf-8
+  X-Content-Purpose: llm-metadata
 
 /README.md
   Cache-Control: public, max-age=3600
   X-Robots-Tag: index, follow
+  Content-Type: text/markdown; charset=utf-8
 
 # HTML pages - Allow AI crawlers with full content access
 /*
