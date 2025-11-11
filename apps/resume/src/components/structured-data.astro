@@ -10,6 +10,24 @@ const { lang, data, pageType = 'resume' } = Astro.props;
 const siteUrl = "https://hmart.app";
 const currentUrl = new URL(Astro.url.pathname, siteUrl).toString();
 
+const resumeKeywords = (lang === 'ko'
+  ? [
+      "프론트엔드 개발자 이력서",
+      "풀스택 개발자 이력서",
+      "개발자 이력서",
+      "한국 개발자 이력서",
+      "프론트엔드 개발자",
+      "풀스택 개발자",
+    ]
+  : [
+      "frontend developer resume",
+      "full stack developer resume",
+      "developer resume",
+      "Korean developer resume",
+      "frontend developer",
+      "full stack developer",
+    ]).join(", ");
+
 // Person Schema - 개인 프로필 정보
 const personSchema = {
   "@context": "https://schema.org",
@@ -60,6 +78,48 @@ const personSchema = {
     skills: data.skills.map((skill: any) => skill.name).join(", "),
     description: data.summary,
   },
+};
+
+// Resume CreativeWork Schema - 이력서 콘텐츠 정보
+const resumeCreativeWorkSchema = {
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "@id": `${siteUrl}/${lang}#resume-document`,
+  url: currentUrl,
+  name:
+    lang === 'ko'
+      ? `${data.name} - 프론트엔드·풀스택 개발자 이력서`
+      : `${data.name} - Frontend & Full Stack Developer Resume`,
+  alternateName:
+    lang === 'ko'
+      ? `${data.name} 개발자 이력서`
+      : `${data.name} Developer Resume`,
+  description: data.summary,
+  inLanguage: lang === 'ko' ? 'ko-KR' : 'en-US',
+  author: {
+    "@id": `${siteUrl}/#person`,
+  },
+  about: {
+    "@id": `${siteUrl}/#person`,
+  },
+  keywords: resumeKeywords,
+  genre: [
+    "Resume",
+    "ProfessionalProfile",
+    lang === 'ko' ? '개발자 이력서' : 'Developer Resume',
+  ],
+  audience: {
+    "@type": "Audience",
+    audienceType:
+      lang === 'ko'
+        ? "채용 담당자 및 기술 리더"
+        : "Recruiters and Engineering Managers",
+  },
+  creator: {
+    "@id": `${siteUrl}/#person`,
+  },
+  isAccessibleForFree: true,
+  dateModified: data.updatedAt || new Date().toISOString().split('T')[0],
 };
 
 // WebSite Schema - 웹사이트 정보
@@ -148,6 +208,7 @@ const schemas = [
   personSchema,
   websiteSchema,
   profilePageSchema,
+  resumeCreativeWorkSchema,
   itemListSchema,
 ].filter(Boolean);
 ---
