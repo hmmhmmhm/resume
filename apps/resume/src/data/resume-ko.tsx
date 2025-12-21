@@ -64,6 +64,18 @@ export const DATA_KO = {
 
   work: [
     {
+      company: "주식회사 네오사피엔스 (타입캐스트)",
+      href: "https://typecast.ai",
+      badges: [],
+      location: "대한민국",
+      title: "풀스택 개발자",
+      logoUrl: "/image/typecast-logo.webp",
+      start: "2025년 12월",
+      end: "Now",
+      description:
+        "API Product 개발업무에 참여중.",
+    },
+    {
       company: "주식회사 피오유엘",
       href: "",
       badges: [],

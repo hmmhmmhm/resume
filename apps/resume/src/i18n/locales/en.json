@@ -62,6 +62,14 @@
     "description": "Full-stack engineer connecting web, on-device LLM, real-time streaming, and robotics into shippable products.",
     "summary": "Full-stack engineer connecting web, on-device LLM, real-time streaming, and robotics into shippable products. I specialize in bridging mobile on-device AI with real-time media/robotics through streaming and low-latency control, achieving both user experience and performance with privacy-centric architecture and PWA/edge deployment. I have experience launching and operating multiple projects with end-to-end ownership from product initialization to deployment/operation automation.",
     "work": {
+      "neosapience": {
+        "company": "Neosapience Inc. (Typecast)",
+        "title": "Full-Stack Developer",
+        "location": "South Korea",
+        "start": "December 2025",
+        "end": "Now",
+        "description": "Participating in API Product development."
+      },
       "poul": {
         "company": "POUL Inc.",
         "title": "CTO",

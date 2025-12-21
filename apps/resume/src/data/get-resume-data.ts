@@ -12,7 +12,7 @@ export function getResumeData(t: TFunction) {
     description: t("data.description"),
     summary: t("data.summary"),
     work: DATA.work.map((work, index) => {
-      const keys = ["poul", "abacus", "metamorp", "toss", "aha", "rightcode"];
+      const keys = ["neosapience", "poul", "abacus", "metamorp", "toss", "aha", "rightcode"];
       const key = keys[index];
       return {
         ...work,
