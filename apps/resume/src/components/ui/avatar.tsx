@@ -18,11 +18,11 @@ const AvatarImage = ({ className, src, alt, ...props }: AvatarImageProps) => (
   <img 
     src={src} 
     alt={alt} 
-    width={284} 
-    height={322} 
+    width={200} 
+    height={200} 
     loading="lazy" 
     decoding="async" 
-    className={cn("aspect-square h-full w-full", className)} 
+    className={cn("absolute inset-0 aspect-square h-full w-full object-cover z-10 bg-white dark:bg-zinc-800", className)} 
     {...props} 
   />
 );
@@ -34,7 +34,7 @@ const AvatarFallback = ({
 }: JSX.HTMLAttributes<HTMLSpanElement> & { children: ComponentChildren }) => (
   <span
     className={cn(
-      "flex h-full w-full items-center justify-center rounded-full bg-muted",
+      "absolute inset-0 flex h-full w-full items-center justify-center rounded-full bg-muted z-0",
       className
     )}
     {...props}
