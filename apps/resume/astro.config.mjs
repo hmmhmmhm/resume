@@ -3,7 +3,6 @@ import { defineConfig } from "astro/config";
 import { preactIntegration } from "@repo/astro-preact/integration";
 import react from "@astrojs/react";
 import tailwindcss from "@repo/astro-tailwind/vite";
-import cloudflare from "@astrojs/cloudflare";
 import { excludePublicFiles } from "@repo/astro-pwa/vite-plugin";
 import { generateServiceWorker } from "@repo/astro-pwa/integration";
 
@@ -11,6 +10,7 @@ import { generateServiceWorker } from "@repo/astro-pwa/integration";
 
 // https://astro.build/config
 export default defineConfig({
+  site: "https://hmart.app",
   i18n: {
     defaultLocale: "ko",
     locales: ["ko", "en"],
@@ -28,10 +28,6 @@ export default defineConfig({
       include: ["**/mugunghwa-page.tsx", "**/node_modules/@paper-design/**"],
     }),
   ],
-  output: "server",
-  adapter: cloudflare({
-    imageService: "passthrough",
-  }),
   build: {
     inlineStylesheets: "always",
   },

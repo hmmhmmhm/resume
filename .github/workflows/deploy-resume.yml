@@ -33,7 +33,7 @@ jobs:
         run: pnpm --filter resume build
 
       - name: Deploy to Cloudflare Pages
-        run: pnpm --filter resume exec wrangler deploy --config ./dist/server/wrangler.json
+        run: pnpm --filter resume exec wrangler pages deploy ./dist --project-name=resume
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
