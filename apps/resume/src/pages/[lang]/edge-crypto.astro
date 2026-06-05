@@ -9,15 +9,21 @@ import "@/styles/global.css";
 const { language, t } = initI18n(Astro);
 const navbarTranslations = extractNavbarTranslations(t);
 
-const pageTitle = t.sideProjects?.edgeCrypto?.pageTitle || (language === "ko"
-  ? "Edge Crypto - Universal SubtleCrypto toolkit"
-  : "Edge Crypto - Universal SubtleCrypto Toolkit");
-const pageDescription = t.sideProjects?.edgeCrypto?.pageDescription || "Encrypt, sign, hash, and manage RSA keys across Node.js, browsers, Cloudflare Workers, Deno, and Bun.";
-const lang = Astro.params.lang || "en";
+const pageTitle = t("sideProjects.edgeCrypto.pageTitle", {
+  defaultValue:
+    language === "ko"
+      ? "Edge Crypto - Universal SubtleCrypto toolkit"
+      : "Edge Crypto - Universal SubtleCrypto Toolkit",
+});
+const pageDescription = t("sideProjects.edgeCrypto.pageDescription", {
+  defaultValue:
+    "Encrypt, sign, hash, and manage RSA keys across Node.js, browsers, Cloudflare Workers, Deno, and Bun.",
+});
+const lang = language;
 const ogImage = new URL(`/${lang}/edge-crypto/og.png`, Astro.url).toString();
 
 // Check if nonav query parameter is present
-const hideNavbar = Astro.url.searchParams.has('nonav');
+const hideNavbar = Astro.url.searchParams.has("nonav");
 ---
 
 <html lang={language}>

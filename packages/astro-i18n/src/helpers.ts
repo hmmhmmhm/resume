@@ -8,6 +8,21 @@ import type { TFunction } from "i18next";
  */
 
 /**
+ * Extract a nested translation object for client components.
+ */
+export function extractTranslationSection<
+  T extends Record<string, unknown> = Record<string, unknown>,
+>(t: TFunction, key: string): T {
+  const value = t(key, { returnObjects: true, defaultValue: {} });
+
+  if (value && typeof value === "object" && !Array.isArray(value)) {
+    return value as T;
+  }
+
+  return {} as T;
+}
+
+/**
  * Extract translations for LogoDownload component
  */
 export function extractLogoTranslations(t: TFunction) {

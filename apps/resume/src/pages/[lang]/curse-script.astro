@@ -3,22 +3,25 @@ import CommonHead from "@/components/common-head.astro";
 import CommonBody from "@/components/common-body.astro";
 import CurseScriptPage from "@/components/curse-script-page.tsx";
 import Navbar from "@/components/navbar";
-import { initI18n, extractNavbarTranslations } from "@/i18n";
+import { initI18n, extractNavbarTranslations, extractTranslationSection } from "@/i18n";
 import "@/styles/global.css";
 
 const { language, t } = initI18n(Astro);
 const navbarTranslations = extractNavbarTranslations(t);
 
-const pageTitle = t.sideProjects?.curseScript?.pageTitle || (language === "ko"
-  ? "Curse Script - JavaScript Obfuscator"
-  : "Curse Script - JavaScript Obfuscator");
-const pageDescription = t.sideProjects?.curseScript?.pageDescription || "A JavaScript obfuscator that converts code into cursed spell-like syntax using ancient characters";
-const lang = Astro.params.lang || "en";
+const pageTitle = t("sideProjects.curseScript.pageTitle", {
+  defaultValue: "Curse Script - JavaScript Obfuscator",
+});
+const pageDescription = t("sideProjects.curseScript.pageDescription", {
+  defaultValue:
+    "A JavaScript obfuscator that converts code into cursed spell-like syntax using ancient characters",
+});
+const lang = language;
 const ogImage = new URL(`/${lang}/curse-script/og.png`, Astro.url).toString();
-const curseScriptTranslations = t.sideProjects?.curseScript || {};
+const curseScriptTranslations = extractTranslationSection(t, "sideProjects.curseScript");
 
 // Check if nonav query parameter is present
-const hideNavbar = Astro.url.searchParams.has('nonav');
+const hideNavbar = Astro.url.searchParams.has("nonav");
 ---
 
 <html lang={language}>

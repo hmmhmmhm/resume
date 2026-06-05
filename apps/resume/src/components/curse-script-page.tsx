@@ -52,7 +52,7 @@ export default function CurseScriptPage({ lang = "en", translations = {} }: Curs
           <div className="space-y-2 text-xs sm:text-sm relative z-20">
             <div className="flex items-start">
               <span className="mr-3 opacity-60">→</span>
-              <span dangerouslySetInnerHTML={{ __html: t('feature1', '<strong>다양한 문자 세트</strong>: 룬 문자, 고대 페르시아어, 이모지 또는 사용자 정의 문자', '<strong>Multiple Character Sets</strong>: Runic, Old Persian, Emoji, or custom characters') }} />
+              <span dangerouslySetInnerHTML={{ __html: t('feature1', '<strong>다양한 문자 세트</strong>: 룬 문자, 고대 페르시아어 또는 사용자 정의 문자', '<strong>Multiple Character Sets</strong>: Runic, Old Persian, or custom characters') }} />
             </div>
             <div className="flex items-start">
               <span className="mr-3 opacity-60">→</span>
@@ -237,7 +237,6 @@ const cursedPersian = curse('alert(1)', { characterSet: 'oldPersian' });`;
               <div className="space-y-2 opacity-90">
                 <p><strong>{t('runic', '룬 문자', 'Runic')}</strong>: {t('runicDesc', '신비로운 난독화를 위해 고대 룬 문자(ᚠ-ᚷ) 사용', 'Uses ancient Runic characters (ᚠ-ᚷ) for mystical obfuscation')}</p>
                 <p><strong>{t('oldPersian', '고대 페르시아', 'Old Persian')}</strong>: {t('oldPersianDesc', '고대 코드 미학을 위해 쐐기 문자(𐎠-𐎷) 사용', 'Employs cuneiform script (𐎠-𐎷) for ancient code aesthetics')}</p>
-                <p><strong>{t('emoji', '이모지', 'Emoji')}</strong>: {t('emojiDesc', '재미있는 난독화를 위해 코드를 이모지 시퀀스(😀-😗)로 변환', 'Transforms code into emoji sequences (😀-😗) for playful obfuscation')}</p>
                 <p><strong>{t('none', '없음', 'None')}</strong>: {t('noneDesc', '특수 문자 없이 기본 난독화를 위해 라틴 문자(A-X) 사용', 'Uses Latin characters (A-X) for basic obfuscation without special characters')}</p>
               </div>
             </div>
@@ -257,7 +256,7 @@ const cursedPersian = curse('alert(1)', { characterSet: 'oldPersian' });`;
                 <p dangerouslySetInnerHTML={{ __html: t('obfuscationProcessDesc2', "프렐루드는 <code>A = ''</code>와 같은 최소한의 할당으로 시작한 다음 강제 변환을 남용하여(예: <code>B = !A + A</code>, <code>D = A + { }</code>) <code>\"true\"</code>, <code>\"false\"</code>, <code>\"[object Object]\"</code>와 같은 단어를 직접 입력하지 않고 추출합니다.", "The prelude starts with minimal assignments like <code>A = ''</code> and then abuses coercion (e.g., <code>B = !A + A</code>, <code>D = A + { }</code>) to mine words such as <code>\"true\"</code>, <code>\"false\"</code>, and <code>\"[object Object]\"</code> without ever typing them directly.") }} />
                 <p dangerouslySetInnerHTML={{ __html: t('obfuscationProcessDesc3', '수집된 부분 문자열은 재결합되어 중요한 토큰을 합성합니다: <code>E = B[A++]</code>는 문자 "t"를 추출하고, <code>I = D[G+H]</code>는 "constructor"를 드러내며, 이를 <code>J(...)</code> 안에 쌓으면 부작용만으로 <code>Function</code> 생성자에 대한 참조를 생성합니다.', 'Those harvested substrings are recombined to synthesize critical tokens: <code>E = B[A++]</code> plucks the letter "t", <code>I = D[G+H]</code> reveals "constructor", and stacking them inside <code>J(...)</code> produces a reference to the <code>Function</code> constructor entirely through side effects.') }} />
                 <p dangerouslySetInnerHTML={{ __html: t('obfuscationProcessDesc4', '각 소스 문자는 이러한 골프 변수를 통해 재표현됩니다—일반적인 글리프는 조회 테이블에서 가져오고, 나머지는 천체 기호의 서로게이트 쌍도 처리하는 유니코드 이스케이프 표현식을 통해 필요에 따라 재구성됩니다.', 'Each source character is re-expressed via these golfed variables—common glyphs come from a lookup table, while the rest are rebuilt on demand through Unicode escape expressions that even handle surrogate pairs for astral symbols.') }} />
-                <p dangerouslySetInnerHTML={{ __html: t('obfuscationProcessDesc5', '모든 조각은 <code>J(... )();</code>로 연결되어 합성된 <code>Function</code>을 호출합니다; 최종 패스는 선택적으로 변수 <code>A</code>–<code>X</code>를 룬 문자, 고대 페르시아어, 이모지 또는 사용자 정의 글리프로 다시 매핑하여 스크립트를 실행 가능하게 유지하면서 주문과 같은 모양을 확정합니다.', 'All pieces are concatenated into <code>J(... )();</code>, invoking the synthesized <code>Function</code>; the final pass optionally remaps variables <code>A</code>–<code>X</code> to Runic, Old Persian, emoji, or custom glyphs, cementing the spell-like appearance while keeping the script executable.') }} />
+                <p dangerouslySetInnerHTML={{ __html: t('obfuscationProcessDesc5', '모든 조각은 <code>J(... )();</code>로 연결되어 합성된 <code>Function</code>을 호출합니다; 최종 패스는 선택적으로 변수 <code>A</code>–<code>X</code>를 룬 문자, 고대 페르시아어 또는 사용자 정의 글리프로 다시 매핑하여 스크립트를 실행 가능하게 유지하면서 주문과 같은 모양을 확정합니다.', 'All pieces are concatenated into <code>J(... )();</code>, invoking the synthesized <code>Function</code>; the final pass optionally remaps variables <code>A</code>–<code>X</code> to Runic, Old Persian, or custom glyphs, cementing the spell-like appearance while keeping the script executable.') }} />
               </div>
             </div>
           </div>

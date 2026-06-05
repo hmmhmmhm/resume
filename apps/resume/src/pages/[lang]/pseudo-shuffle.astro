@@ -9,18 +9,23 @@ import "@/styles/global.css";
 const { language, t } = initI18n(Astro);
 const navbarTranslations = extractNavbarTranslations(t);
 
-const pageTitle = t.sideProjects?.pseudoShuffle?.pageTitle || (language === "ko"
-  ? "Pseudo Shuffle - FPE 동형암호화 기반 유사난수 셔플 라이브러리"
-  : "Pseudo Shuffle - FPE-Based Pseudo-Random Shuffle Library");
-const pageDescription = t.sideProjects?.pseudoShuffle?.pageDescription || (language === "ko"
-  ? "실제로 섮지 않고도 섮인 것처럼 보이는 인덱스를 계산하는 TypeScript 라이브러리"
-  : "A TypeScript library that calculates shuffled-looking indices without actually shuffling");
-const lang = Astro.params.lang || "ko";
+const pageTitle = t("sideProjects.pseudoShuffle.pageTitle", {
+  defaultValue:
+    language === "ko"
+      ? "Pseudo Shuffle - FPE 동형암호화 기반 유사난수 셔플 라이브러리"
+      : "Pseudo Shuffle - FPE-Based Pseudo-Random Shuffle Library",
+});
+const pageDescription = t("sideProjects.pseudoShuffle.pageDescription", {
+  defaultValue:
+    language === "ko"
+      ? "실제로 섞지 않고도 섞인 것처럼 보이는 인덱스를 계산하는 TypeScript 라이브러리"
+      : "A TypeScript library that calculates shuffled-looking indices without actually shuffling",
+});
+const lang = language;
 const ogImage = new URL(`/${lang}/pseudo-shuffle/og.png`, Astro.url).toString();
 
 // Check if nonav query parameter is present
-const hideNavbar = Astro.url.searchParams.has('nonav');
-
+const hideNavbar = Astro.url.searchParams.has("nonav");
 ---
 
 <html lang={language}>

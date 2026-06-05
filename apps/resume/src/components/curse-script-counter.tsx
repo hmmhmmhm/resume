@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { curse } from "curse-script";
 import GradientText from "./gradient-text";
 
-type CharacterSet = "runic" | "oldPersian" | "emoji" | "none";
+type CharacterSet = "runic" | "oldPersian" | "none";
 
 interface CurseScriptCounterProps {
   isDarkMode: boolean;
@@ -93,7 +93,7 @@ export default function CurseScriptCounter({ isDarkMode, translations = {}, lang
             {t('characterSet', '문자 세트', 'Character Set')}
           </label>
           <div className="flex gap-2 flex-wrap">
-            {(["runic", "oldPersian", "emoji", "none"] as CharacterSet[]).map((charSet) => (
+            {(["runic", "oldPersian", "none"] as CharacterSet[]).map((charSet) => (
               <button
                 key={charSet}
                 onClick={() => handleCharSetChange(charSet)}
@@ -168,19 +168,13 @@ export default function CurseScriptCounter({ isDarkMode, translations = {}, lang
             </div>
             <div className={`px-4 py-4 rounded font-mono text-xs sm:text-sm break-all overflow-x-auto max-h-[400px] overflow-y-auto ${isDarkMode ? "bg-white/10" : "bg-black/10"
               }`}>
-              {selectedCharSet === "emoji" ? (
-                <div className="font-bold text-white">
-                  {cursedOutput}
-                </div>
-              ) : (
-                <GradientText
-                  colors={["#8B0000", "#DC143C", "#FF0000", "#B22222", "#8B0000", "#DC143C"]}
-                  animationSpeed={6}
-                  className="font-bold"
-                >
-                  {cursedOutput}
-                </GradientText>
-              )}
+              <GradientText
+                colors={["#8B0000", "#DC143C", "#FF0000", "#B22222", "#8B0000", "#DC143C"]}
+                animationSpeed={6}
+                className="font-bold"
+              >
+                {cursedOutput}
+              </GradientText>
             </div>
           </div>
         )}

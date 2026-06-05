@@ -9,17 +9,23 @@ import "@/styles/global.css";
 const { language, t } = initI18n(Astro);
 const navbarTranslations = extractNavbarTranslations(t);
 
-const pageTitle = t.sideProjects?.biggest?.pageTitle || (language === "ko"
-  ? "Biggest - 무한 정밀도 계산 라이브러리"
-  : "Biggest - Arbitrary Precision Math Library");
-const pageDescription = t.sideProjects?.biggest?.pageDescription || (language === "ko"
-  ? "2kb의 가벼운 크기로 무한 정밀도의 큰 정수와 큰 소수를 안전하게 계산할 수 있는 라이브러리"
-  : "A lightweight 2kb library for safely calculating arbitrary-precision large integers and decimals");
-const lang = Astro.params.lang || "ko";
+const pageTitle = t("sideProjects.biggest.pageTitle", {
+  defaultValue:
+    language === "ko"
+      ? "Biggest - 무한 정밀도 계산 라이브러리"
+      : "Biggest - Arbitrary Precision Math Library",
+});
+const pageDescription = t("sideProjects.biggest.pageDescription", {
+  defaultValue:
+    language === "ko"
+      ? "2kb의 가벼운 크기로 무한 정밀도의 큰 정수와 큰 소수를 안전하게 계산할 수 있는 라이브러리"
+      : "A lightweight 2kb library for safely calculating arbitrary-precision large integers and decimals",
+});
+const lang = language;
 const ogImage = new URL(`/${lang}/biggest/og.png`, Astro.url).toString();
 
 // Check if nonav query parameter is present
-const hideNavbar = Astro.url.searchParams.has('nonav');
+const hideNavbar = Astro.url.searchParams.has("nonav");
 ---
 
 <html lang={language}>

@@ -25,10 +25,11 @@ export { supportedLanguages, defaultLanguage } from "./languages";
 export type { SupportedLanguage } from "./languages";
 
 // Re-export helpers
-export { 
+export {
   extractLogoTranslations,
   extractResumeTranslations,
   extractPortfolioTranslations,
   extractNotFoundTranslations,
   extractNavbarTranslations,
+  extractTranslationSection,
 } from "@repo/astro-i18n/helpers";
