@@ -8,8 +8,8 @@
     "download:icons": "node scripts/download-icons.mjs",
     "prebuild": "pnpm optimize:images && pnpm download:icons",
     "build": "astro build",
-    "preview": "pnpm build && wrangler pages dev ./dist",
-    "deploy": "pnpm build && wrangler pages deploy ./dist --project-name=resume",
+    "preview": "pnpm build && wrangler dev --config ./dist/server/wrangler.json",
+    "deploy": "pnpm build && wrangler deploy --config ./dist/server/wrangler.json",
     "lint": "prettier --write . && eslint . --fix",
     "lint:check": "prettier --check . && eslint .",
     "astro": "astro"
