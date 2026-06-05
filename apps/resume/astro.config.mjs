@@ -22,15 +22,15 @@ export default defineConfig({
   integrations: [
     generateServiceWorker(),
     preactIntegration({
-      exclude: ['**/mugunghwa-page.tsx', '**/node_modules/@paper-design/**'],
+      exclude: ["**/mugunghwa-page.tsx", "**/node_modules/@paper-design/**"],
     }),
     react({
-      include: ['**/mugunghwa-page.tsx', '**/node_modules/@paper-design/**'],
+      include: ["**/mugunghwa-page.tsx", "**/node_modules/@paper-design/**"],
     }),
   ],
   output: "server",
   adapter: cloudflare({
-    imageService: "compile",
+    imageService: "passthrough",
     platformProxy: {
       enabled: true,
     },
@@ -51,7 +51,10 @@ export default defineConfig({
         enforce: "pre",
         resolveId(source, importer) {
           // Don't alias React imports for mugunghwa-resume component
-          if (importer && (importer.includes("mugunghwa-resume.tsx") || importer.includes("mugunghwa-resume.jsx"))) {
+          if (
+            importer &&
+            (importer.includes("mugunghwa-resume.tsx") || importer.includes("mugunghwa-resume.jsx"))
+          ) {
             if (source === "react" || source === "react-dom" || source === "react/jsx-runtime") {
               return null; // Let Vite resolve the actual React
             }
@@ -78,7 +81,12 @@ export default defineConfig({
     assetsInclude: ["**/*.wasm"],
     ssr: {
       external: ["buffer", "path", "fs", "sharp"].map((i) => (i === "sharp" ? i : `node:${i}`)),
-      noExternal: ["workers-og", "@supabase/supabase-js", "framer-motion", "@paper-design/shaders-react"],
+      noExternal: [
+        "workers-og",
+        "@supabase/supabase-js",
+        "framer-motion",
+        "@paper-design/shaders-react",
+      ],
     },
     optimizeDeps: {
       exclude: ["sharp"],
@@ -91,24 +99,24 @@ export default defineConfig({
         output: {
           manualChunks: (id) => {
             // Separate lucide icons into their own chunk for better caching
-            if (id.includes('lucide-preact')) {
-              return 'lucide';
+            if (id.includes("lucide-preact")) {
+              return "lucide";
             }
             // Separate framer-motion for better caching
-            if (id.includes('framer-motion')) {
-              return 'framer-motion';
+            if (id.includes("framer-motion")) {
+              return "framer-motion";
             }
             // Group UI components together
-            if (id.includes('/components/ui/')) {
-              return 'ui-components';
+            if (id.includes("/components/ui/")) {
+              return "ui-components";
             }
             // Group magicui components together
-            if (id.includes('/components/magicui/')) {
-              return 'magicui';
+            if (id.includes("/components/magicui/")) {
+              return "magicui";
             }
             // Keep preact core separate
-            if (id.includes('preact') && !id.includes('lucide-preact')) {
-              return 'preact';
+            if (id.includes("preact") && !id.includes("lucide-preact")) {
+              return "preact";
             }
           },
         },
