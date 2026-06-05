@@ -1,4 +1,4 @@
-@import "@repo/astro-tailwind/tailwindcss";
+@import "tailwindcss";
 
 @variant dark (.dark &);
 

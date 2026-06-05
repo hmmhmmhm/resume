@@ -43,6 +43,7 @@
     "pseudo-shuffle": "^1.1.2",
     "qrcode": "^1.5.4",
     "tailwind-merge": "^3.6.0",
+    "tailwindcss": "^4.3.0",
     "three": "^0.184.0"
   },
   "devDependencies": {
