@@ -10,14 +10,14 @@
     "./react-dom": "./react-dom.js"
   },
   "dependencies": {
-    "@astrojs/preact": "^4.1.1",
-    "preact": "^10.27.2",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "@astrojs/preact": "^5.1.5",
+    "preact": "^10.29.2",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7"
   },
   "devDependencies": {
-    "@types/react": "^19.2.2",
-    "@types/react-dom": "^19.2.1",
-    "astro": "^5.14.4"
+    "@types/react": "^19.2.16",
+    "@types/react-dom": "^19.2.3",
+    "astro": "^6.4.4"
   }
 }

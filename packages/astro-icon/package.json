@@ -8,10 +8,10 @@
     "./react": "./src/react.js"
   },
   "dependencies": {
-    "@lucide/astro": "^0.545.0",
-    "lucide-react": "^0.545.0"
+    "@lucide/astro": "^1.17.0",
+    "lucide-react": "^1.17.0"
   },
   "devDependencies": {
-    "astro": "^5.14.4"
+    "astro": "^6.4.4"
   }
 }
