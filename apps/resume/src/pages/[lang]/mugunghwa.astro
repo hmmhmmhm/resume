@@ -3,8 +3,17 @@ import CommonHead from "@/components/common-head.astro";
 import CommonBody from "@/components/common-body.astro";
 import MugunghwaPage from "@/components/mugunghwa-page.tsx";
 import Navbar from "@/components/navbar";
-import { initI18n, extractNavbarTranslations, extractTranslationSection } from "@/i18n";
+import {
+  initI18n,
+  extractNavbarTranslations,
+  extractTranslationSection,
+  supportedLanguages,
+} from "@/i18n";
 import "@/styles/global.css";
+
+export function getStaticPaths() {
+  return supportedLanguages.map((lang) => ({ params: { lang } }));
+}
 
 const { language, t } = initI18n(Astro);
 const navbarTranslations = extractNavbarTranslations(t);

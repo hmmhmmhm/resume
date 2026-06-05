@@ -2,6 +2,15 @@ import type { APIRoute } from "astro";
 import { MAX_URLS_PER_SITEMAP } from "@repo/sitemap-generator";
 import { sitemapGenerator } from "@/lib/sitemap.config";
 
+export async function getStaticPaths() {
+  const allPages = await sitemapGenerator.getAllPages("https://hmart.app");
+  const sitemapCount = Math.max(1, Math.ceil(allPages.length / MAX_URLS_PER_SITEMAP));
+
+  return Array.from({ length: sitemapCount }, (_, index) => ({
+    params: { index: String(index + 1) },
+  }));
+}
+
 export const GET: APIRoute = async ({ params, request }) => {
   try {
     const index = parseInt(params.index || "1", 10);

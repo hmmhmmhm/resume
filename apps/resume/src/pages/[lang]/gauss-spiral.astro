@@ -3,18 +3,26 @@ import CommonHead from "@/components/common-head.astro";
 import CommonBody from "@/components/common-body.astro";
 import GaussSpiralPage from "@/components/gauss-spiral-page.tsx";
 import Navbar from "@/components/navbar";
-import { initI18n, extractNavbarTranslations } from "@/i18n";
+import { initI18n, extractNavbarTranslations, supportedLanguages } from "@/i18n";
 import "@/styles/global.css";
+
+export function getStaticPaths() {
+  return supportedLanguages.map((lang) => ({ params: { lang } }));
+}
 
 const { language, t } = initI18n(Astro);
 const navbarTranslations = extractNavbarTranslations(t);
 
-const pageTitle = t("sideProjects.gaussSpiral.pageTitle") || (language === "ko"
-  ? "Gauss Spiral - 나선 좌표 시스템 라이브러리"
-  : "Gauss Spiral - Spiral Coordinate System Library");
-const pageDescription = t("sideProjects.gaussSpiral.pageDescription") || (language === "ko"
-  ? "나선형으로 회전하며 픽셀을 채우는 효율적인 좌표 시스템의 좌표를 계산합니다."
-  : "Calculates coordinates for an efficient coordinate system that fills pixels in a spiral rotation.");
+const pageTitle =
+  t("sideProjects.gaussSpiral.pageTitle") ||
+  (language === "ko"
+    ? "Gauss Spiral - 나선 좌표 시스템 라이브러리"
+    : "Gauss Spiral - Spiral Coordinate System Library");
+const pageDescription =
+  t("sideProjects.gaussSpiral.pageDescription") ||
+  (language === "ko"
+    ? "나선형으로 회전하며 픽셀을 채우는 효율적인 좌표 시스템의 좌표를 계산합니다."
+    : "Calculates coordinates for an efficient coordinate system that fills pixels in a spiral rotation.");
 const lang = Astro.params.lang || "ko";
 const ogImage = new URL(`/${lang}/gauss-spiral/og.png`, Astro.url).toString();
 
@@ -87,7 +95,7 @@ const gaussSpiralTranslations = {
 };
 
 // Check if nonav query parameter is present
-const hideNavbar = Astro.url.searchParams.has('nonav');
+const hideNavbar = Astro.url.searchParams.has("nonav");
 ---
 
 <html lang={language}>

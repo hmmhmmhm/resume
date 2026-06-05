@@ -6,8 +6,17 @@ import ResumePage from "@/components/resume-page";
 import Navbar from "@/components/navbar";
 import "@/styles/global.css";
 
-import { initI18n, extractResumeTranslations, extractNavbarTranslations } from "@/i18n";
+import {
+  initI18n,
+  extractResumeTranslations,
+  extractNavbarTranslations,
+  supportedLanguages,
+} from "@/i18n";
 import { getResumeData } from "@/data/get-resume-data";
+
+export function getStaticPaths() {
+  return supportedLanguages.map((lang) => ({ params: { lang } }));
+}
 
 const { language, t } = initI18n(Astro);
 
@@ -18,19 +27,20 @@ const navbarTranslations = extractNavbarTranslations(t);
 const resumeData = getResumeData(t);
 
 // SEO Keywords for AI crawlers
-const keywords = language === 'ko' 
-  ? "프론트엔드 개발자 이력서, 풀스택 개발자 이력서, 프론트엔드 개발자, 풀스택 개발자, Full Stack Engineer, 이하민, Hamin Lee, 웹 개발자, React, Next.js, TypeScript, Node.js, WebRTC, AI, LLM, 온디바이스 AI, 로보틱스, 개발자 이력서, 포트폴리오, 개발자 채용, 한국 개발자"
-  : "frontend developer resume, full stack developer resume, frontend developer, full stack developer, Full Stack Engineer, Hamin Lee, Web Developer, React, Next.js, TypeScript, Node.js, WebRTC, AI, LLM, On-device AI, Robotics, developer resume, portfolio, developer hiring, Korean developer";
+const keywords =
+  language === "ko"
+    ? "프론트엔드 개발자 이력서, 풀스택 개발자 이력서, 프론트엔드 개발자, 풀스택 개발자, Full Stack Engineer, 이하민, Hamin Lee, 웹 개발자, React, Next.js, TypeScript, Node.js, WebRTC, AI, LLM, 온디바이스 AI, 로보틱스, 개발자 이력서, 포트폴리오, 개발자 채용, 한국 개발자"
+    : "frontend developer resume, full stack developer resume, frontend developer, full stack developer, Full Stack Engineer, Hamin Lee, Web Developer, React, Next.js, TypeScript, Node.js, WebRTC, AI, LLM, On-device AI, Robotics, developer resume, portfolio, developer hiring, Korean developer";
 
 // Check if nonav query parameter is present
-const hideNavbar = Astro.url.searchParams.has('nonav');
+const hideNavbar = Astro.url.searchParams.has("nonav");
 ---
 
 <html lang={language}>
   <head>
-    <CommonHead 
-      title={pageTitle} 
-      description={pageDescription} 
+    <CommonHead
+      title={pageTitle}
+      description={pageDescription}
       lang={language}
       keywords={keywords}
       author="Hamin Lee"

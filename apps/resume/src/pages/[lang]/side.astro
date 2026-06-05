@@ -6,8 +6,17 @@ import SidePage from "@/components/side-page";
 import Navbar from "@/components/navbar";
 import "@/styles/global.css";
 
-import { initI18n, extractNavbarTranslations, extractTranslationSection } from "@/i18n";
+import {
+  initI18n,
+  extractNavbarTranslations,
+  extractTranslationSection,
+  supportedLanguages,
+} from "@/i18n";
 import { getResumeData } from "@/data/get-resume-data";
+
+export function getStaticPaths() {
+  return supportedLanguages.map((lang) => ({ params: { lang } }));
+}
 
 const { language, t } = initI18n(Astro);
 
