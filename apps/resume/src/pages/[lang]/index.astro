@@ -56,7 +56,16 @@ const hideNavbar = Astro.url.searchParams.has("nonav");
   </head>
   <body>
     <CommonBody lang={language} />
-    <ResumePage client:idle lang={language} data={resumeData} translations={resumeTranslations} />
-    {!hideNavbar && <Navbar client:idle lang={language} translations={navbarTranslations} />}
+    <ResumePage
+      client:only="preact"
+      lang={language}
+      data={resumeData}
+      translations={resumeTranslations}
+    />
+    {
+      !hideNavbar && (
+        <Navbar client:only="preact" lang={language} translations={navbarTranslations} />
+      )
+    }
   </body>
 </html>

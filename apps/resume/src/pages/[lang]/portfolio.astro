@@ -63,6 +63,10 @@ const hideNavbar = Astro.url.searchParams.has("nonav");
       translations={portfolioTranslations}
       slideTranslations={slideTranslations}
     />
-    {!hideNavbar && <Navbar client:idle lang={language} translations={navbarTranslations} />}
+    {
+      !hideNavbar && (
+        <Navbar client:only="preact" lang={language} translations={navbarTranslations} />
+      )
+    }
   </body>
 </html>

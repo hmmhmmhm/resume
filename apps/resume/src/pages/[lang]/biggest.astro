@@ -48,6 +48,10 @@ const hideNavbar = Astro.url.searchParams.has("nonav");
     <div class="max-w-[1500px] mx-auto w-full">
       <BiggestPage client:only="react" lang={lang} />
     </div>
-    {!hideNavbar && <Navbar client:idle lang={language} translations={navbarTranslations} />}
+    {
+      !hideNavbar && (
+        <Navbar client:only="preact" lang={language} translations={navbarTranslations} />
+      )
+    }
   </body>
 </html>
